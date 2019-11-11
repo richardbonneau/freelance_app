@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import {BrowserRouter, Route} from 'react-router-dom';
-import './App.css';
-import styled from 'styled-components';
-import Dashboard from './Pages/Dashboard'
-import SideBar from './Components/SideBar'
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import styled from "styled-components";
+import SideBar from "./Components/SideBar";
+import Dashboard from "./Pages/Dashboard";
+import Clients from "./Pages/Clients";
 
 const PageStructure = styled.div`
-  display:flex;
-`
-
+  display: flex;
+`;
+const RoutesContainer = styled.div`
+  margin-left: 220px;
+`;
 function App() {
   return (
-      <BrowserRouter>
+    <BrowserRouter>
       <PageStructure>
-      <SideBar />
-      <Route exact={true} path="/" component={Dashboard} />
+        <SideBar />
+        <RoutesContainer>
+          <Route exact={true} path="/" component={Dashboard} />
+          <Route exact={true} path="/clients" component={Clients} />
+        </RoutesContainer>
       </PageStructure>
-      </BrowserRouter>
-      
+    </BrowserRouter>
   );
 }
 
