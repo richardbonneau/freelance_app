@@ -1,11 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import styled from 'styled-components';
 
+const Container = styled.div`
+    padding-left: 25px;
+`
 function Clients() {
   return (
-      <div>
+      <Container>
           <h2>Clients</h2>
-          </div>
+          </Container>
       
   );
 }
