@@ -2,20 +2,21 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {FaIndent,FaUserAlt} from 'react-icons/fa';
 import styled from 'styled-components';
+import { connect } from 'http2';
 
 const NavContainer = styled.nav`
+@media (min-width:1024px) {
+  min-width:220px;
+  display:block;
+}
 padding:30px 0 30px 0;
-min-width:220px;
+display: none;
 border-right:1px;
 border-right-color:black;
 border-right-style:solid;
 height:100vh;
 position:fixed;
 `
-const Nav = styled.div`
-
-`
-
 const LinkContainer = styled.div`
     color:green;
     display:block;
@@ -39,8 +40,6 @@ const styles = {
 function SideBar() {
   return (
     <NavContainer>
-      
- 
       <MainLogo src="/images/reduxlogo.png" />
       <LinkContainer><Link  to="/"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
@@ -54,4 +53,10 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+let mapStateToProps=(st)=>{
+  return {
+    sideBarMenuOpened:false
+  }
+}
+let connectedSideBar = connect(mapStateToProps)(SideBar)
+export default connectedSideBar;
