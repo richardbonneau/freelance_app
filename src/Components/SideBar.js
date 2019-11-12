@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {FaIndent,FaUserAlt} from 'react-icons/fa';
 import styled from 'styled-components';
-import { connect } from 'http2';
 
 const NavContainer = styled.nav`
 @media (min-width:1024px) {
@@ -53,10 +52,4 @@ function SideBar() {
   );
 }
 
-let mapStateToProps=(st)=>{
-  return {
-    sideBarMenuOpened:false
-  }
-}
-let connectedSideBar = connect(mapStateToProps)(SideBar)
-export default connectedSideBar;
+export default SideBar;
