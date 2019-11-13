@@ -2,13 +2,13 @@ import { createStore } from "redux";
 
 let reducer = (state, action) => {
   switch(action.type){
-    case "increment": return {counter:state.counter+1}
+    case "toggleHamburgerMenu": return {...state, hamburgerMenuOpened: action.payload}
     default: return state
   }
 };
 
 let initState = {
-  counter:0
+  hamburgerMenuOpened:false
 }
 
 
