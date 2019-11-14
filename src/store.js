@@ -1,19 +1,14 @@
 import { createStore } from "redux";
+import rootReducer from './_reducers/index.js'
 
-let reducer = (state, action) => {
-  switch(action.type){
-    case "toggleHamburgerMenu": return {...state, hamburgerMenuOpened: action.payload}
-    default: return state
-  }
-};
+//https://itnext.io/firebase-login-functionality-from-scratch-with-react-redux-2bf316e5820f
 
 let initState = {
   hamburgerMenuOpened:false
 }
-
-
+console.log("root",rootReducer)
 const store = createStore(
-  reducer,
+  rootReducer,
   initState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
