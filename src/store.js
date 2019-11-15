@@ -8,7 +8,7 @@ import { verifyAuth } from "./_actions/auth.js";
 
 
 
-console.log("root",rootReducer)
+
 const store = createStore(
   rootReducer,
   undefined,

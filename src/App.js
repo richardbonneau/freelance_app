@@ -25,13 +25,9 @@ const RoutesContainer = styled.div`
 function App() {
 const isAuthenticated = useSelector(state=>state.auth.isAuthenticated);
 const isVerifying = useSelector(state=>state.auth.isVerifying);
-console.log('isAuthenticated',isAuthenticated)
+
   return (
     <BrowserRouter>
-      <PageStructure>
-        <MobileNavBar />
-        <SideBar />
-        <RoutesContainer>
           <Route exact={true} path="/" component={Login} />
           <ProtectedRoute 
           exact 
@@ -40,8 +36,6 @@ console.log('isAuthenticated',isAuthenticated)
           isAuthenticated={isAuthenticated} 
           isVerifying={isVerifying} />
           <Route exact={true} path="/clients" component={Clients} />
-        </RoutesContainer>
-      </PageStructure>
     </BrowserRouter>
   );
 }

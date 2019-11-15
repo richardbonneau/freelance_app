@@ -64,6 +64,7 @@ export default (
         }
     case VERIFY_REQUEST:
         return {
+          ...state,
             isVerifying:true,
             verifyingError: false
         }
