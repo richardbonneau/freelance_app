@@ -44,8 +44,8 @@ const styles = {
   }
 }
 function SideBar() {
-  const hamburgerMenuOpened = useSelector(state => state.hamburgerMenuOpened)
-  console.log(hamburgerMenuOpened)
+  const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
+  console.log('hamburgerMenuOpened',hamburgerMenuOpened)
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
       <MainLogo src="/images/reduxlogo.png" />

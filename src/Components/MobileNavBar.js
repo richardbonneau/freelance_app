@@ -23,7 +23,7 @@ const styles={
     }
 }
 function MobileNavBar() {
-    const hamburgerMenuOpened = useSelector(state => state.hamburgerMenuOpened)
+    const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
     const dispatch = useDispatch();
 
     function hamburgerMenuClick(){
