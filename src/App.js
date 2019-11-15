@@ -29,13 +29,20 @@ const isVerifying = useSelector(state=>state.auth.isVerifying);
   return (
     <BrowserRouter>
           <Route exact={true} path="/" component={Login} />
+          
           <ProtectedRoute 
           exact 
           path="/dashboard" 
           component={Dashboard} 
           isAuthenticated={isAuthenticated} 
           isVerifying={isVerifying} />
-          <Route exact={true} path="/clients" component={Clients} />
+          <ProtectedRoute 
+          exact 
+          path="/clients" 
+          component={Clients} 
+          isAuthenticated={isAuthenticated} 
+          isVerifying={isVerifying} />
+
     </BrowserRouter>
   );
 }

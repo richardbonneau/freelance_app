@@ -23,17 +23,19 @@ export default function ProtectedRoute({
 }) {
   return (
     <PageStructure>
-      {isAuthenticated ? <div>
-          <MobileNavBar />
-          <SideBar />
-          </div> : null }
+
       <Route
         {...rest}
         render={props => {
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (
-            <Component {...props} />
+            <div>
+          <MobileNavBar />
+          <SideBar />
+          <Component {...props} />
+          </div>
+            
           ) : (
             <Redirect
               to={{

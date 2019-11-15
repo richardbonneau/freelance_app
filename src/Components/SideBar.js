@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaIndent, FaUserAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux'
+import { firebaseLogout } from '../_actions';
 
 const NavContainer = styled.nav`
 @media (min-width:1024px) {
@@ -46,6 +47,8 @@ const styles = {
 function SideBar() {
   const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
 
+  
+
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
       <MainLogo src="/images/reduxlogo.png" />
@@ -55,6 +58,7 @@ function SideBar() {
       {/* <LinkContainer><Link to="/">Invoices</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
+      <button onClick={firebaseLogout}>Sign out</button>
 
 
     </NavContainer>

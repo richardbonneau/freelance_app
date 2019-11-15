@@ -60,8 +60,16 @@ const verifySuccess = () =>{
         type: VERIFY_SUCCESS
     }
 };
+export const firebaseSignup = (email,password)=> dispatch =>{
+    dispatch(requestLogin());
+    myFirebase.auth().createUserWithEmailAndPassword(email,password).then(user=>{
+        dispatch(receiveLogin(user));
+    }).catch(error=>{
+        dispatch(loginError());
+    })
+};
 
-export const loginUser = (email,password)=> dispatch =>{
+export const firebaseLogin = (email,password)=> dispatch =>{
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email,password).then(user=>{
         dispatch(receiveLogin(user));
@@ -70,7 +78,8 @@ export const loginUser = (email,password)=> dispatch =>{
     })
 };
 
-export const logoutUser = () => dispatch => {
+export const firebaseLogout = () => dispatch => {
+    console.log("logout")
     dispatch(requestLogout());
     myFirebase.auth().signOut().then(()=>{
         dispatch(receiveLogout());
