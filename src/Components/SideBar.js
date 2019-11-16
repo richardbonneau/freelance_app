@@ -33,7 +33,6 @@ const MainLogo = styled.img`
   display:block;
 }
   display:none;
-
 `
 const styles = {
   icons: {
@@ -43,11 +42,16 @@ const styles = {
     display: 'inline-block',
     marginLeft: '15px'
   }
-}
+};
+
 function SideBar() {
+  const dispatch = useDispatch();
   const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
 
-  
+  const logoutUser = (e)=>{
+    e.preventDefault();
+    dispatch(firebaseLogout);
+  }
 
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
@@ -58,7 +62,7 @@ function SideBar() {
       {/* <LinkContainer><Link to="/">Invoices</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
-      <button onClick={firebaseLogout}>Sign out</button>
+      <button onClick={logoutUser}>Sign out</button>
 
 
     </NavContainer>

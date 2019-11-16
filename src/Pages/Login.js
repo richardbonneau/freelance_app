@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { firebaseLogin } from "../_actions";
+import { firebaseLogin, firebaseSignup} from "../_actions";
 import styled from "styled-components";
 import { myFirebase } from "../utils/fire.js";
 import Loading from "../Components/Loading";
@@ -11,6 +11,8 @@ const Container = styled.div`
 `;
 
 function Login() {
+  const dispatch = useDispatch();
+
   const [signupEmailInput, setSignupEmailInput] = useState("");
   const [signupPasswordInput, setSignupPasswordInput] = useState("");
   const [loginEmailInput, setLoginEmailInput] = useState("");
@@ -21,7 +23,14 @@ function Login() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
 
-
+const loginUser = (e) => {
+  e.preventDefault();
+  dispatch(firebaseLogin);
+}
+const signupUser = (e) => {
+  e.preventDefault();
+  dispatch(firebaseSignup);
+}
   
 
   if (isAuthenticated) return (<Redirect to="/dashboard" />);
@@ -29,7 +38,7 @@ function Login() {
   else return (
     <Container>
       <h2>signup</h2>
-      <form onSubmit={firebaseSignup}>
+      <form onSubmit={signupUser}>
         <input
           type="text"
           onChange={e => setSignupEmailInput(e.target.value)}
@@ -41,7 +50,7 @@ function Login() {
         <input type="submit" />
       </form>
       <h2>login</h2>
-      <form onSubmit={firebaseLogin}>
+      <form onSubmit={loginUser}>
         <input type="text" onChange={e => setLoginEmailInput(e.target.value)} />
         <input
           type="text"

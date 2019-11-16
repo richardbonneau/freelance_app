@@ -36,6 +36,7 @@ const isVerifying = useSelector(state=>state.auth.isVerifying);
           component={Dashboard} 
           isAuthenticated={isAuthenticated} 
           isVerifying={isVerifying} />
+          
           <ProtectedRoute 
           exact 
           path="/clients" 

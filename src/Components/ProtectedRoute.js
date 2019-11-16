@@ -9,7 +9,7 @@ const PageStructure = styled.div`
     display: flex;
   }
 `;
-const RoutesContainer = styled.div`
+const ComponentContainer = styled.div`
   @media (min-width: 1024px) {
     margin-left: 220px;
   }
@@ -23,7 +23,6 @@ export default function ProtectedRoute({
 }) {
   return (
     <PageStructure>
-
       <Route
         {...rest}
         render={props => {
@@ -33,9 +32,8 @@ export default function ProtectedRoute({
             <div>
           <MobileNavBar />
           <SideBar />
-          <Component {...props} />
+          <ComponentContainer><Component {...props} /></ComponentContainer>
           </div>
-            
           ) : (
             <Redirect
               to={{
