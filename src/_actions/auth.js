@@ -69,6 +69,7 @@ export const firebaseSignup = (email,password)=> dispatch =>{
     })
 };
 
+
 export const firebaseLogin = (email,password)=> dispatch =>{
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email,password).then(user=>{
