@@ -26,7 +26,6 @@ export default (
   },
   action
 ) => {
-  console.log('action.type',action.type)
   switch (action.type) {
     
     case LOGIN_REQUEST:
@@ -86,6 +85,7 @@ export default (
       }
     case DATABASE_FAILURE:
       return {
+        
         ...state,
         databaseError: true,
         isManipulatingDatabase: false
@@ -93,4 +93,5 @@ export default (
     default:
       return state;
   }
+ 
 };

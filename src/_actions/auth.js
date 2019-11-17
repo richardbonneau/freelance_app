@@ -16,6 +16,7 @@ export const DATABASE_ACCESS = "DATABASE_ACCESS";
 export const DATABASE_FAILURE = "DATABASE_FAILURE";
 
 const requestLogin = () => {
+    console.log("req login")
     return {
         type: LOGIN_REQUEST
     }
@@ -77,17 +78,17 @@ const accessingDatabase = () => {
     }
 }
 export const firebaseSignup = (email, password) => dispatch => {
+    console.log("signing up")
     dispatch(requestLogin());
     myFirebase.auth().createUserWithEmailAndPassword(email, password).then(user => {
-        console.log("then")
         addNewUserToDatabase(user, dispatch);
     }).catch(error => {
-        console.log("login error",error)
+        console.log("login error", error)
         dispatch(loginError());
     })
 };
 const addNewUserToDatabase = (user, dispatch) => {
-    console.log("addNewUserToDatabase",user)
+    console.log("addNewUserToDatabase", user)
     dispatch(accessingDatabase());
     db.collection("users").doc(user.user.uid).set({
         clients: []
@@ -110,7 +111,7 @@ export const firebaseLogin = (email, password) => dispatch => {
         console.log("firebaseLogin")
         dispatch(receiveLogin(user));
     }).catch(error => {
-        console.log("login error",error)
+        console.log("login error", error)
         dispatch(loginError());
     })
 };
@@ -121,16 +122,31 @@ export const firebaseLogout = () => dispatch => {
     myFirebase.auth().signOut().then(() => {
         dispatch(receiveLogout());
     }).catch(error => {
-        console.log("logout error",error)
+        console.log("logout error", error)
         dispatch(logoutError());
     })
 };
 
 export const verifyAuth = () => dispatch => {
+    console.log("verify auth")
     dispatch(verifyRequest());
     myFirebase.auth().onAuthStateChanged(user => {
+        console.log("VERIFY auth", user)
         if (user !== null) {
-            dispatch(receiveLogin(user));
+            db.collection("users").doc(user.uid).get().then(function (doc) {
+                if (doc.exists) {
+                    console.log("Document data:", doc.data());
+                    dispatch(receiveLogin(user));
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("verify auth error : No such document!");
+                }
+            }).catch(function (error) {
+                console.log("Error getting document:", error);
+            });
+
+
+
         }
         dispatch(verifySuccess());
     })

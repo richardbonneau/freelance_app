@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { firebaseLogin, firebaseSignup} from "../_actions";
+import { firebaseLogin, firebaseSignup } from "../_actions";
 import styled from "styled-components";
 import { myFirebase } from "../utils/fire.js";
 import Loading from "../Components/Loading";
@@ -23,21 +23,21 @@ function Login() {
   const loginError = useSelector(state => state.auth.loginError);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
-  
-const signupUser = (e) => {
+
+  const signupUser = (e) => {
     e.preventDefault();
-    dispatch(firebaseSignup(signupEmailInput,signupPasswordInput));
+    dispatch(firebaseSignup(signupEmailInput, signupPasswordInput));
   }
 
-const loginUser = (e) => {
-  e.preventDefault();
-  dispatch(firebaseLogin(loginEmailInput,loginPasswordInput));
-}
+  const loginUser = (e) => {
+    e.preventDefault();
+    dispatch(firebaseLogin(loginEmailInput, loginPasswordInput));
+  }
 
-  
+
 
   if (isAuthenticated) return (<Redirect to="/dashboard" />);
-  else if(isVerifying || isLoggingIn) return (<Loading />);
+  else if (isVerifying || isLoggingIn) return (<Loading />);
   else return (
     <Container>
       <h2>signup</h2>
