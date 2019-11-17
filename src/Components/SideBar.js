@@ -50,7 +50,7 @@ function SideBar() {
 
   const logoutUser = (e)=>{
     e.preventDefault();
-    dispatch(firebaseLogout);
+    dispatch(firebaseLogout());
   }
 
   return (

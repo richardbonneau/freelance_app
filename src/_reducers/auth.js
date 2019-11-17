@@ -6,7 +6,9 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
   VERIFY_REQUEST,
-  VERIFY_SUCCESS
+  VERIFY_SUCCESS,
+  DATABASE_ACCESS,
+  DATABASE_FAILURE
 } from "../_actions";
 
 export default (
@@ -17,12 +19,16 @@ export default (
     logoutError: false,
     isVerifying: false,
     verifyingError: false,
+    isManipulatingDatabase: false,
+    databaseError: false,
     isAuthenticated: false,
     user: {}
   },
   action
 ) => {
+  console.log('action.type',action.type)
   switch (action.type) {
+    
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -44,35 +50,46 @@ export default (
         loginError: true
       };
     case LOGOUT_REQUEST:
-        return {
-            ...state,
-            isLoggingOut: true,
-            logoutError: false
-        }
+      return {
+        ...state,
+        isLoggingOut: true,
+        logoutError: false
+      }
     case LOGOUT_SUCCESS:
-        return {
-            ...state,
-            isLoggingOut:false,
-            isAuthenticated:false,
-            user: {}
-        }
+      return {
+        ...state,
+        isLoggingOut: false,
+        isAuthenticated: false,
+        user: {}
+      }
     case LOGOUT_FAILURE:
-        return {
-            ...state,
-            isLoggingOut:false,
-            logoutError:true
-        }
+      return {
+        ...state,
+        isLoggingOut: false,
+        logoutError: true
+      }
     case VERIFY_REQUEST:
-        return {
-          ...state,
-            isVerifying:true,
-            verifyingError: false
-        }
+      return {
+        ...state,
+        isVerifying: true,
+        verifyingError: false
+      }
     case VERIFY_SUCCESS:
-        return {
-            ...state,
-            isVerifying: false
-        }
+      return {
+        ...state,
+        isVerifying: false
+      }
+    case DATABASE_ACCESS:
+      return {
+        ...state,
+        isManipulatingDatabase: true
+      }
+    case DATABASE_FAILURE:
+      return {
+        ...state,
+        databaseError: true,
+        isManipulatingDatabase: false
+      }
     default:
       return state;
   }

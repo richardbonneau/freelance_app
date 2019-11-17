@@ -11,6 +11,7 @@ const Container = styled.div`
 `;
 
 function Login() {
+
   const dispatch = useDispatch();
 
   const [signupEmailInput, setSignupEmailInput] = useState("");
@@ -22,19 +23,21 @@ function Login() {
   const loginError = useSelector(state => state.auth.loginError);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
+  
+const signupUser = (e) => {
+    e.preventDefault();
+    dispatch(firebaseSignup(signupEmailInput,signupPasswordInput));
+  }
 
 const loginUser = (e) => {
   e.preventDefault();
-  dispatch(firebaseLogin);
+  dispatch(firebaseLogin(loginEmailInput,loginPasswordInput));
 }
-const signupUser = (e) => {
-  e.preventDefault();
-  dispatch(firebaseSignup);
-}
+
   
 
   if (isAuthenticated) return (<Redirect to="/dashboard" />);
-  else if(isVerifying) return (<Loading />);
+  else if(isVerifying || isLoggingIn) return (<Loading />);
   else return (
     <Container>
       <h2>signup</h2>
