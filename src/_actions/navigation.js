@@ -1,11 +1,13 @@
+export const TOGGLE_HAMBURGER_MENU = "TOGGLE_HAMBURGER_MENU";
 
+const toggleHamburger = () => {
+    console.log("toggleHamburger")
+    return {
+        type: TOGGLE_HAMBURGER_MENU
+    }
+};
 
-
-// export default (state = {
-//     hamburgerMenuOpened: false
-// }, action) =>{
-//     switch(action.type){
-//         case "toggleHamburgerMenu": return {...state, hamburgerMenuOpened: action.payload}
-//         default: return state
-//       }
-// }
+export const toggleHamburgerMenu = () => dispatch => {
+    console.log("toggleHamburgerMenu")
+    dispatch(toggleHamburger());
+};

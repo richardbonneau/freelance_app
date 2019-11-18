@@ -88,7 +88,7 @@ export const firebaseSignup = (email, password) => dispatch => {
 const addNewUserToDatabase = (user, dispatch) => {
     dispatch(accessingDatabase());
     db.collection("users").doc(user.user.uid).set({
-        clients: []
+        clients: [{name:"Example Client"}]
     })
         .then(function () {
             console.log("hi")

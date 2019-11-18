@@ -4,6 +4,7 @@ import MobileNavBar from "./MobileNavBar";
 import SideBar from "./SideBar";
 import styled from "styled-components";
 import Loading from "./Loading"
+
 const PageStructure = styled.div`
   @media (min-width: 1024px) {
     display: flex;

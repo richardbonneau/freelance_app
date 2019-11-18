@@ -22,7 +22,7 @@ function Clients() {
     e.preventDefault();
 
     db.collection("users").doc(user.uid).update({
-      clients: firestore.FieldValue.arrayUnion(newClientInput)
+      clients: firestore.FieldValue.arrayUnion({name:newClientInput})
     }).then(function (doc) {
       console.log("New client pushed")
     }).catch(function (error) {
@@ -57,16 +57,11 @@ function Clients() {
       });
   }
 
-
-
-
-
-
   const lifyClients = () => {
     console.log("listOfClients", listOfClients)
     return listOfClients.map(client => {
       console.log("client", client)
-      return <Client name={client} />
+      return <Client name={client.name} />
     })
   }
   return (
@@ -77,7 +72,6 @@ function Clients() {
         <input type="text" onChange={onNewClientChange} value={newClientInput} />
         <input type="submit" />
       </form>
-
 
       {lifyClients()}
 

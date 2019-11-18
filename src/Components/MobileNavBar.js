@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {FaBars} from 'react-icons/fa'
 import styled from 'styled-components';
 import {useSelector,useDispatch} from 'react-redux'
-
+import { toggleHamburgerMenu } from '../_actions';
 
 const Container = styled.div`
 @media (min-width:1024px) {
@@ -15,7 +15,6 @@ const Container = styled.div`
 const MainLogo = styled.img`
     height: 25px;
 `
-
 const styles={
     hamburgerMenu:{
         height:'30px',
@@ -28,7 +27,7 @@ function MobileNavBar() {
     const dispatch = useDispatch();
 
     function hamburgerMenuClick(){
-        dispatch({type:"toggleHamburgerMenu", payload: !hamburgerMenuOpened})
+        dispatch(toggleHamburgerMenu());
     }
 
   return (
