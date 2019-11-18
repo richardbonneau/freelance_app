@@ -7,7 +7,6 @@ const Container = styled.div`
     margin: 3px 0;
 `
 function Client(props) {
-    console.log("props",props)
   return (
     <Container>
         {props.name}

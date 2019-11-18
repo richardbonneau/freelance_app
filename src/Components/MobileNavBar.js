@@ -22,17 +22,13 @@ const styles={
         cursor:'pointer'
     }
 }
-function MobileNavBar() {
-    const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
-    const dispatch = useDispatch();
 
-    function hamburgerMenuClick(){
-        dispatch(toggleHamburgerMenu());
-    }
+function MobileNavBar() {
+    const dispatch = useDispatch();
 
   return (
       <Container>
-          <FaBars style={styles.hamburgerMenu} onClick={hamburgerMenuClick} />
+          <FaBars style={styles.hamburgerMenu} onClick={()=>dispatch(toggleHamburgerMenu())} />
           <MainLogo src="/images/reduxlogo.png" />
       </Container>
       
