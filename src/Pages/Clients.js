@@ -12,6 +12,7 @@ const Container = styled.div`
 function Clients() {
   const user = useSelector(state => state.auth.user);
   const [listOfClients, setListOfClients] = useState([]);
+  console.log("user",user)
 
   db.collection("users").doc(user.uid).get().then(function (doc) {
     if (doc.exists && listOfClients.length !== doc.data().clients.length ) {

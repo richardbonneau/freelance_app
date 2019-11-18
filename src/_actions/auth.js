@@ -16,14 +16,12 @@ export const DATABASE_ACCESS = "DATABASE_ACCESS";
 export const DATABASE_FAILURE = "DATABASE_FAILURE";
 
 const requestLogin = () => {
-    console.log("req login")
     return {
         type: LOGIN_REQUEST
     }
 };
 
 const receiveLogin = user => {
-    console.log("receive login???", user)
     return {
         type: LOGIN_SUCCESS,
         user
@@ -88,14 +86,13 @@ export const firebaseSignup = (email, password) => dispatch => {
     })
 };
 const addNewUserToDatabase = (user, dispatch) => {
-    console.log("addNewUserToDatabase", user)
     dispatch(accessingDatabase());
     db.collection("users").doc(user.user.uid).set({
         clients: []
     })
         .then(function () {
             console.log("hi")
-            dispatch(receiveLogin(user));
+            dispatch(receiveLogin(user.user));
             console.log("Document successfully written!");
         })
         .catch(function (error) {
