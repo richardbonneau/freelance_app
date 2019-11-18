@@ -59,7 +59,7 @@ function SideBar() {
       <LinkContainer><Link to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
       <LinkContainer><Link to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
-      {/* <LinkContainer><Link to="/">Invoices</Link></LinkContainer> */}
+      <LinkContainer><Link to="/invoices"><FaUserAlt style={styles.icons} /><div style={styles.text}>Invoices</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
       <button onClick={logoutUser}>Sign out</button>
