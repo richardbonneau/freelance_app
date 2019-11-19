@@ -11,12 +11,13 @@ const Container = styled.div`
 `
 function Clients() {
   const user = useSelector(state => state.auth.user);
-  const clients = useSelector(state => {
-    console.log('state',state)
+  const listOfClients = useSelector(state => {
 
+    console.log('state',state)
+    return state.clients.clients
   });
   const [newClientInput, setNewClientInput] = useState("");
-  const [listOfClients, setListOfClients] = useState([]);
+  // const [listOfClients, setListOfClients] = useState([]);
 
 
   const onNewClientChange = (e) => {
@@ -34,19 +35,19 @@ function Clients() {
     });
     setNewClientInput("");
   }
-const getClient = () => {
-      db.collection("users").doc(user.uid).get().then(function (doc) {
-        if (doc.exists && listOfClients.length !== doc.data().clients.length) {
-            setListOfClients(doc.data().clients);
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function (error) {
-        console.log("Error getting document:", error);
-    });
-}
+// const getClient = () => {
+//       db.collection("users").doc(user.uid).get().then(function (doc) {
+//         if (doc.exists && listOfClients.length !== doc.data().clients.length) {
+//             setListOfClients(doc.data().clients);
+//             console.log("Document data:", doc.data());
+//         } else {
+//             // doc.data() will be undefined in this case
+//             console.log("No such document!");
+//         }
+//     }).catch(function (error) {
+//         console.log("Error getting document:", error);
+//     });
+// }
 
 
   const pushToFirestore = () => {
@@ -71,7 +72,7 @@ const getClient = () => {
   return (
     <Container>
       <h2>Clients</h2>
-      <button onClick={getClient}>get clients</button>
+      {/* <button onClick={getClient}>get clients</button> */}
       <form onSubmit={newClientSubmit}>
         <input type="text" onChange={onNewClientChange} value={newClientInput} />
         <input type="submit" />

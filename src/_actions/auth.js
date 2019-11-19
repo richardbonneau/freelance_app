@@ -106,27 +106,32 @@ export const firebaseLogin = (email, password) => dispatch => {
     console.log("firebaseLogin")
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email, password).then(user => {
-
-        db.collection("users").doc(user.user.uid).get().then(function (doc) {
-            if (doc.exists) {
-                dispatch(requestInitialClientsList(doc.data().clients))
-                console.log("Document data:", doc.data());
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function (error) {
-            console.log("Error getting document:", error);
-        });
-
-        
+        console.log("***login",user);
+        dispatch(getUserDataAndLogin(user.user));
         console.log("firebaseLogin")
-        dispatch(receiveLogin(user));
+        
     }).catch(error => {
         console.log("login error", error)
         dispatch(loginError());
     })
 };
+
+const getUserDataAndLogin = (user) => dispatch => {
+    console.log("user",user)
+    db.collection("users").doc(user.uid).get().then(function (doc) {
+        if (doc.exists) {
+            dispatch(requestInitialClientsList(doc.data().clients));
+            dispatch(receiveLogin(user));
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error);
+    });
+ 
+}
 
 export const firebaseLogout = () => dispatch => {
     console.log("logout")
@@ -143,22 +148,10 @@ export const verifyAuth = () => dispatch => {
     console.log("verify auth")
     dispatch(verifyRequest());
     myFirebase.auth().onAuthStateChanged(user => {
-        console.log("VERIFY auth", user)
+        
+        console.log("***VERIFY auth", user)
         if (user !== null) {
-            db.collection("users").doc(user.uid).get().then(function (doc) {
-                if (doc.exists) {
-                    console.log("Document data:", doc.data());
-                    dispatch(receiveLogin(user));
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("verify auth error : No such document!");
-                }
-            }).catch(function (error) {
-                console.log("Error getting document:", error);
-            });
-
-
-
+            dispatch(getUserDataAndLogin(user));
         }
         dispatch(verifySuccess());
     })

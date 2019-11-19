@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {FaBars} from 'react-icons/fa'
 import styled from 'styled-components';
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { toggleHamburgerMenu } from '../_actions';
 
 const Container = styled.div`
@@ -25,13 +25,11 @@ const styles={
 
 function MobileNavBar() {
     const dispatch = useDispatch();
-
   return (
       <Container>
           <FaBars style={styles.hamburgerMenu} onClick={()=>dispatch(toggleHamburgerMenu())} />
           <MainLogo src="/images/reduxlogo.png" />
       </Container>
-      
   );
 }
 
