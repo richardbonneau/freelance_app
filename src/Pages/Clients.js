@@ -11,6 +11,10 @@ const Container = styled.div`
 `
 function Clients() {
   const user = useSelector(state => state.auth.user);
+  const clients = useSelector(state => {
+    console.log('state',state)
+
+  });
   const [newClientInput, setNewClientInput] = useState("");
   const [listOfClients, setListOfClients] = useState([]);
 
@@ -30,20 +34,20 @@ function Clients() {
     });
     setNewClientInput("");
   }
-
-  const getClients = () => {
-    db.collection("users").doc(user.uid).get().then(function (doc) {
-      if (doc.exists && listOfClients.length !== doc.data().clients.length) {
-        setListOfClients(doc.data().clients);
-        console.log("Document data:", doc.data());
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
+const getClient = () => {
+      db.collection("users").doc(user.uid).get().then(function (doc) {
+        if (doc.exists && listOfClients.length !== doc.data().clients.length) {
+            setListOfClients(doc.data().clients);
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
     }).catch(function (error) {
-      console.log("Error getting document:", error);
+        console.log("Error getting document:", error);
     });
-  }
+}
+
 
   const pushToFirestore = () => {
     db.collection("users").doc(user.uid).set({
@@ -59,15 +63,15 @@ function Clients() {
 
   const lifyClients = () => {
     console.log("listOfClients", listOfClients)
-    return listOfClients.map(client => {
+    return listOfClients.map((client,i) => {
       console.log("client", client)
-      return <Client name={client.name} />
+      return <Client key={i} name={client.name} />
     })
   }
   return (
     <Container>
       <h2>Clients</h2>
-      <button onClick={getClients}>getClients</button>
+      <button onClick={getClient}>get clients</button>
       <form onSubmit={newClientSubmit}>
         <input type="text" onChange={onNewClientChange} value={newClientInput} />
         <input type="submit" />

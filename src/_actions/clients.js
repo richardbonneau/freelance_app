@@ -1,36 +1,50 @@
 import { myFirebase, db } from '../utils/fire.js';
+import store from "../store";
 
+// export const INITIAL_CLIENTS_REQUEST = "INITIAL_CLIENTS_REQUEST";
+// export const INITIAL_CLIENTS_SUCCESS = "INITIAL_CLIENTS_SUCCESS";
+export const GET_INITIAL_CLIENTS_LIST = "GET_INITIAL_CLIENTS_LIST";
+export const PUSH_NEW_CLIENT = "PUSH_NEW_CLIENT";
+export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 
-export const CLIENTS_REQUEST = "CLIENTS_REQUEST";
-export const CLIENTS_SUCCESS = "CLIENTS_SUCCESS";
-export const CLIENTS_FAILURE = "CLIENTS_FAILURE";
+// const UID = store.getState().user.uid;
+// console.log('store.getState()',store.getState())
 
-//
-
-const sendRequest = () => {
+// const sendRequest = () => {
+//     return {
+//         type: INITIAL_CLIENTS_REQUEST
+//     }
+// };
+// const receiveData = () => {
+//     return {
+//         type: INITIAL_CLIENTS_SUCCESS
+//     }
+// };
+const getInitalClientList = (clientsList) => {
     return {
-        type: CLIENTS_REQUEST
+        type: GET_INITIAL_CLIENTS_LIST,
+        clientsList
+    }
+}
+const pushNewClient = (newClient) => {
+    return {
+        type: PUSH_NEW_CLIENT,
+        newClient
     }
 };
-
-const receiveData = () => {
-    return {
-        type: CLIENTS_SUCCESS
-    }
-};
-
 const requestError = () => {
     return {
-        type: CLIENTS_FAILURE
+        type: FIREBASE_FAILURE
     }
 };
 
-export const requestFirestore = () => dispatch => {
-    dispatch(sendRequest());
+export const requestInitialClientsList = (clientsList) => dispatch => {
+    dispatch(getInitalClientList(clientsList))
 };
-export const receiveFirestore = () => dispatch => {
-    dispatch(receiveData());
+export const addClientToFirestore = (newClient) => dispatch => {
+    // push client to DB, then add client to redux if successful
+    dispatch(pushNewClient(newClient));
 };
-export const firestoreError = () => dispatch => {
+export const clientsFirestoreError = () => dispatch => {
     dispatch(requestError());
 };

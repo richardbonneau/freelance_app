@@ -1,4 +1,5 @@
 import { myFirebase, db } from '../utils/fire.js';
+import { requestInitialClientsList } from './index';
 
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
@@ -88,7 +89,7 @@ export const firebaseSignup = (email, password) => dispatch => {
 const addNewUserToDatabase = (user, dispatch) => {
     dispatch(accessingDatabase());
     db.collection("users").doc(user.user.uid).set({
-        clients: [{name:"Example Client"}]
+        clients: [{ name: "Example Client" }]
     })
         .then(function () {
             console.log("hi")
@@ -105,6 +106,20 @@ export const firebaseLogin = (email, password) => dispatch => {
     console.log("firebaseLogin")
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email, password).then(user => {
+
+        db.collection("users").doc(user.user.uid).get().then(function (doc) {
+            if (doc.exists) {
+                dispatch(requestInitialClientsList(doc.data().clients))
+                console.log("Document data:", doc.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function (error) {
+            console.log("Error getting document:", error);
+        });
+
+        
         console.log("firebaseLogin")
         dispatch(receiveLogin(user));
     }).catch(error => {
