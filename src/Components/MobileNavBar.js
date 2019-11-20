@@ -30,7 +30,7 @@ function MobileNavBar() {
       <Container>
           <FaBars style={styles.hamburgerMenu} onClick={()=>dispatch(toggleHamburgerMenu())} />
           <MainLogo src="/images/reduxlogo.png" />
-          <button>Logout</button>
+          <div />
       </Container>
   );
 }

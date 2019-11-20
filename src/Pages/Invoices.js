@@ -14,7 +14,7 @@ function Invoices() {
 
   const listOfInvoices = () => {
     return invoices.map(invoice=>(
-      <li>{invoice.title}</li>
+      <li>title: {invoice.title} #: {invoice.invoiceNumber} project: projects[invoice.projectId] client: clients[invoices.clientId]</li>
     ))
   }
 
@@ -22,7 +22,7 @@ function Invoices() {
     // the "frontend" must build the Object that is sent to redux/firebase
     e.preventDefault();
     dispatch(addInvoiceToFirestore(
-      { title: "New Invoice", invoiceNumber: 2, projectId: "new project", clientId: 1, 
+      { title: "New Invoice", invoiceNumber: 2, projectId: 123, clientId: 1, 
         columns: [
             { name: "Tcing", description: "cyril", hours: 5, rate: 40 }
         ] 

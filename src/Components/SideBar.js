@@ -10,7 +10,6 @@ const NavContainer = styled.nav`
   left:0px !important;
 }
   transition: all 300ms ease-out 10ms;
-  left:-220px;
   background: white;
   min-width:220px;
   padding:30px 0 30px 0;
@@ -58,7 +57,7 @@ function SideBar() {
   };
 
   return (
-    <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
+    <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-225px' }}>
       <MainLogo src="/images/reduxlogo.png" />
       <LinkContainer onClick={closeHamburgerMenu}><Link  to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
       <LinkContainer onClick={closeHamburgerMenu}><Link  to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
