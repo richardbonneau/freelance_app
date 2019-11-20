@@ -7,13 +7,13 @@ export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 
 const getInitalInvoicesList = (invoicesList) => {
     return {
-        type: GET_INITIAL_CLIENTS_LIST,
+        type: GET_INITIAL_INVOICES_LIST,
         invoicesList
     };
 };
 const pushNewInvoice = (newInvoice) => {
     return {
-        type: PUSH_NEW_CLIENT,
+        type: PUSH_NEW_INVOICE,
         newInvoice
     };
 };
