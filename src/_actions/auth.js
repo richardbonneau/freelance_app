@@ -1,4 +1,5 @@
 import { myFirebase, db } from '../utils/fire.js';
+import { initialUserDocument } from '../utils/static.js'
 import { requestInitialClientsList } from './index';
 
 
@@ -88,10 +89,7 @@ export const firebaseSignup = (email, password) => dispatch => {
 };
 const addNewUserToDatabase = (user, dispatch) => {
     dispatch(accessingDatabase());
-    db.collection("users").doc(user.user.uid).set({
-        clients: [{ name: "Example Client", id: 1 }],
-        invoices:[{ projectId:"new project", clientId: 1 }]
-    })
+    db.collection("users").doc(user.user.uid).set(initialUserDocument)
         .then(function () {
             dispatch(receiveLogin(user.user));
             console.log("Document successfully written!");
