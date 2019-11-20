@@ -31,8 +31,7 @@ export default function ProtectedRoute({
             <Loading />
           ) : isAuthenticated ? (
             <div>
-          <MobileNavBar />
-          <SideBar />
+
           <ComponentContainer><Component {...props} /></ComponentContainer>
           </div>
           ) : (

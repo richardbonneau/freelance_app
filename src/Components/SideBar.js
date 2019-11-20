@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { FaIndent, FaUserAlt, FaMoneyCheckAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux'
-import { firebaseLogout } from '../_actions';
+import { firebaseLogout, toggleHamburgerMenu } from '../_actions';
 
 const NavContainer = styled.nav`
 @media (min-width:1024px) {
   left:0px !important;
 }
-  transition: all 450ms ease-out 10ms;
+  transition: all 300ms ease-out 10ms;
   left:-220px;
   background: white;
   min-width:220px;
@@ -48,18 +48,21 @@ const styles = {
 function SideBar() {
   const dispatch = useDispatch();
   const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
-  const logoutUser = (e)=>{
+  const logoutUser = (e) => {
     e.preventDefault();
     dispatch(firebaseLogout());
+  }
+  const closeHamburgerMenu = () =>{
+    dispatch(toggleHamburgerMenu());
   }
 
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
       <MainLogo src="/images/reduxlogo.png" />
-      <LinkContainer><Link to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
+      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
+      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
+      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/invoices"><FaMoneyCheckAlt style={styles.icons} /><div style={styles.text}>Invoices</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
-      <LinkContainer><Link to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
-      <LinkContainer><Link to="/invoices"><FaMoneyCheckAlt style={styles.icons} /><div style={styles.text}>Invoices</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
       <button onClick={logoutUser}>Sign out</button>

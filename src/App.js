@@ -6,6 +6,8 @@ import Dashboard from "./Pages/Dashboard";
 import Clients from "./Pages/Clients";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
+import MobileNavBar from "./Components/MobileNavBar"
+import SideBar from "./Components/SideBar"
 import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
@@ -14,7 +16,8 @@ const isVerifying = useSelector(state=>state.auth.isVerifying);
 
   return (
     <BrowserRouter>
-    
+              <MobileNavBar />
+          <SideBar />
           <Route exact={true} path="/" component={Login} />
           
           <ProtectedRoute 

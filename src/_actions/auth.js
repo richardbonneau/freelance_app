@@ -107,7 +107,6 @@ export const firebaseLogin = (email, password) => dispatch => {
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email, password).then(user => {
         console.log("***login",user);
-        dispatch(getUserDataAndLogin(user.user));
         console.log("firebaseLogin")
         
     }).catch(error => {
@@ -120,9 +119,12 @@ const getUserDataAndLogin = (user) => dispatch => {
     console.log("user",user)
     db.collection("users").doc(user.uid).get().then(function (doc) {
         if (doc.exists) {
-            dispatch(requestInitialClientsList(doc.data().clients));
-            dispatch(receiveLogin(user));
-            console.log("Document data:", doc.data());
+            console.log("before")
+             dispatch(requestInitialClientsList(doc.data().clients));
+            console.log("in between")
+             dispatch(receiveLogin(user));
+            console.log("after")
+            console.log("This user exists in the database. Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
