@@ -1,58 +1,42 @@
 import { firestore, db } from '../utils/fire.js';
 import store from "../store";
 
-// export const INITIAL_CLIENTS_REQUEST = "INITIAL_CLIENTS_REQUEST";
-// export const INITIAL_CLIENTS_SUCCESS = "INITIAL_CLIENTS_SUCCESS";
-export const GET_INITIAL_CLIENTS_LIST = "GET_INITIAL_CLIENTS_LIST";
-export const PUSH_NEW_CLIENT = "PUSH_NEW_CLIENT";
+export const GET_INITIAL_INVOICES_LIST = "GET_INITIAL_INVOICES_LIST";
+export const PUSH_NEW_INVOICE = "PUSH_NEW_INVOICE";
 export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 
-// const UID = store.getState().user.uid;
-// console.log('store.getState()',store.getState())
-
-// const sendRequest = () => {
-//     return {
-//         type: INITIAL_CLIENTS_REQUEST
-//     }
-// };
-// const receiveData = () => {
-//     return {
-//         type: INITIAL_CLIENTS_SUCCESS
-//     }
-// };
-const getInitalClientList = (clientsList) => {
+const getInitalInvoicesList = (invoicesList) => {
     return {
         type: GET_INITIAL_CLIENTS_LIST,
-        clientsList
-    }
+        invoicesList
+    };
 };
-const pushNewClient = (newClient) => {
+const pushNewInvoice = (newInvoice) => {
     return {
         type: PUSH_NEW_CLIENT,
-        newClient
-    }
+        newInvoice
+    };
 };
 const requestError = () => {
     return {
         type: FIREBASE_FAILURE
-    }
+    };
 };
 
-export const requestInitialClientsList = (clientsList) => dispatch => {
-    dispatch(getInitalClientList(clientsList))
+export const requestInitialInvoicesList = (invoicesList) => dispatch => {
+    dispatch(getInitalInvoicesList(invoicesList))
 };
-export const addClientToFirestore = (newClient) => dispatch => {
+export const addInvoiceToFirestore = (newInvoice) => dispatch => {
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({
-        clients: firestore.FieldValue.arrayUnion(newClient)
+        invoices: firestore.FieldValue.arrayUnion(newInvoice)
       }).then(function (doc) {
         console.log("New client pushed. Now pushing to redux store.")
-        dispatch(pushNewClient(newClient));
+        dispatch(pushNewInvoice(newInvoice));
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
-    
 };
-export const clientsFirestoreError = () => dispatch => {
+export const firestoreError = () => dispatch => {
     dispatch(requestError());
 };

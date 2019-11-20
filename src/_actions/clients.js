@@ -49,10 +49,11 @@ export const addClientToFirestore = (newClient) => dispatch => {
         console.log("New client pushed. Now pushing to redux store.")
         dispatch(pushNewClient(newClient));
       }).catch(function (error) {
+          dispatch(firestoreError());
         console.log("Error getting document:", error);
       });
     
 };
-export const clientsFirestoreError = () => dispatch => {
+export const firestoreError = () => dispatch => {
     dispatch(requestError());
 };

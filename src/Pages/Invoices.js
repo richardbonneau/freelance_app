@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { backend } from '../utils/static.js'
 import { useSelector, useDispatch } from "react-redux";
 import { db, firestore } from '../utils/fire.js';
 
@@ -9,17 +8,20 @@ const Container = styled.div`
     padding-left: 25px;
 `
 function Invoices() {
-  // const clientOptions = () => {
-  //   return <option value="lime">Lime</option>
-  // }
+  const invoices = useSelector(state=>state.invoices.invoices)
+  const listOfInvoices = () => {
+    return invoices.map(invoice=>(
+      <div>{invoice.title}</div>
+    ))
+  }
+
   return (<Container>
     <h2>Invoices</h2>
-    <form>
-    <label>Invoice For</label>
-      {/* <select>
-        {clientOptions()}
-      </select> */}
-    </form>
+    <button>Create New Invoice</button>
+
+    <ul>
+      {listOfInvoices}
+    </ul>
     
 
     </Container>)

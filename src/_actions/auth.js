@@ -1,6 +1,6 @@
 import { myFirebase, db } from '../utils/fire.js';
 import { initialUserDocument } from '../utils/static.js'
-import { requestInitialClientsList } from './index';
+import { requestInitialClientsList, requestInitialInvoicesList } from './index';
 
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
@@ -116,6 +116,7 @@ const getUserDataAndLogin = (user) => dispatch => {
     db.collection("users").doc(user.uid).get().then(function (doc) {
         if (doc.exists) {
              dispatch(requestInitialClientsList(doc.data().clients));
+             dispatch(requestInitialInvoicesList(doc.data().invoices));
              dispatch(receiveLogin(user));
             console.log("This user exists in the database. Document data:", doc.data());
         } else {

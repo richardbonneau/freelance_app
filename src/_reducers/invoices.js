@@ -1,41 +1,29 @@
 import {
-  GET_INITIAL_CLIENTS_LIST,
-  INITIAL_CLIENTS_SUCCESS,
-  PUSH_NEW_CLIENT,
+  GET_INITIAL_INVOICES_LIST,
+  PUSH_NEW_INVOICE,
   FIREBASE_FAILURE
 } from "../_actions";
 
 export default (
   state = {
     isSendingReq: false,
-    initialClientsFetch: false,
+    initialInvoicesFetch: false,
     reqError: false,
-    clients:[]
+    invoices:[]
   },
   action
 ) => {
   switch (action.type) {
-    // case INITIAL_CLIENTS_REQUEST:
-    //   return {
-    //     ...state,
-    //     isSendingReq: true,
-    //     reqError: false
-    //   };
-    // case INITIAL_CLIENTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isSendingReq: false,
-    //     initialClientsFetch: true,
-    //   };
-    case GET_INITIAL_CLIENTS_LIST:
+    
+    case GET_INITIAL_INVOICES_LIST:
       return {
         ...state,
-        clients: action.clientsList
+        invoices: action.invoicesList
       }
-    case PUSH_NEW_CLIENT:
+    case PUSH_NEW_INVOICE:
       return {
         ...state,
-        clients: [...state.clients, action.newClient]
+        invoices: [...state.invoices, action.newInvoice]
       }
     case FIREBASE_FAILURE:
       return {
