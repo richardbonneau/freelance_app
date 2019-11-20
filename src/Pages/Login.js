@@ -11,7 +11,6 @@ const Container = styled.div`
 `;
 
 function Login() {
-
   const dispatch = useDispatch();
 
   const [signupEmailInput, setSignupEmailInput] = useState("");
