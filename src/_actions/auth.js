@@ -89,10 +89,10 @@ export const firebaseSignup = (email, password) => dispatch => {
 const addNewUserToDatabase = (user, dispatch) => {
     dispatch(accessingDatabase());
     db.collection("users").doc(user.user.uid).set({
-        clients: [{ name: "Example Client" }]
+        clients: [{ name: "Example Client", id: 1 }],
+        invoices:[{ projectId:"new project", clientId: 1 }]
     })
         .then(function () {
-            console.log("hi")
             dispatch(receiveLogin(user.user));
             console.log("Document successfully written!");
         })
@@ -106,9 +106,7 @@ export const firebaseLogin = (email, password) => dispatch => {
     console.log("firebaseLogin")
     dispatch(requestLogin());
     myFirebase.auth().signInWithEmailAndPassword(email, password).then(user => {
-        console.log("***login",user);
-        console.log("firebaseLogin")
-        
+        console.log("***firebaseLogin",user);
     }).catch(error => {
         console.log("login error", error)
         dispatch(loginError());
@@ -119,11 +117,8 @@ const getUserDataAndLogin = (user) => dispatch => {
     console.log("user",user)
     db.collection("users").doc(user.uid).get().then(function (doc) {
         if (doc.exists) {
-            console.log("before")
              dispatch(requestInitialClientsList(doc.data().clients));
-            console.log("in between")
              dispatch(receiveLogin(user));
-            console.log("after")
             console.log("This user exists in the database. Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
@@ -150,7 +145,6 @@ export const verifyAuth = () => dispatch => {
     console.log("verify auth")
     dispatch(verifyRequest());
     myFirebase.auth().onAuthStateChanged(user => {
-        
         console.log("***VERIFY auth", user)
         if (user !== null) {
             dispatch(getUserDataAndLogin(user));
