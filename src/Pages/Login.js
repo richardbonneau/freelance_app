@@ -33,8 +33,6 @@ function Login() {
     dispatch(firebaseLogin(loginEmailInput, loginPasswordInput));
   }
 
-
-
   if (isAuthenticated) return (<Redirect to="/dashboard" />);
   else if (isVerifying || isLoggingIn) return (<Loading />);
   else return (
