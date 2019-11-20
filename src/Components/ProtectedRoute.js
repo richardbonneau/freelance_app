@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import MobileNavBar from "./MobileNavBar";
-import SideBar from "./SideBar";
+
 import styled from "styled-components";
 import Loading from "./Loading"
 

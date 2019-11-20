@@ -1,4 +1,4 @@
-import { myFirebase, db } from '../utils/fire.js';
+import { firestore, db } from '../utils/fire.js';
 import store from "../store";
 
 // export const INITIAL_CLIENTS_REQUEST = "INITIAL_CLIENTS_REQUEST";
@@ -42,8 +42,16 @@ export const requestInitialClientsList = (clientsList) => dispatch => {
     dispatch(getInitalClientList(clientsList))
 };
 export const addClientToFirestore = (newClient) => dispatch => {
-    // push client to DB, then add client to redux if successful
-    dispatch(pushNewClient(newClient));
+    let uid = store.getState().auth.user.uid;
+    db.collection("users").doc(uid).update({
+        clients: firestore.FieldValue.arrayUnion(newClient)
+      }).then(function (doc) {
+        console.log("New client pushed. Now pushing to redux store.")
+        dispatch(pushNewClient(newClient));
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+    
 };
 export const clientsFirestoreError = () => dispatch => {
     dispatch(requestError());
