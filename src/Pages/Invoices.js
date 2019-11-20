@@ -8,14 +8,15 @@ const Container = styled.div`
   padding-left: 25px;
 `;
 const Table = styled.table`
-  border: 1px solid #ccc;
-  border-collapse: collapse;
   margin: 0;
   padding: 0;
   width: 100%;
   table-layout: fixed;
 `
 const TrHeader = styled.tr`
+`
+const Th = styled.th`
+    cursor: default;
 `
 const Td = styled.td`
   padding: .625em;
@@ -61,12 +62,12 @@ function Invoices() {
       <Table>
         <thead>
         <tr>
-          <th width="1%" scope="col"></th>
-          <th scope="col">Title</th>
-          <th scope="col">#</th>
-          <th scope="col">Project</th>
-          <th scope="col">Client</th>
-          <th scope="col">Due Date</th>
+          <Th width="1%" scope="col"></Th>
+          <Th scope="col">Title</Th>
+          <Th scope="col">#</Th>
+          <Th scope="col">Project</Th>
+          <Th scope="col">Client</Th>
+          <Th scope="col">Due Date</Th>
           
         </tr>
         </thead>
