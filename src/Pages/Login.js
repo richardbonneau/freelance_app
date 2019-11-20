@@ -26,12 +26,12 @@ function Login() {
   const signupUser = (e) => {
     e.preventDefault();
     dispatch(firebaseSignup(signupEmailInput, signupPasswordInput));
-  }
+  };
 
   const loginUser = (e) => {
     e.preventDefault();
     dispatch(firebaseLogin(loginEmailInput, loginPasswordInput));
-  }
+  };
 
   if (isAuthenticated) return (<Redirect to="/dashboard" />);
   else if (isVerifying || isLoggingIn) return (<Loading />);
@@ -60,6 +60,6 @@ function Login() {
       </form>
     </Container>
   );
-}
+};
 
 export default Login;

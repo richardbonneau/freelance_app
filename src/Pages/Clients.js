@@ -9,14 +9,15 @@ import { addClientToFirestore } from "../_actions";
 
 const Container = styled.div`
     padding-left: 25px;
-`
+`;
+
 function Clients() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const listOfClients = useSelector(state => {
 
     console.log('state',state)
-    return state.clients.clients
+    return state.clients.clients;
   });
   const [newClientInput, setNewClientInput] = useState("");
   // const [listOfClients, setListOfClients] = useState([]);

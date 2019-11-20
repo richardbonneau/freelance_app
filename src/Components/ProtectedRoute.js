@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 import styled from "styled-components";
-import Loading from "./Loading"
+import Loading from "./Loading";
 
 const PageStructure = styled.div`
   @media (min-width: 1024px) {
@@ -45,4 +45,4 @@ export default function ProtectedRoute({
       />
     </PageStructure>
   );
-}
+};

@@ -18,13 +18,13 @@ const NavContainer = styled.nav`
   border-right:1px solid black;
   height:100vh;
   position:fixed;
-`
+`;
 const LinkContainer = styled.div`
   color:green;
   display:block;
   font-size:25px;
   margin-bottom: 12px;
-`
+`;
 const MainLogo = styled.img`
 @media (min-width:1024px) {
   height:100px;
@@ -33,7 +33,8 @@ const MainLogo = styled.img`
   display:block;
 }
   display:none;
-`
+`;
+
 const styles = {
   icons: {
     color: 'purple',
@@ -47,14 +48,14 @@ const styles = {
 
 function SideBar() {
   const dispatch = useDispatch();
-  const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened)
+  const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened);
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(firebaseLogout());
-  }
+  };
   const closeHamburgerMenu = () =>{
     dispatch(toggleHamburgerMenu());
-  }
+  };
 
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-220px' }}>
@@ -70,6 +71,6 @@ function SideBar() {
 
     </NavContainer>
   );
-}
+};
 
 export default SideBar;

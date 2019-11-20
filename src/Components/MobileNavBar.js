@@ -10,6 +10,7 @@ const Container = styled.div`
     display:none;
 }
     display:flex;
+    justify-content: space-between;
     border-bottom:1px solid black;
 `
 const MainLogo = styled.img`
@@ -29,6 +30,7 @@ function MobileNavBar() {
       <Container>
           <FaBars style={styles.hamburgerMenu} onClick={()=>dispatch(toggleHamburgerMenu())} />
           <MainLogo src="/images/reduxlogo.png" />
+          <button>Logout</button>
       </Container>
   );
 }

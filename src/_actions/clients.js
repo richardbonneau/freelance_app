@@ -25,7 +25,7 @@ const getInitalClientList = (clientsList) => {
         type: GET_INITIAL_CLIENTS_LIST,
         clientsList
     }
-}
+};
 const pushNewClient = (newClient) => {
     return {
         type: PUSH_NEW_CLIENT,
