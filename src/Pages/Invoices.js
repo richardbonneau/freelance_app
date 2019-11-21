@@ -8,13 +8,19 @@ const Container = styled.div`
   padding-left: 25px;
 `;
 const Table = styled.table`
+  table-layout: fixed;
+  width: 100%;
+  @media(min-width: 1024px){
   margin: 0;
   padding: 0;
-  width: 100%;
   table-layout: fixed;
+  max-width: 1000px;
+  }
+
 `
 const TrHeader = styled.tr`
 `
+
 const Th = styled.th`
     cursor: default;
 `
@@ -28,9 +34,9 @@ width:1%;
 const ExpandableButton = styled.div`
 color:brown;
   ${TrHeader}:hover & {
-    width: 100vw;
+    width: 1000px;
     cursor: pointer;
-    height: 30px;
+    height: 35px;
     background: rgba(175, 175, 175, 0.28);
     position: relative;
   }
@@ -51,10 +57,10 @@ function Invoices() {
         <ExpandableButton onClick={()=>alert("clicked")}></ExpandableButton>
           </td>
         <Td>{invoice.title}</Td>
-        <Td>{invoice.invoiceNumber}</Td>
+        <Td width="5%">{invoice.invoiceNumber}</Td>
         <Td>projects[invoice.projectId]</Td>
         <Td>clients[invoices.clientId]</Td>
-        <Td>invoice.dueDate</Td>
+        <Td width="20%">invoice.dueDate</Td>
       </TrHeader>
 
     ));
@@ -64,10 +70,10 @@ function Invoices() {
         <tr>
           <Th width="1%" scope="col"></Th>
           <Th scope="col">Title</Th>
-          <Th scope="col">#</Th>
+          <Th width="5%" scope="col">#</Th>
           <Th scope="col">Project</Th>
           <Th scope="col">Client</Th>
-          <Th scope="col">Due Date</Th>
+          <Th width="20%" scope="col">Due Date</Th>
           
         </tr>
         </thead>
