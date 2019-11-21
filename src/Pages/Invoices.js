@@ -10,6 +10,9 @@ const Container = styled.div`
 const Table = styled.table`
   table-layout: fixed;
   width: 100%;
+  border-collapse: separate; 
+  border-spacing:0 20px;
+
   @media(min-width: 1024px){
   margin: 0;
   padding: 0;
@@ -17,23 +20,40 @@ const Table = styled.table`
   max-width: 1000px;
   }
 
-`
-const TrHeader = styled.tr`
-`
 
+`
+const Tr = styled.tr`
+  border: 1px solid black;
+  @media(min-width: 768px){
+  border:none;
+  }
+`
+const THead = styled.thead`
+  @media(max-width:768px) {
+    display:none;
+  }
+`
 const Th = styled.th`
     cursor: default;
 `
 const Td = styled.td`
   padding: .625em;
   text-align: center;
+  @media(max-width:768px){
+    text-align:right;
+    display:block;
+    &::before{
+      content: attr(label);
+      float:left;
+    }
+  }
 `
 const EBContainer = styled.td`
 width:1%;
 `
 const ExpandableButton = styled.div`
 color:brown;
-  ${TrHeader}:hover & {
+  ${Tr}:hover & {
     width: 1000px;
     cursor: pointer;
     height: 35px;
@@ -52,21 +72,21 @@ function Invoices() {
     // ))
     let tableContents = invoices.map((invoice,i) => (
 
-      <TrHeader key={i}>
+      <Tr key={i}>
         <td width="1%">
         <ExpandableButton onClick={()=>alert("clicked")}></ExpandableButton>
           </td>
-        <Td>{invoice.title}</Td>
-        <Td width="5%">{invoice.invoiceNumber}</Td>
-        <Td>projects[invoice.projectId]</Td>
-        <Td>clients[invoices.clientId]</Td>
-        <Td width="20%">invoice.dueDate</Td>
-      </TrHeader>
+        <Td label="Title">{invoice.title}</Td>
+        <Td label="#">{invoice.invoiceNumber}</Td>
+        <Td label="Project">projects[invoice.projectId]</Td>
+        <Td label="Client">clients[invoices.clientId]</Td>
+        <Td label="Due Date">invoice.dueDate</Td>
+      </Tr>
 
     ));
     return (
       <Table>
-        <thead>
+        <THead>
         <tr>
           <Th width="1%" scope="col"></Th>
           <Th scope="col">Title</Th>
@@ -76,7 +96,7 @@ function Invoices() {
           <Th width="20%" scope="col">Due Date</Th>
           
         </tr>
-        </thead>
+        </THead>
         <tbody>
         {tableContents}
         </tbody>
