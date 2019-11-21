@@ -10,57 +10,61 @@ const Container = styled.div`
 const Table = styled.table`
   table-layout: fixed;
   width: 100%;
-  border-collapse: separate; 
-  border-spacing:0 20px;
+  border-collapse: separate;
+  border-spacing: 0 20px;
 
-  @media(min-width: 1024px){
-  margin: 0;
-  padding: 0;
-  table-layout: fixed;
-  max-width: 1000px;
+  @media (min-width: 1024px) {
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    max-width: 1000px;
   }
-
-
-`
+`;
 const Tr = styled.tr`
   border: 1px solid black;
-  @media(min-width: 768px){
-  border:none;
+  @media (min-width: 768px) {
+    border: none;
+
+
   }
-`
+`;
 const THead = styled.thead`
-  @media(max-width:768px) {
-    display:none;
+  @media (max-width: 768px) {
+    display: none;
   }
-`
+`;
 const Th = styled.th`
-    cursor: default;
-`
+  cursor: default;
+`;
 const Td = styled.td`
-  padding: .625em;
+  padding: 0.625em;
   text-align: center;
-  @media(max-width:768px){
-    text-align:right;
-    display:block;
-    &::before{
+  @media (max-width: 768px) {
+    text-align: right;
+    display: block;
+    &::before {
       content: attr(label);
-      float:left;
+      float: left;
     }
   }
-`
+`;
 const EBContainer = styled.td`
-width:1%;
-`
+  width: 1%;
+`;
 const ExpandableButton = styled.div`
-color:brown;
-  ${Tr}:hover & {
+height: 215px;
+@media(min-width:768px){
+  height: 35px;
+}
+      /* goes in hover */
     width: 1000px;
     cursor: pointer;
-    height: 35px;
     background: rgba(175, 175, 175, 0.28);
     position: relative;
+
+  ${Tr}:hover & {
   }
-`
+`;
 
 function Invoices() {
   const dispatch = useDispatch();
@@ -70,37 +74,35 @@ function Invoices() {
     // return invoices.map(invoice=>(
     //   <li>title: {invoice.title} #: {invoice.invoiceNumber} project: projects[invoice.projectId] client: clients[invoices.clientId]</li>
     // ))
-    let tableContents = invoices.map((invoice,i) => (
-
+    let tableContents = invoices.map((invoice, i) => (
       <Tr key={i}>
         <td width="1%">
-        <ExpandableButton onClick={()=>alert("clicked")}></ExpandableButton>
-          </td>
+          <ExpandableButton onClick={() => alert("clicked")}></ExpandableButton>
+        </td>
         <Td label="Title">{invoice.title}</Td>
         <Td label="#">{invoice.invoiceNumber}</Td>
         <Td label="Project">projects[invoice.projectId]</Td>
         <Td label="Client">clients[invoices.clientId]</Td>
         <Td label="Due Date">invoice.dueDate</Td>
       </Tr>
-
     ));
     return (
       <Table>
         <THead>
-        <tr>
-          <Th width="1%" scope="col"></Th>
-          <Th scope="col">Title</Th>
-          <Th width="5%" scope="col">#</Th>
-          <Th scope="col">Project</Th>
-          <Th scope="col">Client</Th>
-          <Th width="20%" scope="col">Due Date</Th>
-          
-        </tr>
+          <tr>
+            <Th width="1%" scope="col"></Th>
+            <Th scope="col">Title</Th>
+            <Th width="5%" scope="col">
+              #
+            </Th>
+            <Th scope="col">Project</Th>
+            <Th scope="col">Client</Th>
+            <Th width="20%" scope="col">
+              Due Date
+            </Th>
+          </tr>
         </THead>
-        <tbody>
-        {tableContents}
-        </tbody>
-        
+        <tbody>{tableContents}</tbody>
       </Table>
     );
   };
