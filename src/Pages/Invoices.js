@@ -5,7 +5,7 @@ import { addInvoiceToFirestore } from "../_actions";
 import { db, firestore } from "../utils/fire.js";
 
 const Container = styled.div`
-  padding-left: 25px;
+      padding: 0 25px;
 `;
 const Table = styled.table`
   table-layout: fixed;
@@ -21,12 +21,10 @@ const Table = styled.table`
   }
 `;
 const Tr = styled.tr`
-  border: 1px solid black;
-  @media (min-width: 768px) {
-    border: none;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
+  
 
-
-  }
 `;
 const THead = styled.thead`
   @media (max-width: 768px) {
@@ -39,6 +37,7 @@ const Th = styled.th`
 const Td = styled.td`
   padding: 0.625em;
   text-align: center;
+
   @media (max-width: 768px) {
     text-align: right;
     display: block;
@@ -56,13 +55,14 @@ height: 215px;
 @media(min-width:768px){
   height: 35px;
 }
-      /* goes in hover */
-    width: 1000px;
+    height: 215px;
+    max-width: 1000px;
     cursor: pointer;
-    background: rgba(175, 175, 175, 0.28);
     position: relative;
 
   ${Tr}:hover & {
+
+    width: 95vw;
   }
 `;
 

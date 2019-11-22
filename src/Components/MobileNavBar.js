@@ -9,6 +9,7 @@ const Container = styled.div`
 @media (min-width:1024px) {
     display:none;
 }
+padding: 2px 10px;
     display:flex;
     justify-content: space-between;
     border-bottom:1px solid black;
