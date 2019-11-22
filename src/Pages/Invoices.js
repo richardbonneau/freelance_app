@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
 import { db, firestore } from "../utils/fire.js";
-import { Table, Tr, Td, Th, THead, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
+import Invoice from "../Components/Invoice"
+import { Container, Table, Tr, Td, Th, THead, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
-const Container = styled.div`
-      padding: 0 25px;
-`;
+
 
 
 function Invoices() {
@@ -19,16 +18,7 @@ function Invoices() {
     //   <li>title: {invoice.title} #: {invoice.invoiceNumber} project: projects[invoice.projectId] client: clients[invoices.clientId]</li>
     // ))
     let tableContents = invoices.map((invoice, i) => (
-      <Tr key={i}>
-        <td width="1%">
-          <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
-        </td>
-        <Td label="Title">{invoice.title}</Td>
-        <Td label="#">{invoice.invoiceNumber}</Td>
-        <Td label="Project">projects[invoice.projectId]</Td>
-        <Td label="Client">clients[invoices.clientId]</Td>
-        <Td label="Due Date">invoice.dueDate</Td>
-      </Tr>
+      <Invoice invoice={invoice} key={i} />
     ));
     return (
       <Table>
@@ -44,6 +34,7 @@ function Invoices() {
             <Th width="20%" scope="col">
               Due Date
             </Th>
+            <Th width="1%" scope="col"></Th>
           </tr>
         </THead>
         <tbody>{tableContents}</tbody>
@@ -64,14 +55,12 @@ function Invoices() {
       })
     );
   };
-  console.log("listOfInvoices", listOfInvoices, "invoices", invoices);
 
   return (
     <Container>
       <h2>Invoices</h2>
       <button onClick={newInvoiceSubmit}>Create New Invoice</button>
-
-      <ul>{listOfInvoices()}</ul>
+      {listOfInvoices()}
     </Container>
   );
 }

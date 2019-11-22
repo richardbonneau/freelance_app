@@ -1,4 +1,8 @@
 import styled from "styled-components";
+
+export const Container = styled.div`
+      padding: 0 25px;
+`;
 export const Table = styled.table`
   table-layout: fixed;
   width: 100%;

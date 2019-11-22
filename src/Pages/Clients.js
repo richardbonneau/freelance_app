@@ -6,10 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { db, firestore } from '../utils/fire.js';
 import Client from '../Components/Client';
 import { addClientToFirestore } from "../_actions";
-
-const Container = styled.div`
-    padding-left: 25px;
-`;
+import { Container, Table, Th, THead } from "../utils/globalStyledComponents";
 
 function Clients() {
   const dispatch = useDispatch();
@@ -46,13 +43,26 @@ function Clients() {
       });
   }
 
-  const lifyClients = () => {
-    console.log("listOfClients", listOfClients)
-    return listOfClients.map((client,i) => {
-      console.log("client", client)
-      return <Client key={i} name={client.name} />
+  const clientsList = () => {
+    let tableContents = listOfClients.map((client,i) => {
+      return <Client key={i} client={client} />
     })
+    return (<Table>
+        <THead>
+          <tr>
+            <Th width="1%" scope="col"></Th>
+            <Th scope="col">Full Name</Th>
+            <Th scope="col">
+              Email
+            </Th>
+            <Th scope="col">Company Name</Th>
+            <Th width="1%" scope="col"></Th>
+          </tr>
+        </THead>
+        <tbody>{tableContents}</tbody>
+      </Table>)
   }
+
   return (
     <Container>
       <h2>Clients</h2>
@@ -61,7 +71,9 @@ function Clients() {
         <input type="submit" />
       </form>
 
-      {lifyClients()}
+      
+
+      {clientsList()}
 
     </Container>
 

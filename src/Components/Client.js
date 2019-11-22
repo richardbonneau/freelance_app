@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Tr, Td,ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 
 const Container = styled.div`
@@ -8,9 +9,15 @@ const Container = styled.div`
 `
 function Client(props) {
   return (
-    <Container>
-        {props.name}
-    </Container>
+    <Tr>
+    <td width="1%">
+      <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
+    </td>
+    <Td label="Full Name">{props.client.name}</Td>
+    <Td label="Email">props.client.email</Td>
+    <Td label="Company">props.client.company</Td>
+
+  </Tr>
 
   );
 }
