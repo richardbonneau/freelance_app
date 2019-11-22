@@ -3,68 +3,12 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
 import { db, firestore } from "../utils/fire.js";
+import { Table, Tr, Td, Th, THead, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 const Container = styled.div`
       padding: 0 25px;
 `;
-const Table = styled.table`
-  table-layout: fixed;
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 20px;
 
-  @media (min-width: 1024px) {
-    margin: 0;
-    padding: 0;
-    table-layout: fixed;
-    max-width: 1000px;
-  }
-`;
-const Tr = styled.tr`
-  border-radius: 3px;
-  box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
-  
-
-`;
-const THead = styled.thead`
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-const Th = styled.th`
-  cursor: default;
-`;
-const Td = styled.td`
-  padding: 0.625em;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    text-align: right;
-    display: block;
-    &::before {
-      content: attr(label);
-      float: left;
-    }
-  }
-`;
-const EBContainer = styled.td`
-  width: 1%;
-`;
-const ExpandableButton = styled.div`
-height: 215px;
-@media(min-width:768px){
-  height: 35px;
-}
-    height: 215px;
-    max-width: 1000px;
-    cursor: pointer;
-    position: relative;
-
-  ${Tr}:hover & {
-
-    width: 95vw;
-  }
-`;
 
 function Invoices() {
   const dispatch = useDispatch();
@@ -77,7 +21,7 @@ function Invoices() {
     let tableContents = invoices.map((invoice, i) => (
       <Tr key={i}>
         <td width="1%">
-          <ExpandableButton onClick={() => alert("clicked")}></ExpandableButton>
+          <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
         </td>
         <Td label="Title">{invoice.title}</Td>
         <Td label="#">{invoice.invoiceNumber}</Td>
