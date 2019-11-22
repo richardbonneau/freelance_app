@@ -3,11 +3,13 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
 import { db, firestore } from "../utils/fire.js";
-import Invoice from "../Components/Invoice"
-import { Container, Table, Tr, Td, Th, THead, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
-
-
-
+import Invoice from "../Components/Invoice";
+import {
+  Container,
+  Table,
+  Th,
+  THead,
+} from "../utils/globalStyledComponents";
 
 function Invoices() {
   const dispatch = useDispatch();

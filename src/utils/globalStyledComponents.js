@@ -13,7 +13,7 @@ export const Table = styled.table`
     margin: 0;
     padding: 0;
     table-layout: fixed;
-    max-width: 1000px;
+    max-width: 900px;
   }
 `;
 export const Tr = styled.tr`

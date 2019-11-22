@@ -14,8 +14,8 @@ function Client(props) {
       <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
     </td>
     <Td label="Full Name">{props.client.name}</Td>
-    <Td label="Email">props.client.email</Td>
-    <Td label="Company">props.client.company</Td>
+    <Td label="Email">{props.client.email}</Td>
+    <Td label="Company">{props.client.companyName}</Td>
 
   </Tr>
 
