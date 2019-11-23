@@ -5,6 +5,7 @@ import { backend } from "../utils/static.js";
 import { useSelector, useDispatch } from "react-redux";
 import Client from "../Components/Client";
 import { addClientToFirestore } from "../_actions";
+import { FiX } from "react-icons/fi";
 import { Container, Table, Th, THead } from "../utils/globalStyledComponents";
 
 const MaskOverlay = styled.div`
@@ -19,8 +20,8 @@ const MaskOverlay = styled.div`
 const ModalContainer = styled.div`
   position: fixed;
   z-index: 160;
-  width: 500px;
-  height: 500px;
+  width: 280px;
+    height: 300px;
   background: #bdc3c7;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -29,6 +30,11 @@ const ModalContainer = styled.div`
 const ModalContents = styled.div`
   padding: 20px;
 `;
+const FormInputContainer = styled.div`
+display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+`
 
 function Clients() {
   const dispatch = useDispatch();
@@ -78,23 +84,37 @@ function Clients() {
 
     return (
       <ModalContents active={isModalOpened}>
+        <FiX onClick={() => toggleModal(false)} />
         <form onSubmit={newClientSubmit}>
-          <input
-            type="text"
-            value={nameInput}
-            onChange={e => setNameInput(e.target.value)}
-          />
-          <input
-            type="text"
-            value={emailInput}
-            onChange={e => setEmailInput(e.target.value)}
-          />
-          <input
-            type="text"
-            value={companyInput}
-            onChange={e => setCompanyInput(e.target.value)}
-          />
-          <input type="submit" />
+          <FormInputContainer>
+            <label>Full Name</label>
+            <input
+              type="text"
+              value={nameInput}
+              onChange={e => setNameInput(e.target.value)}
+            />
+          </FormInputContainer>
+          <FormInputContainer>
+            <label>Email</label>
+            <input
+              type="text"
+              value={emailInput}
+              onChange={e => setEmailInput(e.target.value)}
+            />
+          </FormInputContainer>
+          <FormInputContainer>
+            {" "}
+            <label>Company</label>
+            <input
+              type="text"
+              value={companyInput}
+              onChange={e => setCompanyInput(e.target.value)}
+            />
+          </FormInputContainer>
+
+          <FormInputContainer>
+            <input type="submit" />
+          </FormInputContainer>
         </form>
       </ModalContents>
     );
@@ -102,14 +122,15 @@ function Clients() {
 
   return (
     <Container>
-      <button onClick={()=>toggleModal(true)}>Add New Client</button>
+      <button onClick={() => toggleModal(true)}>Add New Client</button>
       <h2>Clients</h2>
       {clientsList()}
-      {isModalOpened && <>
-      <MaskOverlay active={isModalOpened} />
-      <ModalContainer>{modalContents()}</ModalContainer>
-      </>
-      }
+      {isModalOpened && (
+        <>
+          <MaskOverlay active={isModalOpened} />
+          <ModalContainer>{modalContents()}</ModalContainer>
+        </>
+      )}
     </Container>
   );
 }
