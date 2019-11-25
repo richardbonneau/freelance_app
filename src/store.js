@@ -3,12 +3,6 @@ import thunkMiddleware from "redux-thunk";
 import rootReducer from './_reducers/index.js'
 import { verifyAuth } from "./_actions/auth.js";
 
-
-//https://itnext.io/firebase-login-functionality-from-scratch-with-react-redux-2bf316e5820f
-
-
-
-
 const store = createStore(
   rootReducer,
   undefined,

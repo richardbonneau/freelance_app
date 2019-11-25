@@ -20,7 +20,7 @@ export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 //         type: INITIAL_CLIENTS_SUCCESS
 //     }
 // };
-const getInitalClientList = (clientsList) => {
+const getInitalClientListFromFirebase = (clientsList) => {
     return {
         type: GET_INITIAL_CLIENTS_LIST,
         clientsList
@@ -32,6 +32,7 @@ const pushNewClient = (newClient) => {
         newClient
     }
 };
+
 const requestError = () => {
     return {
         type: FIREBASE_FAILURE
@@ -39,8 +40,9 @@ const requestError = () => {
 };
 
 export const requestInitialClientsList = (clientsList) => dispatch => {
-    dispatch(getInitalClientList(clientsList))
+    dispatch(getInitalClientListFromFirebase(clientsList))
 };
+
 export const addClientToFirestore = (newClient) => dispatch => {
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({

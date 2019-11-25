@@ -6,13 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Client from "../Components/Client";
 import { addClientToFirestore } from "../_actions";
 import { FiX } from "react-icons/fi";
-import { Container, Table, Th, THead, MaskOverlay, ModalContainer, ModalContents, ModalTitle, ModalHr } from "../utils/globalStyledComponents";
-
-const FormInputContainer = styled.div`
-display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-`
+import { Container, Table, Th, THead, MaskOverlay, ModalContainer, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
 
 const styles = {
   fiX: {
@@ -66,6 +60,8 @@ function Clients() {
         })
       );
       setNameInput("");
+      setEmailInput("");
+      setCompanyInput("");
     };
 
     return (

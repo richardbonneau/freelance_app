@@ -100,3 +100,8 @@ export const ModalTitle = styled.h3`
 export const ModalHr = styled.hr`
 margin: 15px 0;
 `
+export const FormInputContainer = styled.div`
+display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+`
