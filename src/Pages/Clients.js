@@ -6,35 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import Client from "../Components/Client";
 import { addClientToFirestore } from "../_actions";
 import { FiX } from "react-icons/fi";
-import { Container, Table, Th, THead } from "../utils/globalStyledComponents";
+import { Container, Table, Th, THead, MaskOverlay, ModalContainer, ModalContents, ModalTitle, ModalHr } from "../utils/globalStyledComponents";
 
-const MaskOverlay = styled.div`
-  position: fixed;
-  z-index: 150;
-  width: 100%;
-  height: 100%;
-  background: #676767ad;
-  top: 0;
-  left: 0;
-`;
-const ModalContainer = styled.div`
-  position: fixed;
-  z-index: 160;
-  width: 280px;
-    height: 300px;
-  background: #bdc3c7;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-`;
-const ModalContents = styled.div`
-  padding: 20px;
-`;
 const FormInputContainer = styled.div`
 display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 `
+
+const styles = {
+  fiX: {
+    cursor: 'pointer',
+    height: '25px',
+    width: '25px'
+  }
+}
 
 function Clients() {
   const dispatch = useDispatch();
@@ -84,7 +70,9 @@ function Clients() {
 
     return (
       <ModalContents active={isModalOpened}>
-        <FiX onClick={() => toggleModal(false)} />
+        <FormInputContainer><div /><FiX style={styles.fiX} onClick={() => toggleModal(false)} /></FormInputContainer>
+        <ModalTitle>Create a New Client</ModalTitle>
+        <ModalHr />
         <form onSubmit={newClientSubmit}>
           <FormInputContainer>
             <label>Full Name</label>
@@ -125,12 +113,11 @@ function Clients() {
       <button onClick={() => toggleModal(true)}>Add New Client</button>
       <h2>Clients</h2>
       {clientsList()}
-      {isModalOpened && (
-        <>
-          <MaskOverlay active={isModalOpened} />
-          <ModalContainer>{modalContents()}</ModalContainer>
-        </>
-      )}
+
+      <MaskOverlay isModalOpened={isModalOpened} />
+      <ModalContainer isModalOpened={isModalOpened}>{modalContents()}</ModalContainer>
+
+
     </Container>
   );
 }

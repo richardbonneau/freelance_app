@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// Tables
 export const Container = styled.div`
       padding: 0 25px;
 `;
@@ -61,3 +62,41 @@ height: 215px;
     width: 95vw;
   }
 `;
+
+// Modal
+
+export const MaskOverlay = styled.div`
+  position: fixed;
+  z-index: 150;
+  width: 100%;
+  height: 100%;
+  background: #676767ad;
+  top: 0;
+  left: 0;
+  visibility: ${({ isModalOpened }) => isModalOpened ? 'visible' : 'hidden'};
+`;
+export const ModalContainer = styled.div`
+  position: fixed;
+  z-index: 160;
+  width: 280px;
+  height: 300px;
+  background: #bdc3c7;
+  left: 50%;
+  top: 50%;
+  margin-top: -150px;
+  margin-left: -140px;
+  transition: 0.5s ease-out;
+  visibility: ${({ isModalOpened }) => isModalOpened ? 'visible' : 'hidden'};
+  transform: ${({ isModalOpened }) => isModalOpened ? 'translateY(0)' : 'translateY(45px)'};
+  opacity: ${({ isModalOpened }) => isModalOpened ? '1' : '0'};
+  
+`;
+export const ModalContents = styled.div`
+  padding: 20px;
+`;
+export const ModalTitle = styled.h3`
+  text-align:center;
+`
+export const ModalHr = styled.hr`
+margin: 15px 0;
+`
