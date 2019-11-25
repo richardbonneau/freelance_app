@@ -59,9 +59,11 @@ function Clients() {
           companyName: companyInput
         })
       );
+      toggleModal(false);
       setNameInput("");
       setEmailInput("");
       setCompanyInput("");
+
     };
 
     return (

@@ -25,9 +25,6 @@ function Invoices() {
   const [selectedClient, setSelectedClient] = useState(clients[0].id)
 
   const listOfInvoices = () => {
-    // return invoices.map(invoice=>(
-    //   <li>title: {invoice.title} #: {invoice.invoiceNumber} project: projects[invoice.projectId] client: clients[invoices.clientId]</li>
-    // ))
     let tableContents = invoices.map((invoice, i) => (
       <Invoice invoice={invoice} clients={clients} key={i} />
     ));
@@ -53,10 +50,7 @@ function Invoices() {
     );
   };
 
-
-
   const modalContents = () => {
-
     const newInvoiceSubmit = e => {
       e.preventDefault();
       dispatch(
@@ -64,10 +58,13 @@ function Invoices() {
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
           projectId: 0,
-          clientId: selectedClient,
+          clientId: Number(selectedClient),
           columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
         })
       );
+      toggleModal(false);
+      setInvoiceNumberInput("");
+      setTitleInput("");
     };
 
     return (
@@ -78,7 +75,7 @@ function Invoices() {
         <form onSubmit={newInvoiceSubmit}>
           <FormInputContainer>
             <select value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
-              {clients.map(client => (<option value={client.id}>{client.name}</option>))}
+              {clients.map((client,i) => (<option key={i} value={client.id}>{client.name}</option>))}
             </select>
           </FormInputContainer>
           <FormInputContainer>

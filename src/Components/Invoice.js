@@ -2,12 +2,7 @@ import React from 'react';
 import { Tr, Td, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 function Invoice(props) {
-  console.log(props.clients)
-  console.log(props.invoice)
-  let client = props.clients.find(cl=>{
-    console.log(cl, props.invoice)
-    return props.invoice.clientId === cl.id
-  })
+  let client = props.clients.find(cl=>props.invoice.clientId === cl.id);
   return (
     <Tr>
         <td width="1%">
@@ -21,6 +16,6 @@ function Invoice(props) {
       </Tr>
 
   );
-}
+};
 
 export default Invoice;
