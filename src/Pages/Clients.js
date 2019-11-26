@@ -71,8 +71,6 @@ function Clients() {
     );
   };
 
-
-
   const addClientModalContents = () => {
     const newClientSubmit = e => {
       console.log("nameInput", nameInput);
@@ -104,6 +102,7 @@ function Clients() {
         <ModalTitle>Create a New Client</ModalTitle>
         <ModalHr />
         <form onSubmit={newClientSubmit}>
+          
           <FormInputContainer>
             <label>Full Name</label>
             <input

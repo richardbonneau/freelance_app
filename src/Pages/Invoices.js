@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
-import { db, firestore } from "../utils/fire.js";
 import Invoice from "../Components/Invoice";
 import { FiX } from "react-icons/fi";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/src/stylesheets/datepicker.scss'
 import { Container, Table, Th, THead, MaskOverlay, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
 
 const ModalContainer = styled.div`
   position: fixed;
   z-index: 160;
-  width: 280px;
-  height: 300px;
+  width: 300px;
+  height: 600px;
   background: #bdc3c7;
   left: 50%;
   top: 50%;
-  margin-top: -150px;
-  margin-left: -140px;
+  margin-left: -150px;
+  margin-top: -300px;
   transition: 0.5s ease-out;
   visibility: ${({ isModalOpened }) => isModalOpened ? 'visible' : 'hidden'};
   transform: ${({ isModalOpened }) => isModalOpened ? 'translateY(0)' : 'translateY(45px)'};
@@ -37,6 +38,8 @@ function Invoices() {
   const clients = useSelector(state => state.clients.clients);
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
+  const [invoiceDate,setInvoiceDate] = useState(new Date());
+  const [dueDate,setDueDate] = useState(new Date());
   const [isModalOpened, toggleModal] = useState(false);
   const [selectedClient, setSelectedClient] = useState(clients[0].id)
 
@@ -109,6 +112,14 @@ function Invoices() {
               value={invoiceNumberInput}
               onChange={e => setInvoiceNumberInput(e.target.value)}
             />
+          </FormInputContainer>
+          <FormInputContainer>
+          <label>Invoice Date</label>
+            <DatePicker selected={invoiceDate} onChange={(date)=>setInvoiceDate(date)} />
+          </FormInputContainer>
+          <FormInputContainer>
+          <label>Due Date</label>
+            <DatePicker selected={dueDate} onChange={(date)=>setDueDate(date)} />
           </FormInputContainer>
           <FormInputContainer>
             <input type="submit" />
