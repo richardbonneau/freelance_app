@@ -21,13 +21,11 @@ export default function ProtectedRoute({
   isVerifying,
   ...rest
 }) {
-
   return (
     <PageStructure>
       <Route
         {...rest}
         render={props => {
-          console.log("props",props)
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (

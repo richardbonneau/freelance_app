@@ -44,7 +44,7 @@ const styles = {
   }
 };
 
-function Invoices() {
+function Invoices(props) {
   const dispatch = useDispatch();
   const invoices = useSelector(state => state.invoices.invoices);
   const clients = useSelector(state => state.clients.clients);
@@ -82,12 +82,15 @@ function Invoices() {
   };
 
   const modalContents = () => {
+  
     const newInvoiceSubmit = e => {
       e.preventDefault();
+      let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
       dispatch(
         addInvoiceToFirestore({
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
+          id:newInvoiceId,
           projectId: 0,
           clientId: Number(selectedClient),
           columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
@@ -96,6 +99,7 @@ function Invoices() {
       toggleModal(false);
       setInvoiceNumberInput("");
       setTitleInput("");
+      props.history.push(`/invoice/${newInvoiceId}`);
     };
 
     return (
@@ -154,7 +158,7 @@ function Invoices() {
       <ModalContainer isModalOpened={isModalOpened}>
         {modalContents()}
       </ModalContainer>
-      <Link to="/invoice/test">Test</Link>
+      <Link to="/invoice/15748076379191192">test</Link>
     </Container>
   );
 }
