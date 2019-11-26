@@ -11,7 +11,7 @@ function Client(props) {
   return (
     <Tr>
     <td width="1%">
-      <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
+      <ExpandableInvisibleButton onClick={() => props.clientSelected(props.client)}></ExpandableInvisibleButton>
     </td>
     <Td label="Full Name">{props.client.name}</Td>
     <Td label="Email">{props.client.email}</Td>

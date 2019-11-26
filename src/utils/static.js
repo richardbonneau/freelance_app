@@ -6,7 +6,12 @@ export const initialUserDocument = {
       name: "Example Client",
       id: 1,
       email: "example@mail.com",
-      companyName: "ThisWebsite"
+      companyName: "ThisWebsite",
+      street: "123 Code Street",
+      city: "Montréal",
+      province:"Québec",
+      zip: "h2w1w2"
+
     }
   ],
   invoices: [

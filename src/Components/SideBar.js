@@ -38,7 +38,8 @@ const MainLogo = styled.img`
 const styles = {
   icons: {
     color: 'purple',
-    marginLeft: '20px'
+    marginLeft: '20px',
+    verticalAlign: '-4px'
   },
   text: {
     display: 'inline-block',

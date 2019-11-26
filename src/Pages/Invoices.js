@@ -5,7 +5,23 @@ import { addInvoiceToFirestore } from "../_actions";
 import { db, firestore } from "../utils/fire.js";
 import Invoice from "../Components/Invoice";
 import { FiX } from "react-icons/fi";
-import { Container, Table, Th, THead, MaskOverlay, ModalContainer, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
+import { Container, Table, Th, THead, MaskOverlay, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
+
+const ModalContainer = styled.div`
+  position: fixed;
+  z-index: 160;
+  width: 280px;
+  height: 300px;
+  background: #bdc3c7;
+  left: 50%;
+  top: 50%;
+  margin-top: -150px;
+  margin-left: -140px;
+  transition: 0.5s ease-out;
+  visibility: ${({ isModalOpened }) => isModalOpened ? 'visible' : 'hidden'};
+  transform: ${({ isModalOpened }) => isModalOpened ? 'translateY(0)' : 'translateY(45px)'};
+  opacity: ${({ isModalOpened }) => isModalOpened ? '1' : '0'};
+`;
 
 const styles = {
   fiX: {
