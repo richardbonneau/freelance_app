@@ -88,32 +88,30 @@ function Invoices() {
 
     return (
       <ModalContents active={isModalOpened}>
-        <FormInputContainer><div /><FiX style={styles.fiX} onClick={() => toggleModal(false)} /></FormInputContainer>
         <ModalTitle>Create a New Invoice</ModalTitle>
         <ModalHr />
         <form onSubmit={newInvoiceSubmit}>
-          <FormInputContainer>
+    
             <select value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
               {clients.map((client,i) => (<option key={i} value={client.id}>{client.name}</option>))}
             </select>
-          </FormInputContainer>
-          <FormInputContainer>
-            <label>Invoice Title</label>
+       
+       
             <input
               type="text"
+              placeholder="Invoice Title"
               value={titleInput}
               onChange={e => setTitleInput(e.target.value)}
             />
-          </FormInputContainer>
-          <FormInputContainer>
-            <label>Invoice #</label>
+     
+         
             <input
               type="text"
+              placeholder="Invoice #"
               value={invoiceNumberInput}
               onChange={e => setInvoiceNumberInput(e.target.value)}
             />
-          </FormInputContainer>
-          <FormInputContainer>
+      <FormInputContainer>
           <label>Invoice Date</label>
             <DatePicker selected={invoiceDate} onChange={(date)=>setInvoiceDate(date)} />
           </FormInputContainer>
@@ -124,6 +122,7 @@ function Invoices() {
           <FormInputContainer>
             <input type="submit" />
           </FormInputContainer>
+          <button onClick={() => toggleModal(false)}>Cancel</button>
         </form>
       </ModalContents>
     );
