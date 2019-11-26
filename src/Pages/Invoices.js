@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
 import Invoice from "../Components/Invoice";
 import { FiX } from "react-icons/fi";
 import DatePicker from "react-datepicker";
-import 'react-datepicker/src/stylesheets/datepicker.scss'
-import { Container, Table, Th, THead, MaskOverlay, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
+import "react-datepicker/src/stylesheets/datepicker.scss";
+import {
+  Container,
+  Table,
+  Th,
+  THead,
+  MaskOverlay,
+  ModalContents,
+  ModalTitle,
+  ModalHr,
+  FormInputContainer
+} from "../utils/globalStyledComponents";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -19,18 +30,19 @@ const ModalContainer = styled.div`
   margin-left: -150px;
   margin-top: -300px;
   transition: 0.5s ease-out;
-  visibility: ${({ isModalOpened }) => isModalOpened ? 'visible' : 'hidden'};
-  transform: ${({ isModalOpened }) => isModalOpened ? 'translateY(0)' : 'translateY(45px)'};
-  opacity: ${({ isModalOpened }) => isModalOpened ? '1' : '0'};
+  visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
+  transform: ${({ isModalOpened }) =>
+    isModalOpened ? "translateY(0)" : "translateY(45px)"};
+  opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
 `;
 
 const styles = {
   fiX: {
-    cursor: 'pointer',
-    height: '25px',
-    width: '25px'
+    cursor: "pointer",
+    height: "25px",
+    width: "25px"
   }
-}
+};
 
 function Invoices() {
   const dispatch = useDispatch();
@@ -38,10 +50,10 @@ function Invoices() {
   const clients = useSelector(state => state.clients.clients);
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
-  const [invoiceDate,setInvoiceDate] = useState(new Date());
-  const [dueDate,setDueDate] = useState(new Date());
+  const [invoiceDate, setInvoiceDate] = useState(new Date());
+  const [dueDate, setDueDate] = useState(new Date());
   const [isModalOpened, toggleModal] = useState(false);
-  const [selectedClient, setSelectedClient] = useState(clients[0].id)
+  const [selectedClient, setSelectedClient] = useState(clients[0].id);
 
   const listOfInvoices = () => {
     let tableContents = invoices.map((invoice, i) => (
@@ -91,37 +103,41 @@ function Invoices() {
         <ModalTitle>Create a New Invoice</ModalTitle>
         <ModalHr />
         <form onSubmit={newInvoiceSubmit}>
-    
-            <select value={selectedClient} onChange={(e) => setSelectedClient(e.target.value)}>
-              {clients.map((client,i) => (<option key={i} value={client.id}>{client.name}</option>))}
-            </select>
-       
-       
-            <input
-              type="text"
-              placeholder="Invoice Title"
-              value={titleInput}
-              onChange={e => setTitleInput(e.target.value)}
-            />
-     
-         
-            <input
-              type="text"
-              placeholder="Invoice #"
-              value={invoiceNumberInput}
-              onChange={e => setInvoiceNumberInput(e.target.value)}
-            />
-      <FormInputContainer>
-          <label>Invoice Date</label>
-            <DatePicker selected={invoiceDate} onChange={(date)=>setInvoiceDate(date)} />
-          </FormInputContainer>
-          <FormInputContainer>
-          <label>Due Date</label>
-            <DatePicker selected={dueDate} onChange={(date)=>setDueDate(date)} />
-          </FormInputContainer>
-          <FormInputContainer>
-            <input type="submit" />
-          </FormInputContainer>
+          <select
+            value={selectedClient}
+            onChange={e => setSelectedClient(e.target.value)}
+          >
+            {clients.map((client, i) => (
+              <option key={i} value={client.id}>
+                {client.name}
+              </option>
+            ))}
+          </select>
+
+          <input
+            type="text"
+            placeholder="Invoice Title"
+            value={titleInput}
+            onChange={e => setTitleInput(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Invoice #"
+            value={invoiceNumberInput}
+            onChange={e => setInvoiceNumberInput(e.target.value)}
+          />
+
+          <h4>Invoice Date</h4>
+          <DatePicker
+            selected={invoiceDate}
+            onChange={date => setInvoiceDate(date)}
+          />
+
+          <h4>Due Date</h4>
+          <DatePicker selected={dueDate} onChange={date => setDueDate(date)} />
+
+          <input type="submit" />
+
           <button onClick={() => toggleModal(false)}>Cancel</button>
         </form>
       </ModalContents>
@@ -135,7 +151,10 @@ function Invoices() {
       {listOfInvoices()}
 
       <MaskOverlay isModalOpened={isModalOpened} />
-      <ModalContainer isModalOpened={isModalOpened}>{modalContents()}</ModalContainer>
+      <ModalContainer isModalOpened={isModalOpened}>
+        {modalContents()}
+      </ModalContainer>
+      <Link to="/invoice/test">Test</Link>
     </Container>
   );
 }

@@ -9,6 +9,7 @@ import Invoices from "./Pages/Invoices";
 import MobileNavBar from "./Components/MobileNavBar"
 import SideBar from "./Components/SideBar"
 import ProtectedRoute from './Components/ProtectedRoute';
+import InvoiceDetails from './Pages/InvoiceDetails';
 
 function App() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
@@ -46,6 +47,13 @@ function App() {
         exact
         path="/invoices"
         component={Invoices}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying} />
+
+<ProtectedRoute
+        exact
+        path="/invoice/:id"
+        component={InvoiceDetails}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying} />
 

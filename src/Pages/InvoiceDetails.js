@@ -5,15 +5,16 @@ import { backend } from "../utils/static.js";
 import { useSelector, useDispatch } from "react-redux";
 import Client from "../Components/Client";
 import { addClientToFirestore } from "../_actions";
-import { FiX } from "react-icons/fi";
 import { Container, Table, Th, THead, MaskOverlay, ModalContents, ModalTitle, ModalHr, FormInputContainer } from "../utils/globalStyledComponents";
 
-function ClientInfo() {
+function InvoiceDetails(props) {
+  console.log('InvoiceDetails',props)
   return (
     <Container>
-   
+      Invoice Details
+  <div>{props.match.params.id}</div>
     </Container>
   );
 }
 
-export default ClientInfo;
+export default InvoiceDetails;
