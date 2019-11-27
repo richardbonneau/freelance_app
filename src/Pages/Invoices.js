@@ -15,8 +15,7 @@ import {
   MaskOverlay,
   ModalContents,
   ModalTitle,
-  ModalHr,
-  FormInputContainer
+  ModalHr
 } from "../utils/globalStyledComponents";
 
 const ModalContainer = styled.div`
@@ -36,20 +35,12 @@ const ModalContainer = styled.div`
   opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
 `;
 
-const styles = {
-  fiX: {
-    cursor: "pointer",
-    height: "25px",
-    width: "25px"
-  }
-};
-
 function Invoices(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const invoices = useSelector(state => state.invoices.invoices);
   const clients = useSelector(state => state.clients.clients);
-  const isSendingReq = useSelector(state=>state.invoices.invoices.isSendingReq);
+  const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date());
@@ -59,7 +50,7 @@ function Invoices(props) {
 
   const listOfInvoices = () => {
     let tableContents = invoices.map((invoice, i) => (
-      <Invoice invoice={invoice} clients={clients} history={props.history} key={i} />
+      <Invoice invoice={invoice} clients={clients} key={i} />
     ));
     return (
       <Table>
@@ -141,15 +132,13 @@ function Invoices(props) {
 
           <h4>Due Date</h4>
           <DatePicker selected={dueDate} onChange={date => setDueDate(date)} />
-
           <input type="submit" />
-
           <button onClick={() => toggleModal(false)}>Cancel</button>
         </form>
       </ModalContents>
     );
   };
-
+console.log("isSendingReq",isSendingReq)
   if(isSendingReq) return <Loading />
   return (
     <Container>

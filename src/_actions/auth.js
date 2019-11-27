@@ -1,6 +1,6 @@
 import { myFirebase, db } from '../utils/fire.js';
 import { initialUserDocument } from '../utils/static.js'
-import { requestInitialClientsList, requestInitialInvoicesList } from './index';
+import { requestInitialClientsList, requestInitialInvoicesList, firestoreSuccess } from './index';
 
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
@@ -123,6 +123,8 @@ const getUserDataAndLogin = (user) => dispatch => {
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
+    }).then(()=>{
+        dispatch(firestoreSuccess());
     }).catch(function (error) {
         console.log("Error getting document:", error);
     });

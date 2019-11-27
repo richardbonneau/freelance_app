@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-
 import styled from "styled-components";
 import Loading from "./Loading";
 
@@ -14,7 +13,6 @@ const ComponentContainer = styled.div`
     margin-left: 220px;
   }
 `;
-
 export default function ProtectedRoute({
   component: Component,
   isAuthenticated,
@@ -26,9 +24,6 @@ export default function ProtectedRoute({
       <Route
         {...rest}
         render={props => {
-
-
-
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (

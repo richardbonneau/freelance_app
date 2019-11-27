@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { backend } from "../utils/static.js";
 import { useSelector, useDispatch } from "react-redux";
-import Client from "../Components/Client";
-import { addClientToFirestore } from "../_actions";
-import {
-  Container,
-  Table,
-  Th,
-  THead,
-  MaskOverlay,
-  ModalContents,
-  ModalTitle,
-  ModalHr,
-  FormInputContainer
-} from "../utils/globalStyledComponents";
+
+import {Container} from "../utils/globalStyledComponents";
 
 function InvoiceDetails(props) {
+  let {id} = useParams();
   const details = useSelector(state =>
-    state.invoices.invoices.find(invoice =>invoice.id === Number(props.match.params.id))
+    state.invoices.invoices.find(invoice =>invoice.id === Number(id))
   );
   const client = useSelector(state =>
     state.clients.clients.find(client => client.id === details.clientId)
@@ -27,8 +16,8 @@ function InvoiceDetails(props) {
   console.log("InvoiceDetails", details);
 
   const displayColumns = () => {
-    return details.columns.map(item => (
-      <div>
+    return details.columns.map((item,i) => (
+      <div key={i}>
         {/* <input type="text" value={} /> */}
         <div>{item.name}</div>
         <div>{item.description}</div>

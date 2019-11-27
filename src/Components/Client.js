@@ -1,12 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Tr, Td,ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
-
-const Container = styled.div`
-    border: 2px solid black;
-    margin: 3px 0;
-`
 function Client(props) {
   return (
     <Tr>

@@ -20,9 +20,9 @@ const pushNewInvoice = (newInvoice) => {
         newInvoice
     };
 };
-const pushSuccess = () => {
+const reqSuccess = () => {
     return {
-        type:INVOICE_PUSH_SUCCESS
+        type:FIREBASE_SUCCESS
     }
 }
 const requestError = () => {
@@ -32,6 +32,7 @@ const requestError = () => {
 };
 
 export const requestInitialInvoicesList = (invoicesList) => dispatch => {
+    console.log("dis")
     dispatch(getInitalInvoicesList(invoicesList))
 };
 export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
@@ -43,13 +44,13 @@ export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
         dispatch(pushNewInvoice(newInvoice));
       }).then(()=>{
         history.push(`/invoice/${newInvoice.id}`);
-        dispatch(invoicePushSuccess());
+        dispatch(firestoreSuccess());
       }).catch(function (error) {
         console.log("Error getting document:", error);
       });
 };
-export const invoicePushSuccess = () => dispatch =>{
-    dispatch(pushSuccess());
+export const firestoreSuccess = () => dispatch =>{
+    dispatch(reqSuccess());
 }
 export const firestoreError = () => dispatch => {
     dispatch(requestError());

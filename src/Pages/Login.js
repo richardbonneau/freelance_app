@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { firebaseLogin, firebaseSignup } from "../_actions";
 import styled from "styled-components";
-import { myFirebase } from "../utils/fire.js";
 import Loading from "../Components/Loading";
 
 const Container = styled.div`

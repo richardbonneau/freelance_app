@@ -1,12 +1,14 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { Tr, Td, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 function Invoice(props) {
+  const history = useHistory();
   let client = props.clients.find(cl=>props.invoice.clientId === cl.id);
   return (
     <Tr>
         <td width="1%">
-          <ExpandableInvisibleButton onClick={() => props.history.push(`/invoice/${props.invoice.id}`)}></ExpandableInvisibleButton>
+          <ExpandableInvisibleButton onClick={()=> history.push(`/invoice/${props.invoice.id}`)}></ExpandableInvisibleButton>
         </td>
         <Td label="Title">{props.invoice.title}</Td>
         <Td label="#">{props.invoice.invoiceNumber}</Td>

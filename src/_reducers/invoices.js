@@ -2,7 +2,6 @@ import {
   GET_INITIAL_INVOICES_LIST,
   PUSH_NEW_INVOICE,
   FIREBASE_SUCCESS,
-  INVOICE_PUSH_SUCCESS,
   FIREBASE_FAILURE
 } from "../_actions";
 
@@ -30,7 +29,7 @@ export default (
         isSendingReq:true,
         reqError: false,
       }
-    case INVOICE_PUSH_SUCCESS:
+    case FIREBASE_SUCCESS:
       return {
         ...state,
         isSendingReq:false
