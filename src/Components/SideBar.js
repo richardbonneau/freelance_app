@@ -50,6 +50,7 @@ const styles = {
 function SideBar() {
   const dispatch = useDispatch();
   const hamburgerMenuOpened = useSelector(state => state.navigation.hamburgerMenuOpened);
+  const currentPage = useSelector(state=>state.navigation.currentPage);
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(firebaseLogout());

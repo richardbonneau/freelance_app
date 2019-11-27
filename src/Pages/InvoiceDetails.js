@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-
 import {Container} from "../utils/globalStyledComponents";
 
 function InvoiceDetails(props) {
   let {id} = useParams();
   const details = useSelector(state =>
-    state.invoices.invoices.find(invoice =>invoice.id === Number(id))
+    state.invoices.invoicesList.find(invoice =>invoice.id === Number(id))
   );
   const client = useSelector(state =>
-    state.clients.clients.find(client => client.id === details.clientId)
+    state.clients.clientsList.find(client => client.id === details.clientId)
   );
   console.log("InvoiceDetails", details);
 

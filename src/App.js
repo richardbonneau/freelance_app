@@ -16,7 +16,6 @@ function App() {
 
   
   const renderNav = () => {
-    console.log("********isVerifying",isVerifying)
     return isVerifying ? null : (
       <div>
         <MobileNavBar />
