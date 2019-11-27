@@ -11,6 +11,7 @@ const motion = props => keyframes`
 `
 
 const DualRingSpinner = styled.div`
+    z-index:100;
     display: flex;
     width: 100vw;
     height: 100vh;

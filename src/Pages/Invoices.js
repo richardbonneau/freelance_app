@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addInvoiceToFirestore } from "../_actions";
 import Invoice from "../Components/Invoice";
-import { FiX } from "react-icons/fi";
+import Loading from "../Components/Loading";
 import DatePicker from "react-datepicker";
 import "react-datepicker/src/stylesheets/datepicker.scss";
 import {
@@ -46,8 +46,10 @@ const styles = {
 
 function Invoices(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const invoices = useSelector(state => state.invoices.invoices);
   const clients = useSelector(state => state.clients.clients);
+  const isSendingReq = useSelector(state=>state.invoices.invoices.isSendingReq);
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date());
@@ -94,15 +96,12 @@ function Invoices(props) {
           projectId: 0,
           clientId: Number(selectedClient),
           columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
-        })
+        }, history)
       );
         
       toggleModal(false);
       setInvoiceNumberInput("");
       setTitleInput("");
-      props.history.push(`/invoice/${newInvoiceId}`);
-
-
     };
 
     return (
@@ -151,6 +150,7 @@ function Invoices(props) {
     );
   };
 
+  if(isSendingReq) return <Loading />
   return (
     <Container>
       <h2>Invoices</h2>
