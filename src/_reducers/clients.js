@@ -9,7 +9,7 @@ export default (
     isSendingReq: false,
     initialClientsFetch: false,
     reqError: false,
-    clients:[]
+    clientsList:[]
   },
   action
 ) => {
@@ -29,12 +29,12 @@ export default (
     case GET_INITIAL_CLIENTS_LIST:
       return {
         ...state,
-        clients: action.clientsList
+        clientsList: action.clientsList
       }
     case PUSH_NEW_CLIENT:
       return {
         ...state,
-        clients: [...state.clients, action.newClient]
+        clientsList: [...state.clients, action.newClient]
       }
     case FIREBASE_FAILURE:
       return {

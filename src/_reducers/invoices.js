@@ -9,7 +9,7 @@ export default (
   state = {
     isSendingReq: false,
     reqError: false,
-    invoices:[]
+    invoicesList:[]
   },
   action
 ) => {
@@ -18,14 +18,14 @@ export default (
     case GET_INITIAL_INVOICES_LIST:
       return {
         ...state,
-        invoices: action.invoicesList,
+        invoicesList: action.invoicesList,
         isSendingReq:true,
         reqError: false,
       }
     case PUSH_NEW_INVOICE:
       return {
         ...state,
-        invoices: [...state.invoices, action.newInvoice],
+        invoicesList: [...state.invoices, action.newInvoice],
         isSendingReq:true,
         reqError: false,
       }

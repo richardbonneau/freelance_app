@@ -38,8 +38,8 @@ const ModalContainer = styled.div`
 function Invoices(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const invoices = useSelector(state => state.invoices.invoices);
-  const clients = useSelector(state => state.clients.clients);
+  const invoices = useSelector(state => state.invoices.invoicesList);
+  const clients = useSelector(state => state.clients.clientsList);
   const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");

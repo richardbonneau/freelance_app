@@ -13,6 +13,7 @@ export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
 
 export const VERIFY_REQUEST = "VERIFY_REQUEST";
 export const VERIFY_SUCCESS = "VERIFY_SUCCESS";
+export const VERIFY_FAIL = "VERIFY_FAIL";
 
 export const DATABASE_ACCESS = "DATABASE_ACCESS";
 export const DATABASE_FAILURE = "DATABASE_FAILURE";
@@ -65,6 +66,11 @@ const verifySuccess = () => {
         type: VERIFY_SUCCESS
     }
 };
+const verifyFail = () => {
+    return {
+        type: VERIFY_FAIL
+    }
+}
 
 const databaseError = () => {
     return {
@@ -149,6 +155,6 @@ export const verifyAuth = () => dispatch => {
         console.log("***VERIFY auth", user)
         if (user !== null) {
             dispatch(getUserDataAndLogin(user));
-        }
+        } else dispatch(verifyFail());
     })
 };

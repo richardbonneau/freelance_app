@@ -45,7 +45,7 @@ const styles = {
 
 function Clients() {
   const dispatch = useDispatch();
-  const listOfClients = useSelector(state => state.clients.clients);
+  const listOfClients = useSelector(state => state.clients.clientsList);
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [companyInput, setCompanyInput] = useState("");

@@ -8,6 +8,7 @@ import {
   LOGOUT_FAILURE,
   VERIFY_REQUEST,
   VERIFY_SUCCESS,
+  VERIFY_FAIL,
   DATABASE_ACCESS,
   DATABASE_FAILURE
 } from "../_actions";
@@ -75,6 +76,11 @@ export default (
         verifyingError: false
       }
     case VERIFY_SUCCESS:
+      return {
+        ...state,
+        isVerifying: false
+      }
+    case VERIFY_FAIL:
       return {
         ...state,
         isVerifying: false
