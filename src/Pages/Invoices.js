@@ -49,6 +49,7 @@ function Invoices(props) {
   const [selectedClient, setSelectedClient] = useState(clients[0].id);
 
   const listOfInvoices = () => {
+    console.log("history",history)
     let tableContents = invoices.map((invoice, i) => (
       <Invoice invoice={invoice} clients={clients} key={i} />
     ));

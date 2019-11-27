@@ -24,6 +24,7 @@ export default function ProtectedRoute({
       <Route
         {...rest}
         render={props => {
+          console.log("protectedRoute: ",isVerifying, isAuthenticated)
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (

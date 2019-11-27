@@ -118,13 +118,13 @@ const getUserDataAndLogin = (user) => dispatch => {
              dispatch(requestInitialClientsList(doc.data().clients));
              dispatch(requestInitialInvoicesList(doc.data().invoices));
              dispatch(receiveLogin(user));
+             dispatch(firestoreSuccess());
+            dispatch(verifySuccess());
             console.log("This user exists in the database. Document data:", doc.data());
         } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
         }
-    }).then(()=>{
-        dispatch(firestoreSuccess());
     }).catch(function (error) {
         console.log("Error getting document:", error);
     });
@@ -150,6 +150,5 @@ export const verifyAuth = () => dispatch => {
         if (user !== null) {
             dispatch(getUserDataAndLogin(user));
         }
-        dispatch(verifySuccess());
     })
 };
