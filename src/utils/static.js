@@ -18,6 +18,7 @@ export const initialUserDocument = {
     {
       title: "Example Invoice",
       invoiceNumber: 1,
+      id:1,
       projectId: "new project",
       clientId: 1,
       columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]

@@ -57,7 +57,7 @@ function Invoices(props) {
 
   const listOfInvoices = () => {
     let tableContents = invoices.map((invoice, i) => (
-      <Invoice invoice={invoice} clients={clients} key={i} />
+      <Invoice invoice={invoice} clients={clients} history={props.history} key={i} />
     ));
     return (
       <Table>
@@ -82,7 +82,7 @@ function Invoices(props) {
   };
 
   const modalContents = () => {
-  
+
     const newInvoiceSubmit = e => {
       e.preventDefault();
       let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
@@ -90,16 +90,19 @@ function Invoices(props) {
         addInvoiceToFirestore({
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
-          id:newInvoiceId,
+          id: newInvoiceId,
           projectId: 0,
           clientId: Number(selectedClient),
           columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
         })
       );
+        
       toggleModal(false);
       setInvoiceNumberInput("");
       setTitleInput("");
       props.history.push(`/invoice/${newInvoiceId}`);
+
+
     };
 
     return (

@@ -10,16 +10,19 @@ import MobileNavBar from "./Components/MobileNavBar"
 import SideBar from "./Components/SideBar"
 import ProtectedRoute from './Components/ProtectedRoute';
 import InvoiceDetails from './Pages/InvoiceDetails';
+import Loading from "./Components/Loading";
 
 function App() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
 
   const renderNav = () => {
-    return (<div>
-      <MobileNavBar />
-      <SideBar />
-    </div>)
+    return isVerifying
+      ? null
+      : <div>
+        <MobileNavBar />
+        <SideBar />
+      </div>
   }
   return (
     <BrowserRouter>
@@ -50,7 +53,7 @@ function App() {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying} />
 
-<ProtectedRoute
+      <ProtectedRoute
         exact
         path="/invoice/:id"
         component={InvoiceDetails}

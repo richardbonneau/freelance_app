@@ -6,7 +6,7 @@ function Invoice(props) {
   return (
     <Tr>
         <td width="1%">
-          <ExpandableInvisibleButton onClick={() => alert("clicked")}></ExpandableInvisibleButton>
+          <ExpandableInvisibleButton onClick={() => props.history.push(`/invoice/${props.invoice.id}`)}></ExpandableInvisibleButton>
         </td>
         <Td label="Title">{props.invoice.title}</Td>
         <Td label="#">{props.invoice.invoiceNumber}</Td>

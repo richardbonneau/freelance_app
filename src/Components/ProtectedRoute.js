@@ -26,21 +26,24 @@ export default function ProtectedRoute({
       <Route
         {...rest}
         render={props => {
+
+
+
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (
             <div>
 
-          <ComponentContainer><Component {...props} /></ComponentContainer>
-          </div>
+              <ComponentContainer><Component {...props} /></ComponentContainer>
+            </div>
           ) : (
-            <Redirect
-              to={{
-                pathname: "/",
-                state: { from: props.location }
-              }}
-            />
-          );
+                <Redirect
+                  to={{
+                    pathname: "/",
+                    state: { from: props.location }
+                  }}
+                />
+              );
         }}
       />
     </PageStructure>

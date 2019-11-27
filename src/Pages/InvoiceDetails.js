@@ -19,9 +19,7 @@ import {
 
 function InvoiceDetails(props) {
   const details = useSelector(state =>
-    state.invoices.invoices.find(
-      invoice => invoice.id === Number(props.match.params.id)
-    )
+    state.invoices.invoices.find(invoice =>invoice.id === Number(props.match.params.id))
   );
   const client = useSelector(state =>
     state.clients.clients.find(client => client.id === details.clientId)
