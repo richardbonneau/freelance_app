@@ -26,11 +26,7 @@ export default function ProtectedRoute({
       <Route
         {...rest}
         render={props => {
-          //store.dispatch(pickCurrentPage());
-          //create an algoritmh to get a string out of props.path
-          // /invoice/15748833053749420
-          console.log("path", props.location.pathname.split("/")[1]);
-          console.log("protectedRoute: ", isVerifying, isAuthenticated);
+          store.dispatch(pickCurrentPage(props.location.pathname));
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (

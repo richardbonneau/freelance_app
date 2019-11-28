@@ -24,6 +24,7 @@ const LinkContainer = styled.div`
   display:block;
   font-size:25px;
   margin-bottom: 12px;
+  background: ${({ isCurrentPage }) => (isCurrentPage ? "red" : "none")};
 `;
 const MainLogo = styled.img`
 @media (min-width:1024px) {
@@ -62,12 +63,13 @@ function SideBar() {
   return (
     <NavContainer style={hamburgerMenuOpened ? { left: '0px' } : { left: '-225px' }}>
       <MainLogo src="/images/reduxlogo.png" />
-      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
-      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
-      <LinkContainer onClick={closeHamburgerMenu}><Link  to="/invoices"><FaMoneyCheckAlt style={styles.icons} /><div style={styles.text}>Invoices</div></Link></LinkContainer>
+      <LinkContainer isCurrentPage={currentPage==="/dashboard"} onClick={closeHamburgerMenu}><Link to="/dashboard"><FaIndent style={styles.icons} /><div style={styles.text}>DashBoard</div></Link></LinkContainer>
+      <LinkContainer isCurrentPage={currentPage==="/clients"} onClick={closeHamburgerMenu}><Link to="/clients"><FaUserAlt style={styles.icons} /><div style={styles.text}>Clients</div></Link></LinkContainer>
+      <LinkContainer isCurrentPage={currentPage==="/invoices"} onClick={closeHamburgerMenu}><Link to="/invoices"><FaMoneyCheckAlt style={styles.icons} /><div style={styles.text}>Invoices</div></Link></LinkContainer>
       {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
       {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
+      {/* <LinkContainer><Link to="/">Become a Member</Link></LinkContainer> */}
       <button onClick={logoutUser}>Sign out</button>
 
 

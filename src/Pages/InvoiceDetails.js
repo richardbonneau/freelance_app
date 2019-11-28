@@ -4,6 +4,11 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import {Container} from "../utils/globalStyledComponents";
 
+const ItemRow = styled.div`
+  display:flex;
+  justify-content: space-around;
+`
+
 function InvoiceDetails(props) {
   let {id} = useParams();
   const details = useSelector(state =>
@@ -16,13 +21,12 @@ function InvoiceDetails(props) {
 
   const displayColumns = () => {
     return details.columns.map((item,i) => (
-      <div key={i}>
-        {/* <input type="text" value={} /> */}
+      <ItemRow key={i}>
         <div>{item.name}</div>
         <div>{item.description}</div>
         <div>{item.rate}</div>
         <div>{item.hours}</div>
-      </div>
+      </ItemRow>
     ));
   };
   return (
