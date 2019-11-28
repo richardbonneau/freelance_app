@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // Tables
 export const Container = styled.div`
-      padding: 0 25px;
+      padding: 25px;
 `;
 export const Table = styled.table`
   table-layout: fixed;

@@ -24,7 +24,7 @@ const LinkContainer = styled.div`
   display:block;
   font-size:25px;
   margin-bottom: 12px;
-  background: ${({ isCurrentPage }) => (isCurrentPage ? "red" : "none")};
+  background: ${({ isCurrentPage }) => (isCurrentPage ? "black" : "none")};
 `;
 const MainLogo = styled.img`
 @media (min-width:1024px) {

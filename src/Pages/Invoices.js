@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addInvoiceToFirestore } from "../_actions";
+
 import Invoice from "../Components/Invoice";
 import Loading from "../Components/Loading";
 import DatePicker from "react-datepicker";
@@ -37,19 +37,13 @@ const ModalContainer = styled.div`
 
 function Invoices(props) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const invoices = useSelector(state => state.invoices.invoicesList);
   const clients = useSelector(state => state.clients.clientsList);
   const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
-  const [titleInput, setTitleInput] = useState("");
-  const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
-  const [invoiceDate, setInvoiceDate] = useState(new Date());
-  const [dueDate, setDueDate] = useState(new Date());
   const [isModalOpened, toggleModal] = useState(false);
-  const [selectedClient, setSelectedClient] = useState(clients[0].id);
+
 
   const listOfInvoices = () => {
-    console.log("history",history)
     let tableContents = invoices.map((invoice, i) => (
       <Invoice invoice={invoice} clients={clients} key={i} />
     ));
@@ -76,66 +70,11 @@ function Invoices(props) {
   };
 
   const modalContents = () => {
-
-    const newInvoiceSubmit = e => {
-      e.preventDefault();
-      let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
-      dispatch(
-        addInvoiceToFirestore({
-          title: titleInput,
-          invoiceNumber: invoiceNumberInput,
-          id: newInvoiceId,
-          projectId: 0,
-          clientId: Number(selectedClient),
-          columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
-        }, history)
-      );
-        
-      toggleModal(false);
-      setInvoiceNumberInput("");
-      setTitleInput("");
-    };
-
     return (
       <ModalContents active={isModalOpened}>
         <ModalTitle>Create a New Invoice</ModalTitle>
         <ModalHr />
-        <form onSubmit={newInvoiceSubmit}>
-          <select
-            value={selectedClient}
-            onChange={e => setSelectedClient(e.target.value)}
-          >
-            {clients.map((client, i) => (
-              <option key={i} value={client.id}>
-                {client.name}
-              </option>
-            ))}
-          </select>
-
-          <input
-            type="text"
-            placeholder="Invoice Title"
-            value={titleInput}
-            onChange={e => setTitleInput(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Invoice #"
-            value={invoiceNumberInput}
-            onChange={e => setInvoiceNumberInput(e.target.value)}
-          />
-
-          <h4>Invoice Date</h4>
-          <DatePicker
-            selected={invoiceDate}
-            onChange={date => setInvoiceDate(date)}
-          />
-
-          <h4>Due Date</h4>
-          <DatePicker selected={dueDate} onChange={date => setDueDate(date)} />
-          <input type="submit" />
-          <button onClick={() => toggleModal(false)}>Cancel</button>
-        </form>
+      
       </ModalContents>
     );
   };
@@ -144,13 +83,13 @@ console.log("isSendingReq",isSendingReq)
   return (
     <Container>
       <h2>Invoices</h2>
-      <button onClick={() => toggleModal(true)}>Create New Invoice</button>
+      <Link to="/invoiceCreator">Create New Invoice</Link>
       {listOfInvoices()}
 
-      <MaskOverlay isModalOpened={isModalOpened} />
+      {/* <MaskOverlay isModalOpened={isModalOpened} />
       <ModalContainer isModalOpened={isModalOpened}>
         {modalContents()}
-      </ModalContainer>
+      </ModalContainer> */}
     </Container>
   );
 }
