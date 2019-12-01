@@ -11,6 +11,16 @@ const DatePickContainer = styled.div`
   display: flex;
 `;
 
+const Hr = styled.hr`
+  padding: 5px 0;
+`;
+
+const SenderRecipientContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+const SenderContainer = styled.div``;
+const RecipientContainer = styled.div``;
 
 function InvoiceCreator() {
   const dispatch = useDispatch();
@@ -46,6 +56,7 @@ function InvoiceCreator() {
 
   return (
     <Container>
+      <h2>Invoice Creator</h2>
       <form onSubmit={newInvoiceSubmit}>
         <input
           type="text"
@@ -64,7 +75,6 @@ function InvoiceCreator() {
           <div>
             <h4>Invoice Date</h4>
             <DatePicker
-
               selected={invoiceDate}
               onChange={date => setInvoiceDate(date)}
             />
@@ -72,28 +82,38 @@ function InvoiceCreator() {
           <div>
             <h4>Due Date</h4>
             <DatePicker
-
               selected={dueDate}
               onChange={date => setDueDate(date)}
             />
           </div>
         </DatePickContainer>
+        <Hr />
+        <SenderRecipientContainer>
+          <SenderContainer>
+            <h4>From</h4>
+          </SenderContainer>
 
-        <select
-          value={selectedClient}
-          onChange={e => setSelectedClient(e.target.value)}
-        >
-          {clients.map((client, i) => (
-            <option key={i} value={client.id}>
-              {client.name}
-            </option>
-          ))}
-        </select>
+          <RecipientContainer>
+            <h4>To</h4>
+            <select
+              value={selectedClient}
+              onChange={e => setSelectedClient(e.target.value)}
+            >
+              {clients.map((client, i) => (
+                <option key={i} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </RecipientContainer>
+        </SenderRecipientContainer>
+
         <h5>Subtotal</h5>
         <h4>Total</h4>
         <div>
           <NotesInput
             value={notesInput}
+            placeholder="Notes"
             onChange={e => setNotesInput(e.target.value)}
           ></NotesInput>
         </div>
