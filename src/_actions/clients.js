@@ -44,6 +44,7 @@ export const requestInitialClientsList = (clientsList) => dispatch => {
 };
 
 export const addClientToFirestore = (newClient) => dispatch => {
+    console.log("newClient",newClient)
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({
         clients: firestore.FieldValue.arrayUnion(newClient)
