@@ -11,8 +11,8 @@ import { FaTrashAlt } from "react-icons/fa";
 const NotesInput = styled.textarea`
   height: 80px;
   width: 470px;
-  resize:none;
-  outline:none;
+  resize: none;
+  outline: none;
 `;
 const DatePickContainer = styled.div`
   display: flex;
@@ -27,18 +27,18 @@ const SenderRecipientContainer = styled.div`
   justify-content: space-around;
 `;
 const BlockInput = styled.input`
-  display:block;
-`
-const SenderContainer = styled.div`
+  display: block;
 `;
+const SenderContainer = styled.div``;
 const RecipientContainer = styled.div``;
 
 function InvoiceCreator() {
-
   const dispatch = useDispatch();
   const history = useHistory();
   const clients = useSelector(state => state.clients.clientsList);
-  const [selectedClientId, setSelectedClientId] = useState(Number(clients[0].id));
+  const [selectedClientId, setSelectedClientId] = useState(
+    Number(clients[0].id)
+  );
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date());
@@ -48,21 +48,21 @@ function InvoiceCreator() {
   const [fromAddress, setFromAddress] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
-  const [itemsList, setItemsList] = useState([Object.assign({},newEntry)]);
+  const [itemsList, setItemsList] = useState([Object.assign({}, newEntry)]);
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
-  const handleItemChange = (e) => {
+  const handleItemChange = e => {
     let itemListCopy = itemsList.slice();
     itemListCopy[e.target.id][e.target.name] = e.target.value;
     setItemsList(itemListCopy);
-  }
-  const addNewItem = (e) =>{
-    let newItem = Object.assign({},newEntry);
+  };
+  const addNewItem = e => {
+    let newItem = Object.assign({}, newEntry);
     setItemsList(itemsList.concat(newItem));
-  }
-  const deleteItem = (itemIndex) => {
-    setItemsList(itemsList.filter((item,i)=>itemIndex!==i));
-  }
+  };
+  const deleteItem = itemIndex => {
+    setItemsList(itemsList.filter((item, i) => itemIndex !== i));
+  };
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
@@ -83,7 +83,7 @@ function InvoiceCreator() {
     setInvoiceNumberInput("");
     setTitleInput("");
   };
-  
+
   return (
     <Container>
       <h2>Invoice Creator</h2>
@@ -121,10 +121,30 @@ function InvoiceCreator() {
         <SenderRecipientContainer>
           <SenderContainer>
             <h4>From</h4>
-            <BlockInput type="text" placeholder="Name" value={fromName} onChange={(e) => setFromName(e.target.value)} />
-            <BlockInput type="text" placeholder="Full Address" value={fromAddress} onChange={(e) => setFromAddress(e.target.value)} />
-            <BlockInput type="text" placeholder="City, Province, ZIP" value={fromCity} onChange={(e) => setFromCity(e.target.value)} />
-            <BlockInput type="text" placeholder="Country" value={fromCountry} onChange={(e) => setFromCountry(e.target.value)} />
+            <BlockInput
+              type="text"
+              placeholder="Name"
+              value={fromName}
+              onChange={e => setFromName(e.target.value)}
+            />
+            <BlockInput
+              type="text"
+              placeholder="Full Address"
+              value={fromAddress}
+              onChange={e => setFromAddress(e.target.value)}
+            />
+            <BlockInput
+              type="text"
+              placeholder="City, Province, ZIP"
+              value={fromCity}
+              onChange={e => setFromCity(e.target.value)}
+            />
+            <BlockInput
+              type="text"
+              placeholder="Country"
+              value={fromCountry}
+              onChange={e => setFromCountry(e.target.value)}
+            />
           </SenderContainer>
 
           <RecipientContainer>
@@ -141,19 +161,47 @@ function InvoiceCreator() {
             </select>
             <div>{selectedClient.name}</div>
             <div>{selectedClient.street}</div>
-            <div>{selectedClient.city} {selectedClient.province} {selectedClient.zip}</div>
+            <div>
+              {selectedClient.city} {selectedClient.province}{" "}
+              {selectedClient.zip}
+            </div>
             <div>selectedClient.country</div>
           </RecipientContainer>
         </SenderRecipientContainer>
         <Hr />
-        {itemsList.map((item,i)=>(<div>
-          <input type="text" id={i} name="name" placeholder="Name or Description" onChange={handleItemChange} value={item.name} /> 
-          <input type="number" id={i} name="hours" placeholder="Hours" onChange={handleItemChange} value={item.hours} /> 
-          <input type="number" id={i} name="rate" placeholder="Rate" onChange={handleItemChange} value={item.rate} />
-          <FaTrashAlt onClick={()=>deleteItem(i)} /> 
-        </div>))}
+        {itemsList.map((item, i) => (
+          <div>
+            <input
+              type="text"
+              id={i}
+              name="name"
+              placeholder="Name or Description"
+              onChange={handleItemChange}
+              value={item.name}
+            />
+            <input
+              type="number"
+              id={i}
+              name="hours"
+              placeholder="Hours"
+              onChange={handleItemChange}
+              value={item.hours}
+            />
+            <input
+              type="number"
+              id={i}
+              name="rate"
+              placeholder="Rate"
+              onChange={handleItemChange}
+              value={item.rate}
+            />
+            <span>{item.hours * item.rate}</span>
+            <FaTrashAlt onClick={() => deleteItem(i)} />
+          </div>
+        ))}
         <button onClick={addNewItem}>Add New Item</button>
         <h5>Subtotal</h5>
+        {/* <div>{}</div> */}
         <h4>Total</h4>
         <Hr />
         <div>
