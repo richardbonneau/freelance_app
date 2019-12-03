@@ -6,7 +6,12 @@ import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container } from "../utils/globalStyledComponents";
 
-const NotesInput = styled.textarea``;
+const NotesInput = styled.textarea`
+  height: 80px;
+  width: 470px;
+  resize:none;
+  outline:none;
+`;
 const DatePickContainer = styled.div`
   display: flex;
 `;
@@ -40,6 +45,7 @@ function InvoiceCreator() {
   const [fromAddress, setFromAddress] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
+  const [itemTitles, setItemTitles] = useState([""]);
 
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
@@ -126,6 +132,9 @@ function InvoiceCreator() {
           </RecipientContainer>
         </SenderRecipientContainer>
         <Hr />
+        {itemTitles.map((item,i)=>(<div>
+          <input type="text" onChange={(e=>)setItemTitles(itemTitles[i]=e.target.value)} value={itemTitles[i]} />
+        </div>))}
         <h5>Subtotal</h5>
         <h4>Total</h4>
         <Hr />
