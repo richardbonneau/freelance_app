@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container } from "../utils/globalStyledComponents";
 import { newEntry } from "../utils/static";
+import { FaTrashAlt } from "react-icons/fa";
 
 const NotesInput = styled.textarea`
   height: 80px;
@@ -47,9 +48,7 @@ function InvoiceCreator() {
   const [fromAddress, setFromAddress] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
-  
   const [itemsList, setItemsList] = useState([Object.assign({},newEntry)]);
-
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
   const handleItemChange = (e) => {
@@ -61,7 +60,9 @@ function InvoiceCreator() {
     let newItem = Object.assign({},newEntry);
     setItemsList(itemsList.concat(newItem));
   }
-  
+  const deleteItem = (itemIndex) => {
+    setItemsList(itemsList.filter((item,i)=>itemIndex!==i));
+  }
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
@@ -146,9 +147,10 @@ function InvoiceCreator() {
         </SenderRecipientContainer>
         <Hr />
         {itemsList.map((item,i)=>(<div>
-          <input type="text" id={i} name="name" placeholder="Name or Description" onChange={handleItemChange} value={item.name} />
-          <input type="number" id={i} name="hours" placeholder="Hours" onChange={handleItemChange} value={item.hours} />
+          <input type="text" id={i} name="name" placeholder="Name or Description" onChange={handleItemChange} value={item.name} /> 
+          <input type="number" id={i} name="hours" placeholder="Hours" onChange={handleItemChange} value={item.hours} /> 
           <input type="number" id={i} name="rate" placeholder="Rate" onChange={handleItemChange} value={item.rate} />
+          <FaTrashAlt onClick={()=>deleteItem(i)} /> 
         </div>))}
         <button onClick={addNewItem}>Add New Item</button>
         <h5>Subtotal</h5>
