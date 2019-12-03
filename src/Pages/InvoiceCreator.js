@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container } from "../utils/globalStyledComponents";
+import { newEntry } from "../utils/static";
 
 const NotesInput = styled.textarea`
   height: 80px;
@@ -32,6 +33,7 @@ const SenderContainer = styled.div`
 const RecipientContainer = styled.div``;
 
 function InvoiceCreator() {
+
   const dispatch = useDispatch();
   const history = useHistory();
   const clients = useSelector(state => state.clients.clientsList);
@@ -45,10 +47,21 @@ function InvoiceCreator() {
   const [fromAddress, setFromAddress] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
-  const [itemTitles, setItemTitles] = useState([""]);
+  
+  const [itemsList, setItemsList] = useState([Object.assign({},newEntry)]);
 
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
+  const handleItemChange = (e) => {
+    let itemListCopy = itemsList.slice();
+    itemListCopy[e.target.id][e.target.name] = e.target.value;
+    setItemsList(itemListCopy);
+  }
+  const addNewItem = (e) =>{
+    let newItem = Object.assign({},newEntry);
+    setItemsList(itemsList.concat(newItem));
+  }
+  
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
@@ -60,7 +73,7 @@ function InvoiceCreator() {
           id: newInvoiceId,
           projectId: 0,
           clientId: selectedClientId,
-          columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
+          items: itemsList
         },
         history
       )
@@ -69,7 +82,7 @@ function InvoiceCreator() {
     setInvoiceNumberInput("");
     setTitleInput("");
   };
-  console.log("selectedClient", selectedClient)
+  
   return (
     <Container>
       <h2>Invoice Creator</h2>
@@ -132,9 +145,12 @@ function InvoiceCreator() {
           </RecipientContainer>
         </SenderRecipientContainer>
         <Hr />
-        {itemTitles.map((item,i)=>(<div>
-          <input type="text" onChange={(e=>)setItemTitles(itemTitles[i]=e.target.value)} value={itemTitles[i]} />
+        {itemsList.map((item,i)=>(<div>
+          <input type="text" id={i} name="name" placeholder="Name or Description" onChange={handleItemChange} value={item.name} />
+          <input type="number" id={i} name="hours" placeholder="Hours" onChange={handleItemChange} value={item.hours} />
+          <input type="number" id={i} name="rate" placeholder="Rate" onChange={handleItemChange} value={item.rate} />
         </div>))}
+        <button onClick={addNewItem}>Add New Item</button>
         <h5>Subtotal</h5>
         <h4>Total</h4>
         <Hr />

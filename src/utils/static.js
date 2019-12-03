@@ -1,5 +1,5 @@
 export const backend = "http://localhost:4000";
-
+export const newEntry = {name:"",hours:"",rate:""};
 export const initialUserDocument = {
   clients: [
     {
