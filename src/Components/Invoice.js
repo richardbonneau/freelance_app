@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Tr, Td, ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 function Invoice(props) {
+  console.log("props.invoice",props.invoice)
   const history = useHistory();
   let client = props.clients.find(cl=>props.invoice.clientId === cl.id);
   return (

@@ -6,6 +6,7 @@ export const PUSH_NEW_INVOICE = "PUSH_NEW_INVOICE";
 export const INVOICE_PUSH_SUCCESS = "INVOICE_PUSH_SUCCESS";
 export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 export const FIREBASE_SUCCESS = "FIREBASE_SUCCESS";
+export const ATTEMPT_PUSHING_NEW_INVOICE = "ATTEMPT_PUSHING_NEW_INVOICE";
 
 
 const getInitalInvoicesList = (invoicesList) => {
@@ -20,6 +21,11 @@ const pushNewInvoice = (newInvoice) => {
         newInvoice
     };
 };
+const attemptPushNewInvoice = () => {
+    return {
+        type:ATTEMPT_PUSHING_NEW_INVOICE
+    }
+}
 const reqSuccess = () => {
     return {
         type:FIREBASE_SUCCESS
@@ -36,6 +42,8 @@ export const requestInitialInvoicesList = (invoicesList) => dispatch => {
     dispatch(getInitalInvoicesList(invoicesList))
 };
 export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
+    console.log('newInvoice',newInvoice)
+    dispatch(attemptPushNewInvoice());
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({
         invoices: firestore.FieldValue.arrayUnion(newInvoice)

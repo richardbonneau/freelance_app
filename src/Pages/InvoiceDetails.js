@@ -10,6 +10,7 @@ const ItemRow = styled.div`
 `
 
 function InvoiceDetails(props) {
+
   let {id} = useParams();
   const details = useSelector(state =>
     state.invoices.invoicesList.find(invoice =>invoice.id === Number(id))
@@ -19,11 +20,10 @@ function InvoiceDetails(props) {
   );
   console.log("InvoiceDetails", details);
 
-  const displayColumns = () => {
-    return details.columns.map((item,i) => (
+  const displayItems = () => {
+    return details.items.map((item,i) => (
       <ItemRow key={i}>
         <div>{item.name}</div>
-        <div>{item.description}</div>
         <div>{item.rate}</div>
         <div>{item.hours}</div>
       </ItemRow>
@@ -37,9 +37,24 @@ function InvoiceDetails(props) {
       <div>{details.title}</div>
       <h3>Client</h3>
       <div>{client.name}</div>
+      <h3>invoiceNumber</h3>
+      <div>{details.invoiceNumber}</div>
+      <h3>invoiceDate</h3>
+      <div>{details.invoiceDate.toString()}</div>
+      <h3>dueDate</h3>
+      <div>{details.dueDate.toString()}</div>
+      <h3>fromName</h3>
+      <div>{details.fromName}</div>
+      <h3>fromAddress</h3>
+      <div>{details.fromAddress}</div>
+      <h3>fromCity</h3>
+      <div>{details.fromCity}</div>
+      <h3>fromCountry</h3>
+      <div>{details.fromCountry}</div>
+      <h3>notes</h3>
+      <div>{details.notes}</div>
       <h3>Items</h3>
-      <button>Add an item</button>
-      {displayColumns()}
+      {displayItems()}
     </Container>
   );
 }

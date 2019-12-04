@@ -2,7 +2,8 @@ import {
   GET_INITIAL_INVOICES_LIST,
   PUSH_NEW_INVOICE,
   FIREBASE_SUCCESS,
-  FIREBASE_FAILURE
+  FIREBASE_FAILURE,
+  ATTEMPT_PUSHING_NEW_INVOICE
 } from "../_actions";
 
 export default (
@@ -22,12 +23,16 @@ export default (
         isSendingReq:true,
         reqError: false,
       }
+    case ATTEMPT_PUSHING_NEW_INVOICE:
+      return {
+        ...state,
+        isSendingReq:true,
+        reqError: false,
+      }
     case PUSH_NEW_INVOICE:
       return {
         ...state,
-        invoicesList: [...state.invoices, action.newInvoice],
-        isSendingReq:true,
-        reqError: false,
+        invoicesList: [...state.invoicesList, action.newInvoice],
       }
     case FIREBASE_SUCCESS:
       return {

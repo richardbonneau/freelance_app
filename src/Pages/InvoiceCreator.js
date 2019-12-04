@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
+import Loading from "../Components/Loading";
 
 const NotesInput = styled.textarea`
   height: 80px;
@@ -34,6 +35,7 @@ const RecipientContainer = styled.div``;
 function InvoiceCreator() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
   const [selectedClientId, setSelectedClientId] = useState(
     Number(clients[0].id)
@@ -77,16 +79,33 @@ function InvoiceCreator() {
 
   const newInvoiceSubmit = e => {
     e.preventDefault();
+    console.log("new",
+    {          title: titleInput,
+      invoiceNumber: invoiceNumberInput,
+      invoiceDate,
+      dueDate,
+      clientId: selectedClientId,
+      fromName,
+      fromAddress,
+      fromCity,
+      fromCountry,
+      items: itemsList,
+      notes: notesInput})
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
     dispatch(
       addInvoiceToFirestore(
-        {
+        {id: newInvoiceId,
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
-          id: newInvoiceId,
-          projectId: 0,
+          invoiceDate,
+          dueDate,
           clientId: selectedClientId,
-          items: itemsList
+          fromName,
+          fromAddress,
+          fromCity,
+          fromCountry,
+          items: itemsList,
+          notes: notesInput,
         },
         history
       )
@@ -94,7 +113,7 @@ function InvoiceCreator() {
     setInvoiceNumberInput("");
     setTitleInput("");
   };
-
+  if(isSendingReq) return <Loading />
   return (
     <Container>
       <h2>Invoice Creator</h2>
@@ -188,7 +207,7 @@ function InvoiceCreator() {
         {itemsList.map((item, i) => (
           <Item item={item} i={i} handleItemChange={handleItemChange} deleteItem={deleteItem}  />
         ))}
-        <button onClick={addNewItem}>Add New Item</button>
+        <button type="button" onClick={addNewItem}>Add New Item</button>
 
         <h5>Subtotal</h5>
         {itemsSum}
