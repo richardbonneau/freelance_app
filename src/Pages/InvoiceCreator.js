@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container } from "../utils/globalStyledComponents";
-import { newEntry } from "../utils/static";
-import { FaTrashAlt } from "react-icons/fa";
+import Item from "../Components/Item";
 
 const NotesInput = styled.textarea`
   height: 80px;
@@ -48,21 +47,34 @@ function InvoiceCreator() {
   const [fromAddress, setFromAddress] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
-  const [itemsList, setItemsList] = useState([Object.assign({}, newEntry)]);
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
+  const newEntry = { name: "", hours: 0, rate: 0 };
+  const [itemsList, setItemsList] = useState([Object.assign({}, newEntry)]);
+  const [itemsSum, setItemsSum] = useState(0);
+
+  const newItemsSum = (newItemsList) =>{
+    let newSum = 0;
+    newItemsList.forEach(item=>newSum=newSum + item.hours * item.rate);
+    setItemsSum(newSum);
+  }
   const handleItemChange = e => {
-    let itemListCopy = itemsList.slice();
-    itemListCopy[e.target.id][e.target.name] = e.target.value;
-    setItemsList(itemListCopy);
+    const index = e.target.id;
+    let newItemsList = itemsList.slice();
+    newItemsList[index][e.target.name] = e.target.value;
+    setItemsList(newItemsList);
+    newItemsSum(newItemsList);
+  };
+  const deleteItem = itemIndex => {
+    let newItemsList = itemsList.filter((item, i) => itemIndex !== i);
+    setItemsList(newItemsList);
+    newItemsSum(newItemsList);
   };
   const addNewItem = e => {
     let newItem = Object.assign({}, newEntry);
     setItemsList(itemsList.concat(newItem));
   };
-  const deleteItem = itemIndex => {
-    setItemsList(itemsList.filter((item, i) => itemIndex !== i));
-  };
+
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
@@ -79,7 +91,6 @@ function InvoiceCreator() {
         history
       )
     );
-
     setInvoiceNumberInput("");
     setTitleInput("");
   };
@@ -100,6 +111,7 @@ function InvoiceCreator() {
           value={invoiceNumberInput}
           onChange={e => setInvoiceNumberInput(e.target.value)}
         />
+
         <DatePickContainer>
           {" "}
           <div>
@@ -117,7 +129,9 @@ function InvoiceCreator() {
             />
           </div>
         </DatePickContainer>
+
         <Hr />
+
         <SenderRecipientContainer>
           <SenderContainer>
             <h4>From</h4>
@@ -168,42 +182,22 @@ function InvoiceCreator() {
             <div>selectedClient.country</div>
           </RecipientContainer>
         </SenderRecipientContainer>
+
         <Hr />
+
         {itemsList.map((item, i) => (
-          <div>
-            <input
-              type="text"
-              id={i}
-              name="name"
-              placeholder="Name or Description"
-              onChange={handleItemChange}
-              value={item.name}
-            />
-            <input
-              type="number"
-              id={i}
-              name="hours"
-              placeholder="Hours"
-              onChange={handleItemChange}
-              value={item.hours}
-            />
-            <input
-              type="number"
-              id={i}
-              name="rate"
-              placeholder="Rate"
-              onChange={handleItemChange}
-              value={item.rate}
-            />
-            <span>{item.hours * item.rate}</span>
-            <FaTrashAlt onClick={() => deleteItem(i)} />
-          </div>
+          <Item item={item} i={i} handleItemChange={handleItemChange} deleteItem={deleteItem}  />
         ))}
         <button onClick={addNewItem}>Add New Item</button>
+
         <h5>Subtotal</h5>
-        {/* <div>{}</div> */}
+        {itemsSum}
+
         <h4>Total</h4>
+        {itemsSum}
+
         <Hr />
+
         <div>
           <NotesInput
             value={notesInput}
