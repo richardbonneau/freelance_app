@@ -5,8 +5,8 @@ export const initialUserDocument = {
     {
       name: "Example Client",
       id: 1,
-      email: "example@mail.com",
-      companyName: "ThisWebsite",
+      email: "example@freelancify.io",
+      companyName: "Freelancify",
       street: "123 Code Street",
       city: "Montréal",
       province:"Québec",
@@ -21,7 +21,7 @@ export const initialUserDocument = {
       id:1,
       projectId: "new project",
       clientId: 1,
-      columns: [{ name: "Tcing", description: "cyril", hours: 5, rate: 40 }]
+      columns: [{ name: "Front-End Development", hours: 5, rate: 40 }]
     }
   ]
 };
