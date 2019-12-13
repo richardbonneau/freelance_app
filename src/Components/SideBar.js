@@ -8,6 +8,8 @@ import { firebaseLogout, toggleHamburgerMenu } from '../_actions';
 const NavContainer = styled.nav`
 @media (min-width:1024px) {
   left:0px !important;
+  background:purple;
+  color:white;
 }
 z-index: 100;
   transition: all 300ms ease-out 10ms;
