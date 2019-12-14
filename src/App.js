@@ -18,10 +18,7 @@ function App() {
   
   const renderNav = () => {
     return isVerifying ? null : (
-      <div>
-        <MobileNavBar />
         <SideBar />
-      </div>
     );
   };
   return (

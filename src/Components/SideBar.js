@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaIndent, FaUserAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import { FaIndent, FaUserAlt, FaMoneyCheckAlt, FaBars } from "react-icons/fa";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { firebaseLogout, toggleHamburgerMenu } from "../_actions";
@@ -8,7 +8,6 @@ import { firebaseLogout, toggleHamburgerMenu } from "../_actions";
 const NavContainer = styled.nav`
   @media (min-width: 1024px) {
     left: 0px !important;
-    
   }
   background: purple;
   z-index: 100;
@@ -57,7 +56,13 @@ const MainLogo = styled.img`
   }
   display: none;
 `;
-
+const styles = {
+  hamburgerMenu: {
+    height: "30px",
+    width: "30px",
+    cursor: "pointer"
+  }
+};
 function SideBar() {
   const dispatch = useDispatch();
   const hamburgerMenuOpened = useSelector(
@@ -76,6 +81,15 @@ function SideBar() {
     <NavContainer
       style={hamburgerMenuOpened ? { left: "0px" } : { left: "-225px" }}
     >
+      <div>
+        {" "}
+        <FaBars
+          style={styles.hamburgerMenu}
+          onClick={() => dispatch(toggleHamburgerMenu())}
+        />
+      </div>
+
+      <div />
       <MainLogo src="/images/reduxlogo.png" />
       <LinkContainer
         isCurrentPage={currentPage === "/dashboard"}
@@ -83,7 +97,7 @@ function SideBar() {
       >
         <Link to="/dashboard">
           <FaIndent />
-          <div >DashBoard</div>
+          <div>DashBoard</div>
         </Link>
       </LinkContainer>
       <LinkContainer
@@ -100,7 +114,7 @@ function SideBar() {
         onClick={closeHamburgerMenu}
       >
         <Link to="/invoices">
-          <FaMoneyCheckAlt/>
+          <FaMoneyCheckAlt />
           <div>Invoices</div>
         </Link>
       </LinkContainer>
