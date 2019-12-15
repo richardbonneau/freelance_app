@@ -11,6 +11,7 @@ const PageStructure = styled.div`
   }
 `;
 const ComponentContainer = styled.div`
+  margin-left:20px;
   @media (min-width: 1024px) {
     margin-left: 220px;
   }

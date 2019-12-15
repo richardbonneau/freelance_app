@@ -9,16 +9,55 @@ const NavContainer = styled.nav`
   @media (min-width: 1024px) {
     left: 0px !important;
   }
-  background: purple;
+  left:${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "0px" : "-188px")};
+  background:${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? props => props.theme.primary : "white")};
   z-index: 100;
   transition: all 300ms ease-out 10ms;
   min-width: 220px;
-  padding: 30px 0 30px 0;
   display: block;
-  border-right: 1px solid black;
   height: 100vh;
   position: fixed;
+  @media (min-width:1024px) {
+    background:${props => props.theme.primary};
+  }
 `;
+const SidebarHeader = styled.div`
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "1px solid black" : "none")};
+  padding: 5px 8px;
+  margin-bottom: 20px;
+  color: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "white" : "black")};
+  align-items: center;
+  svg{
+    height: 20px;
+    cursor: pointer;
+  }
+  img{
+    height:20px;
+  }
+  @media (min-width:1024px) {
+    border-bottom:1px solid black;
+    color:white;
+    svg{
+    visibility:hidden;
+  }
+  }
+`
+const Mask = styled.div`
+  position:fixed;
+  top:0;
+  right:0;
+  width:100vw;
+  height:100vh;
+  background:#00000080;
+  z-index:50;
+  display: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "block" : "none")};
+  @media (min-width:1024px) {
+    display:none;
+  }
+`
 const LinkContainer = styled.div`
   color: green;
   display: block;
@@ -47,22 +86,7 @@ const LinkContainer = styled.div`
     }
   }
 `;
-const MainLogo = styled.img`
-  @media (min-width: 1024px) {
-    height: 100px;
-    margin-bottom: 30px;
-    margin-left: 45px;
-    display: block;
-  }
-  display: none;
-`;
-const styles = {
-  hamburgerMenu: {
-    height: "30px",
-    width: "30px",
-    cursor: "pointer"
-  }
-};
+
 function SideBar() {
   const dispatch = useDispatch();
   const hamburgerMenuOpened = useSelector(
@@ -78,52 +102,59 @@ function SideBar() {
   };
 
   return (
-    <NavContainer
-      style={hamburgerMenuOpened ? { left: "0px" } : { left: "-225px" }}
-    >
-      <div>
-        {" "}
-        <FaBars
-          style={styles.hamburgerMenu}
+    <>
+      <NavContainer
+        hamburgerMenuOpened={hamburgerMenuOpened}
+      >
+        <SidebarHeader
+          hamburgerMenuOpened={hamburgerMenuOpened}
           onClick={() => dispatch(toggleHamburgerMenu())}
-        />
-      </div>
+        >
+          {" "}
+          <img src="/images/reduxlogo.png" />
+          Freelancify
+        <FaBars
+            
+          />
+        </SidebarHeader>
 
-      <div />
-      <MainLogo src="/images/reduxlogo.png" />
-      <LinkContainer
-        isCurrentPage={currentPage === "/dashboard"}
-        onClick={closeHamburgerMenu}
-      >
-        <Link to="/dashboard">
-          <FaIndent />
-          <div>DashBoard</div>
-        </Link>
-      </LinkContainer>
-      <LinkContainer
-        isCurrentPage={currentPage === "/clients"}
-        onClick={closeHamburgerMenu}
-      >
-        <Link to="/clients">
-          <FaUserAlt />
-          <div>Clients</div>
-        </Link>
-      </LinkContainer>
-      <LinkContainer
-        isCurrentPage={currentPage === "/invoices"}
-        onClick={closeHamburgerMenu}
-      >
-        <Link to="/invoices">
-          <FaMoneyCheckAlt />
-          <div>Invoices</div>
-        </Link>
-      </LinkContainer>
-      {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
-      {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
-      {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
-      {/* <LinkContainer><Link to="/">Become a Member</Link></LinkContainer> */}
-      <button onClick={logoutUser}>Sign out</button>
-    </NavContainer>
+        <div />
+        <LinkContainer
+          isCurrentPage={currentPage === "/dashboard"}
+          onClick={closeHamburgerMenu}
+        >
+          <Link to="/dashboard">
+            <FaIndent />
+            <div>DashBoard</div>
+          </Link>
+        </LinkContainer>
+        <LinkContainer
+          isCurrentPage={currentPage === "/clients"}
+          onClick={closeHamburgerMenu}
+        >
+          <Link to="/clients">
+            <FaUserAlt />
+            <div>Clients</div>
+          </Link>
+        </LinkContainer>
+        <LinkContainer
+          isCurrentPage={currentPage === "/invoices"}
+          onClick={closeHamburgerMenu}
+        >
+          <Link to="/invoices">
+            <FaMoneyCheckAlt />
+            <div>Invoices</div>
+          </Link>
+        </LinkContainer>
+        {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
+        {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
+        {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
+        {/* <LinkContainer><Link to="/">Become a Member</Link></LinkContainer> */}
+        <button onClick={logoutUser}>Sign out</button>
+      </NavContainer>
+
+      <Mask hamburgerMenuOpened={hamburgerMenuOpened} />
+    </>
   );
 }
 
