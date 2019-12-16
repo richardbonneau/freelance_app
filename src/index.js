@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import App from './App';
 import { ThemeProvider } from 'styled-components';
-import './App.css'
-import store from './store'
+import './App.css';
+import store from './store';
 import * as serviceWorker from './serviceWorker';
 
 const theme = {

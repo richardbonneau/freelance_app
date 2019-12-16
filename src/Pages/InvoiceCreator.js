@@ -8,6 +8,16 @@ import { Container } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
+const TitleContainer = styled.div`
+  .title{
+    font-size:18px;
+    font-weight: 600;
+    margin-right:10px;
+  }
+  .invoice-number{
+    width:25px;
+  }
+`
 const NotesInput = styled.textarea`
   height: 80px;
   width: 470px;
@@ -16,6 +26,12 @@ const NotesInput = styled.textarea`
 `;
 const DatePickContainer = styled.div`
   display: flex;
+  input{
+    width: 78px;
+  }
+  .first-child{
+    margin-right:50px;
+  }
 `;
 
 const Hr = styled.hr`
@@ -24,7 +40,7 @@ const Hr = styled.hr`
 
 const SenderRecipientContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+
 `;
 const BlockInput = styled.input`
   display: block;
@@ -35,7 +51,7 @@ const RecipientContainer = styled.div``;
 function InvoiceCreator() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
+  const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
   const [selectedClientId, setSelectedClientId] = useState(
     Number(clients[0].id)
@@ -55,11 +71,11 @@ function InvoiceCreator() {
   const [itemsList, setItemsList] = useState([Object.assign({}, newEntry)]);
   const [itemsSum, setItemsSum] = useState(0);
 
-  const newItemsSum = (newItemsList) =>{
+  const newItemsSum = newItemsList => {
     let newSum = 0;
-    newItemsList.forEach(item=>newSum=newSum + item.hours * item.rate);
+    newItemsList.forEach(item => (newSum = newSum + item.hours * item.rate));
     setItemsSum(newSum);
-  }
+  };
   const handleItemChange = e => {
     const index = e.target.id;
     let newItemsList = itemsList.slice();
@@ -79,8 +95,8 @@ function InvoiceCreator() {
 
   const newInvoiceSubmit = e => {
     e.preventDefault();
-    console.log("new",
-    {          title: titleInput,
+    console.log("new", {
+      title: titleInput,
       invoiceNumber: invoiceNumberInput,
       invoiceDate,
       dueDate,
@@ -90,11 +106,13 @@ function InvoiceCreator() {
       fromCity,
       fromCountry,
       items: itemsList,
-      notes: notesInput})
+      notes: notesInput
+    });
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
     dispatch(
       addInvoiceToFirestore(
-        {id: newInvoiceId,
+        {
+          id: newInvoiceId,
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
           invoiceDate,
@@ -105,7 +123,7 @@ function InvoiceCreator() {
           fromCity,
           fromCountry,
           items: itemsList,
-          notes: notesInput,
+          notes: notesInput
         },
         history
       )
@@ -113,27 +131,31 @@ function InvoiceCreator() {
     setInvoiceNumberInput("");
     setTitleInput("");
   };
-  if(isSendingReq) return <Loading />
+  if (isSendingReq) return <Loading />;
   return (
     <Container>
       <h2>Invoice Creator</h2>
       <form onSubmit={newInvoiceSubmit}>
-        <input
-          type="text"
-          placeholder="Invoice Title"
-          value={titleInput}
-          onChange={e => setTitleInput(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Invoice #"
-          value={invoiceNumberInput}
-          onChange={e => setInvoiceNumberInput(e.target.value)}
-        />
+        <TitleContainer>
+          <input
+            type="text"
+            className="title"
+            placeholder="Invoice Title"
+            value={titleInput}
+            onChange={e => setTitleInput(e.target.value)}
+          />
+          <h4>Invoice Number</h4>
+          <input
+            type="number"
+            className="invoice-number"
+            placeholder="#"
+            value={invoiceNumberInput}
+            onChange={e => e.target.value.length < 4 ? setInvoiceNumberInput(e.target.value) : false}
+          />
+        </TitleContainer>
 
         <DatePickContainer>
-          {" "}
-          <div>
+          <div className="first-child">
             <h4>Invoice Date</h4>
             <DatePicker
               selected={invoiceDate}
@@ -205,9 +227,16 @@ function InvoiceCreator() {
         <Hr />
 
         {itemsList.map((item, i) => (
-          <Item item={item} i={i} handleItemChange={handleItemChange} deleteItem={deleteItem}  />
+          <Item
+            item={item}
+            i={i}
+            handleItemChange={handleItemChange}
+            deleteItem={deleteItem}
+          />
         ))}
-        <button type="button" onClick={addNewItem}>Add New Item</button>
+        <button type="button" onClick={addNewItem}>
+          Add New Item
+        </button>
 
         <h5>Subtotal</h5>
         {itemsSum}

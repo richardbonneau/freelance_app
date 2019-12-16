@@ -73,7 +73,8 @@ const UserAvatarContainer = styled.div`
     visibility: ${({ avatarPopupToggle }) =>
       avatarPopupToggle ? "visible" : "hidden"};
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
-    top: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "-36px" : "0")};
+    top:-36px;
+    left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
     background: ${props => props.theme.accent};
     transition: all 300ms ease-out 10ms;
     position: absolute;
