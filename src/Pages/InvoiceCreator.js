@@ -9,38 +9,38 @@ import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
 const TitleContainer = styled.div`
-  .title{
-    font-size:18px;
+  margin-top: 20px;
+
+  .title {
+    font-size: 18px;
     font-weight: 600;
-    margin-right:10px;
+    margin-right: 10px;
   }
-  .invoice-number{
-    width:25px;
+  .invoice-number {
+    width: 25px;
   }
-`
+`;
 const NotesInput = styled.textarea`
   height: 80px;
-  width: 470px;
+  width: 100%;
   resize: none;
   outline: none;
 `;
 const DatePickContainer = styled.div`
+  margin-top: 20px;
+
   display: flex;
-  input{
+  input {
     width: 78px;
   }
-  .first-child{
-    margin-right:50px;
+  .first-child {
+    margin-right: 50px;
   }
-`;
-
-const Hr = styled.hr`
-  margin: 20px 0;
 `;
 
 const SenderRecipientContainer = styled.div`
   display: flex;
-
+  margin-top: 20px;
 `;
 const BlockInput = styled.input`
   display: block;
@@ -48,6 +48,12 @@ const BlockInput = styled.input`
 const SenderContainer = styled.div``;
 const RecipientContainer = styled.div``;
 
+const ItemsListContainer = styled.div`
+margin-top:20px;
+`
+const SumContainer = styled.div`
+  margin-top:20px;
+`
 function InvoiceCreator() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -150,7 +156,11 @@ function InvoiceCreator() {
             className="invoice-number"
             placeholder="#"
             value={invoiceNumberInput}
-            onChange={e => e.target.value.length < 4 ? setInvoiceNumberInput(e.target.value) : false}
+            onChange={e =>
+              e.target.value.length < 4
+                ? setInvoiceNumberInput(e.target.value)
+                : false
+            }
           />
         </TitleContainer>
 
@@ -170,8 +180,6 @@ function InvoiceCreator() {
             />
           </div>
         </DatePickContainer>
-
-        <Hr />
 
         <SenderRecipientContainer>
           <SenderContainer>
@@ -224,35 +232,33 @@ function InvoiceCreator() {
           </RecipientContainer>
         </SenderRecipientContainer>
 
-        <Hr />
+        <ItemsListContainer>
+          {itemsList.map((item, i) => (
+            <Item
+              item={item}
+              i={i}
+              handleItemChange={handleItemChange}
+              deleteItem={deleteItem}
+            />
+          ))}
+          <button type="button" onClick={addNewItem}>
+            Add New Item
+          </button>
+        </ItemsListContainer>
 
-        {itemsList.map((item, i) => (
-          <Item
-            item={item}
-            i={i}
-            handleItemChange={handleItemChange}
-            deleteItem={deleteItem}
-          />
-        ))}
-        <button type="button" onClick={addNewItem}>
-          Add New Item
-        </button>
+        <SumContainer>
+          <h5>Subtotal</h5>
+          {itemsSum}
 
-        <h5>Subtotal</h5>
-        {itemsSum}
+          <h4>Total</h4>
+          {itemsSum}
+        </SumContainer>
 
-        <h4>Total</h4>
-        {itemsSum}
-
-        <Hr />
-
-        <div>
-          <NotesInput
-            value={notesInput}
-            placeholder="Notes"
-            onChange={e => setNotesInput(e.target.value)}
-          ></NotesInput>
-        </div>
+        <NotesInput
+          value={notesInput}
+          placeholder="Notes"
+          onChange={e => setNotesInput(e.target.value)}
+        ></NotesInput>
 
         <input type="submit" value="Submit Draft" />
       </form>
