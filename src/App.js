@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Clients from "./Pages/Clients";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
-import MobileNavBar from "./Components/MobileNavBar";
 import SideBar from "./Components/SideBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import InvoiceDetails from "./Pages/InvoiceDetails";

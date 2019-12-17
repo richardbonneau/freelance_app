@@ -1,46 +1,22 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Invoice from "../Components/Invoice";
 import Loading from "../Components/Loading";
-import DatePicker from "react-datepicker";
-import "react-datepicker/src/stylesheets/datepicker.scss";
+
 import {
   Container,
   Table,
   Th,
   THead,
-  MaskOverlay,
-  ModalContents,
-  ModalTitle,
-  ModalHr
 } from "../utils/globalStyledComponents";
 
-const ModalContainer = styled.div`
-  position: fixed;
-  z-index: 160;
-  width: 300px;
-  height: 600px;
-  background: #bdc3c7;
-  left: 50%;
-  top: 50%;
-  margin-left: -150px;
-  margin-top: -300px;
-  transition: 0.5s ease-out;
-  visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
-  transform: ${({ isModalOpened }) =>
-    isModalOpened ? "translateY(0)" : "translateY(45px)"};
-  opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
-`;
 
 function Invoices(props) {
-  const dispatch = useDispatch();
   const invoices = useSelector(state => state.invoices.invoicesList);
   const clients = useSelector(state => state.clients.clientsList);
   const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
-  const [isModalOpened, toggleModal] = useState(false);
 
 
   const listOfInvoices = () => {
@@ -69,15 +45,7 @@ function Invoices(props) {
     );
   };
 
-  const modalContents = () => {
-    return (
-      <ModalContents active={isModalOpened}>
-        <ModalTitle>Create a New Invoice</ModalTitle>
-        <ModalHr />
-      
-      </ModalContents>
-    );
-  };
+
 console.log("isSendingReq",isSendingReq)
   if(isSendingReq) return <Loading />
   return (
@@ -85,11 +53,6 @@ console.log("isSendingReq",isSendingReq)
       <h2>Invoices</h2>
       <Link to="/invoiceCreator">Create New Invoice</Link>
       {listOfInvoices()}
-
-      {/* <MaskOverlay isModalOpened={isModalOpened} />
-      <ModalContainer isModalOpened={isModalOpened}>
-        {modalContents()}
-      </ModalContainer> */}
     </Container>
   );
 }
