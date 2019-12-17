@@ -107,9 +107,9 @@ export const FormInputContainer = styled.div`
   margin-bottom: 15px;
 `;
 
-export const AccentButton = styled.a`
+export const PageButton = styled.a`
   padding: 4px 10px;
-  background: ${props => props.theme.accent};
+  background: ${props => props.theme.blue};
   display:flex;
   align-items:center;
   justify-content:center;

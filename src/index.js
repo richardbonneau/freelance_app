@@ -10,7 +10,8 @@ import * as serviceWorker from './serviceWorker';
 const theme = {
     primary: "#011C27",
     accent: "#F26430",
-    notWhite:"#a9a9a9"
+    notWhite:"#a9a9a9",
+    blue: "#039BE5"
 }
 
 ReactDOM.render(<Provider store={store}>

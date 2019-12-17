@@ -1,9 +1,12 @@
-import React from "react";
+import React,{useRef} from "react";
 import styled from "styled-components";
-import { AccentButton } from "../utils/globalStyledComponents";
+import { PageButton } from "../utils/globalStyledComponents";
 import { FaTrashAlt } from "react-icons/fa";
 
 function Item(props) {
+  const titleRef = useRef(null)
+  const hoursRef = useRef(null)
+  const rateRef = useRef(null)
   const ItemContainer = styled.div`
     box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
     padding: 14px;
@@ -25,6 +28,9 @@ function Item(props) {
     .number-inputs-container-first-child {
       margin-right: 20px;
     }
+    .number-input{
+      width:50px;
+    }
 
     .sum {
       bottom: 0;
@@ -32,52 +38,52 @@ function Item(props) {
       position: absolute;
     }
   `;
-  const NumberInput = styled.input`
-    width: 50px;
-  `;
+
   let itemSum = props.item.hours * props.item.rate;
 
   return (
     <ItemContainer>
       <input
         type="text"
+        ref={titleRef}
         className="title-description"
-        id={props.i}
         name="name"
         placeholder="Name or Description"
-        onChange={props.handleItemChange}
+        onChange={(e)=>props.handleItemChange(e,props.i,titleRef)}
         value={props.item.name}
       />
       <div className="number-inputs-container">
         <div className="number-inputs-container-first-child">
           <h4>Hours</h4>
-          <NumberInput
-            type="text"
-            id={props.i}
+          <input
+            type="number"
+            ref={hoursRef}
+            className="number-input"
             name="hours"
             placeholder="Hours"
-            onChange={props.handleItemChange}
+            onChange={(e)=>props.handleItemChange(e,props.i,hoursRef)}
             value={props.item.hours}
           />
         </div>
         <div>
           <h4>Rate</h4>
-          <NumberInput
-            type="text"
-            id={props.i}
+          <input
+            type="number"
+            ref={rateRef}
+            className="number-input"
             name="rate"
             placeholder="Rate"
-            onChange={props.handleItemChange}
+            onChange={(e)=>props.handleItemChange(e,props.i,rateRef)}
             value={props.item.rate}
           />
         </div>
         <div className="sum">{itemSum}</div>
       </div>
       <div>
-        <AccentButton onClick={() => props.deleteItem(props.i)}>
+        <PageButton onClick={(e) => props.deleteItem(e,props.i)}>
           <FaTrashAlt />
           Delete
-        </AccentButton>
+        </PageButton>
       </div>
     </ItemContainer>
   );

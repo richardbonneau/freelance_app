@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
-import { Container, AccentButton } from "../utils/globalStyledComponents";
+import { Container, PageButton } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
@@ -89,13 +89,17 @@ function InvoiceCreator() {
     newItemsList.forEach(item => (newSum = newSum + item.hours * item.rate));
     setItemsSum(newSum);
   };
-  const handleItemChange = e => {
-    const index = e.target.id;
+
+  const handleItemChange = (e,index,selectedInput) => {
+    console.log("etarget",e.target)
     let newItemsList = itemsList.slice();
+    console.log(newItemsList,index,newItemsList[index],e.target)
     newItemsList[index][e.target.name] = e.target.value;
     setItemsList(newItemsList);
     newItemsSum(newItemsList);
+    selectedInput.current.focus()
   };
+
   const deleteItem = itemIndex => {
     let newItemsList = itemsList.filter((item, i) => itemIndex !== i);
     setItemsList(newItemsList);
@@ -245,13 +249,14 @@ function InvoiceCreator() {
             <Item
               item={item}
               i={i}
+              key={i}
               handleItemChange={handleItemChange}
               deleteItem={deleteItem}
             />
           ))}
-          <AccentButton type="button" onClick={addNewItem}>
+          <PageButton type="button" onClick={addNewItem}>
             Add New Item
-          </AccentButton>
+          </PageButton>
         </ItemsListContainer>
 
         <SumContainer>
@@ -268,7 +273,7 @@ function InvoiceCreator() {
           onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
 
-        <AccentButton onClick={newInvoiceSubmit}>Submit Draft</AccentButton>
+        <PageButton onClick={newInvoiceSubmit}>Submit Draft</PageButton>
       </form>
     </Container>
   );
