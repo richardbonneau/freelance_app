@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
-import { Container } from "../utils/globalStyledComponents";
+import { Container, AccentButton } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
@@ -41,19 +41,26 @@ const DatePickContainer = styled.div`
 const SenderRecipientContainer = styled.div`
   display: flex;
   margin-top: 20px;
+  flex-direction: column;
 `;
 const BlockInput = styled.input`
   display: block;
 `;
-const SenderContainer = styled.div``;
+const SenderContainer = styled.div`
+  margin-bottom: 10px;
+`;
 const RecipientContainer = styled.div``;
 
 const ItemsListContainer = styled.div`
-margin-top:20px;
-`
+  margin-top: 20px;
+  a{
+    padding:0;
+    width:100%;
+  }
+`;
 const SumContainer = styled.div`
-  margin-top:20px;
-`
+  margin-top: 20px;
+`;
 function InvoiceCreator() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -141,7 +148,7 @@ function InvoiceCreator() {
   return (
     <Container>
       <h2>Invoice Creator</h2>
-      <form onSubmit={newInvoiceSubmit}>
+      <form>
         <TitleContainer>
           <input
             type="text"
@@ -208,6 +215,7 @@ function InvoiceCreator() {
               value={fromCountry}
               onChange={e => setFromCountry(e.target.value)}
             />
+            <a href="#">Use your profile info</a>
           </SenderContainer>
 
           <RecipientContainer>
@@ -241,9 +249,9 @@ function InvoiceCreator() {
               deleteItem={deleteItem}
             />
           ))}
-          <button type="button" onClick={addNewItem}>
+          <AccentButton type="button" onClick={addNewItem}>
             Add New Item
-          </button>
+          </AccentButton>
         </ItemsListContainer>
 
         <SumContainer>
@@ -260,7 +268,7 @@ function InvoiceCreator() {
           onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
 
-        <input type="submit" value="Submit Draft" />
+        <AccentButton onClick={newInvoiceSubmit}>Submit Draft</AccentButton>
       </form>
     </Container>
   );

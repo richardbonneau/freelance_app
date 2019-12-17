@@ -106,3 +106,15 @@ export const FormInputContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 15px;
 `;
+
+export const AccentButton = styled.a`
+  padding: 4px 10px;
+  background: ${props => props.theme.accent};
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 100px;
+  svg{
+        margin-right:5px;
+    }
+`;

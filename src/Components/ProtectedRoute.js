@@ -12,8 +12,11 @@ const PageStructure = styled.div`
 `;
 const ComponentContainer = styled.div`
   margin-left:20px;
+  flex-grow:100;
   @media (min-width: 1024px) {
     margin-left: 220px;
+    display: flex;
+    justify-content: center;
   }
 `;
 export default function ProtectedRoute({
@@ -31,11 +34,9 @@ export default function ProtectedRoute({
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (
-            <div>
               <ComponentContainer>
                 <Component {...props} />
               </ComponentContainer>
-            </div>
           ) : (
             <Redirect
               to={{
