@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { PageButton } from "../utils/globalStyledComponents";
 import { FaTrashAlt } from "react-icons/fa";
@@ -40,7 +40,10 @@ function Item(props) {
   const [itemInputs, setItemInputs] = useState({ ...newEntry });
   const handleItemChange = (e) => setItemInputs({ ...itemInputs, [e.target.name]: e.target.value })
   let itemSum = itemInputs.hours * itemInputs.rate;
-console.log("itemInputs",itemInputs)
+
+  useEffect(()=>{
+    setItemInputs(props.item);
+  }, []);
   return (
     <ItemContainer>
       <input
@@ -77,7 +80,7 @@ console.log("itemInputs",itemInputs)
         <div className="sum">{itemSum}</div>
       </div>
       <div>
-        <PageButton onClick={(e) => props.deleteItem(e, props.i)}>
+        <PageButton onClick={(e) => props.deleteItem(props.i)}>
           <FaTrashAlt />
           Delete
         </PageButton>

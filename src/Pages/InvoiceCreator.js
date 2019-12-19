@@ -80,17 +80,9 @@ function InvoiceCreator() {
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
-
-
   const [itemsList, setItemsList] = useState([{...newEntry}]);
   const [itemsSum, setItemsSum] = useState(0);
 
-  // const newItemsSum = newItemsList => {
-  //   //just awful
-  //   let newSum = 0;
-  //   newItemsList.forEach(item => (newSum = newSum + item.hours * item.rate));
-  //   setItemsSum(newSum);
-  // };
 
   const getSum = receivedSum => {
     let newSum = 0;
@@ -98,17 +90,8 @@ function InvoiceCreator() {
     setItemsSum(newSum+receivedSum);
   };
 
-  // const handleItemChange = (e,index,selectedInput) => {
-  //   console.log("etarget",e.target)
-  //   let newItemsList = itemsList.slice();
-  //   console.log(newItemsList,index,newItemsList[index],e.target)
-  //   newItemsList[index][e.target.name] = e.target.value;
-  //   setItemsList(newItemsList);
-  //   // newItemsSum(newItemsList);
-  //   selectedInput.current.focus()
-  // };
-
   const deleteItem = itemIndex => {
+    console.log("itemsList",itemsList,"itemIndex",itemIndex)
     let newItemsList = itemsList.filter((item, i) => itemIndex !== i);
     setItemsList(newItemsList);
     getSum(0);
@@ -258,7 +241,6 @@ function InvoiceCreator() {
               item={item}
               i={i}
               key={i}
-              
               deleteItem={deleteItem}
             />
           ))}
