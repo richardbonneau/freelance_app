@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { PageButton } from "../utils/globalStyledComponents";
 import { FaTrashAlt } from "react-icons/fa";
 import { newEntry } from "../utils/static"
+import {  useDispatch } from "react-redux";
+import { deleteItemFromStore, modifyItemFromStore  } from "../_actions";
 
 const ItemContainer = styled.div`
 box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
@@ -13,7 +15,6 @@ a {
   padding:0;
   width:100%;
 }
-
 .title-description {
   width: 100%;
 }
@@ -28,7 +29,6 @@ a {
 .number-input{
   width:50px;
 }
-
 .sum {
   bottom: 0;
   right: 0;
@@ -37,6 +37,7 @@ a {
 `;
 
 function Item(props) {
+  const dispatch = useDispatch();
   const [itemInputs, setItemInputs] = useState({ ...newEntry });
   const handleItemChange = (e) => setItemInputs({ ...itemInputs, [e.target.name]: e.target.value })
   let itemSum = itemInputs.hours * itemInputs.rate;
@@ -44,6 +45,13 @@ function Item(props) {
   useEffect(()=>{
     setItemInputs(props.item);
   }, []);
+  useEffect(()=>{
+    dispatch(modifyItemFromStore(props.i,itemInputs));
+  },[itemInputs]);
+  // useEffect(()=>{
+  //   // setItemInputs(props.item);
+  //   console.log("item",props.item,props.i)
+  // },[props.item])
   return (
     <ItemContainer>
       <input
@@ -80,7 +88,7 @@ function Item(props) {
         <div className="sum">{itemSum}</div>
       </div>
       <div>
-        <PageButton onClick={(e) => props.deleteItem(props.i)}>
+        <PageButton onClick={(e) => dispatch(deleteItemFromStore(props.i))}>
           <FaTrashAlt />
           Delete
         </PageButton>

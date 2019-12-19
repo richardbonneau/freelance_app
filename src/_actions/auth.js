@@ -149,6 +149,7 @@ const getUserDataAndLogin = user => dispatch => {
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
+        dispatch(verifyFail())
       }
     })
     .catch(function(error) {

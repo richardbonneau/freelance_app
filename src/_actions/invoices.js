@@ -7,6 +7,9 @@ export const INVOICE_PUSH_SUCCESS = "INVOICE_PUSH_SUCCESS";
 export const FIREBASE_FAILURE = "FIREBASE_FAILURE";
 export const FIREBASE_SUCCESS = "FIREBASE_SUCCESS";
 export const ATTEMPT_PUSHING_NEW_INVOICE = "ATTEMPT_PUSHING_NEW_INVOICE";
+export const PUSH_NEW_ITEM = "PUSH_NEW_ITEM";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const MODIFY_ITEM = "MODIFY_ITEM";
 
 
 const getInitalInvoicesList = (invoicesList) => {
@@ -26,6 +29,24 @@ const attemptPushNewInvoice = () => {
         type:ATTEMPT_PUSHING_NEW_INVOICE
     }
 }
+const pushNewItem = () => {
+    return {
+        type:PUSH_NEW_ITEM
+    }
+}
+const deleteItem = (index)=>{
+    return { 
+        type: DELETE_ITEM,
+        index
+    }
+}
+const modifyItem = (index, contents) =>{
+    return {
+        type: MODIFY_ITEM,
+        index,
+        contents
+    }
+}
 const reqSuccess = () => {
     return {
         type:FIREBASE_SUCCESS
@@ -38,8 +59,7 @@ const requestError = () => {
 };
 
 export const requestInitialInvoicesList = (invoicesList) => dispatch => {
-    console.log("dis")
-    dispatch(getInitalInvoicesList(invoicesList))
+    dispatch(getInitalInvoicesList(invoicesList));
 };
 export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
     console.log('newInvoice',newInvoice)
@@ -57,6 +77,15 @@ export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
         console.log("Error getting document:", error);
       });
 };
+export const addItemToStore = ()=> dispatch => {
+    dispatch(pushNewItem());
+}
+export const deleteItemFromStore = (index) => dispatch => {
+    dispatch(deleteItem(index));
+}
+export const modifyItemFromStore = (index,contents) => dispatch => {
+    dispatch(modifyItem(index,contents));
+}
 export const firestoreSuccess = () => dispatch =>{
     dispatch(reqSuccess());
 }

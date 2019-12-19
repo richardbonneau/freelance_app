@@ -25,6 +25,7 @@ export default function ProtectedRoute({
   isVerifying,
   ...rest
 }) {
+  console.log("isVerifying",isVerifying,"isAuthenticated",isAuthenticated)
   return (
     <PageStructure>
       <Route

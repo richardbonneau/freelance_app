@@ -92,7 +92,6 @@ export default (
       }
     case DATABASE_FAILURE:
       return {
-        
         ...state,
         databaseError: true,
         isManipulatingDatabase: false

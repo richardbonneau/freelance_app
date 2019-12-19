@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
-import { addInvoiceToFirestore } from "../_actions";
+import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import { Container, PageButton } from "../utils/globalStyledComponents";
-import {newEntry} from "../utils/static"
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
@@ -38,7 +37,6 @@ const DatePickContainer = styled.div`
     margin-right: 50px;
   }
 `;
-
 const SenderRecipientContainer = styled.div`
   display: flex;
   margin-top: 20px;
@@ -67,9 +65,8 @@ function InvoiceCreator() {
   const history = useHistory();
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
-  const [selectedClientId, setSelectedClientId] = useState(
-    Number(clients[0].id)
-  );
+  const itemsList = useSelector(state=>state.invoices.currentItemsList);
+  const [selectedClientId, setSelectedClientId] = useState(Number(clients[0].id));
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date());
@@ -80,25 +77,13 @@ function InvoiceCreator() {
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
-  const [itemsList, setItemsList] = useState([{...newEntry}]);
   const [itemsSum, setItemsSum] = useState(0);
 
-
+console.log(itemsList)
   const getSum = receivedSum => {
     let newSum = 0;
     itemsList.forEach(item=>newSum=newSum+(item.hours*item.rate));
     setItemsSum(newSum+receivedSum);
-  };
-
-  const deleteItem = itemIndex => {
-    console.log("itemsList",itemsList,"itemIndex",itemIndex)
-    let newItemsList = itemsList.filter((item, i) => itemIndex !== i);
-    setItemsList(newItemsList);
-    getSum(0);
-  };
-  const addNewItem = e => {
-    let newItem = Object.assign({}, newEntry);
-    setItemsList(itemsList.concat(newItem));
   };
 
   const newInvoiceSubmit = e => {
@@ -241,10 +226,9 @@ function InvoiceCreator() {
               item={item}
               i={i}
               key={i}
-              deleteItem={deleteItem}
             />
           ))}
-          <PageButton type="button" onClick={addNewItem}>
+          <PageButton type="button" onClick={()=>dispatch(addItemToStore())}>
             Add New Item
           </PageButton>
         </ItemsListContainer>
