@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import { addInvoiceToFirestore } from "../_actions";
 import { Container, PageButton } from "../utils/globalStyledComponents";
+import {newEntry} from "../utils/static"
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
@@ -80,30 +81,37 @@ function InvoiceCreator() {
   const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
 
-  const newEntry = { name: "", hours: 0, rate: 0 };
-  const [itemsList, setItemsList] = useState([Object.assign({}, newEntry)]);
+
+  const [itemsList, setItemsList] = useState([{...newEntry}]);
   const [itemsSum, setItemsSum] = useState(0);
 
-  const newItemsSum = newItemsList => {
+  // const newItemsSum = newItemsList => {
+  //   //just awful
+  //   let newSum = 0;
+  //   newItemsList.forEach(item => (newSum = newSum + item.hours * item.rate));
+  //   setItemsSum(newSum);
+  // };
+
+  const getSum = receivedSum => {
     let newSum = 0;
-    newItemsList.forEach(item => (newSum = newSum + item.hours * item.rate));
-    setItemsSum(newSum);
+    itemsList.forEach(item=>newSum=newSum+(item.hours*item.rate));
+    setItemsSum(newSum+receivedSum);
   };
 
-  const handleItemChange = (e,index,selectedInput) => {
-    console.log("etarget",e.target)
-    let newItemsList = itemsList.slice();
-    console.log(newItemsList,index,newItemsList[index],e.target)
-    newItemsList[index][e.target.name] = e.target.value;
-    setItemsList(newItemsList);
-    newItemsSum(newItemsList);
-    selectedInput.current.focus()
-  };
+  // const handleItemChange = (e,index,selectedInput) => {
+  //   console.log("etarget",e.target)
+  //   let newItemsList = itemsList.slice();
+  //   console.log(newItemsList,index,newItemsList[index],e.target)
+  //   newItemsList[index][e.target.name] = e.target.value;
+  //   setItemsList(newItemsList);
+  //   // newItemsSum(newItemsList);
+  //   selectedInput.current.focus()
+  // };
 
   const deleteItem = itemIndex => {
     let newItemsList = itemsList.filter((item, i) => itemIndex !== i);
     setItemsList(newItemsList);
-    newItemsSum(newItemsList);
+    getSum(0);
   };
   const addNewItem = e => {
     let newItem = Object.assign({}, newEntry);
@@ -250,7 +258,7 @@ function InvoiceCreator() {
               item={item}
               i={i}
               key={i}
-              handleItemChange={handleItemChange}
+              
               deleteItem={deleteItem}
             />
           ))}
