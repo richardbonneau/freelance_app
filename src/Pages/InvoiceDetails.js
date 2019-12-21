@@ -18,7 +18,6 @@ function InvoiceDetails(props) {
   const client = useSelector(state =>
     state.clients.clientsList.find(client => client.id === details.clientId)
   );
-  console.log("InvoiceDetails", details);
 
   const displayItems = () => {
     return details.items.map((item,i) => (

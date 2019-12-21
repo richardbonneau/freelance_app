@@ -45,8 +45,6 @@ function Invoices(props) {
     );
   };
 
-
-console.log("isSendingReq",isSendingReq)
   if(isSendingReq) return <Loading />
   return (
     <Container>

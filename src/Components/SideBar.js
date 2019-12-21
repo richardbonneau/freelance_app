@@ -139,7 +139,6 @@ function SideBar() {
   const closeHamburgerMenu = () => {
     dispatch(toggleHamburgerMenu());
   };
-  console.log("avatarPopupToggle", avatarPopupToggle);
   return (
     <>
       <NavContainer hamburgerMenuOpened={hamburgerMenuOpened}>

@@ -81,13 +81,11 @@ const databaseError = () => {
   };
 };
 const accessingDatabase = () => {
-  console.log("accessingDatabase");
   return {
     type: DATABASE_ACCESS
   };
 };
 export const firebaseSignup = (email, password) => dispatch => {
-  console.log("signing up");
   dispatch(requestLogin());
   myFirebase
     .auth()
@@ -116,7 +114,6 @@ const addNewUserToDatabase = (user, dispatch) => {
 };
 
 export const firebaseLogin = (email, password) => dispatch => {
-  console.log("firebaseLogin");
   dispatch(requestLogin());
   myFirebase
     .auth()
@@ -131,7 +128,6 @@ export const firebaseLogin = (email, password) => dispatch => {
 };
 
 const getUserDataAndLogin = user => dispatch => {
-  console.log("user", user);
   db.collection("users")
     .doc(user.uid)
     .get()
@@ -158,7 +154,6 @@ const getUserDataAndLogin = user => dispatch => {
 };
 
 export const firebaseLogout = () => dispatch => {
-  console.log("logout");
   dispatch(requestLogout());
   myFirebase
     .auth()
@@ -173,7 +168,6 @@ export const firebaseLogout = () => dispatch => {
 };
 
 export const verifyAuth = () => dispatch => {
-  console.log("verify auth");
   dispatch(verifyRequest());
   myFirebase.auth().onAuthStateChanged(user => {
     console.log("***VERIFY auth", user);

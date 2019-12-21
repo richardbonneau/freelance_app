@@ -41,18 +41,14 @@ export default (
         invoicesList: [...state.invoicesList, action.newInvoice],
       }
     case PUSH_NEW_ITEM:
-      let newItem = {...newEntry, id:uniqid()}
-      console.log("newitem",newItem)
       return {
         ...state,
-        currentItemsList: state.currentItemsList.concat(newItem)
+        currentItemsList: state.currentItemsList.concat({...newEntry, id:uniqid()})
       }
     case DELETE_ITEM:
       return {
         ...state,
-        currentItemsList:state.currentItemsList.filter((item,i)=>{
-          console.log("action.index !== i",action.index ,"!==", i,action.index !== i)
-          return action.index !== i})
+        currentItemsList:state.currentItemsList.filter((item,i)=>action.index !== i)
       }
     case MODIFY_ITEM:
       return {

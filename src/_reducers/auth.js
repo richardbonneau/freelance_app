@@ -28,7 +28,6 @@ export default (
   },
   action
 ) => {
-  console.log("action",action.type)
   switch (action.type) {
     case LOGIN_REQUEST:
       return {

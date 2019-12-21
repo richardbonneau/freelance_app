@@ -62,7 +62,6 @@ export const requestInitialInvoicesList = (invoicesList) => dispatch => {
     dispatch(getInitalInvoicesList(invoicesList));
 };
 export const addInvoiceToFirestore = (newInvoice,history) => dispatch => {
-    console.log('newInvoice',newInvoice)
     dispatch(attemptPushNewInvoice());
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({

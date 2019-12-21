@@ -80,7 +80,6 @@ function InvoiceCreator() {
   const selectedClient = clients.find(c => c.id === selectedClientId);
   const [itemsSum, setItemsSum] = useState(0);
 
-console.log(itemsList)
   const getSum = receivedSum => {
     let newSum = 0;
     itemsList.forEach(item=>newSum=newSum+(item.hours*item.rate));
@@ -222,15 +221,13 @@ console.log(itemsList)
         </SenderRecipientContainer>
 
         <ItemsListContainer>
-          {itemsList.map((item, i) => {
-            console.log("item",item)
-            return(
+          {itemsList.map((item, i) => (
             <Item
               item={item}
               i={i}
               key={item.id}
             />
-          )})}
+          ))}
           <PageButton type="button" onClick={()=>dispatch(addItemToStore())}>
             Add New Item
           </PageButton>
