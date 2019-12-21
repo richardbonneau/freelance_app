@@ -6,6 +6,7 @@ import { newEntry } from "../utils/static"
 import {  useDispatch } from "react-redux";
 import { deleteItemFromStore, modifyItemFromStore  } from "../_actions";
 
+
 const ItemContainer = styled.div`
 box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
 padding: 14px;
@@ -38,20 +39,14 @@ a {
 
 function Item(props) {
   const dispatch = useDispatch();
-  const [itemInputs, setItemInputs] = useState({ ...newEntry });
+  const [itemInputs, setItemInputs] = useState(props.item);
   const handleItemChange = (e) => setItemInputs({ ...itemInputs, [e.target.name]: e.target.value })
   let itemSum = itemInputs.hours * itemInputs.rate;
 
   useEffect(()=>{
-    setItemInputs(props.item);
-  }, []);
-  useEffect(()=>{
     dispatch(modifyItemFromStore(props.i,itemInputs));
   },[itemInputs]);
-  // useEffect(()=>{
-  //   // setItemInputs(props.item);
-  //   console.log("item",props.item,props.i)
-  // },[props.item])
+
   return (
     <ItemContainer>
       <input

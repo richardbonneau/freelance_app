@@ -7,6 +7,7 @@ import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
+import uniqid from "uniqid"
 
 const TitleContainer = styled.div`
   margin-top: 20px;
@@ -221,13 +222,15 @@ console.log(itemsList)
         </SenderRecipientContainer>
 
         <ItemsListContainer>
-          {itemsList.map((item, i) => (
+          {itemsList.map((item, i) => {
+            console.log("item",item)
+            return(
             <Item
               item={item}
               i={i}
-              key={i}
+              key={item.id}
             />
-          ))}
+          )})}
           <PageButton type="button" onClick={()=>dispatch(addItemToStore())}>
             Add New Item
           </PageButton>

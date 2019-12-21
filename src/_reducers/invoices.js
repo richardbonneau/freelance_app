@@ -1,4 +1,6 @@
 import {newEntry} from "../utils/static"
+import uniqid from "uniqid";
+
 import {
   GET_INITIAL_INVOICES_LIST,
   PUSH_NEW_INVOICE,
@@ -15,7 +17,7 @@ export default (
     isSendingReq: false,
     reqError: false,
     invoicesList:[],
-    currentItemsList:[]
+    currentItemsList:[{...newEntry, id:uniqid()}]
   },
   action
 ) => {
@@ -39,9 +41,11 @@ export default (
         invoicesList: [...state.invoicesList, action.newInvoice],
       }
     case PUSH_NEW_ITEM:
+      let newItem = {...newEntry, id:uniqid()}
+      console.log("newitem",newItem)
       return {
         ...state,
-        currentItemsList: state.currentItemsList.concat(newEntry)
+        currentItemsList: state.currentItemsList.concat(newItem)
       }
     case DELETE_ITEM:
       return {
