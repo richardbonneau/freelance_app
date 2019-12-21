@@ -181,8 +181,9 @@ function Clients() {
 
   return (
     <Container>
-      <button onClick={() => toggleModal(true)}>Add New Client</button>
+      
       <h2>Clients</h2>
+      <a href="#" onClick={() => toggleModal(true)}>Add New Client</a>
       {clientsList()}
 
       <MaskOverlay isModalOpened={isModalOpened || isClientCardOpened} />
