@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,6 +26,7 @@ const NotesInput = styled.textarea`
   width: 100%;
   resize: none;
   outline: none;
+  margin-top: 10px;
 `;
 const DatePickContainer = styled.div`
   margin-top: 20px;
@@ -66,7 +67,7 @@ function InvoiceCreator() {
   const history = useHistory();
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
-  const itemsList = useSelector(state=>state.invoices.currentItemsList);
+  const itemsList = useSelector(state => state.invoices.currentItemsList);
   const [selectedClientId, setSelectedClientId] = useState(Number(clients[0].id));
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
@@ -80,11 +81,12 @@ function InvoiceCreator() {
   const selectedClient = clients.find(c => c.id === selectedClientId);
   const [itemsSum, setItemsSum] = useState(0);
 
-  const getSum = receivedSum => {
+  useEffect(() => {
+    //Display new total sum everytime the list of item updates
     let newSum = 0;
-    itemsList.forEach(item=>newSum=newSum+(item.hours*item.rate));
-    setItemsSum(newSum+receivedSum);
-  };
+    itemsList.forEach(item => newSum = newSum + (item.hours * item.rate));
+    setItemsSum(newSum);
+  }, [itemsList])
 
   const newInvoiceSubmit = e => {
     e.preventDefault();
@@ -228,7 +230,7 @@ function InvoiceCreator() {
               key={item.id}
             />
           ))}
-          <PageButton type="button" onClick={()=>dispatch(addItemToStore())}>
+          <PageButton type="button" onClick={() => dispatch(addItemToStore())}>
             Add New Item
           </PageButton>
         </ItemsListContainer>

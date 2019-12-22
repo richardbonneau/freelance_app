@@ -11,6 +11,8 @@ export const Container = styled.div`
   input {
     border: none;
     border-bottom: 1px solid #8c8c8c;
+    margin: 8px 0;
+    width: 100%;
   }
   input:focus {
     border-bottom-color: ${props => props.theme.accent};
