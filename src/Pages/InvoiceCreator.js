@@ -7,7 +7,6 @@ import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
-import uniqid from "uniqid"
 
 const TitleContainer = styled.div`
   margin-top: 20px;
@@ -43,12 +42,18 @@ const SenderRecipientContainer = styled.div`
   display: flex;
   margin-top: 20px;
   flex-direction: column;
+  @media(min-width:768px){
+    flex-direction: row;
+  }
 `;
 const BlockInput = styled.input`
   display: block;
 `;
 const SenderContainer = styled.div`
   margin-bottom: 10px;
+  @media(min-width:768px){
+    margin-right: 40px;
+  }
 `;
 const RecipientContainer = styled.div``;
 
