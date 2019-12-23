@@ -10,20 +10,26 @@ const ItemContainer = styled.div`
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
   padding: 14px;
   margin-bottom: 10px;
+  border-radius: 15px;
 
   @media (min-width: 768px) {
     display: flex;
   }
 
   a {
-    background: #f50909;
+    background: ${props => props.theme.red};
     padding: 0;
     width: 100%;
     height: 25px;
     color: white;
   }
+<<<<<<< HEAD
   svg {
     margin: 0 25px;
+=======
+  svg{
+    margin: 0;
+>>>>>>> 0dbdc7d3973b583444bce62c60fe4f7b17e5c75f
   }
   .title-description {
     width: 100%;

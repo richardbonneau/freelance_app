@@ -3,6 +3,9 @@ import styled from "styled-components";
 // Tables
 export const Container = styled.div`
   padding: 25px;
+  a{
+    color:${props=>props.theme.blue};
+  }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -112,6 +115,7 @@ export const FormInputContainer = styled.div`
 export const PageButton = styled.a`
   padding: 4px 10px;
   background: ${props => props.theme.blue};
+  color:white !important;
   display:flex;
   align-items:center;
   justify-content:center;
