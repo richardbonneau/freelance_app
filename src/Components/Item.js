@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { IoIosCloseCircle } from "react-icons/io";
 import { PageButton } from "../utils/globalStyledComponents";
-import { FaTrashAlt } from "react-icons/fa";
 import { newEntry } from "../utils/static";
 import { useDispatch } from "react-redux";
 import { deleteItemFromStore, modifyItemFromStore } from "../_actions";
@@ -22,7 +22,7 @@ const ItemContainer = styled.div`
     height: 25px;
     color: white;
   }
-  svg{
+  svg {
     margin: 0 25px;
   }
   .title-description {
@@ -51,7 +51,7 @@ const ItemContainer = styled.div`
     margin-right: 15px;
   }
   @media (min-width: 768px) {
-    a{
+    a {
       height: 100%;
     }
     .number-inputs-container {
@@ -87,7 +87,6 @@ function Item(props) {
       <div className="number-inputs-container">
         <div className="hours-rate-container">
           <div className="number-inputs-container-first-child">
-            <h4>Hours</h4>
             <input
               type="number"
               className="number-input"
@@ -98,7 +97,6 @@ function Item(props) {
             />
           </div>
           <div>
-            <h4>Rate</h4>
             <input
               type="number"
               className="number-input"
@@ -110,15 +108,13 @@ function Item(props) {
           </div>
         </div>
         <div className="amount-container">
-          <h4>Amount</h4>
           <div className="amount">{itemAmount}</div>
         </div>
       </div>
       <div>
-        <PageButton onClick={e => dispatch(deleteItemFromStore(props.i))}>
-          <FaTrashAlt />
-         
-        </PageButton>
+        <IoIosCloseCircle
+          onClick={e => dispatch(deleteItemFromStore(props.i))}
+        />
       </div>
     </ItemContainer>
   );

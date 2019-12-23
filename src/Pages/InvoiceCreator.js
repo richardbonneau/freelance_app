@@ -3,14 +3,13 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
 const TitleContainer = styled.div`
-  margin-top: 20px;
-
   .title {
     font-size: 18px;
     font-weight: 600;
@@ -20,6 +19,12 @@ const TitleContainer = styled.div`
     width: 25px;
   }
 `;
+const InvoiceContainer = styled.form`
+box-shadow: 0 2px 8px rgba(0,0,0,.2);
+border: 1px solid #dee1e2;
+padding:20px;
+margin-top:20px;
+`
 const NotesInput = styled.textarea`
   height: 80px;
   width: 100%;
@@ -63,8 +68,18 @@ const ItemsListContainer = styled.div`
     padding:0;
     width:100%;
   }
+  .items-header{
+    width: 100%;
+    height: 26px;
+    background: black;
+    color:white;
+    display:flex;
+  }
 `;
-const SumContainer = styled.div`
+const TotalContainer = styled.div`
+.total{
+  text-align:right;
+}
   margin-top: 20px;
 `;
 function InvoiceCreator() {
@@ -84,13 +99,15 @@ function InvoiceCreator() {
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
-  const [itemsSum, setItemsSum] = useState(0);
+  const [itemsSubtotal, setItemsSubtotal] = useState(0);
+  const [itemsTotal, setItemsTotal] = useState(0);
 
   useEffect(() => {
     //Display new total sum everytime the list of item updates
-    let newSum = 0;
-    itemsList.forEach(item => newSum = newSum + (item.hours * item.rate));
-    setItemsSum(newSum);
+    let newTotal = 0;
+    itemsList.forEach(item => newTotal = newTotal + (item.hours * item.rate));
+    setItemsSubtotal(newTotal);
+    setItemsTotal(newTotal);
   }, [itemsList])
 
   const newInvoiceSubmit = e => {
@@ -135,7 +152,7 @@ function InvoiceCreator() {
   return (
     <Container>
       <h2>Invoice Creator</h2>
-      <form>
+      <InvoiceContainer>
         <TitleContainer>
           <input
             type="text"
@@ -157,23 +174,6 @@ function InvoiceCreator() {
             }
           />
         </TitleContainer>
-
-        <DatePickContainer>
-          <div className="first-child">
-            <h4>Invoice Date</h4>
-            <DatePicker
-              selected={invoiceDate}
-              onChange={date => setInvoiceDate(date)}
-            />
-          </div>
-          <div>
-            <h4>Due Date</h4>
-            <DatePicker
-              selected={dueDate}
-              onChange={date => setDueDate(date)}
-            />
-          </div>
-        </DatePickContainer>
 
         <SenderRecipientContainer>
           <SenderContainer>
@@ -227,7 +227,38 @@ function InvoiceCreator() {
           </RecipientContainer>
         </SenderRecipientContainer>
 
+        <DatePickContainer>
+          <div className="first-child">
+            <h4>Invoice Date</h4>
+            <DatePicker
+              selected={invoiceDate}
+              onChange={date => setInvoiceDate(date)}
+            />
+          </div>
+          <div>
+            <h4>Due Date</h4>
+            <DatePicker
+              selected={dueDate}
+              onChange={date => setDueDate(date)}
+            />
+          </div>
+        </DatePickContainer>
+        
         <ItemsListContainer>
+          <div className="items-header">
+                <h4>
+                  Items
+                </h4>
+                <h4>
+                  Hours
+                </h4>
+                <h4>
+                  Rate
+                </h4>
+                <h4>
+                  Amount
+                </h4>
+          </div>
           {itemsList.map((item, i) => (
             <Item
               item={item}
@@ -240,13 +271,13 @@ function InvoiceCreator() {
           </PageButton>
         </ItemsListContainer>
 
-        <SumContainer>
+        <TotalContainer>
           <h5>Subtotal</h5>
-          {itemsSum}
+          <div className="total">{itemsSubtotal}</div>
 
           <h4>Total</h4>
-          {itemsSum}
-        </SumContainer>
+          <div className="total">{itemsTotal}</div>
+        </TotalContainer>
 
         <NotesInput
           value={notesInput}
@@ -255,7 +286,7 @@ function InvoiceCreator() {
         ></NotesInput>
 
         <PageButton onClick={newInvoiceSubmit}>Submit Draft</PageButton>
-      </form>
+      </InvoiceContainer>
     </Container>
   );
 }
