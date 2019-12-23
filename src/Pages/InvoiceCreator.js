@@ -42,6 +42,7 @@ const SenderRecipientContainer = styled.div`
   display: flex;
   margin-top: 20px;
   flex-direction: column;
+
   @media(min-width:768px){
     flex-direction: row;
   }
@@ -62,6 +63,7 @@ const ItemsListContainer = styled.div`
   a{
     padding:0;
     width:100%;
+    
   }
 `;
 const SumContainer = styled.div`
@@ -202,7 +204,7 @@ function InvoiceCreator() {
               value={fromCountry}
               onChange={e => setFromCountry(e.target.value)}
             />
-            <a href="#">Use your profile info</a>
+            <a className="edit-info" href="#">Edit your contact details</a>
           </SenderContainer>
 
           <RecipientContainer>
