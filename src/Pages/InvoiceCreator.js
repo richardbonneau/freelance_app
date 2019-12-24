@@ -219,6 +219,7 @@ function InvoiceCreator() {
               selected={invoiceDate}
               onChange={date => setInvoiceDate(date)}
               withPortal
+              disabledKeyboardNavigation
             />
           </div>
           <div className="subcontainer">
@@ -227,6 +228,7 @@ function InvoiceCreator() {
               selected={dueDate}
               onChange={date => setDueDate(date)}
               withPortal
+              disabledKeyboardNavigation
             />
           </div>
           </div>
