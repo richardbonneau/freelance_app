@@ -73,7 +73,7 @@ const ItemsListContainer = styled.div`
   .items-header{
     width: 100%;
     height: 26px;
-    background: black;
+    background: #191919;
     color:white;
     display:flex;
     justify-content:space-between;
@@ -83,7 +83,7 @@ const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount{
     display:flex;
-    width:200px;
+    width:220px;
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
@@ -290,10 +290,10 @@ function InvoiceCreator() {
 
         <TotalContainer>
           <h5>Subtotal</h5>
-          <div className="total">{itemsSubtotal}</div>
+          <div className="total">{"$"+itemsSubtotal}</div>
 
           <h4>Total</h4>
-          <div className="total">{itemsTotal}</div>
+          <div className="total">{"$"+itemsTotal}</div>
         </TotalContainer>
 
         <NotesInput

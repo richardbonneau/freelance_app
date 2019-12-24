@@ -20,7 +20,7 @@ export const Container = styled.div`
     width: 100%;
   }
   input:focus {
-    border-bottom-color: ${props => props.theme.accent};
+    border-bottom-color: ${props => props.theme.blue};
   }
   input:focus,
   select:focus,

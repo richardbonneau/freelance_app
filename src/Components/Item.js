@@ -9,8 +9,9 @@ import { deleteItemFromStore, modifyItemFromStore } from "../_actions";
 const ItemContainer = styled.div`
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
   padding: 14px;
-  margin-bottom: 10px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
+  border: 1px solid #0000001f;
+  border-top:none;
 
   a {
     background: ${props => props.theme.red};
@@ -20,7 +21,11 @@ const ItemContainer = styled.div`
     color: white;
   }
   svg{
-    margin: 0;
+    margin-top: 5px;
+    color: #6b6b6b;
+    height: 25px;
+    width: 25px;
+    cursor:pointer;
   }
   .title-description {
     width: 100%;
@@ -38,7 +43,7 @@ const ItemContainer = styled.div`
     width: 50px;
   }
   .amount {
-    margin: 0px 25px;
+    margin: 5px 25px;
     text-align: right;
   }
   .hours-rate-container {
@@ -47,7 +52,7 @@ const ItemContainer = styled.div`
   @media (min-width: 768px) {
     display: flex;
     box-shadow: none;
-    padding: 14px 4px;
+    padding: 25px 4px;
     a {
       height: 100%;
     }
@@ -105,7 +110,7 @@ function Item(props) {
           </div>
         </div>
         <div className="amount-container">
-          <div className="amount">{itemAmount}</div>
+          <div className="amount">{"$"+itemAmount}</div>
         </div>
       </div>
       <div>
