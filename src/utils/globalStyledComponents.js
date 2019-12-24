@@ -122,6 +122,7 @@ export const PageButton = styled.a`
   align-items:center;
   justify-content:center;
   width: 100px;
+  cursor:pointer;
   svg{
         margin-right:5px;
     }

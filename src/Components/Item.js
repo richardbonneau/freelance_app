@@ -52,7 +52,7 @@ const ItemContainer = styled.div`
   @media (min-width: 768px) {
     display: flex;
     box-shadow: none;
-    padding: 25px 4px;
+    padding: 25px 10px;
     a {
       height: 100%;
     }
