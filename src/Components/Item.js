@@ -12,10 +12,6 @@ const ItemContainer = styled.div`
   margin-bottom: 10px;
   border-radius: 15px;
 
-  @media (min-width: 768px) {
-    display: flex;
-  }
-
   a {
     background: ${props => props.theme.red};
     padding: 0;
@@ -23,13 +19,8 @@ const ItemContainer = styled.div`
     height: 25px;
     color: white;
   }
-<<<<<<< HEAD
-  svg {
-    margin: 0 25px;
-=======
   svg{
     margin: 0;
->>>>>>> 0dbdc7d3973b583444bce62c60fe4f7b17e5c75f
   }
   .title-description {
     width: 100%;
@@ -47,16 +38,16 @@ const ItemContainer = styled.div`
     width: 50px;
   }
   .amount {
-    margin: 8px 0;
+    margin: 0px 25px;
     text-align: right;
   }
   .hours-rate-container {
     display: flex;
   }
-  .amount-container {
-    margin-right: 15px;
-  }
   @media (min-width: 768px) {
+    display: flex;
+    box-shadow: none;
+    padding: 14px 4px;
     a {
       height: 100%;
     }

@@ -76,7 +76,19 @@ const ItemsListContainer = styled.div`
     background: black;
     color:white;
     display:flex;
+    justify-content:space-between;
   }
+  .items-header > h4{
+    margin-left: 5px;
+  }
+  .header-hours-rate-amount{
+    display:flex;
+    width:200px;
+  }
+  .header-hours-rate-amount > h4 {
+    margin-right: 30px;
+}
+  
 `;
 const TotalContainer = styled.div`
 .total{
@@ -251,6 +263,7 @@ function InvoiceCreator() {
                 <h4>
                   Items
                 </h4>
+                <div className="header-hours-rate-amount">
                 <h4>
                   Hours
                 </h4>
@@ -260,6 +273,8 @@ function InvoiceCreator() {
                 <h4>
                   Amount
                 </h4>
+                </div>
+            
           </div>
           {itemsList.map((item, i) => (
             <Item

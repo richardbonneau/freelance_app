@@ -3,6 +3,8 @@ import styled from "styled-components";
 // Tables
 export const Container = styled.div`
   padding: 25px;
+  width: 100%;
+  max-width: 800px;
   a{
     color:${props=>props.theme.blue};
   }
