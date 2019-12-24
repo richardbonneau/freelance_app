@@ -21,11 +21,17 @@ const ItemContainer = styled.div`
     color: white;
   }
   svg{
-    margin-top: 5px;
-    color: #6b6b6b;
     height: 25px;
     width: 25px;
+    
+  }
+  .delete-btn{
     cursor:pointer;
+    background: #eaeaea;
+    color: ${props=>props.theme.red};
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .title-description {
     width: 100%;
@@ -43,7 +49,7 @@ const ItemContainer = styled.div`
     width: 50px;
   }
   .amount {
-    margin: 5px 25px;
+    margin: 35px 0 0 0;
     text-align: right;
   }
   .hours-rate-container {
@@ -61,6 +67,12 @@ const ItemContainer = styled.div`
     }
     .title-description {
       margin-right: 20px;
+    }
+    .amount{
+      margin: 5px 25px;
+    }
+    h4{
+      display:none;
     }
   }
 `;
@@ -89,6 +101,7 @@ function Item(props) {
       <div className="number-inputs-container">
         <div className="hours-rate-container">
           <div className="number-inputs-container-first-child">
+            <h4>Hours</h4>
             <input
               type="number"
               className="number-input"
@@ -99,6 +112,7 @@ function Item(props) {
             />
           </div>
           <div>
+            <h4>Rate</h4>
             <input
               type="number"
               className="number-input"
@@ -113,9 +127,13 @@ function Item(props) {
           <div className="amount">{"$"+itemAmount}</div>
         </div>
       </div>
-      <div>
+      <div
+      onClick={e => dispatch(deleteItemFromStore(props.i))}
+      className="delete-btn"
+      >
+        Delete
         <IoIosCloseCircle
-          onClick={e => dispatch(deleteItemFromStore(props.i))}
+          
         />
       </div>
     </ItemContainer>

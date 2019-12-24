@@ -83,7 +83,7 @@ const ItemsListContainer = styled.div`
     height: 26px;
     background: #191919;
     color: white;
-    display: flex;
+    display: none;
     justify-content: space-between;
   }
   .items-header > h4 {
@@ -95,6 +95,11 @@ const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
+  }
+  @media(min-width:768px){
+    .items-header {
+      display:flex;
+    }
   }
 `;
 const TotalContainer = styled.div`
