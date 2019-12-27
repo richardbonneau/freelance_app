@@ -32,9 +32,10 @@ export default (
         clientsList: action.clientsList
       }
     case PUSH_NEW_CLIENT:
+      console.log("state.clients",state.clientsList)
       return {
         ...state,
-        clientsList: [...state.clients, action.newClient]
+        clientsList: [...state.clientsList, action.newClient]
       }
     case FIREBASE_FAILURE:
       return {
