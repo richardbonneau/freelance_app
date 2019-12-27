@@ -61,6 +61,9 @@ const ItemContainer = styled.div`
   .hours-rate-container {
     display: flex;
   }
+  .amount-container{
+    min-width:105px;
+  }
   @media (min-width: 768px) {
     display: flex;
     box-shadow: none;
@@ -76,6 +79,7 @@ const ItemContainer = styled.div`
     }
     .amount{
       margin: 5px 25px;
+      text-align: left;
     }
     h4{
       display:none;

@@ -16,7 +16,8 @@ import {
   ModalContents,
   ModalTitle,
   ModalHr,
-  FormInputContainer
+  FormInputContainer,
+  Anchor
 } from "../utils/globalStyledComponents";
 
 const styles = {
@@ -80,9 +81,9 @@ console.log("listOfClients",listOfClients)
   return (
     <Container>
       <h2>Clients</h2>
-      <a href="#" onClick={() => toggleModal(true)}>
+      <Anchor href="#" onClick={() => toggleModal(true)}>
         Add New Client
-      </a>
+      </Anchor>
       {clientsList()}
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={toggleModal}  />
 

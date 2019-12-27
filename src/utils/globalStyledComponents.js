@@ -5,9 +5,6 @@ export const Container = styled.div`
   padding: 25px;
   width: 100%;
   max-width: 800px;
-  a{
-    color:${props=>props.theme.blue};
-  }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -85,6 +82,9 @@ export const ExpandableInvisibleButton = styled.div`
     width: 95vw;
   }
 `;
+export const Anchor = styled.a`
+    color:${props=>props.theme.blue};
+`
 
 // Modal
 
@@ -102,11 +102,11 @@ export const ModalContainer = styled.div`
   position: fixed;
   z-index: 160;
   width: 330px;
-  height: 500px;
+  height: 470px;
   background: #fff;
   left: 50%;
   top: 50%;
-  margin-top: -250px;
+  margin-top: -265px;
   margin-left: -165px;
   transition: 0.5s ease-out;
   visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
@@ -137,9 +137,10 @@ export const FormInputContainer = styled.div`
 `;
 
 export const PageButton = styled.a`
+    background: white;
+    color:${props => props.theme.accent};
   padding: 4px 10px;
-  background: ${props => props.theme.blue};
-  color:white !important;
+
   display:flex;
   align-items:center;
   justify-content:center;
@@ -150,6 +151,7 @@ export const PageButton = styled.a`
         margin-right:5px;
     }
   &&:hover{
-    background: ${props => props.theme.blueHover};
+    background: ${props => props.theme.accent};
+  color:white;
   }
 `;

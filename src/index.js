@@ -13,7 +13,7 @@ const theme = {
     notWhite:"#a9a9a9",
     blue: "#006ca1",
     blueHover:"#009ce8",
-    red:"#cc0805"
+    red:"#940300"
 }
 
 ReactDOM.render(<Provider store={store}>
