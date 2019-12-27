@@ -12,6 +12,7 @@ const theme = {
     accent: "#F26430",
     notWhite:"#a9a9a9",
     blue: "#006ca1",
+    blueHover:"#009ce8",
     red:"#cc0805"
 }
 

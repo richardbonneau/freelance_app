@@ -27,11 +27,17 @@ const ItemContainer = styled.div`
   }
   .delete-btn{
     cursor:pointer;
-    background: #eaeaea;
+    border: 1px solid #c7c7c7ba;
+    padding:5px;
     color: ${props=>props.theme.red};
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 300ms;
+  }
+  .delete-btn:hover{
+    background: #cc0805;
+    color: white;
   }
   .title-description {
     width: 100%;

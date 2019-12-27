@@ -9,29 +9,14 @@ import {
   Table,
   Th,
   THead,
+  PageButton,
   MaskOverlay,
+  ModalContainer,
   ModalContents,
   ModalTitle,
   ModalHr,
   FormInputContainer
 } from "../utils/globalStyledComponents";
-
-const ModalContainer = styled.div`
-  position: fixed;
-  z-index: 160;
-  width: 330px;
-  height: 500px;
-  background: #bdc3c7;
-  left: 50%;
-  top: 50%;
-  margin-top: -250px;
-  margin-left: -165px;
-  transition: 0.5s ease-out;
-  visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
-  transform: ${({ isModalOpened }) =>
-    isModalOpened ? "translateY(0)" : "translateY(45px)"};
-  opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
-`;
 
 const styles = {
   fiX: {
@@ -106,9 +91,9 @@ function Clients() {
 
     return (
       <ModalContents active={isModalOpened}>
-        <ModalTitle>Create a New Client</ModalTitle>
+        <ModalTitle>New Client</ModalTitle>
         <ModalHr />
-        <form onSubmit={newClientSubmit}>
+        <form >
           <h4>Identification</h4>
           <input
             type="text"
@@ -153,8 +138,9 @@ function Clients() {
             value={zipInput}
             onChange={e => setZipInput(e.target.value)}
           />
-          <input type="submit" />
-          <button onClick={() => toggleModal(false)}>Cancel</button>
+          <div className="modal-buttons">  <PageButton onClick={newClientSubmit}>Create Client</PageButton>
+          <PageButton onClick={() => toggleModal(false)}>Cancel</PageButton></div>
+        
         </form>
       </ModalContents>
     );

@@ -98,7 +98,29 @@ export const MaskOverlay = styled.div`
   left: 0;
   visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
 `;
-
+export const ModalContainer = styled.div`
+  position: fixed;
+  z-index: 160;
+  width: 330px;
+  height: 500px;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  margin-top: -250px;
+  margin-left: -165px;
+  transition: 0.5s ease-out;
+  visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
+  transform: ${({ isModalOpened }) =>
+    isModalOpened ? "translateY(0)" : "translateY(45px)"};
+  opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
+  @media(min-width:1024px){
+    margin-left: -55px;
+  }
+  .modal-buttons{
+    display:flex;
+    justify-content:space-between;
+  }
+`;
 export const ModalContents = styled.div`
   padding: 20px;
 `;
@@ -122,8 +144,12 @@ export const PageButton = styled.a`
   align-items:center;
   justify-content:center;
   width: 100px;
+  transition: background-color 300ms ease-in-out;
   cursor:pointer;
   svg{
         margin-right:5px;
     }
+  &&:hover{
+    background: ${props => props.theme.blueHover};
+  }
 `;
