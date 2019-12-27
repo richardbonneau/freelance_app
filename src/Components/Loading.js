@@ -24,8 +24,8 @@ const DualRingSpinner = styled.div`
     height: 46px;
     margin: 1px;
     border-radius: 50%;
-    border: 5px solid ${p => p.color};
-    border-color: ${p => p.color} transparent ${p => p.color} transparent;
+    border: 5px solid ${p => p.theme.accent};
+    border-color: ${p => p.theme.accent} transparent ${p => p.theme.accent} transparent;
     animation: ${p => motion(p)} 1.2s linear infinite;
   }
 `

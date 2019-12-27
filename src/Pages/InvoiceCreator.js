@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
+import AddClientPopup from "../Components/AddClientPopup";
 import "react-datepicker/dist/react-datepicker.css";
 import { addInvoiceToFirestore, addItemToStore } from "../_actions";
-import { Container, PageButton,Anchor } from "../utils/globalStyledComponents";
+import { Container, PageButton, Anchor } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
@@ -21,6 +22,14 @@ const InvoiceContainer = styled.form`
   border: 1px solid #dee1e2;
   padding: 20px;
   margin-top: 20px;
+  .submit-btn{
+    margin-top: 15px;
+    background: ${props=>props.theme.blue};
+    color:white;
+  }
+  .submit-btn:hover{
+    background: ${props=>props.theme.blueHover};
+  }
   .invoice-number {
     width: 27px;
   }
@@ -123,6 +132,7 @@ const ItemsListContainer = styled.div`
   }
   .add-item-btn:hover{
     background:#c3c3c3;
+    color:black;
   }
   @media (min-width: 768px) {
     .items-header {
@@ -162,7 +172,8 @@ function InvoiceCreator() {
   const selectedClient = clients.find(c => c.id === selectedClientId);
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
-
+  const [isModalOpened, setModal] = useState(false);
+  console.log("isModalOpened",isModalOpened)
   useEffect(() => {
     //Display new total sum everytime the list of item updates
     let newTotal = 0;
@@ -285,13 +296,13 @@ function InvoiceCreator() {
                   </option>
                 ))}
               </select>
-              <div>{selectedClient.name}</div>
               <div>{selectedClient.street}</div>
               <div>
                 {selectedClient.city} {selectedClient.province}{" "}
                 {selectedClient.zip}
               </div>
               <div>selectedClient.country</div>
+              <Anchor href="#" onClick={()=>setModal(true)}>Add New Client</Anchor>
             </RecipientContainer>
           </SenderRecipientContainer>
           <DatePickContainer>
@@ -354,8 +365,9 @@ function InvoiceCreator() {
           onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
 
-        <PageButton onClick={newInvoiceSubmit}>Submit Draft</PageButton>
+        <PageButton className="submit-btn" onClick={newInvoiceSubmit}>Submit Draft</PageButton>
       </InvoiceContainer>
+      <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
     </Container>
   );
 }

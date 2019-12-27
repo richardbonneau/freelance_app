@@ -104,6 +104,7 @@ function Item(props) {
         type="text"
         className="title-description"
         name="name"
+        maxLength={38}
         placeholder="Title and description"
         onChange={handleItemChange}
         value={itemInputs.name}
