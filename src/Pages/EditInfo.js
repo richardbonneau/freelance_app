@@ -19,19 +19,18 @@ function EditInfo(props) {
         const sendNewUserInfoToFirestore = e => {
           // the "frontend" must build the Object that is sent to redux/firebase
           e.preventDefault();
-        //   dispatch(
-        //     editUserInfoInFirestore({
-        //       name: nameInput,
-        //       email: emailInput,
-        //       companyName: companyInput,
-        //       addressOne: addressOneInput,
-        //       addressTwo: addressTwoInput,
-        //       city: cityInput,
-        //       province: provinceInput,
-        //       zip: zipInput
-        //     })
-        //   );
-          props.toggleModal(false);
+          dispatch(
+            editUserInfoInFirestore({
+              name: nameInput,
+              email: emailInput,
+              companyName: companyInput,
+              addressOne: addressOneInput,
+              addressTwo: addressTwoInput,
+              city: cityInput,
+              province: provinceInput,
+              zip: zipInput
+            })
+          );
           setNameInput("");
           setEmailInput("");
           setCompanyInput("");

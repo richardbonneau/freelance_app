@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import AddClientPopup from "../Components/AddClientPopup";
@@ -170,6 +170,7 @@ function InvoiceCreator() {
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
   const itemsList = useSelector(state => state.invoices.currentItemsList);
+  const userInfo = useSelector(state=>state.user.userInfo);
   const [selectedClientId, setSelectedClientId] = useState(
     Number(clients[0].id)
   );
@@ -255,39 +256,17 @@ function InvoiceCreator() {
           <SenderRecipientContainer>
             <SenderContainer>
               <h4>From</h4>
-              <BlockInput
-                type="text"
-                placeholder="Name"
-                value={fromName}
-                onChange={e => setFromName(e.target.value)}
-              />
-              <BlockInput
-                type="text"
-                placeholder="Address Line 1"
-                value={fromAddressOne}
-                onChange={e => setFromAddressOne(e.target.value)}
-              />
-              <BlockInput
-                type="text"
-                placeholder="Address Line 2"
-                value={fromAddressTwo}
-                onChange={e => setFromAddressTwo(e.target.value)}
-              />
-              <BlockInput
-                type="text"
-                placeholder="City, Province, ZIP"
-                value={fromCity}
-                onChange={e => setFromCity(e.target.value)}
-              />
-              <BlockInput
-                type="text"
-                placeholder="Country"
-                value={fromCountry}
-                onChange={e => setFromCountry(e.target.value)}
-              />
-              <Anchor className="edit-info" href="#">
+            <div>{userInfo.name}</div>
+            <div>{userInfo.addressOne}</div>    
+            <div>{userInfo.addressTwo}</div> 
+            <div>{userInfo.country}</div>  
+            <div>{userInfo.province}</div> 
+            <div>{userInfo.city}</div>  
+            <div>{userInfo.zip}</div>    
+           
+              <Link className="edit-info" to="/editInfo">
                 Edit your contact details
-              </Anchor>
+              </Link>
             </SenderContainer>
 
             <RecipientContainer>
@@ -304,11 +283,12 @@ function InvoiceCreator() {
               </select>
               <div>{selectedClient.addressOne}</div>
               <div>{selectedClient.addressTwo}</div>
+              <div>{selectedClient.country}</div>
               <div>
-                {selectedClient.city} {selectedClient.province}{" "}
-                {selectedClient.zip}
+                {selectedClient.city}</div><div> {selectedClient.province}</div>
+                <div>{selectedClient.zip}
               </div>
-              <div>selectedClient.country</div>
+             
               <Anchor href="#" onClick={() => setModal(true)}>Add New Client</Anchor>
             </RecipientContainer>
           </SenderRecipientContainer>

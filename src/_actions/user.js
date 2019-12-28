@@ -29,20 +29,19 @@ export const requestInitialUserInfo = (userInfo) => dispatch => {
     dispatch(getInitialUserInfoFromFirebase(userInfo))
 };
 
-// export const addClientToFirestore = (newClient) => dispatch => {
-//     console.log()
-//     let uid = store.getState().auth.user.uid;
-//     db.collection("users").doc(uid).update({
-//         clients: firestore.FieldValue.arrayUnion(newClient)
-//       }).then(function (doc) {
-//         console.log("New client pushed. Now pushing to redux store.")
-//         dispatch(pushNewClient(newClient));
-//       }).catch(function (error) {
-//           dispatch(firestoreError());
-//         console.log("Error getting document:", error);
-//       });
-    
-// };
+export const editUserInfoInFirestore = (newUserInfo) => dispatch => {
+    console.log()
+    let uid = store.getState().auth.user.uid;
+    db.collection("users").doc(uid).update({
+        userInfo: newUserInfo
+      }).then(function (doc) {
+        console.log("New client pushed. Now pushing to redux store.")
+        dispatch(editUserInfo(newUserInfo));
+      }).catch(function (error) {
+          dispatch(firestoreError());
+        console.log("Error getting document:", error);
+      });
+};
 export const firestoreError = () => dispatch => {
     dispatch(requestError());
 };

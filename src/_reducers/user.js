@@ -16,12 +16,11 @@ import {
           ...state,
           userInfo: action.userInfo
         }
-    //   case PUSH_NEW_CLIENT:
-    //     console.log("state.clients",state.clientsList)
-    //     return {
-    //       ...state,
-    //       clientsList: [...state.clientsList, action.newClient]
-    //     }
+      case EDIT_USER_INFO:
+        return {
+          ...state,
+          userInfo: action.userInfo
+        }
       case FIREBASE_FAILURE:
         return {
           ...state,
