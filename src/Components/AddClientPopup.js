@@ -17,12 +17,8 @@ function AddClientPopup(props) {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [companyInput, setCompanyInput] = useState("");
-<<<<<<< Updated upstream
   const [addressOneInput, setAddressOneInput] = useState("");
   const [addressTwoInput, setAddressTwoInput] = useState("");
-=======
-  const [addressInput, setAddressInput] = useState("");
->>>>>>> Stashed changes
   const [cityInput, setCityInput] = useState("");
   const [provinceInput, setProvinceInput] = useState("");
   const [zipInput, setZipInput] = useState("");

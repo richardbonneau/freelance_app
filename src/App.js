@@ -8,6 +8,7 @@ import Invoices from "./Pages/Invoices";
 import SideBar from "./Components/SideBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import InvoiceDetails from "./Pages/InvoiceDetails";
+import EditInfo from "./Pages/EditInfo";
 import InvoiceCreator from "./Pages/InvoiceCreator";
 
 function App() {
@@ -63,6 +64,14 @@ function App() {
         exact
         path="/invoiceCreator"
         component={InvoiceCreator}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+<ProtectedRoute
+        exact
+        path="/editInfo"
+        component={EditInfo}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

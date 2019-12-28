@@ -133,7 +133,8 @@ const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount {
     display: flex;
-    width: 295px;
+    width: 307px;
+    
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;

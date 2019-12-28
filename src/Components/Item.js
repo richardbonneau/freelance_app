@@ -58,6 +58,7 @@ const ItemContainer = styled.div`
   .amount {
     margin: 35px 0 0 0;
     text-align: right;
+    word-break: break-all;
   }
   .hours-rate-container {
     display: flex;

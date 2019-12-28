@@ -9,13 +9,8 @@ export const initialUserDocument = {
       id: 1,
       email: "example@freelancify.io",
       companyName: "Freelancify",
-<<<<<<< Updated upstream
       addressOne: "123 Code Street",
       addressTwo:"apt 1",
-=======
-      street: "123 Code Street",
-      streetTwo:"apt1",
->>>>>>> Stashed changes
       city: "Montréal",
       province:"Québec",
       zip: "h2w1w2"

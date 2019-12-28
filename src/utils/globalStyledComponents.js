@@ -5,6 +5,8 @@ export const Container = styled.div`
   padding: 25px;
   width: 100%;
   max-width: 800px;
+  min-height: 100vh;
+  background: white;
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;

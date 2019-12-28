@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaIndent, FaUserAlt, FaMoneyCheckAlt, FaBars } from "react-icons/fa";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { firebaseLogout, toggleHamburgerMenu } from "../_actions";
 
@@ -60,6 +61,9 @@ const UserAvatarContainer = styled.div`
     display: flex;
     align-items: center;
   }
+  .avatar-and-username:hover {
+    color: ${props => props.theme.accent};
+  }
   .avatar {
     margin-right: 10px;
     background: url("/images/default-user-icon.jpg");
@@ -73,13 +77,17 @@ const UserAvatarContainer = styled.div`
     visibility: ${({ avatarPopupToggle }) =>
       avatarPopupToggle ? "visible" : "hidden"};
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
-    top:-36px;
+    top: -52px;
     left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
     background: ${props => props.theme.accent};
     transition: all 300ms ease-out 10ms;
     position: absolute;
     width: 100%;
     text-align: center;
+  }
+  .popup > div:hover {
+    background: white;
+    color: ${props => props.theme.accent};
   }
 `;
 const Mask = styled.div`
@@ -106,10 +114,16 @@ const LinkContainer = styled.div`
     vertical-align: -4px;
   }
   a {
-    color: ${({ isCurrentPage }) => (isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite)};
+    color: ${({ isCurrentPage }) =>
+      isCurrentPage
+        ? props => props.theme.accent
+        : props => props.theme.notWhite};
   }
   svg {
-    color: ${({ isCurrentPage }) => (isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite)};
+    color: ${({ isCurrentPage }) =>
+      isCurrentPage
+        ? props => props.theme.accent
+        : props => props.theme.notWhite};
   }
   div {
     display: inline-block;
@@ -127,6 +141,7 @@ const LinkContainer = styled.div`
 
 function SideBar() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const hamburgerMenuOpened = useSelector(
     state => state.navigation.hamburgerMenuOpened
   );
@@ -136,6 +151,10 @@ function SideBar() {
     e.preventDefault();
     dispatch(firebaseLogout());
   };
+  const editInfo = e => {
+    e.preventDefault();
+    history.push(`/editInfo`);
+  }
   const closeHamburgerMenu = () => {
     dispatch(toggleHamburgerMenu());
   };
@@ -196,6 +215,7 @@ function SideBar() {
             <div className="username">USERNAME</div>
           </div>
           <div className="popup">
+            <div onClick={editInfo}>Edit Info</div>
             <div onClick={logoutUser}>Sign out</div>
           </div>
         </UserAvatarContainer>
