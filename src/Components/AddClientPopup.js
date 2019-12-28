@@ -17,7 +17,8 @@ function AddClientPopup(props) {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [companyInput, setCompanyInput] = useState("");
-  const [streetInput, setStreetInput] = useState("");
+  const [addressOneInput, setAddressOneInput] = useState("");
+  const [addressTwoInput, setAddressTwoInput] = useState("");
   const [cityInput, setCityInput] = useState("");
   const [provinceInput, setProvinceInput] = useState("");
   const [zipInput, setZipInput] = useState("");
@@ -33,7 +34,8 @@ function AddClientPopup(props) {
           id: newClientId,
           email: emailInput,
           companyName: companyInput,
-          street: streetInput,
+          addressOne: addressOneInput,
+          addressTwo: addressTwoInput,
           city: cityInput,
           province: provinceInput,
           zip: zipInput
@@ -43,7 +45,8 @@ function AddClientPopup(props) {
       setNameInput("");
       setEmailInput("");
       setCompanyInput("");
-      setStreetInput("");
+      setAddressOneInput("");
+      setAddressTwoInput("");
       setCityInput("");
       setProvinceInput("");
       setZipInput("");
@@ -76,9 +79,15 @@ function AddClientPopup(props) {
           <h4>Residency (required for Invoicing)</h4>{" "}
           <input
             type="text"
-            placeholder="Street"
-            value={streetInput}
-            onChange={e => setStreetInput(e.target.value)}
+            placeholder="Address Line 1"
+            value={addressOneInput}
+            onChange={e => setAddressOneInput(e.target.value)}
+          />{" "}
+          <input
+            type="text"
+            placeholder="Address Line 2"
+            value={addressTwoInput}
+            onChange={e => setAddressTwoInput(e.target.value)}
           />{" "}
           <input
             type="text"

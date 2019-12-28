@@ -9,7 +9,8 @@ export const initialUserDocument = {
       id: 1,
       email: "example@freelancify.io",
       companyName: "Freelancify",
-      street: "123 Code Street",
+      addressOne: "123 Code Street",
+      addressTwo:"apt 1",
       city: "Montréal",
       province:"Québec",
       zip: "h2w1w2"

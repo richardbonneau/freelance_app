@@ -11,10 +11,22 @@ import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
 const TitleContainer = styled.div`
+ display:block;
   .title {
     font-size: 18px;
     font-weight: 600;
     margin-right: 10px;
+  }
+  .invoice-number-container{
+    display:flex;
+  }
+  .invoice-number {
+    width: 90px !important;
+    margin-left:0!important;
+  }
+  @media(min-width:768px){
+    display:flex;
+    
   }
 `;
 const InvoiceContainer = styled.form`
@@ -24,15 +36,13 @@ const InvoiceContainer = styled.form`
   margin-top: 20px;
   .submit-btn{
     margin-top: 15px;
-    background: ${props=>props.theme.blue};
+    background: ${props => props.theme.blue};
     color:white;
   }
   .submit-btn:hover{
-    background: ${props=>props.theme.blueHover};
+    background: ${props => props.theme.blueHover};
   }
-  .invoice-number {
-    width: 27px;
-  }
+
   .first-row{
     justify-content: space-between;
     display: flex;
@@ -40,9 +50,25 @@ const InvoiceContainer = styled.form`
     
     flex-direction: column;
   }
+  .subcontainer h4 {
+    text-align: left;
+    width: 100%;
+    margin: 8px 0;
+  }
+  .subcontainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .subcontainer input {
+    width: 78px;
+    margin-left: 10px;
+  }
   @media(min-width:768px){
     .first-row{
       flex-direction: row;
+    }
+    .subcontainer h4 {
+      text-align: right;
     }
    
   }
@@ -62,23 +88,9 @@ const DatePickContainer = styled.div`
   .invoice-number {
     width: 40px;
   }
-  .subcontainer h4 {
-    text-align: left;
-    width: 100%;
-    margin: 8px 0;
-  }
-  .subcontainer {
-    display: flex;
-    justify-content: space-between;
-  }
-  .subcontainer input {
-    width: 78px;
-    margin-left: 10px;
-  }
+
   @media(min-width:768px){
-    .subcontainer h4 {
-      text-align: right;
-    }
+
   }
 `;
 const SenderRecipientContainer = styled.div`
@@ -121,7 +133,7 @@ const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount {
     display: flex;
-    width: 315px;
+    width: 295px;
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
@@ -166,14 +178,15 @@ function InvoiceCreator() {
   const [dueDate, setDueDate] = useState(new Date());
   const [notesInput, setNotesInput] = useState("");
   const [fromName, setFromName] = useState("");
-  const [fromAddress, setFromAddress] = useState("");
+  const [fromAddressOne, setFromAddressOne] = useState("");
+  const [fromAddressTwo, setFromAddressTwo] = useState("");
   const [fromCity, setFromCity] = useState("");
   const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
   const [isModalOpened, setModal] = useState(false);
-  console.log("isModalOpened",isModalOpened)
+  console.log("isModalOpened", isModalOpened)
   useEffect(() => {
     //Display new total sum everytime the list of item updates
     let newTotal = 0;
@@ -184,19 +197,6 @@ function InvoiceCreator() {
 
   const newInvoiceSubmit = e => {
     e.preventDefault();
-    console.log("new", {
-      title: titleInput,
-      invoiceNumber: invoiceNumberInput,
-      invoiceDate,
-      dueDate,
-      clientId: selectedClientId,
-      fromName,
-      fromAddress,
-      fromCity,
-      fromCountry,
-      items: itemsList,
-      notes: notesInput
-    });
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
     dispatch(
       addInvoiceToFirestore(
@@ -208,7 +208,8 @@ function InvoiceCreator() {
           dueDate,
           clientId: selectedClientId,
           fromName,
-          fromAddress,
+          fromAddressOne,
+          fromAddressTwo,
           fromCity,
           fromCountry,
           items: itemsList,
@@ -225,33 +226,31 @@ function InvoiceCreator() {
     <Container>
       <h2>Invoice Creator</h2>
       <InvoiceContainer>
-      <TitleContainer>
+        <TitleContainer>
+          <input
+            type="text"
+            className="title"
+            placeholder="Invoice Title"
+            value={titleInput}
+            onChange={e => setTitleInput(e.target.value)}
+          />
+          <div className="subcontainer ">
+            {" "}
             <input
               type="text"
-              className="title"
-              placeholder="Invoice Title"
-              value={titleInput}
-              onChange={e => setTitleInput(e.target.value)}
+              className="invoice-number"
+              placeholder="Invoice Number"
+              value={invoiceNumberInput}
+              maxLength={7}
+              onChange={e => e.target.value.startsWith("#") ? setInvoiceNumberInput(e.target.value) : setInvoiceNumberInput("#"+e.target.value)
+                  
+              }
             />
-
-          </TitleContainer>
+          </div>
+        </TitleContainer>
         <div className="first-row">
- 
-          <div>
-              {" "}
-              <h4>Invoice Number</h4>
-              <input
-                type="number"
-                className="invoice-number"
-                placeholder="#"
-                value={invoiceNumberInput}
-                onChange={e =>
-                  e.target.value.length < 4
-                    ? setInvoiceNumberInput(e.target.value)
-                    : false
-                }
-              />
-            </div>
+
+
           <SenderRecipientContainer>
             <SenderContainer>
               <h4>From</h4>
@@ -263,9 +262,15 @@ function InvoiceCreator() {
               />
               <BlockInput
                 type="text"
-                placeholder="Full Address"
-                value={fromAddress}
-                onChange={e => setFromAddress(e.target.value)}
+                placeholder="Address Line 1"
+                value={fromAddressOne}
+                onChange={e => setFromAddressOne(e.target.value)}
+              />
+              <BlockInput
+                type="text"
+                placeholder="Address Line 2"
+                value={fromAddressTwo}
+                onChange={e => setFromAddressTwo(e.target.value)}
               />
               <BlockInput
                 type="text"
@@ -296,13 +301,14 @@ function InvoiceCreator() {
                   </option>
                 ))}
               </select>
-              <div>{selectedClient.street}</div>
+              <div>{selectedClient.addressOne}</div>
+              <div>{selectedClient.addressTwo}</div>
               <div>
                 {selectedClient.city} {selectedClient.province}{" "}
                 {selectedClient.zip}
               </div>
               <div>selectedClient.country</div>
-              <Anchor href="#" onClick={()=>setModal(true)}>Add New Client</Anchor>
+              <Anchor href="#" onClick={() => setModal(true)}>Add New Client</Anchor>
             </RecipientContainer>
           </SenderRecipientContainer>
           <DatePickContainer>
@@ -347,13 +353,13 @@ function InvoiceCreator() {
         </ItemsListContainer>
 
         <TotalContainer>
-          <div className="subcontainer">
+          <div>
             {" "}
             <h5>Subtotal</h5>
             <div className="total">{"$" + itemsSubtotal}</div>
           </div>
 
-          <div className="subcontainer">
+          <div>
             <h4>Total</h4>
             <div className="total">{"$" + itemsTotal}</div>
           </div>

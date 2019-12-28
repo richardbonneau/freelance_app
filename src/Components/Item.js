@@ -21,15 +21,16 @@ const ItemContainer = styled.div`
     color: white;
   }
   svg{
-    height: 25px;
-    width: 25px;
-    
+    height: 15px;
+    margin-left: 5px;
+    width: 15px;
   }
   .delete-btn{
     cursor:pointer;
-    border: 1px solid #c7c7c7ba;
+    border: 1px solid #f2f2f2ba;
+    font-size: 12px;
     padding:5px;
-    color: ${props=>props.theme.red};
+    color: ${props => props.theme.red};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,7 +68,7 @@ const ItemContainer = styled.div`
   @media (min-width: 768px) {
     display: flex;
     box-shadow: none;
-    padding: 25px 10px;
+    padding:10px;
     a {
       height: 100%;
     }
@@ -78,7 +79,7 @@ const ItemContainer = styled.div`
       margin-right: 20px;
     }
     .amount{
-      margin: 5px 25px;
+      margin: 5px 18px;
       text-align: left;
     }
     h4{
@@ -90,8 +91,8 @@ const ItemContainer = styled.div`
 function Item(props) {
   const dispatch = useDispatch();
   const [itemInputs, setItemInputs] = useState(props.item);
-  const handleItemChange = e =>
-    setItemInputs({ ...itemInputs, [e.target.name]: e.target.value });
+  const handleItemChange = e => e.target.value.length < 6 ? setItemInputs({ ...itemInputs, [e.target.name]: e.target.value }) : false
+
   let itemAmount = itemInputs.hours * itemInputs.rate;
 
   useEffect(() => {
@@ -135,16 +136,16 @@ function Item(props) {
           </div>
         </div>
         <div className="amount-container">
-          <div className="amount">{"$"+itemAmount}</div>
+          <div className="amount">{"$" + itemAmount}</div>
         </div>
       </div>
       <div
-      onClick={e => dispatch(deleteItemFromStore(props.i))}
-      className="delete-btn"
+        onClick={e => dispatch(deleteItemFromStore(props.i))}
+        className="delete-btn"
       >
         Delete
         <IoIosCloseCircle
-          
+
         />
       </div>
     </ItemContainer>
