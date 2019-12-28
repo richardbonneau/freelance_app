@@ -11,22 +11,21 @@ import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 
 const TitleContainer = styled.div`
- display:block;
+  display: block;
   .title {
     font-size: 18px;
     font-weight: 600;
     margin-right: 10px;
   }
-  .invoice-number-container{
-    display:flex;
+  .invoice-number-container {
+    display: flex;
   }
   .invoice-number {
     width: 90px !important;
-    margin-left:0!important;
+    margin-left: 0 !important;
   }
-  @media(min-width:768px){
-    display:flex;
-    
+  @media (min-width: 768px) {
+    display: flex;
   }
 `;
 const InvoiceContainer = styled.form`
@@ -34,20 +33,20 @@ const InvoiceContainer = styled.form`
   border: 1px solid #dee1e2;
   padding: 20px;
   margin-top: 20px;
-  .submit-btn{
+  .submit-btn {
     margin-top: 15px;
     background: ${props => props.theme.blue};
-    color:white;
+    color: white;
   }
-  .submit-btn:hover{
+  .submit-btn:hover {
     background: ${props => props.theme.blueHover};
   }
 
-  .first-row{
+  .first-row {
     justify-content: space-between;
     display: flex;
-    align-items:baseline;
-    
+    align-items: baseline;
+
     flex-direction: column;
   }
   .subcontainer h4 {
@@ -63,14 +62,13 @@ const InvoiceContainer = styled.form`
     width: 78px;
     margin-left: 10px;
   }
-  @media(min-width:768px){
-    .first-row{
+  @media (min-width: 768px) {
+    .first-row {
       flex-direction: row;
     }
     .subcontainer h4 {
       text-align: right;
     }
-   
   }
 `;
 const NotesInput = styled.textarea`
@@ -89,8 +87,7 @@ const DatePickContainer = styled.div`
     width: 40px;
   }
 
-  @media(min-width:768px){
-
+  @media (min-width: 768px) {
   }
 `;
 const SenderRecipientContainer = styled.div`
@@ -134,18 +131,17 @@ const ItemsListContainer = styled.div`
   .header-hours-rate-amount {
     display: flex;
     width: 307px;
-    
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
   }
-  .add-item-btn{
+  .add-item-btn {
     background: #e8e8e8;
-    color:black;
+    color: black;
   }
-  .add-item-btn:hover{
-    background:#c3c3c3;
-    color:black;
+  .add-item-btn:hover {
+    background: #c3c3c3;
+    color: black;
   }
   @media (min-width: 768px) {
     .items-header {
@@ -170,7 +166,7 @@ function InvoiceCreator() {
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
   const itemsList = useSelector(state => state.invoices.currentItemsList);
-  const userInfo = useSelector(state=>state.user.userInfo);
+  const userInfo = useSelector(state => state.user.userInfo);
   const [selectedClientId, setSelectedClientId] = useState(
     Number(clients[0].id)
   );
@@ -188,7 +184,7 @@ function InvoiceCreator() {
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
   const [isModalOpened, setModal] = useState(false);
-  console.log("isModalOpened", isModalOpened)
+  console.log("isModalOpened", isModalOpened);
   useEffect(() => {
     //Display new total sum everytime the list of item updates
     let newTotal = 0;
@@ -244,26 +240,26 @@ function InvoiceCreator() {
               placeholder="Invoice Number"
               value={invoiceNumberInput}
               maxLength={7}
-              onChange={e => e.target.value.startsWith("#") ? setInvoiceNumberInput(e.target.value) : setInvoiceNumberInput("#"+e.target.value)
-                  
+              onChange={e =>
+                e.target.value.startsWith("#")
+                  ? setInvoiceNumberInput(e.target.value)
+                  : setInvoiceNumberInput("#" + e.target.value)
               }
             />
           </div>
         </TitleContainer>
         <div className="first-row">
-
-
           <SenderRecipientContainer>
             <SenderContainer>
               <h4>From</h4>
-            <div>{userInfo.name}</div>
-            <div>{userInfo.addressOne}</div>    
-            <div>{userInfo.addressTwo}</div> 
-            <div>{userInfo.country}</div>  
-            <div>{userInfo.province}</div> 
-            <div>{userInfo.city}</div>  
-            <div>{userInfo.zip}</div>    
-           
+              <div>{userInfo.name}</div>
+              <div>{userInfo.addressOne}</div>
+              <div>{userInfo.addressTwo}</div>
+              <div>{userInfo.country}</div>
+              <div>{userInfo.province}</div>
+              <div>{userInfo.city}</div>
+              <div>{userInfo.zip}</div>
+
               <Link className="edit-info" to="/editInfo">
                 Edit your contact details
               </Link>
@@ -284,12 +280,13 @@ function InvoiceCreator() {
               <div>{selectedClient.addressOne}</div>
               <div>{selectedClient.addressTwo}</div>
               <div>{selectedClient.country}</div>
-              <div>
-                {selectedClient.city}</div><div> {selectedClient.province}</div>
-                <div>{selectedClient.zip}
-              </div>
-             
-              <Anchor href="#" onClick={() => setModal(true)}>Add New Client</Anchor>
+              <div>{selectedClient.city}</div>
+              <div> {selectedClient.province}</div>
+              <div>{selectedClient.zip}</div>
+
+              <Anchor href="#" onClick={() => setModal(true)}>
+                Add New Client
+              </Anchor>
             </RecipientContainer>
           </SenderRecipientContainer>
           <DatePickContainer>
@@ -328,7 +325,11 @@ function InvoiceCreator() {
           {itemsList.map((item, i) => (
             <Item item={item} i={i} key={item.id} />
           ))}
-          <PageButton className="add-item-btn" type="button" onClick={() => dispatch(addItemToStore())}>
+          <PageButton
+            className="add-item-btn"
+            type="button"
+            onClick={() => dispatch(addItemToStore())}
+          >
             Add New Item
           </PageButton>
         </ItemsListContainer>
@@ -352,7 +353,9 @@ function InvoiceCreator() {
           onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
 
-        <PageButton className="submit-btn" onClick={newInvoiceSubmit}>Submit Draft</PageButton>
+        <PageButton className="submit-btn" onClick={newInvoiceSubmit}>
+          Submit Draft
+        </PageButton>
       </InvoiceContainer>
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
     </Container>

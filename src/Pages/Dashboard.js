@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const Container = styled.div`
-    padding-left: 25px;
-`
+import {Container} from "../utils/globalStyledComponents"
 
 function Dashboard() {
   return (
       <Container>
           <h2>Dashboard</h2>
-        
+    
       </Container>
       
   );
