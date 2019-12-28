@@ -10,21 +10,29 @@ export const initialUserDocument = {
       email: "example@freelancify.io",
       companyName: "Freelancify",
       addressOne: "123 Code Street",
-      addressTwo:"apt 1",
+      addressTwo: "apt 1",
       city: "Montréal",
-      province:"Québec",
+      province: "Québec",
       zip: "h2w1w2"
-
     }
   ],
   invoices: [
     {
       title: "Example Invoice",
       invoiceNumber: 1,
-      id:1,
+      id: 1,
       projectId: "new project",
       clientId: 1,
       columns: [{ name: "Front-End Development", hours: 5, rate: 40 }]
     }
-  ]
+  ],
+  userInfo: {
+    name: "",
+    addressOne: "",
+    addressTwo: "",
+    city: "",
+    province: "",
+    country: "",
+    zip: ""
+  }
 };

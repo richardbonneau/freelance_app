@@ -25,7 +25,7 @@ export const Container = styled.div`
   select:focus,
   textarea:focus,
   button:focus {
-    outline: none;
+  outline: none;
   }
 `;
 export const Table = styled.table`
@@ -35,10 +35,10 @@ export const Table = styled.table`
   border-spacing: 0 20px;
 
   @media (min-width: 1024px) {
-    margin: 0;
-    padding: 0;
-    table-layout: fixed;
-    max-width: 900px;
+  margin: 0;
+  padding: 0;
+  table-layout: fixed;
+  max-width: 900px;
   }
 `;
 export const Tr = styled.tr`
@@ -46,7 +46,7 @@ export const Tr = styled.tr`
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
   transition: box-shadow 150ms;
   &:hover {
-    box-shadow: 0 0 5px 2px rgb(221, 221, 221);
+  box-shadow: 0 0 5px 2px rgb(221, 221, 221);
   }
 `;
 export const THead = styled.thead`

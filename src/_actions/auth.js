@@ -3,6 +3,7 @@ import { initialUserDocument } from "../utils/static.js";
 import {
   requestInitialClientsList,
   requestInitialInvoicesList,
+  requestInitialUserInfo,
   firestoreSuccess
 } from "./index";
 
@@ -99,6 +100,7 @@ export const firebaseSignup = (email, password) => dispatch => {
     });
 };
 const addNewUserToDatabase = (user, dispatch) => {
+  console.log('initialUserDocument',initialUserDocument)
   dispatch(accessingDatabase());
   db.collection("users")
     .doc(user.user.uid)
@@ -133,8 +135,10 @@ const getUserDataAndLogin = user => dispatch => {
     .get()
     .then(function(doc) {
       if (doc.exists) {
+        console.log("doc.data()",doc.data())
         dispatch(requestInitialClientsList(doc.data().clients));
         dispatch(requestInitialInvoicesList(doc.data().invoices));
+        dispatch(requestInitialUserInfo(doc.data().userInfo))
         dispatch(receiveLogin(user));
         dispatch(firestoreSuccess());
         dispatch(verifySuccess());
