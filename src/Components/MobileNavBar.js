@@ -13,7 +13,7 @@ const Container = styled.div`
   padding: 2px 10px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${props=>props.theme.black};
   svg{
       color:white;
   }

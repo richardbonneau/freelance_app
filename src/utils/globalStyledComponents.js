@@ -7,6 +7,9 @@ export const Container = styled.div`
   max-width: 800px;
   min-height: 100vh;
   background: white;
+  *{
+    color:${props=>props.theme.black};
+  }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -27,6 +30,7 @@ export const Container = styled.div`
   button:focus {
   outline: none;
   }
+
 `;
 export const Table = styled.table`
   table-layout: fixed;
@@ -104,11 +108,11 @@ export const ModalContainer = styled.div`
   position: fixed;
   z-index: 160;
   width: 330px;
-  height: 470px;
+  height: 500px;
   background: #fff;
   left: 50%;
   top: 50%;
-  margin-top: -265px;
+  margin-top: -250px;
   margin-left: -165px;
   transition: 0.5s ease-out;
   visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
@@ -121,6 +125,7 @@ export const ModalContainer = styled.div`
   .modal-buttons {
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
   }
 `;
 export const ModalContents = styled.div`
@@ -139,10 +144,9 @@ export const FormInputContainer = styled.div`
 `;
 
 export const PageButton = styled.a`
-  background: white;
-  color: ${props => props.theme.blue};
+  color: white;
+  background: ${props => props.theme.sidebarSelected};
   padding: 4px 10px;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,6 +158,6 @@ export const PageButton = styled.a`
   }
   &&:hover {
     background: ${props => props.theme.blue};
-    color: white;
+    
   }
 `;

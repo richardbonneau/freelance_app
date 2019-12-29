@@ -96,7 +96,7 @@ function EditInfo(props) {
           />
           <div className="modal-buttons">
             {" "}
-            <PageButton onClick={sendNewUserInfoToFirestore}>Create Client</PageButton>
+            <PageButton onClick={sendNewUserInfoToFirestore}>Save</PageButton>
           </div>
         </form>
     </Container>

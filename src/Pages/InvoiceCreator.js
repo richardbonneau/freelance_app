@@ -35,11 +35,11 @@ const InvoiceContainer = styled.form`
   margin-top: 20px;
   .submit-btn {
     margin-top: 15px;
-    background: ${props => props.theme.blue};
+    /* background: ${props => props.theme.blue}; */
     color: white;
   }
   .submit-btn:hover {
-    background: ${props => props.theme.blueHover};
+    /* background: ${props => props.theme.blueHover}; */
   }
 
   .first-row {
@@ -121,27 +121,30 @@ const ItemsListContainer = styled.div`
     width: 100%;
     height: 26px;
     background: #191919;
-    color: white;
+    
     display: none;
     justify-content: space-between;
   }
-  .items-header > h4 {
-    margin-left: 5px;
+  .items-header > h4{
+    margin-left: 10px;
+  }
+  .items-header  h4 {
+    color: white;
   }
   .header-hours-rate-amount {
     display: flex;
-    width: 307px;
+    width: 305px;
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
   }
   .add-item-btn {
     background: #e8e8e8;
-    color: black;
+    color: ${props=>props.theme.black};
   }
   .add-item-btn:hover {
     background: #c3c3c3;
-    color: black;
+    color: ${props=>props.theme.black};
   }
   @media (min-width: 768px) {
     .items-header {

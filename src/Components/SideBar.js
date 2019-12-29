@@ -36,7 +36,7 @@ const SidebarHeader = styled.div`
   padding: 5px 8px;
   margin-bottom: 20px;
   color: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? "white" : "black"};
+    hamburgerMenuOpened ? "white" : props => props.theme.black};
   align-items: center;
   svg {
     height: 20px;
@@ -75,7 +75,7 @@ const UserAvatarContainer = styled.div`
   }
   .popup {
     visibility: ${({ avatarPopupToggle }) =>
-      avatarPopupToggle ? "visible" : "hidden"};
+    avatarPopupToggle ? "visible" : "hidden"};
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
     top: -52px;
     left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
@@ -105,29 +105,33 @@ const Mask = styled.div`
   }
 `;
 const LinkContainer = styled.div`
-  color: green;
   display: block;
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 12px;
+  background: ${({ changeBackgroundColor }) =>
+    changeBackgroundColor
+      ? props => props.theme.sidebarSelected
+      : null};
   svg {
     margin-left: 20px;
     vertical-align: -4px;
   }
   a {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage
-        ? props => props.theme.accent
-        : props => props.theme.notWhite};
+    isCurrentPage
+      ? props => props.theme.accent
+      : props => props.theme.notWhite};
   }
   svg {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage
-        ? props => props.theme.accent
-        : props => props.theme.notWhite};
+    isCurrentPage
+      ? props => props.theme.accent
+      : props => props.theme.notWhite};
   }
   div {
     display: inline-block;
     margin-left: 15px;
+    width: 75%;
   }
   &:hover {
     a {
@@ -158,6 +162,7 @@ function SideBar() {
   const closeHamburgerMenu = () => {
     dispatch(toggleHamburgerMenu());
   };
+  console.log('"currentPage === "/dashboard" && hamburgerMenuOpened"', currentPage === "/dashboard", hamburgerMenuOpened)
   return (
     <>
       <NavContainer hamburgerMenuOpened={hamburgerMenuOpened}>
@@ -174,8 +179,9 @@ function SideBar() {
 
           <div />
           <LinkContainer
-            isCurrentPage={currentPage === "/dashboard"}
+            changeBackgroundColor={currentPage === "/dashboard" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
+
           >
             <Link to="/dashboard">
               <FaIndent />
@@ -183,7 +189,8 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-            isCurrentPage={currentPage === "/clients"}
+            changeBackgroundColor={currentPage === "/clients" && hamburgerMenuOpened}
+
             onClick={closeHamburgerMenu}
           >
             <Link to="/clients">
@@ -192,7 +199,7 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-            isCurrentPage={currentPage === "/invoices"}
+            changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
           >
             <Link to="/invoices">

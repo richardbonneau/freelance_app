@@ -8,12 +8,14 @@ import store from './store';
 import * as serviceWorker from './serviceWorker';
 
 const theme = {
+    black:"#505050",
     primary: "#011C27",
     accent: "#F26430",
     notWhite:"#a9a9a9",
     blue: "#006ca1",
     blueHover:"#009ce8",
-    red:"#940300"
+    red:"#940300",
+    sidebarSelected:"#042532"
 }
 
 ReactDOM.render(<Provider store={store}>
