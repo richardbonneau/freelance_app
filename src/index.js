@@ -8,7 +8,7 @@ import store from './store';
 import * as serviceWorker from './serviceWorker';
 
 const theme = {
-    black:"#505050",
+    black:"#444444",
     primary: "#011C27",
     accent: "#F26430",
     notWhite:"#a9a9a9",

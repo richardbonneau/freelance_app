@@ -120,7 +120,7 @@ const ItemsListContainer = styled.div`
   .items-header {
     width: 100%;
     height: 26px;
-    background: #191919;
+    background: ${props=>props.theme.black};
     
     display: none;
     justify-content: space-between;
@@ -139,12 +139,10 @@ const ItemsListContainer = styled.div`
     margin-right: 30px;
   }
   .add-item-btn {
-    background: #e8e8e8;
-    color: ${props=>props.theme.black};
+    background:${props=>props.theme.blue};
   }
   .add-item-btn:hover {
-    background: #c3c3c3;
-    color: ${props=>props.theme.black};
+    background:${props=>props.theme.blueHover};
   }
   @media (min-width: 768px) {
     .items-header {
