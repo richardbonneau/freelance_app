@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaIndent, FaUserAlt, FaMoneyCheckAlt, FaBars } from "react-icons/fa";
+import { FaIndent, FaUserAlt, FaMoneyCheckAlt, FaBars, FaPencilRuler } from "react-icons/fa";
+import { IoIosTime } from "react-icons/io";
+import { GoGraph } from "react-icons/go";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -189,6 +191,16 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
+            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+            // onClick={closeHamburgerMenu}
+          >
+            <Link to="/">
+              <IoIosTime />
+              <div>Time Tracking</div>
+            </Link>
+          </LinkContainer>
+ 
+          <LinkContainer
             changeBackgroundColor={currentPage === "/clients" && hamburgerMenuOpened}
 
             onClick={closeHamburgerMenu}
@@ -199,18 +211,43 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
+            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+            // onClick={closeHamburgerMenu}
+          >
+            <Link to="/">
+              <FaPencilRuler />
+              <div>Projects</div>
+            </Link>
+          </LinkContainer>
+          <LinkContainer
             changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
           >
+
+            
             <Link to="/invoices">
               <FaMoneyCheckAlt />
               <div>Invoices</div>
             </Link>
           </LinkContainer>
+
+
+          <LinkContainer
+            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+            // onClick={closeHamburgerMenu}
+          >
+            <Link to="/">
+              <GoGraph />
+              <div>Income Tracker</div>
+            </Link>
+          </LinkContainer>
+          
+       
+         
           {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
-          {/* <LinkContainer><Link to="/">Become a Member</Link></LinkContainer> */}
+         
         </div>
         <UserAvatarContainer
           avatarPopupToggle={avatarPopupToggle}
