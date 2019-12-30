@@ -3,28 +3,29 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Item from "../Components/Item";
-import {Container} from "../utils/globalStyledComponents";
+import { Container, Anchor } from "../utils/globalStyledComponents";
 import { TitleContainer, InvoiceContainer, NotesInput, DatePickContainer, SenderRecipientContainer, SenderContainer, RecipientContainer, ItemsListContainer, TotalContainer, ItemContainer } from "../utils/invoiceStyling";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 function InvoiceDetails(props) {
   const userInfo = useSelector(state => state.user.userInfo);
-  let {id} = useParams();
+  let { id } = useParams();
   const details = useSelector(state =>
-    state.invoices.invoicesList.find(invoice =>invoice.id === Number(id))
+    state.invoices.invoicesList.find(invoice => invoice.id === Number(id))
   );
   const client = useSelector(state =>
     state.clients.clientsList.find(client => client.id === details.clientId)
   );
 
-
-  const invoiceDate = new Date(details.invoiceDate.seconds*1000);
-  const dueDate = new Date(details.dueDate.seconds*1000);
+  console.log("details", details);
+  const invoiceDate = new Date(details.invoiceDate.seconds * 1000);
+  const dueDate = new Date(details.dueDate.seconds * 1000);
 
 
   return (
-    <Container >
+    <Container>
+      <Anchor onClick={() => props.history.goBack()}>Back</Anchor>
       <InvoiceContainer>
         <TitleContainer>
           <input
@@ -32,7 +33,8 @@ function InvoiceDetails(props) {
             className="title"
             placeholder="Invoice Title"
             value={details.title}
-            // onChange={e => setTitleInput(e.target.value)}
+            readOnly
+          // onChange={e => setTitleInput(e.target.value)}
           />
           <div className="subcontainer ">
             {" "}
@@ -42,11 +44,12 @@ function InvoiceDetails(props) {
               placeholder="Invoice Number"
               value={details.invoiceNumber}
               maxLength={7}
-              // onChange={e =>
-              //   e.target.value.startsWith("#")
-              //     ? setInvoiceNumberInput(e.target.value)
-              //     : setInvoiceNumberInput("#" + e.target.value)
-              // }
+              readOnly
+            // onChange={e =>
+            //   e.target.value.startsWith("#")
+            //     ? setInvoiceNumberInput(e.target.value)
+            //     : setInvoiceNumberInput("#" + e.target.value)
+            // }
             />
           </div>
         </TitleContainer>
@@ -62,7 +65,7 @@ function InvoiceDetails(props) {
               <div>{userInfo.city}</div>
               <div>{userInfo.zip}</div>
 
-       
+
             </SenderContainer>
 
             <RecipientContainer>
@@ -75,7 +78,7 @@ function InvoiceDetails(props) {
               <div> {client.province}</div>
               <div>{client.zip}</div>
 
-            
+
             </RecipientContainer>
           </SenderRecipientContainer>
           <DatePickContainer>
@@ -107,55 +110,58 @@ function InvoiceDetails(props) {
         <ItemsListContainer>
           <div className="items-header">
             <h4>Items</h4>
-            <div className="header-hours-rate-amount" style={{width:"240px"}}>
+            <div className="header-hours-rate-amount" style={{ width: "240px" }}>
               <h4>Hours</h4>
               <h4>Rate</h4>
               <h4>Amount</h4>
             </div>
           </div>
           {details.items.map((item, i) => (
-            
+
             <ItemContainer>
-            <input
-              type="text"
-              className="title-description"
-              name="name"
-              maxLength={38}
-              placeholder="Title and description"
-              // onChange={handleItemChange}
-              value={item.name}
-            />
-            <div className="number-inputs-container">
-              <div className="hours-rate-container">
-                <div className="number-inputs-container-first-child">
-                  <h4>Hours</h4>
-                  <input
-                    type="number"
-                    className="number-input"
-                    name="hours"
-                    placeholder="#"
-                    // onChange={handleItemChange}
-                    value={item.hours}
-                  />
+              <input
+                type="text"
+                className="title-description"
+                name="name"
+                maxLength={38}
+                readOnly
+                placeholder="Title and description"
+                // onChange={handleItemChange}
+                value={item.name}
+              />
+              <div className="number-inputs-container">
+                <div className="hours-rate-container">
+                  <div className="number-inputs-container-first-child">
+                    <h4>Hours</h4>
+                    <input
+                      type="number"
+                      className="number-input"
+                      name="hours"
+                      placeholder="#"
+                      readOnly
+                      // onChange={handleItemChange}
+                      value={item.hours}
+                    />
+                  </div>
+                  <div>
+                    <h4>Rate</h4>
+                    <input
+                      type="number"
+                      className="number-input"
+                      name="rate"
+                      placeholder="#"
+                      readOnly
+                      // onChange={handleItemChange}
+                      value={item.rate}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <h4>Rate</h4>
-                  <input
-                    type="number"
-                    className="number-input"
-                    name="rate"
-                    placeholder="#"
-                    // onChange={handleItemChange}
-                    value={item.rate}
-                  />
+                <div className="amount-container">
+                  <div className="amount">{"$" + item.hours * item.rate}</div>
                 </div>
               </div>
-              <div className="amount-container">
-                <div className="amount">{"$" + item.hours * item.rate}</div>
-              </div>
-            </div>
-     
-          </ItemContainer>
+
+            </ItemContainer>
           ))}
 
         </ItemsListContainer>
@@ -176,10 +182,11 @@ function InvoiceDetails(props) {
         <NotesInput
           value={details.notes}
           placeholder="Notes"
-          // onChange={e => setNotesInput(e.target.value)}
+          readOnly
+        // onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
 
-        
+
       </InvoiceContainer>
     </Container>
   )

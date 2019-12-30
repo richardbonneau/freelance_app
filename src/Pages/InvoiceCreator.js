@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import firebase from "firebase/app";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
@@ -54,8 +54,8 @@ function InvoiceCreator() {
           id: newInvoiceId,
           title: titleInput,
           invoiceNumber: invoiceNumberInput,
-          invoiceDate,
-          dueDate,
+          invoiceDate: firebase.firestore.Timestamp.fromDate(invoiceDate),
+          dueDate: firebase.firestore.Timestamp.fromDate(dueDate),
           clientId: selectedClientId,
           fromName,
           fromAddressOne,
