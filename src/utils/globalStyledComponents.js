@@ -145,7 +145,7 @@ export const FormInputContainer = styled.div`
 
 export const PageButton = styled.a`
   color: white;
-  background: ${props => props.theme.sidebarSelected};
+  background: ${props => props.theme.blue};
   padding: 4px 10px;
   display: flex;
   align-items: center;
@@ -153,11 +153,13 @@ export const PageButton = styled.a`
   width: 100px;
   transition: 300ms ease-in-out;
   cursor: pointer;
+
   svg {
     margin-right: 5px;
   }
   &&:hover {
-    background: ${props => props.theme.blue};
-    
+    background: ${props => props.theme.blueHover};
   }
+
+
 `;

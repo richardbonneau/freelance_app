@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaIndent, FaUserAlt, FaMoneyCheckAlt, FaBars, FaPencilRuler } from "react-icons/fa";
+import { FaIndent, FaUserAlt, FaMoneyBillAlt, FaBars, FaPencilRuler, FaFileInvoiceDollar } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
+import { GiPayMoney } from "react-icons/gi";
 import { GoGraph } from "react-icons/go";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
@@ -164,7 +165,7 @@ function SideBar() {
   const closeHamburgerMenu = () => {
     dispatch(toggleHamburgerMenu());
   };
-  console.log('"currentPage === "/dashboard" && hamburgerMenuOpened"', currentPage === "/dashboard", hamburgerMenuOpened)
+
   return (
     <>
       <NavContainer hamburgerMenuOpened={hamburgerMenuOpened}>
@@ -226,11 +227,20 @@ function SideBar() {
 
             
             <Link to="/invoices">
-              <FaMoneyCheckAlt />
+              <FaFileInvoiceDollar />
               <div>Invoices</div>
             </Link>
           </LinkContainer>
 
+          <LinkContainer
+            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+            // onClick={closeHamburgerMenu}
+          >
+            <Link to="/">
+              <FaMoneyBillAlt />
+              <div>Expenses</div>
+            </Link>
+          </LinkContainer>
 
           <LinkContainer
             // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
@@ -241,6 +251,8 @@ function SideBar() {
               <div>Income Tracker</div>
             </Link>
           </LinkContainer>
+
+
           
        
          

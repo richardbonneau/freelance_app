@@ -20,13 +20,7 @@ import {
   Anchor
 } from "../utils/globalStyledComponents";
 
-const styles = {
-  fiX: {
-    cursor: "pointer",
-    height: "25px",
-    width: "25px"
-  }
-};
+
 
 function Clients() {
   const listOfClients = useSelector(state => state.clients.clientsList);
@@ -81,9 +75,8 @@ console.log("listOfClients",listOfClients)
   return (
     <Container>
       <h2>Clients</h2>
-      <Anchor href="#" onClick={() => toggleModal(true)}>
-        Add New Client
-      </Anchor>
+      <PageButton style={{width:"125px", float: 'right', marginBottom: '10px'}} onClick={() => toggleModal(true)}>Add New Client</PageButton>
+
       {clientsList()}
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={toggleModal}  />
 

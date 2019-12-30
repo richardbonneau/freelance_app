@@ -10,6 +10,7 @@ import {
   Table,
   Th,
   THead,
+  PageButton
 } from "../utils/globalStyledComponents";
 
 
@@ -49,7 +50,8 @@ function Invoices(props) {
   return (
     <Container>
       <h2>Invoices</h2>
-      <Link to="/invoiceCreator">Create New Invoice</Link>
+     <Link to="/invoiceCreator"> <PageButton style={{width:"160px", float: 'right', marginBottom: '10px'}} >Create New Invoice</PageButton>
+      </Link>
       {listOfInvoices()}
     </Container>
   );
