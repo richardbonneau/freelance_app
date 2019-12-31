@@ -1,5 +1,6 @@
-export const backend = "http://localhost:4000";
+import firebase from "firebase/app";
 
+export const backend = "http://localhost:4000";
 export const newEntry = { name: "", hours: "", rate: "" };
 
 export const initialUserDocument = {
@@ -23,7 +24,14 @@ export const initialUserDocument = {
       id: 1,
       projectId: "new project",
       clientId: 1,
-      columns: [{ name: "Front-End Development", hours: 5, rate: 40 }]
+      fromName:"John Doe",
+      fromAddressOne:"1138 Cityview Drive",
+      fromAddressTwo:"Apt. 1",
+      fromCity:"Montreal",
+      fromCountry:"Canada",
+      invoiceDate:firebase.firestore.Timestamp.fromDate(new Date()),
+      dueDate:firebase.firestore.Timestamp.fromDate(new Date()),
+      items: [{ name: "Front-End Development", hours: 5, rate: 40, id:"1" }]
     }
   ],
   userInfo: {

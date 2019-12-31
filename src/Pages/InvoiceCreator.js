@@ -48,6 +48,7 @@ function InvoiceCreator() {
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
+    console.log("userinfo",userInfo)
     dispatch(
       addInvoiceToFirestore(
         {
@@ -57,11 +58,7 @@ function InvoiceCreator() {
           invoiceDate: firebase.firestore.Timestamp.fromDate(invoiceDate),
           dueDate: firebase.firestore.Timestamp.fromDate(dueDate),
           clientId: selectedClientId,
-          fromName,
-          fromAddressOne,
-          fromAddressTwo,
-          fromCity,
-          fromCountry,
+          userInfo,
           items: itemsList,
           notes: notesInput
         },

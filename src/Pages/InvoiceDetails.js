@@ -57,13 +57,13 @@ function InvoiceDetails(props) {
           <SenderRecipientContainer>
             <SenderContainer>
               <h4>From</h4>
-              <div>{userInfo.name}</div>
-              <div>{userInfo.addressOne}</div>
-              <div>{userInfo.addressTwo}</div>
-              <div>{userInfo.country}</div>
-              <div>{userInfo.province}</div>
-              <div>{userInfo.city}</div>
-              <div>{userInfo.zip}</div>
+              <div>{details.userInfo.name}</div>
+              <div>{details.userInfo.addressOne}</div>
+              <div>{details.userInfo.addressTwo}</div>
+              <div>{details.userInfo.country}</div>
+              <div>{details.userInfo.province}</div>
+              <div>{details.userInfo.city}</div>
+              <div>{details.userInfo.zip}</div>
 
 
             </SenderContainer>
