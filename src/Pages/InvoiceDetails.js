@@ -38,6 +38,7 @@ function InvoiceDetails(props) {
           />
           <div className="subcontainer ">
             {" "}
+            <div className="hashtag">#</div>
             <input
               type="text"
               className="invoice-number"

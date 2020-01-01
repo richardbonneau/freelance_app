@@ -83,17 +83,14 @@ function InvoiceCreator() {
           />
           <div className="subcontainer ">
             {" "}
+            <div className="hashtag">#</div>
             <input
               type="text"
               className="invoice-number"
               placeholder="Invoice Number"
               value={invoiceNumberInput}
               maxLength={7}
-              onChange={e =>
-                e.target.value.startsWith("#")
-                  ? setInvoiceNumberInput(e.target.value)
-                  : setInvoiceNumberInput("#" + e.target.value)
-              }
+              onChange={e => setInvoiceNumberInput(e.target.value)}
             />
           </div>
         </TitleContainer>

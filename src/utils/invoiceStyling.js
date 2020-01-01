@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 export const TitleContainer = styled.div`
   display: block;
+  .hashtag {
+    display: flex;
+    align-items: center;
+    width: 20px;
+  }
   .title {
     font-size: 18px;
     font-weight: 600;
