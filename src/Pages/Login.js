@@ -7,7 +7,6 @@ import { MdEmail, MdVpnKey } from "react-icons/md";
 import Loading from "../Components/Loading";
 
 const LoginContainer = styled.div`
-  padding-left: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,6 +51,16 @@ const Form = styled.form`
   }
   .login-switch-btn {
     margin-left: 5px;
+  }
+`;
+const RememberMeAndForgotPassword = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  input[type="checkbox"] {
+    width: auto;
+    vertical-align: bottom;
   }
 `;
 function Login() {
@@ -150,11 +159,13 @@ function Login() {
             />
           </div>
 
-          <div>
-            <input type="checkbox" checked={true} />
-            Remember me
-          </div>
-
+          <RememberMeAndForgotPassword>
+            <div>
+              <input type="checkbox" checked={true} />
+              Remember me
+            </div>
+            <div>Forgot password?</div>
+          </RememberMeAndForgotPassword>
           {showSignup ? (
             <div className="form-btn-container">
               <a className="form-btn" onClick={signupUser}>
