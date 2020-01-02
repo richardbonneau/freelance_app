@@ -5,14 +5,35 @@ import { firebaseLogin, firebaseSignup } from "../_actions";
 import styled from "styled-components";
 import { MdEmail, MdVpnKey } from "react-icons/md";
 import Loading from "../Components/Loading";
+import { Anchor } from "../utils/globalStyledComponents";
 
+const Container = styled.div`
+  display:flex;
+  height:100vh;
+`
+const SplashContainer = styled.div`
+  background:url("/images/login-splash.jpg");
+  width: 500px;
+  max-width:500px;
+  min-width:500px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+`
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width:100%;
+  h1{
+    padding: 15px 0px;
+  }
 `;
 const Form = styled.form`
-  width: 250px;
+  width: 335px;
+  .header-text-container{
+    margin: 20px 0;
+  }
   input {
     border: none;
     width: 100%;
@@ -35,16 +56,16 @@ const Form = styled.form`
     margin: 5px 0;
     border: 1px solid #ddd;
   }
-  .form-btn-container {
-    display: flex;
-    justify-content: space-between;
-  }
+
   .form-btn {
     display: block;
     padding: 10px;
     cursor: pointer;
     background: ${props => props.theme.blue};
     color: white;
+    text-align:center;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   .form-btn:hover {
     background: ${props => props.theme.blueHover};
@@ -53,16 +74,7 @@ const Form = styled.form`
     margin-left: 5px;
   }
 `;
-const RememberMeAndForgotPassword = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  input[type="checkbox"] {
-    width: auto;
-    vertical-align: bottom;
-  }
-`;
+
 function Login() {
   const dispatch = useDispatch();
 
@@ -87,112 +99,68 @@ function Login() {
     dispatch(firebaseLogin(loginEmailInput, loginPasswordInput));
   };
 
-  function displaySignup() {
-    return (
-      <>
-        <h2>Signup</h2>
-        <Form>
-          <div className="input-container">
-            <MdEmail />
-            <input
-              type="email"
-              onChange={e => setSignupEmailInput(e.target.value)}
-            />
-          </div>
-          <div className="input-container">
-            <MdVpnKey />
-            <input
-              type="password"
-              onChange={e => setSignupPasswordInput(e.target.value)}
-            />
-          </div>
-          <div className="form-btn-container">
-            <a className="form-btn" onClick={signupUser}>
-              Sign up
-            </a>
-            <a
-              className="form-btn login-switch-btn"
-              onClick={() => toggleLoginOrSignup(false)}
-            >
-              Create Account
-            </a>
-          </div>
-        </Form>
-      </>
-    );
-  }
-  function displayLogin() {
-    return <> </>;
-  }
-
   if (isAuthenticated) return <Redirect to="/dashboard" />;
   else if (isVerifying || isLoggingIn) return <Loading />;
   else
     return (
-      <LoginContainer>
-        <h1>
-          Welcome to <span>Freelancify</span>
-        </h1>
+      <Container>
+        <SplashContainer>
 
-        <h2>{showSignup ? "Sign Up" : "Log In"}</h2>
-        <Form>
-          <div className="input-container">
-            <MdEmail />
-            <input
-              type="email"
-              onChange={e =>
-                showSignup
-                  ? setSignupEmailInput(e.target.value)
-                  : setLoginEmailInput(e.target.value)
-              }
-            />
-          </div>
-          <div className="input-container">
-            <MdVpnKey />
-            <input
-              type="password"
-              onChange={e =>
-                showSignup
-                  ? setSignupPasswordInput(e.target.value)
-                  : setLoginPasswordInput(e.target.value)
-              }
-            />
-          </div>
+        </SplashContainer>
+        <LoginContainer>
 
-          <RememberMeAndForgotPassword>
-            <div>
-              <input type="checkbox" checked={true} />
-              Remember me
+          <h1>
+            Welcome to <span>Freelancify</span>
+          </h1>
+
+          <Form>
+            <div className="header-text-container">
+              <div>Log in to your Freelancify account to get started.</div>
+              {
+                showSignup
+                  ? <div>If you already have an account, <Anchor onClick={() => toggleLoginOrSignup(false)}>Log In </Anchor></div>
+                  : <div>If you are a new user, <Anchor onClick={() => toggleLoginOrSignup(true)}>Sign Up </Anchor></div>
+              }
             </div>
-            <div>Forgot password?</div>
-          </RememberMeAndForgotPassword>
-          {showSignup ? (
-            <div className="form-btn-container">
-              <a className="form-btn" onClick={signupUser}>
-                Sign up
-              </a>
-              <a
-                className="form-btn login-switch-btn"
-                onClick={() => toggleLoginOrSignup(false)}
-              >
-                Create Account
-              </a>
+
+            <div className="input-container">
+              <MdEmail />
+              <input
+                type="email"
+                placeholder="E-Mail"
+                onChange={e =>
+                  showSignup
+                    ? setSignupEmailInput(e.target.value)
+                    : setLoginEmailInput(e.target.value)
+                }
+              />
             </div>
-          ) : (
-            <div className="form-btn-container">
-              <a className="form-btn" onClick={loginUser}>
-                Login
-              </a>
-              <a
-                className="form-btn signup-or-login"
-                onClick={() => toggleLoginOrSignup(!showSignup)}
-              >
-                Use existing account
-              </a>
+            <div className="input-container">
+              <MdVpnKey />
+              <input
+                type="password"
+                placeholder="Password"
+                onChange={e =>
+                  showSignup
+                    ? setSignupPasswordInput(e.target.value)
+                    : setLoginPasswordInput(e.target.value)
+                }
+              />
             </div>
-          )}
-        </Form>
-      </LoginContainer>
+
+
+
+            {showSignup ? (
+
+              <a className="form-btn" onClick={signupUser}>Sign up</a>)
+              : (<a className="form-btn" onClick={loginUser}>Login</a>)
+            }
+            <Anchor href="#">Forgot password?</Anchor>
+          </Form>
+
+        </LoginContainer>
+      </Container>
+
     );
 }
 

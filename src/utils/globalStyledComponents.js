@@ -8,7 +8,7 @@ export const Container = styled.div`
   min-height: 100vh;
   background: white;
   *{
-    color:${props=>props.theme.black};
+    color:${props => props.theme.black};
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -90,6 +90,7 @@ export const ExpandableInvisibleButton = styled.div`
 `;
 export const Anchor = styled.a`
   color: ${props => props.theme.blue};
+  cursor: pointer;
 `;
 
 // Modal
