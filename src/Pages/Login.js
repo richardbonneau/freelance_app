@@ -34,9 +34,6 @@ const LoginContainer = styled.div`
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-}
-
-  
 `;
 const Form = styled.form`
   width: 280px;
