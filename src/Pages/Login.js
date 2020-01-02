@@ -12,25 +12,35 @@ const Container = styled.div`
   height:100vh;
 `
 const SplashContainer = styled.div`
+  display:none;
   background:url("/images/login-splash.jpg");
-  width: 500px;
-  max-width:500px;
-  min-width:500px;
+  width: 350px;
+  max-width: 350px;
+  min-width: 350px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  @media(min-width:768px){
+    display:block;
+  }
 `
 const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content:center;
   align-items: center;
   width:100%;
   h1{
     padding: 15px 0px;
+    position: absolute;
+    top: 30px;
   }
 `;
 const Form = styled.form`
-  width: 335px;
+  width: 280px;
+  @media(min-width:375px){
+    width: 335px;
+  }
   .header-text-container{
     margin: 20px 0;
   }
