@@ -30,8 +30,10 @@ const LoginContainer = styled.div`
   justify-content:center;
   align-items: center;
   width:100%;
-  background:url("/images/login-background.jpg");
+  background: url(/images/login-background.jpg);
+  background-size: cover;
   background-position: right;
+  background-repeat: no-repeat;
 }
 
   
