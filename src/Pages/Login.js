@@ -30,16 +30,21 @@ const LoginContainer = styled.div`
   justify-content:center;
   align-items: center;
   width:100%;
-  h1{
-    padding: 15px 0px;
-    position: absolute;
-    top: 30px;
-  }
+  background:url("/images/login-background.jpg");
+  background-position: right;
+}
+
+  
 `;
 const Form = styled.form`
   width: 280px;
-  @media(min-width:375px){
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  background:white;
+  
+  @media(min-width:400px){
     width: 335px;
+    padding:30px;
   }
   .header-text-container{
     margin: 20px 0;
@@ -119,11 +124,12 @@ function Login() {
         </SplashContainer>
         <LoginContainer>
 
-          <h1>
-            Welcome to <span>Freelancify</span>
-          </h1>
+
 
           <Form>
+            <h1>
+              Welcome to <span>Freelancify</span>
+            </h1>
             <div className="header-text-container">
               <div>Log in to your Freelancify account to get started.</div>
               {
