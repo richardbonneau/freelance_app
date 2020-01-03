@@ -11,7 +11,7 @@ const PageStructure = styled.div`
   }
 `;
 const ComponentContainer = styled.div`
-  margin-left:20px;
+  margin-left: 35px;
   flex-grow:100;
   display: flex;
     justify-content: center;
@@ -35,17 +35,17 @@ export default function ProtectedRoute({
           return isVerifying ? (
             <Loading />
           ) : isAuthenticated ? (
-              <ComponentContainer>
-                <Component {...props} />
-              </ComponentContainer>
+            <ComponentContainer>
+              <Component {...props} />
+            </ComponentContainer>
           ) : (
-            <Redirect
-              to={{
-                pathname: "/",
-                state: { from: props.location }
-              }}
-            />
-          );
+                <Redirect
+                  to={{
+                    pathname: "/",
+                    state: { from: props.location }
+                  }}
+                />
+              );
         }}
       />
     </PageStructure>

@@ -57,12 +57,16 @@ export const InvoiceContainer = styled.form`
     width: 78px;
     margin-left: 10px;
   }
+  .invoice-number-container{
+    display:flex;
+  }
   @media (min-width: 768px) {
     .first-row {
       flex-direction: row;
     }
     .subcontainer h4 {
       text-align: right;
+      
     }
   }
 `;
@@ -113,7 +117,7 @@ export const ItemsListContainer = styled.div`
   .items-header {
     width: 100%;
     height: 26px;
-    background: ${props=>props.theme.black};
+    background: ${props => props.theme.black};
     
     display: none;
     justify-content: space-between;
@@ -126,16 +130,16 @@ export const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount {
     display: flex;
-    width: 305px;
+    width: 248px;
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
   }
   .add-item-btn {
-    background:${props=>props.theme.blue};
+    background:${props => props.theme.blue};
   }
   .add-item-btn:hover {
-    background:${props=>props.theme.blueHover};
+    background:${props => props.theme.blueHover};
   }
   @media (min-width: 768px) {
     .items-header {
@@ -171,23 +175,20 @@ a {
 }
 svg{
   height: 15px;
-  margin-left: 5px;
   width: 15px;
 }
 .delete-btn{
   cursor:pointer;
-  border: 1px solid #f2f2f2ba;
   font-size: 12px;
   padding:5px;
-  color: ${props => props.theme.red};
+  color: ${props => props.theme.black};
   display: flex;
   justify-content: center;
   align-items: center;
   transition: 300ms;
 }
-.delete-btn:hover{
-  background: #cc0805;
-  color: white;
+.delete-btn:hover .trashcan{
+  color: ${props => props.theme.red};
 }
 .title-description {
   width: 100%;
@@ -205,7 +206,6 @@ svg{
   width: 50px;
 }
 .amount {
-  margin: 35px 0 0 0;
   text-align: right;
   word-break: break-all;
 }
@@ -213,7 +213,10 @@ svg{
   display: flex;
 }
 .amount-container{
-  min-width:105px;
+  min-width: 90px;
+}
+.amount-container h4{
+  text-align: right;
 }
 @media (min-width: 768px) {
   display: flex;
@@ -229,7 +232,7 @@ svg{
     margin-right: 20px;
   }
   .amount{
-    margin: 5px 18px;
+    margin: 5px 10px;
     text-align: left;
   }
   h4{

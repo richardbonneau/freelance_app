@@ -158,7 +158,7 @@ function InvoiceDetails(props) {
                   </div>
                 </div>
                 <div className="amount-container">
-                  <div className="amount">{"$" + item.hours * item.rate}</div>
+                  <div className="amount">{"$" + (item.hours * item.rate).toFixed(2)}</div>
                 </div>
               </div>
 

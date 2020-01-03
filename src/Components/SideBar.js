@@ -18,7 +18,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   color: white;
   left: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? "0px" : "-188px"};
+    hamburgerMenuOpened ? "0px" : "-182px"};
   background: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? props => props.theme.primary : "white"};
   z-index: 100;
@@ -42,7 +42,8 @@ const SidebarHeader = styled.div`
     hamburgerMenuOpened ? "white" : props => props.theme.black};
   align-items: center;
   svg {
-    height: 20px;
+    height: 25px;
+    width:25px;
     cursor: pointer;
   }
   img {
@@ -192,15 +193,15 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-            // onClick={closeHamburgerMenu}
+          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+          // onClick={closeHamburgerMenu}
           >
             <Link to="/">
               <IoIosTime />
               <div>Time Tracking</div>
             </Link>
           </LinkContainer>
- 
+
           <LinkContainer
             changeBackgroundColor={currentPage === "/clients" && hamburgerMenuOpened}
 
@@ -212,8 +213,8 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-            // onClick={closeHamburgerMenu}
+          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+          // onClick={closeHamburgerMenu}
           >
             <Link to="/">
               <FaPencilRuler />
@@ -225,7 +226,7 @@ function SideBar() {
             onClick={closeHamburgerMenu}
           >
 
-            
+
             <Link to="/invoices">
               <FaFileInvoiceDollar />
               <div>Invoices</div>
@@ -233,8 +234,8 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-            // onClick={closeHamburgerMenu}
+          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+          // onClick={closeHamburgerMenu}
           >
             <Link to="/">
               <FaMoneyBillAlt />
@@ -243,8 +244,8 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-            // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-            // onClick={closeHamburgerMenu}
+          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+          // onClick={closeHamburgerMenu}
           >
             <Link to="/">
               <GoGraph />
@@ -253,13 +254,13 @@ function SideBar() {
           </LinkContainer>
 
 
-          
-       
-         
+
+
+
           {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
-         
+
         </div>
         <UserAvatarContainer
           avatarPopupToggle={avatarPopupToggle}

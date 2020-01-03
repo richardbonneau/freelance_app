@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { IoIosCloseCircle } from "react-icons/io";
+import { FaTrashAlt } from "react-icons/fa";
 import { PageButton } from "../utils/globalStyledComponents";
 import { newEntry } from "../utils/static";
 import { useDispatch } from "react-redux";
@@ -56,17 +56,14 @@ function Item(props) {
           </div>
         </div>
         <div className="amount-container">
-          <div className="amount">{"$" + itemAmount}</div>
+          <h4>Amount</h4>
+          <div className="amount">{"$" + itemAmount.toFixed(2)}</div>
         </div>
       </div>
       <div
         onClick={e => dispatch(deleteItemFromStore(props.i))}
         className="delete-btn"
-      >
-        Delete
-        <IoIosCloseCircle
-
-        />
+      ><FaTrashAlt className="trashcan" />
       </div>
     </ItemContainer>
   );

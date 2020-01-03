@@ -14,13 +14,11 @@ const Container = styled.div`
 const SplashContainer = styled.div`
   display:none;
   background:url("/images/login-splash.jpg");
-  width: 350px;
-  max-width: 350px;
-  min-width: 350px;
+  min-width: 500px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  @media(min-width:768px){
+  @media(min-width:1000px){
     display:block;
   }
 `

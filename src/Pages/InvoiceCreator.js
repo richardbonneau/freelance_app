@@ -48,7 +48,7 @@ function InvoiceCreator() {
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
-    console.log("userinfo",userInfo)
+    console.log("userinfo", userInfo)
     dispatch(
       addInvoiceToFirestore(
         {
@@ -81,7 +81,7 @@ function InvoiceCreator() {
             value={titleInput}
             onChange={e => setTitleInput(e.target.value)}
           />
-          <div className="subcontainer ">
+          <div className="invoice-number-container">
             {" "}
             <div className="hashtag">#</div>
             <input

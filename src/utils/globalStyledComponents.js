@@ -91,6 +91,16 @@ export const ExpandableInvisibleButton = styled.div`
 export const Anchor = styled.a`
   color: ${props => props.theme.blue};
   cursor: pointer;
+  text-decoration: underline;
+  &&:hover{
+    color: ${props => props.theme.blueHover};
+  }
+  &&:visited{
+    color: ${props => props.theme.blue};
+  }
+  &&:active{
+    color: ${props => props.theme.blue};
+  }
 `;
 
 // Modal
