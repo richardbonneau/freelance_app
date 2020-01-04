@@ -130,7 +130,7 @@ export const ItemsListContainer = styled.div`
   }
   .header-hours-rate-amount {
     display: flex;
-    width: 248px;
+    width: 257px;
   }
   .header-hours-rate-amount > h4 {
     margin-right: 30px;
@@ -213,7 +213,7 @@ svg{
   display: flex;
 }
 .amount-container{
-  min-width: 90px;
+  min-width: 100px;
 }
 .amount-container h4{
   text-align: right;

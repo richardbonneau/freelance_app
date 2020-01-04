@@ -28,6 +28,7 @@ function AddClientPopup(props) {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
       let newClientId = Date.now() * 10000 + Math.round(Math.random() * 9999);
+      if (addressTwoInput === "") setAddressTwoInput("-");
       dispatch(
         addClientToFirestore({
           name: nameInput,

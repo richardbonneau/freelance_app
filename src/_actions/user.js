@@ -30,17 +30,17 @@ export const requestInitialUserInfo = (userInfo) => dispatch => {
 };
 
 export const editUserInfoInFirestore = (newUserInfo) => dispatch => {
-    console.log()
+    if (newUserInfo.addressTwo === "") newUserInfo.addressTwo = "-";
     let uid = store.getState().auth.user.uid;
     db.collection("users").doc(uid).update({
         userInfo: newUserInfo
-      }).then(function (doc) {
+    }).then(function (doc) {
         console.log("New client pushed. Now pushing to redux store.")
         dispatch(editUserInfo(newUserInfo));
-      }).catch(function (error) {
-          dispatch(firestoreError());
+    }).catch(function (error) {
+        dispatch(firestoreError());
         console.log("Error getting document:", error);
-      });
+    });
 };
 export const firestoreError = () => dispatch => {
     dispatch(requestError());

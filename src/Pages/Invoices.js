@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { openNewInvoicePage } from "../_actions";
 import Invoice from "../Components/Invoice";
 import Loading from "../Components/Loading";
 
@@ -15,10 +15,16 @@ import {
 
 
 function Invoices(props) {
+  const dispatch = useDispatch();
   const invoices = useSelector(state => state.invoices.invoicesList);
   const clients = useSelector(state => state.clients.clientsList);
-  const isSendingReq = useSelector(state=>state.invoices.isSendingReq);
+  const isSendingReq = useSelector(state => state.invoices.isSendingReq);
 
+  function createNewInvoice() {
+    console.log("here")
+    dispatch(openNewInvoicePage());
+    props.history.push("/invoiceCreator");
+  }
 
   const listOfInvoices = () => {
     let tableContents = invoices.map((invoice, i) => (
@@ -46,12 +52,11 @@ function Invoices(props) {
     );
   };
 
-  if(isSendingReq) return <Loading />
+  if (isSendingReq) return <Loading />
   return (
     <Container>
       <h2>Invoices</h2>
-     <Link to="/invoiceCreator"> <PageButton style={{width:"160px", float: 'right', marginBottom: '10px'}} >Create New Invoice</PageButton>
-      </Link>
+      <PageButton onClick={createNewInvoice} style={{ width: "160px", float: 'right', marginBottom: '10px' }} >Create New Invoice</PageButton>
       {listOfInvoices()}
     </Container>
   );

@@ -27,16 +27,11 @@ function InvoiceCreator() {
   const [invoiceDate, setInvoiceDate] = useState(new Date());
   const [dueDate, setDueDate] = useState(new Date());
   const [notesInput, setNotesInput] = useState("");
-  const [fromName, setFromName] = useState("");
-  const [fromAddressOne, setFromAddressOne] = useState("");
-  const [fromAddressTwo, setFromAddressTwo] = useState("");
-  const [fromCity, setFromCity] = useState("");
-  const [fromCountry, setFromCountry] = useState("");
   const selectedClient = clients.find(c => c.id === selectedClientId);
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
   const [isModalOpened, setModal] = useState(false);
-  console.log("isModalOpened", isModalOpened);
+
   useEffect(() => {
     //Display new total sum everytime the list of item updates
     let newTotal = 0;
