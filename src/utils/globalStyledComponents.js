@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // Tables
 export const Container = styled.div`
-  padding: 25px;
+  padding:65px 20px 20px 20px;
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
@@ -30,7 +30,9 @@ export const Container = styled.div`
   button:focus {
   outline: none;
   }
-
+  @media(min-width:1024px){
+    padding: 25px;
+  }
 `;
 export const Table = styled.table`
   table-layout: fixed;
