@@ -11,12 +11,12 @@ const PageStructure = styled.div`
   }
 `;
 const ComponentContainer = styled.div`
-  flex-grow:100;
+  flex-grow: 100;
+  background: #f6f7f9;
   display: flex;
-    justify-content: center;
+  justify-content: center;
   @media (min-width: 1024px) {
     margin-left: 220px;
-
   }
 `;
 export default function ProtectedRoute({
@@ -38,13 +38,13 @@ export default function ProtectedRoute({
               <Component {...props} />
             </ComponentContainer>
           ) : (
-                <Redirect
-                  to={{
-                    pathname: "/",
-                    state: { from: props.location }
-                  }}
-                />
-              );
+            <Redirect
+              to={{
+                pathname: "/",
+                state: { from: props.location }
+              }}
+            />
+          );
         }}
       />
     </PageStructure>

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import Client from "../Components/Client";
-import { addClientToFirestore } from "../_actions";
-import AddClientPopup from "../Components/AddClientPopup";
-import { } from "../utils/globalStyledComponents";
+import AddProjectPopup from "../Components/AddProjectPopup";
+import {} from "../utils/globalStyledComponents";
 import moment from "moment";
 import {
   Container,
@@ -19,29 +17,31 @@ import {
   ModalHr,
   FormInputContainer,
   Anchor,
-  Tr, Td, ExpandableInvisibleButton
+  Tr,
+  Td,
+  ExpandableInvisibleButton
 } from "../utils/globalStyledComponents";
-
-
 
 function Projects() {
   const listOfProjects = useSelector(state => state.projects.projectsList);
+  const listOfClients = useSelector(state => state.clients.clientsList);
   const [isModalOpened, toggleModal] = useState(false);
   const [isClientCardOpened, toggleClientCard] = useState(false);
-  const [selectedClient, setSelectedClient] = useState(listOfProjects[0]);
-  console.log("listOfProjects", listOfProjects)
-  const clientSelected = client => {
-    toggleClientCard(true);
-    setSelectedClient(client);
-  };
 
+  //TODO:Open a card showing the project when a project is clicked
+  // const [selectedProject, setSelectedClient] = useState(listOfProjects[0]);
+  // console.log("listOfProjects", listOfProjects);
 
+  // const clientSelected = client => {
+  //   toggleClientCard(true);
+  //   setSelectedClient(client);
+  // };
 
-
-  const clientsList = () => {
+  const projectsList = () => {
     let tableContents = listOfProjects.map((project, i) => {
       let projectDebutDate = new Date(project.projectDebutDate.seconds * 1000);
       let projectEndDate = new Date(project.projectEndDate.seconds * 1000);
+      let client = listOfClients.find(client => client.id === project.clientId);
       // return <Client key={i} client={client} clientSelected={clientSelected} />;
       return (
         <Tr key={i}>
@@ -49,12 +49,15 @@ function Projects() {
             {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
           </td>
           <Td label="Project Name">{project.name}</Td>
-          <Td label="Client">{project.clientId}</Td>
-          <Td label="Debut Date">{moment(projectDebutDate).format("MMM Do YYYY")}</Td>
-          <Td label="End Date">{moment(projectEndDate).format("MMM Do YYYY")}</Td>
-
+          <Td label="Client">{client.name}</Td>
+          <Td label="Debut Date">
+            {moment(projectDebutDate).format("MMM Do YYYY")}
+          </Td>
+          <Td label="End Date">
+            {moment(projectEndDate).format("MMM Do YYYY")}
+          </Td>
         </Tr>
-      )
+      );
     });
     return (
       <Table>
@@ -72,7 +75,6 @@ function Projects() {
       </Table>
     );
   };
-
 
   // const clientCardModalContents = () => {
   //   return (
@@ -95,11 +97,18 @@ function Projects() {
   return (
     <Container>
       <h2>Projects</h2>
-      <PageButton style={{ width: "125px", float: 'right', marginBottom: '10px' }} onClick={() => toggleModal(true)}>Add New Project</PageButton>
+      <PageButton
+        style={{ width: "125px", float: "right", marginBottom: "10px" }}
+        onClick={() => toggleModal(true)}
+      >
+        Add New Project
+      </PageButton>
 
-      {clientsList()}
-      <AddClientPopup isModalOpened={isModalOpened} toggleModal={toggleModal} />
-
+      {projectsList()}
+      <AddProjectPopup
+        isModalOpened={isModalOpened}
+        toggleModal={toggleModal}
+      />
     </Container>
   );
 }

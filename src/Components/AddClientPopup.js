@@ -8,9 +8,8 @@ import {
   ModalContainer,
   ModalContents,
   ModalTitle,
-  ModalHr,
+  ModalHr
 } from "../utils/globalStyledComponents";
-
 
 function AddClientPopup(props) {
   const dispatch = useDispatch();
@@ -28,7 +27,6 @@ function AddClientPopup(props) {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
       let newClientId = Date.now() * 10000 + Math.round(Math.random() * 9999);
-      if (addressTwoInput === "") setAddressTwoInput("-");
       dispatch(
         addClientToFirestore({
           name: nameInput,
@@ -111,7 +109,9 @@ function AddClientPopup(props) {
           <div className="modal-buttons">
             {" "}
             <PageButton onClick={newClientSubmit}>Create Client</PageButton>
-            <PageButton onClick={() => props.toggleModal(false)}>Cancel</PageButton>
+            <PageButton onClick={() => props.toggleModal(false)}>
+              Cancel
+            </PageButton>
           </div>
         </form>
       </ModalContents>
