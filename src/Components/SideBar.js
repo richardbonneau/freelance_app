@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaIndent, FaUserAlt, FaMoneyBillAlt, FaPencilRuler, FaFileInvoiceDollar } from "react-icons/fa";
+import {
+  FaIndent,
+  FaUserAlt,
+  FaMoneyBillAlt,
+  FaPencilRuler,
+  FaFileInvoiceDollar
+} from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosTime } from "react-icons/io";
 import { GoGraph } from "react-icons/go";
@@ -13,7 +19,7 @@ const NavContainer = styled.nav`
   @media (min-width: 1024px) {
     left: 0px !important;
   }
-  top:0;
+  top: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,7 +31,7 @@ const NavContainer = styled.nav`
   z-index: 100;
   transition: all 300ms ease-out 10ms;
   min-width: 220px;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   @media (min-width: 1024px) {
     background: ${props => props.theme.primary};
@@ -33,7 +39,7 @@ const NavContainer = styled.nav`
 `;
 const SidebarHeader = styled.div`
   z-index: 100;
-  
+
   height: 40px;
   justify-content: space-between;
   padding: 5px 8px;
@@ -41,17 +47,16 @@ const SidebarHeader = styled.div`
   color: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? "white" : props => props.theme.black};
   align-items: center;
-  display:none;
+  display: none;
   svg {
     height: 25px;
-    width:25px;
+    width: 25px;
     cursor: pointer;
   }
   img {
     height: 20px;
   }
-  .sidebar-title{
-    
+  .sidebar-title {
   }
   @media (min-width: 1024px) {
     color: white;
@@ -83,7 +88,7 @@ const UserAvatarContainer = styled.div`
   }
   .popup {
     visibility: ${({ avatarPopupToggle }) =>
-    avatarPopupToggle ? "visible" : "hidden"};
+      avatarPopupToggle ? "visible" : "hidden"};
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
     top: -52px;
     left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
@@ -117,24 +122,22 @@ const LinkContainer = styled.div`
   font-size: 20px;
   margin-bottom: 12px;
   background: ${({ changeBackgroundColor }) =>
-    changeBackgroundColor
-      ? props => props.theme.sidebarSelected
-      : null};
+    changeBackgroundColor ? props => props.theme.sidebarSelected : null};
   svg {
     margin-left: 20px;
     vertical-align: -4px;
   }
   a {
     color: ${({ isCurrentPage }) =>
-    isCurrentPage
-      ? props => props.theme.accent
-      : props => props.theme.notWhite};
+      isCurrentPage
+        ? props => props.theme.accent
+        : props => props.theme.notWhite};
   }
   svg {
     color: ${({ isCurrentPage }) =>
-    isCurrentPage
-      ? props => props.theme.accent
-      : props => props.theme.notWhite};
+      isCurrentPage
+        ? props => props.theme.accent
+        : props => props.theme.notWhite};
   }
   div {
     display: inline-block;
@@ -166,7 +169,7 @@ function SideBar() {
   const editInfo = e => {
     e.preventDefault();
     history.push(`/editInfo`);
-  }
+  };
   const closeHamburgerMenu = () => {
     dispatch(toggleHamburgerMenu());
   };
@@ -181,17 +184,16 @@ function SideBar() {
           >
             {" "}
             <img src="/images/logo.png" />
-
-
             Freelancify
             <div />
           </SidebarHeader>
 
           <div style={{ marginTop: "20px" }} />
           <LinkContainer
-            changeBackgroundColor={currentPage === "/dashboard" && hamburgerMenuOpened}
+            changeBackgroundColor={
+              currentPage === "/dashboard" && hamburgerMenuOpened
+            }
             onClick={closeHamburgerMenu}
-
           >
             <Link to="/dashboard">
               <FaIndent />
@@ -209,8 +211,9 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-            changeBackgroundColor={currentPage === "/clients" && hamburgerMenuOpened}
-
+            changeBackgroundColor={
+              currentPage === "/clients" && hamburgerMenuOpened
+            }
             onClick={closeHamburgerMenu}
           >
             <Link to="/clients">
@@ -220,7 +223,9 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-            changeBackgroundColor={currentPage === "/projects" && hamburgerMenuOpened}
+            changeBackgroundColor={
+              currentPage === "/projects" && hamburgerMenuOpened
+            }
             onClick={closeHamburgerMenu}
           >
             <Link to="/projects">
@@ -229,7 +234,9 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-            changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
+            changeBackgroundColor={
+              currentPage === "/invoices" && hamburgerMenuOpened
+            }
             onClick={closeHamburgerMenu}
           >
             <Link to="/invoices">
@@ -258,14 +265,9 @@ function SideBar() {
             </Link>
           </LinkContainer>
 
-
-
-
-
           {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
-
         </div>
         <UserAvatarContainer
           avatarPopupToggle={avatarPopupToggle}
