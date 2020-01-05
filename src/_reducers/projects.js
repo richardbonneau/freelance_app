@@ -1,29 +1,29 @@
 import {
-  GET_INITIAL_CLIENTS_LIST,
-  PUSH_NEW_CLIENT,
+  GET_INITIAL_PROJECTS_LIST,
+  PUSH_NEW_PROJECT,
   FIREBASE_FAILURE
 } from "../_actions";
 
 export default (
   state = {
     isSendingReq: false,
-    initialClientsFetch: false,
+    initialProjectsFetch: false,
     reqError: false,
-    clientsList: []
+    projectsList: []
   },
   action
 ) => {
   switch (action.type) {
-    case GET_INITIAL_CLIENTS_LIST:
+    case GET_INITIAL_PROJECTS_LIST:
       return {
         ...state,
-        clientsList: action.clientsList
+        projectsList: action.projectsList
       }
-    case PUSH_NEW_CLIENT:
-      console.log("state.clients", state.clientsList)
+    case PUSH_NEW_PROJECT:
+      console.log("state.projectsList", state.projectsList)
       return {
         ...state,
-        clientsList: [...state.clientsList, action.newClient]
+        projectsList: [...state.projectsList, action.newProject]
       }
     case FIREBASE_FAILURE:
       return {

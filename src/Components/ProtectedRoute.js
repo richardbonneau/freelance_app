@@ -11,7 +11,6 @@ const PageStructure = styled.div`
   }
 `;
 const ComponentContainer = styled.div`
-  margin-left: 35px;
   flex-grow:100;
   display: flex;
     justify-content: center;

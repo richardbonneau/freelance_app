@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { openNewInvoicePage } from "../_actions";
 import Invoice from "../Components/Invoice";
 import Loading from "../Components/Loading";
-
 import {
   Container,
   Table,

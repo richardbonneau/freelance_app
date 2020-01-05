@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Clients from "./Pages/Clients";
+import Projects from "./Pages/Projects";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
 import MobileNavBar from "./Components/MobileNavBar";
@@ -53,6 +54,14 @@ function App() {
         exact
         path="/invoices"
         component={Invoices}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/projects"
+        component={Projects}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

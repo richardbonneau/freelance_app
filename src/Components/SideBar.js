@@ -218,11 +218,12 @@ function SideBar() {
               <div>Clients</div>
             </Link>
           </LinkContainer>
+
           <LinkContainer
-          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-          // onClick={closeHamburgerMenu}
+            changeBackgroundColor={currentPage === "/projects" && hamburgerMenuOpened}
+            onClick={closeHamburgerMenu}
           >
-            <Link to="/">
+            <Link to="/projects">
               <FaPencilRuler />
               <div>Projects</div>
             </Link>
@@ -231,8 +232,6 @@ function SideBar() {
             changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
           >
-
-
             <Link to="/invoices">
               <FaFileInvoiceDollar />
               <div>Invoices</div>
