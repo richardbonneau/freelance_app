@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard";
 import Clients from "./Pages/Clients";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
+import MobileNavBar from "./Components/MobileNavBar";
 import SideBar from "./Components/SideBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import InvoiceDetails from "./Pages/InvoiceDetails";
@@ -15,10 +16,14 @@ function App() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
 
-  
+
   const renderNav = () => {
     return isVerifying ? null : (
+      <>
+        <MobileNavBar />
         <SideBar />
+      </>
+
     );
   };
   return (
@@ -59,7 +64,7 @@ function App() {
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
-      
+
       <ProtectedRoute
         exact
         path="/invoiceCreator"
@@ -68,7 +73,7 @@ function App() {
         isVerifying={isVerifying}
       />
 
-<ProtectedRoute
+      <ProtectedRoute
         exact
         path="/editInfo"
         component={EditInfo}

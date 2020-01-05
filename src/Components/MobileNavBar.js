@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +8,19 @@ const Container = styled.div`
   @media (min-width: 1024px) {
     display: none;
   }
-  background:purple;
+  height: 45px;
+  transition: all 300ms ease-out 10ms;
+  z-index: 100;
+  position:fixed;
+  width:100%;
+  transform: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "translate(220px, 0);" : "translate(0, 0)")};
+  background: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? props => props.theme.blue : props => props.theme.primary)};
+  color:${props => props.theme.notWhite};
   padding: 2px 10px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid ${props=>props.theme.black};
+  align-items: center;
+  border-bottom: 1px solid ${props => props.theme.black};
   svg{
       color:white;
   }
@@ -31,13 +38,16 @@ const styles = {
 
 function MobileNavBar() {
   const dispatch = useDispatch();
+  const hamburgerMenuOpened = useSelector(
+    state => state.navigation.hamburgerMenuOpened
+  );
   return (
-    <Container>
+    <Container hamburgerMenuOpened={hamburgerMenuOpened}>
       <FaBars
         style={styles.hamburgerMenu}
         onClick={() => dispatch(toggleHamburgerMenu())}
       />
-      <MainLogo src="/images/reduxlogo.png" />
+      <h4>Freelancify</h4>
       <div />
     </Container>
   );

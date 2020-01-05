@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaIndent, FaUserAlt, FaMoneyBillAlt, FaBars, FaPencilRuler, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaIndent, FaUserAlt, FaMoneyBillAlt, FaPencilRuler, FaFileInvoiceDollar } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
 import { IoIosTime } from "react-icons/io";
-import { GiPayMoney } from "react-icons/gi";
 import { GoGraph } from "react-icons/go";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
@@ -13,12 +13,13 @@ const NavContainer = styled.nav`
   @media (min-width: 1024px) {
     left: 0px !important;
   }
+  top:0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   color: white;
   left: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? "0px" : "-182px"};
+    hamburgerMenuOpened ? "0px" : "-220px"};
   background: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? props => props.theme.primary : "white"};
   z-index: 100;
@@ -33,10 +34,10 @@ const NavContainer = styled.nav`
 const SidebarHeader = styled.div`
   z-index: 100;
   display: flex;
+  height: 40px;
   justify-content: space-between;
-  border-bottom: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? "1px solid #4c4c4c" : "none"};
   padding: 5px 8px;
+  height: 40px;
   margin-bottom: 20px;
   color: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? "white" : props => props.theme.black};
@@ -178,7 +179,7 @@ function SideBar() {
             {" "}
             <img src="/images/logo.png" />
             Freelancify
-            <FaBars />
+    <div />
           </SidebarHeader>
 
           <div />
