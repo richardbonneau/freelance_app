@@ -33,15 +33,15 @@ const NavContainer = styled.nav`
 `;
 const SidebarHeader = styled.div`
   z-index: 100;
-  display: flex;
+  
   height: 40px;
   justify-content: space-between;
   padding: 5px 8px;
   height: 40px;
-  margin-bottom: 20px;
   color: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? "white" : props => props.theme.black};
   align-items: center;
+  display:none;
   svg {
     height: 25px;
     width:25px;
@@ -50,9 +50,12 @@ const SidebarHeader = styled.div`
   img {
     height: 20px;
   }
+  .sidebar-title{
+    
+  }
   @media (min-width: 1024px) {
-    border-bottom: 1px solid #4c4c4c;
     color: white;
+    display: flex;
     svg {
       visibility: hidden;
     }
@@ -178,11 +181,13 @@ function SideBar() {
           >
             {" "}
             <img src="/images/logo.png" />
+
+
             Freelancify
-    <div />
+            <div />
           </SidebarHeader>
 
-          <div />
+          <div style={{ marginTop: "20px" }} />
           <LinkContainer
             changeBackgroundColor={currentPage === "/dashboard" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}

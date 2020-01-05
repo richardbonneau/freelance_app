@@ -15,7 +15,7 @@ const Container = styled.div`
   width:100%;
   transform: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "translate(220px, 0);" : "translate(0, 0)")};
   background: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? props => props.theme.blue : props => props.theme.primary)};
-  color:${props => props.theme.notWhite};
+  color:white;
   padding: 2px 10px;
   display: flex;
   justify-content: space-between;
