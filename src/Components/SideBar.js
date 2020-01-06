@@ -88,7 +88,7 @@ const UserAvatarContainer = styled.div`
   }
   .popup {
     visibility: ${({ avatarPopupToggle }) =>
-      avatarPopupToggle ? "visible" : "hidden"};
+    avatarPopupToggle ? "visible" : "hidden"};
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
     top: -52px;
     left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
@@ -129,15 +129,15 @@ const LinkContainer = styled.div`
   }
   a {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage
-        ? props => props.theme.accent
-        : props => props.theme.notWhite};
+    isCurrentPage
+      ? props => props.theme.accent
+      : props => props.theme.notWhite};
   }
   svg {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage
-        ? props => props.theme.accent
-        : props => props.theme.notWhite};
+    isCurrentPage
+      ? props => props.theme.accent
+      : props => props.theme.notWhite};
   }
   div {
     display: inline-block;
@@ -201,10 +201,10 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-          // onClick={closeHamburgerMenu}
+            changeBackgroundColor={currentPage === "/time-tracking" && hamburgerMenuOpened}
+            onClick={closeHamburgerMenu}
           >
-            <Link to="/">
+            <Link to="/time-tracking">
               <IoIosTime />
               <div>Time Tracking</div>
             </Link>

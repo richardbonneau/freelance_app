@@ -27,6 +27,7 @@ function InvoiceDetails(props) {
     <Container>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
       <InvoiceContainer>
+        <h1 style={{ marginBottom: '35px' }}>INVOICE</h1>
         <TitleContainer>
           <input
             type="text"

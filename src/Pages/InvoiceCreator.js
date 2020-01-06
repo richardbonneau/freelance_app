@@ -68,11 +68,12 @@ function InvoiceCreator() {
     <Container>
       <h2>Invoice Creator</h2>
       <InvoiceContainer>
+        <h1 style={{ marginBottom: '35px' }}>INVOICE</h1>
         <TitleContainer>
           <input
             type="text"
             className="title"
-            placeholder="Invoice Title"
+            placeholder="Subject"
             value={titleInput}
             onChange={e => setTitleInput(e.target.value)}
           />

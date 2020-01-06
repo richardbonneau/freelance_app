@@ -6,6 +6,7 @@ import Clients from "./Pages/Clients";
 import Projects from "./Pages/Projects";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
+import TimeTracking from "./Pages/TimeTracking";
 import MobileNavBar from "./Components/MobileNavBar";
 import SideBar from "./Components/SideBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
@@ -86,6 +87,14 @@ function App() {
         exact
         path="/editInfo"
         component={EditInfo}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/time-tracking"
+        component={TimeTracking}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />
