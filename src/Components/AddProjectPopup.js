@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
-import firebase from "firebase/app";
 import "react-datepicker/dist/react-datepicker.css";
+import firebase from "firebase/app";
 import { addProjectToFirestore } from "../_actions";
 import {
   PageButton,
