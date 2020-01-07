@@ -4,6 +4,7 @@ import {
   requestInitialClientsList,
   requestInitialInvoicesList,
   requestInitialProjectsList,
+  requestInitialTasksList,
   requestInitialUserInfo,
   firestoreSuccess
 } from "./index";
@@ -101,16 +102,16 @@ export const firebaseSignup = (email, password) => dispatch => {
     });
 };
 const addNewUserToDatabase = (user, dispatch) => {
-  console.log('initialUserDocument', initialUserDocument)
+  console.log("initialUserDocument", initialUserDocument);
   dispatch(accessingDatabase());
   db.collection("users")
     .doc(user.user.uid)
     .set(initialUserDocument)
-    .then(function () {
+    .then(function() {
       dispatch(receiveLogin(user.user));
       console.log("Document successfully written!");
     })
-    .catch(function (error) {
+    .catch(function(error) {
       dispatch(databaseError());
       console.error("Error writing document: ", error);
     });
@@ -134,28 +135,26 @@ const getUserDataAndLogin = user => dispatch => {
   db.collection("users")
     .doc(user.uid)
     .get()
-    .then(function (doc) {
+    .then(function(doc) {
       if (doc.exists) {
-        console.log("doc.data()", doc.data())
+        console.log("doc.data()", doc.data());
         dispatch(requestInitialClientsList(doc.data().clients));
         dispatch(requestInitialInvoicesList(doc.data().invoices));
         dispatch(requestInitialUserInfo(doc.data().userInfo));
         dispatch(requestInitialProjectsList(doc.data().projects));
+        dispatch(requestInitialTasksList(doc.data().tasks));
 
         dispatch(receiveLogin(user));
         dispatch(firestoreSuccess());
         dispatch(verifySuccess());
-        console.log(
-          "This user exists in the database. Document data:",
-          doc.data()
-        );
+        console.log("This user exists in the database. Document data:", doc.data());
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
-        dispatch(verifyFail())
+        dispatch(verifyFail());
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.log("Error getting document:", error);
     });
 };

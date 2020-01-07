@@ -43,6 +43,7 @@ export const initialUserDocument = {
       items: [{ name: "Front-End Development", hours: 5, rate: 40, id: "1" }]
     }
   ],
+  tasks: [],
   userInfo: {
     name: "",
     addressOne: "",

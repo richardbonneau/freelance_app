@@ -12,17 +12,16 @@ import {
   ModalTitle,
   ModalHr
 } from "../utils/globalStyledComponents";
+const hours = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+const minutes = ["00", "15", "30", "45"];
 
 function AddTaskPopup(props) {
   const dispatch = useDispatch();
   const listOfProjects = useSelector(state => state.projects.projectsList);
-  const [nameInput, setNameInput] = useState("");
   const [selectedProjectId, setSelectedProjectId] = useState(Number(listOfProjects[0].id));
   const [workType, setWorkType] = useState("");
   const [selectedHours, setSelectedHours] = useState("");
   const [selectedMinutes, setSelectedMinutes] = useState("");
-  const hours = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-  const minutes = ["00", "15", "30", "45"];
 
   const addProjectModalContents = () => {
     const newProjectSubmit = e => {
@@ -41,7 +40,6 @@ function AddTaskPopup(props) {
       //   })
       // );
       props.toggleModal(false);
-      setNameInput("");
     };
 
     return (
