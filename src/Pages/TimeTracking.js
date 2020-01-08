@@ -5,7 +5,7 @@ import moment from "moment";
 import AddTaskPopup from "../Components/AddTaskPopup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Container, PageButton } from "../utils/globalStyledComponents";
+import { Container, PageButton, Tr, Td, Th, Table, THead } from "../utils/globalStyledComponents";
 
 const Header = styled.div`
   display: flex;
@@ -69,7 +69,17 @@ function TimeTracking() {
 
   function tasksList() {
     console.log("listOfTasks", listOfTasks);
-    return listOfTasks.map((task, i) => <div key={i}>{task.workType}</div>);
+    // return listOfTasks.map((task, i) => <div key={i}>{task.workType}</div>);
+    return listOfTasks.map((task, i) => (
+      <Tr key={i}>
+        <td width="1%">
+          {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
+        </td>
+        <Td label="Project">{task.projectId}</Td>
+        <Td label="Type of work">{task.workType}</Td>
+        <Td label="Time Spent">{`${task.timeWorked.hours}:${task.timeWorked.minutes}`}</Td>
+      </Tr>
+    ));
   }
   return (
     <Container>
@@ -131,8 +141,20 @@ function TimeTracking() {
           </Weekday>
         </WeekdaysContainer>
         <TasksContainer>
-          {tasksList()}
-          <PageButton onClick={() => toggleModal(true)}>Open Modal</PageButton>
+          <Table>
+            <THead>
+              <tr>
+                <Th width="1%" scope="col"></Th>
+                <Th scope="col">Project</Th>
+                <Th scope="col">Type of Work</Th>
+                <Th scope="col">Time Spent</Th>
+                <Th width="1%" scope="col"></Th>
+              </tr>
+            </THead>
+            <tbody>{tasksList()}</tbody>
+          </Table>
+
+          <PageButton onClick={() => toggleModal(true)}>Add New Task</PageButton>
         </TasksContainer>
       </CalendarContainer>
       <AddTaskPopup

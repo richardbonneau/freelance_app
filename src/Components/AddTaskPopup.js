@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DatePicker from "react-datepicker";
+import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
-import firebase from "firebase/app";
 import { addTaskToFirestore } from "../_actions";
 import {
   PageButton,
@@ -14,6 +13,15 @@ import {
 } from "../utils/globalStyledComponents";
 const hours = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 const minutes = ["00", "15", "30", "45"];
+
+const LabelInputContainer = styled.div`
+  display: flex;
+  label {
+    min-width: 98px;
+    padding: 8px;
+    text-align: center;
+  }
+`;
 
 function AddTaskPopup(props) {
   const dispatch = useDispatch();
@@ -45,38 +53,50 @@ function AddTaskPopup(props) {
         <ModalTitle>New Task</ModalTitle>
         <ModalHr />
         <form>
-          <label>Task: </label>
-          <select
-            value={selectedProjectId}
-            onChange={e => setSelectedProjectId(Number(e.target.value))}
-          >
-            {listOfProjects.map((client, i) => (
-              <option key={i} value={client.id}>
-                {client.name}
-              </option>
-            ))}
-          </select>
-          <input
-            type="text"
-            placeholder="Work Type"
-            value={workType}
-            onChange={e => setWorkType(e.target.value)}
-          />
+          <LabelInputContainer>
+            <label>Task: </label>
+            <select
+              value={selectedProjectId}
+              onChange={e => setSelectedProjectId(Number(e.target.value))}
+            >
+              {listOfProjects.map((client, i) => (
+                <option key={i} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </LabelInputContainer>
 
-          <select value={selectedHours} onChange={e => setSelectedHours(e.target.value)}>
-            {hours.map((hour, i) => (
-              <option key={i} value={hour}>
-                {hour}
-              </option>
-            ))}
-          </select>
-          <select value={selectedMinutes} onChange={e => setSelectedMinutes(e.target.value)}>
-            {minutes.map((hour, i) => (
-              <option key={i} value={hour}>
-                {hour}
-              </option>
-            ))}
-          </select>
+          <div />
+          <LabelInputContainer>
+            {" "}
+            <label>Type of Work: </label>
+            <input
+              type="text"
+              placeholder='ex: "Programming"'
+              maxLength={20}
+              value={workType}
+              onChange={e => setWorkType(e.target.value)}
+            />
+          </LabelInputContainer>
+
+          <LabelInputContainer>
+            <label>Time Spent: </label>
+            <select value={selectedHours} onChange={e => setSelectedHours(e.target.value)}>
+              {hours.map((hour, i) => (
+                <option key={i} value={hour}>
+                  {hour}
+                </option>
+              ))}
+            </select>
+            <select value={selectedMinutes} onChange={e => setSelectedMinutes(e.target.value)}>
+              {minutes.map((hour, i) => (
+                <option key={i} value={hour}>
+                  {hour}
+                </option>
+              ))}
+            </select>
+          </LabelInputContainer>
 
           <div />
 
