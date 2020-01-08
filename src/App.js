@@ -13,11 +13,12 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import InvoiceDetails from "./Pages/InvoiceDetails";
 import EditInfo from "./Pages/EditInfo";
 import InvoiceCreator from "./Pages/InvoiceCreator";
+import IncomeTracker from "./Pages/IncomeTracker";
+import Expenses from "./Pages/Expenses";
 
 function App() {
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
-
 
   const renderNav = () => {
     return isVerifying ? null : (
@@ -25,7 +26,6 @@ function App() {
         <MobileNavBar />
         <SideBar />
       </>
-
     );
   };
   return (
@@ -95,6 +95,22 @@ function App() {
         exact
         path="/time-tracking"
         component={TimeTracking}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/income-tracker"
+        component={IncomeTracker}
+        isAuthenticated={isAuthenticated}
+        isVerifying={isVerifying}
+      />
+
+      <ProtectedRoute
+        exact
+        path="/expenses"
+        component={Expenses}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

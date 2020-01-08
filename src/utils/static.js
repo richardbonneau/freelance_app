@@ -10,11 +10,12 @@ export const initialUserDocument = {
       id: 1,
       email: "example@freelancify.io",
       companyName: "Freelancify",
-      addressOne: "123 Code Street",
-      addressTwo: "apt 1",
+      addressOne: "1234 Code Street",
+      addressTwo: "Apt 1",
+      country: "Canada",
       city: "Montréal",
       province: "Québec",
-      zip: "h2w1w2"
+      zip: "H1H1H1"
     }
   ],
   projects: [
@@ -40,7 +41,16 @@ export const initialUserDocument = {
       fromCountry: "Canada",
       invoiceDate: firebase.firestore.Timestamp.fromDate(new Date()),
       dueDate: firebase.firestore.Timestamp.fromDate(new Date()),
-      items: [{ name: "Front-End Development", hours: 5, rate: 40, id: "1" }]
+      items: [{ name: "Front-End Development", hours: 5, rate: 40, id: "1" }],
+      userInfo: {
+        name: "You",
+        addressOne: "1234 Freelance Street",
+        addressTwo: "Apt. 1",
+        city: "Atlantis",
+        province: "Ares",
+        country: "Atlantic Ocean",
+        zip: "123456"
+      }
     }
   ],
   tasks: [],

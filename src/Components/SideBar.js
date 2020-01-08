@@ -190,10 +190,10 @@ function SideBar() {
             </Link>
           </LinkContainer>
           <LinkContainer
-          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-          // onClick={closeHamburgerMenu}
+            changeBackgroundColor={currentPage === "/income-tracker" && hamburgerMenuOpened}
+            onClick={closeHamburgerMenu}
           >
-            <Link to="/">
+            <Link to="/income-tracker">
               <GoGraph />
               <div>Income Tracker</div>
             </Link>
@@ -239,18 +239,16 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-          // changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-          // onClick={closeHamburgerMenu}
+            changeBackgroundColor={currentPage === "/expenses" && hamburgerMenuOpened}
+            onClick={closeHamburgerMenu}
           >
-            <Link to="/">
+            <Link to="/expenses">
               <FaMoneyBillAlt />
               <div>Expenses</div>
             </Link>
           </LinkContainer>
 
-          {/* <LinkContainer><Link to="/">Calendar</Link></LinkContainer> */}
           {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
-          {/* <LinkContainer><Link to="/">Tax Report Documents</Link></LinkContainer> */}
         </div>
         <UserAvatarContainer
           avatarPopupToggle={avatarPopupToggle}

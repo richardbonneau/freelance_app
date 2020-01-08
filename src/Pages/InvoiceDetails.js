@@ -4,7 +4,18 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Item from "../Components/Item";
 import { Container, Anchor } from "../utils/globalStyledComponents";
-import { TitleContainer, InvoiceContainer, NotesInput, DatePickContainer, SenderRecipientContainer, SenderContainer, RecipientContainer, ItemsListContainer, TotalContainer, ItemContainer } from "../utils/invoiceStyling";
+import {
+  TitleContainer,
+  InvoiceContainer,
+  NotesInput,
+  DatePickContainer,
+  SenderRecipientContainer,
+  SenderContainer,
+  RecipientContainer,
+  ItemsListContainer,
+  TotalContainer,
+  ItemContainer
+} from "../utils/invoiceStyling";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -22,12 +33,12 @@ function InvoiceDetails(props) {
   const invoiceDate = new Date(details.invoiceDate.seconds * 1000);
   const dueDate = new Date(details.dueDate.seconds * 1000);
 
-
+  console.log("details", details);
   return (
     <Container>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
       <InvoiceContainer>
-        <h1 style={{ marginBottom: '35px' }}>INVOICE</h1>
+        <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
         <TitleContainer>
           <input
             type="text"
@@ -35,7 +46,7 @@ function InvoiceDetails(props) {
             placeholder="Invoice Title"
             value={details.title}
             readOnly
-          // onChange={e => setTitleInput(e.target.value)}
+            // onChange={e => setTitleInput(e.target.value)}
           />
           <div className="subcontainer ">
             {" "}
@@ -47,11 +58,11 @@ function InvoiceDetails(props) {
               value={details.invoiceNumber}
               maxLength={7}
               readOnly
-            // onChange={e =>
-            //   e.target.value.startsWith("#")
-            //     ? setInvoiceNumberInput(e.target.value)
-            //     : setInvoiceNumberInput("#" + e.target.value)
-            // }
+              // onChange={e =>
+              //   e.target.value.startsWith("#")
+              //     ? setInvoiceNumberInput(e.target.value)
+              //     : setInvoiceNumberInput("#" + e.target.value)
+              // }
             />
           </div>
         </TitleContainer>
@@ -66,8 +77,6 @@ function InvoiceDetails(props) {
               <div>{details.userInfo.province}</div>
               <div>{details.userInfo.city}</div>
               <div>{details.userInfo.zip}</div>
-
-
             </SenderContainer>
 
             <RecipientContainer>
@@ -79,8 +88,6 @@ function InvoiceDetails(props) {
               <div>{client.city}</div>
               <div> {client.province}</div>
               <div>{client.zip}</div>
-
-
             </RecipientContainer>
           </SenderRecipientContainer>
           <DatePickContainer>
@@ -119,7 +126,6 @@ function InvoiceDetails(props) {
             </div>
           </div>
           {details.items.map((item, i) => (
-
             <ItemContainer>
               <input
                 type="text"
@@ -162,10 +168,8 @@ function InvoiceDetails(props) {
                   <div className="amount">{"$" + (item.hours * item.rate).toFixed(2)}</div>
                 </div>
               </div>
-
             </ItemContainer>
           ))}
-
         </ItemsListContainer>
 
         <TotalContainer>
@@ -185,14 +189,11 @@ function InvoiceDetails(props) {
           value={details.notes}
           placeholder="Notes"
           readOnly
-        // onChange={e => setNotesInput(e.target.value)}
+          // onChange={e => setNotesInput(e.target.value)}
         ></NotesInput>
-
-
       </InvoiceContainer>
     </Container>
-  )
-
+  );
 }
 
 export default InvoiceDetails;

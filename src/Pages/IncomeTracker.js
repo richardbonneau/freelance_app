@@ -5,8 +5,9 @@ import { Container, PageButton } from "../utils/globalStyledComponents";
 function Dashboard() {
   return (
     <Container>
-      <h2>Dashboard</h2>
-      Buttons that redirects you to different parts of the site
+      <h2>Income Tracker</h2>
+      Graphs that shows you how much money you've made and with whom. What has been the most
+      profitable?
       {/* <PageButton>New Invoice</PageButton>
             <PageButton>New Client</PageButton>
             <PageButton>New Project</PageButton>
