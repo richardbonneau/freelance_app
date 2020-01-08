@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
-import { addProjectToFirestore } from "../_actions";
+import { addTaskToFirestore } from "../_actions";
 import {
   PageButton,
   MaskOverlay,
@@ -23,31 +23,29 @@ function AddTaskPopup(props) {
   const [selectedHours, setSelectedHours] = useState("");
   const [selectedMinutes, setSelectedMinutes] = useState("");
 
-  const addProjectModalContents = () => {
-    const newProjectSubmit = e => {
+  const addTaskModalContents = () => {
+    console.log("props.selectedDay", props.selectedDay);
+    const newTaskSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
-      let newProjectId = Date.now() * 10000 + Math.round(Math.random() * 9999);
-      // dispatch(
-      //   addProjectToFirestore({
-      //     name: nameInput,
-      //     id: newProjectId,
-      //     clientId: selectedClientId,
-      //     projectDebutDate: firebase.firestore.Timestamp.fromDate(
-      //       projectStartDate
-      //     ),
-      //     projectEndDate: firebase.firestore.Timestamp.fromDate(projectEndDate)
-      //   })
-      // );
+
+      dispatch(
+        addTaskToFirestore({
+          date: props.selectedDay,
+          projectId: selectedProjectId,
+          workType,
+          timeWorked: { hours: selectedHours, minutes: selectedMinutes }
+        })
+      );
       props.toggleModal(false);
     };
 
     return (
       <ModalContents active={props.isModalOpened}>
-        <ModalTitle>New Project</ModalTitle>
+        <ModalTitle>New Task</ModalTitle>
         <ModalHr />
         <form>
-          <label>Project: </label>
+          <label>Task: </label>
           <select
             value={selectedProjectId}
             onChange={e => setSelectedProjectId(Number(e.target.value))}
@@ -84,7 +82,7 @@ function AddTaskPopup(props) {
 
           <div className="modal-buttons">
             {" "}
-            <PageButton onClick={newProjectSubmit}>Create Project</PageButton>
+            <PageButton onClick={newTaskSubmit}>Create Task</PageButton>
             <PageButton onClick={() => props.toggleModal(false)}>Cancel</PageButton>
           </div>
         </form>
@@ -99,7 +97,7 @@ function AddTaskPopup(props) {
         isModalOpened={props.isModalOpened}
         style={{ height: "260px", marginTop: "-130px" }}
       >
-        {addProjectModalContents()}
+        {addTaskModalContents()}
       </ModalContainer>
     </>
   );
