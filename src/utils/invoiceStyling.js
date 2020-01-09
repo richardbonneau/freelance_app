@@ -24,8 +24,8 @@ export const TitleContainer = styled.div`
   }
 `;
 export const InvoiceContainer = styled.form`
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  border: 1px solid #dee1e2;
+   box-shadow: none;
+  border: none;
   padding: 20px;
   margin-top: 20px;
   .submit-btn {
@@ -61,6 +61,8 @@ export const InvoiceContainer = styled.form`
     display:flex;
   }
   @media (min-width: 768px) {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #dee1e2;
     .first-row {
       flex-direction: row;
     }
@@ -118,14 +120,14 @@ export const ItemsListContainer = styled.div`
     width: 100%;
     height: 26px;
     background: ${props => props.theme.black};
-    
+
     display: none;
     justify-content: space-between;
   }
-  .items-header > h4{
+  .items-header > h4 {
     margin-left: 10px;
   }
-  .items-header  h4 {
+  .items-header h4 {
     color: white;
   }
   .header-hours-rate-amount {
@@ -136,10 +138,10 @@ export const ItemsListContainer = styled.div`
     margin-right: 30px;
   }
   .add-item-btn {
-    background:${props => props.theme.blue};
+    background: ${props => props.theme.blue};
   }
   .add-item-btn:hover {
-    background:${props => props.theme.blueHover};
+    background: ${props => props.theme.blueHover};
   }
   @media (min-width: 768px) {
     .items-header {
@@ -160,83 +162,83 @@ export const TotalContainer = styled.div`
 `;
 
 export const ItemContainer = styled.div`
-box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
-padding: 14px;
-/* border-radius: 15px; */
-border: 1px solid #0000001f;
-border-top:none;
+  box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
+  padding: 14px;
+  /* border-radius: 15px; */
+  border: 1px solid #0000001f;
+  border-top: none;
 
-a {
-  background: ${props => props.theme.red};
-  padding: 0;
-  width: 100%;
-  height: 25px;
-  color: white;
-}
-svg{
-  height: 15px;
-  width: 15px;
-}
-.delete-btn{
-  cursor:pointer;
-  font-size: 12px;
-  padding:5px;
-  color: ${props => props.theme.black};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 300ms;
-}
-.delete-btn:hover .trashcan{
-  color: ${props => props.theme.red};
-}
-.title-description {
-  width: 100%;
-}
-.number-inputs-container {
-  display: flex;
-  position: relative;
-  margin: 10px 0;
-  justify-content: space-between;
-}
-.number-inputs-container-first-child {
-  margin-right: 20px;
-}
-.number-input {
-  width: 50px;
-}
-.amount {
-  text-align: right;
-  word-break: break-all;
-}
-.hours-rate-container {
-  display: flex;
-}
-.amount-container{
-  min-width: 100px;
-}
-.amount-container h4{
-  text-align: right;
-}
-@media (min-width: 768px) {
-  display: flex;
-  box-shadow: none;
-  padding:10px;
   a {
-    height: 100%;
+    background: ${props => props.theme.red};
+    padding: 0;
+    width: 100%;
+    height: 25px;
+    color: white;
   }
-  .number-inputs-container {
-    margin: 0;
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+  .delete-btn {
+    cursor: pointer;
+    font-size: 12px;
+    padding: 5px;
+    color: ${props => props.theme.black};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 300ms;
+  }
+  .delete-btn:hover .trashcan {
+    color: ${props => props.theme.red};
   }
   .title-description {
+    width: 100%;
+  }
+  .number-inputs-container {
+    display: flex;
+    position: relative;
+    margin: 10px 0;
+    justify-content: space-between;
+  }
+  .number-inputs-container-first-child {
     margin-right: 20px;
   }
-  .amount{
-    margin: 5px 10px;
-    text-align: left;
+  .number-input {
+    width: 50px;
   }
-  h4{
-    display:none;
+  .amount {
+    text-align: right;
+    word-break: break-all;
   }
-}
+  .hours-rate-container {
+    display: flex;
+  }
+  .amount-container {
+    min-width: 100px;
+  }
+  .amount-container h4 {
+    text-align: right;
+  }
+  @media (min-width: 768px) {
+    display: flex;
+    box-shadow: none;
+    padding: 10px;
+    a {
+      height: 100%;
+    }
+    .number-inputs-container {
+      margin: 0;
+    }
+    .title-description {
+      margin-right: 20px;
+    }
+    .amount {
+      margin: 5px 10px;
+      text-align: left;
+    }
+    h4 {
+      display: none;
+    }
+  }
 `;

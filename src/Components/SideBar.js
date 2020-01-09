@@ -90,14 +90,14 @@ const UserAvatarContainer = styled.div`
     opacity: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "1" : "0")};
     top: -52px;
     left: ${({ avatarPopupToggle }) => (avatarPopupToggle ? "0px" : "-80px")};
-    background: ${props => props.theme.accent};
+    background: ${props => props.theme.blue};
     transition: all 300ms ease-out 10ms;
     position: absolute;
     width: 100%;
     text-align: center;
   }
   .popup > div:hover {
-    background: white;
+    /* background: ${props => props.theme.black}; */
     color: ${props => props.theme.accent};
   }
 `;

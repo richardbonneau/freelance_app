@@ -17,9 +17,7 @@ function AddProjectPopup(props) {
   const dispatch = useDispatch();
   const listOfClients = useSelector(state => state.clients.clientsList);
   const [nameInput, setNameInput] = useState("");
-  const [selectedClientId, setSelectedClientId] = useState(
-    Number(listOfClients[0].id)
-  );
+  const [selectedClientId, setSelectedClientId] = useState(Number(listOfClients[0].id));
   const [projectStartDate, setProjectStartDate] = useState(new Date());
   const [projectEndDate, setProjectEndDate] = useState(new Date());
 
@@ -33,9 +31,7 @@ function AddProjectPopup(props) {
           name: nameInput,
           id: newProjectId,
           clientId: selectedClientId,
-          projectDebutDate: firebase.firestore.Timestamp.fromDate(
-            projectStartDate
-          ),
+          projectDebutDate: firebase.firestore.Timestamp.fromDate(projectStartDate),
           projectEndDate: firebase.firestore.Timestamp.fromDate(projectEndDate)
         })
       );
@@ -80,9 +76,7 @@ function AddProjectPopup(props) {
           <div className="modal-buttons">
             {" "}
             <PageButton onClick={newProjectSubmit}>Create Project</PageButton>
-            <PageButton onClick={() => props.toggleModal(false)}>
-              Cancel
-            </PageButton>
+            <PageButton onClick={() => props.toggleModal(false)}>Cancel</PageButton>
           </div>
         </form>
       </ModalContents>

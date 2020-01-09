@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 // Tables
 export const Container = styled.div`
-  padding:65px 20px 20px 20px;
+  padding: 65px 20px 20px 20px;
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
   background: white;
-  *{
-    color:${props => props.theme.black};
+  * {
+    color: ${props => props.theme.black};
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -28,9 +28,9 @@ export const Container = styled.div`
   select:focus,
   textarea:focus,
   button:focus {
-  outline: none;
+    outline: none;
   }
-  @media(min-width:1024px){
+  @media (min-width: 1024px) {
     padding: 25px;
   }
 `;
@@ -41,10 +41,10 @@ export const Table = styled.table`
   border-spacing: 0 20px;
 
   @media (min-width: 1024px) {
-  margin: 0;
-  padding: 0;
-  table-layout: fixed;
-  max-width: 900px;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+    max-width: 900px;
   }
 `;
 export const Tr = styled.tr`
@@ -52,7 +52,7 @@ export const Tr = styled.tr`
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
   transition: box-shadow 150ms;
   &:hover {
-  box-shadow: 0 0 5px 2px rgb(221, 221, 221);
+    box-shadow: 0 0 5px 2px rgb(221, 221, 221);
   }
 `;
 export const THead = styled.thead`
@@ -94,28 +94,28 @@ export const Anchor = styled.a`
   color: ${props => props.theme.blue};
   cursor: pointer;
   text-decoration: underline;
-  &&:hover{
+  &&:hover {
     color: ${props => props.theme.blueHover};
   }
-  &&:visited{
+  &&:visited {
     color: ${props => props.theme.blue};
   }
-  &&:active{
+  &&:active {
     color: ${props => props.theme.blue};
   }
 `;
 
 // Modal
-
 export const MaskOverlay = styled.div`
   position: fixed;
   z-index: 150;
   width: 100%;
   height: 100%;
-  background: #676767ad;
+  background: ${({ isModalOpened }) => (isModalOpened ? "#676767ad" : "#67676700")};
   top: 0;
   left: 0;
   visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
+  transition: 0.5s ease-out;
 `;
 export const ModalContainer = styled.div`
   position: fixed;
@@ -129,8 +129,7 @@ export const ModalContainer = styled.div`
   margin-left: -165px;
   transition: 0.5s ease-out;
   visibility: ${({ isModalOpened }) => (isModalOpened ? "visible" : "hidden")};
-  transform: ${({ isModalOpened }) =>
-    isModalOpened ? "translateY(0)" : "translateY(45px)"};
+  transform: ${({ isModalOpened }) => (isModalOpened ? "translateY(0)" : "translateY(45px)")};
   opacity: ${({ isModalOpened }) => (isModalOpened ? "1" : "0")};
   @media (min-width: 1024px) {
     margin-left: -55px;
@@ -155,7 +154,6 @@ export const FormInputContainer = styled.div`
   justify-content: space-between;
   margin-bottom: 15px;
 `;
-
 export const PageButton = styled.a`
   color: white;
   background: ${props => props.theme.blue};
@@ -166,13 +164,10 @@ export const PageButton = styled.a`
   width: 100px;
   transition: 300ms ease-in-out;
   cursor: pointer;
-
   svg {
     margin-right: 5px;
   }
   &&:hover {
     background: ${props => props.theme.blueHover};
   }
-
-
 `;
