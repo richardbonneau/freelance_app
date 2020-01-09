@@ -200,10 +200,10 @@ function SideBar() {
           </LinkContainer>
 
           <LinkContainer
-            changeBackgroundColor={currentPage === "/time-tracking" && hamburgerMenuOpened}
+            changeBackgroundColor={currentPage === "/time-tracker" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
           >
-            <Link to="/time-tracking">
+            <Link to="/time-tracker">
               <IoIosTime />
               <div>Time Tracker</div>
             </Link>

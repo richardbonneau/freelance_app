@@ -28,8 +28,8 @@ function AddTaskPopup(props) {
   const listOfProjects = useSelector(state => state.projects.projectsList);
   const [selectedProjectId, setSelectedProjectId] = useState(Number(listOfProjects[0].id));
   const [workType, setWorkType] = useState("");
-  const [selectedHours, setSelectedHours] = useState("");
-  const [selectedMinutes, setSelectedMinutes] = useState("");
+  const [selectedHours, setSelectedHours] = useState(hours[0]);
+  const [selectedMinutes, setSelectedMinutes] = useState(minutes[0]);
 
   const addTaskModalContents = () => {
     console.log("props.selectedDay", props.selectedDay);

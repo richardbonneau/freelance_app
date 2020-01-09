@@ -6,7 +6,7 @@ import Clients from "./Pages/Clients";
 import Projects from "./Pages/Projects";
 import Login from "./Pages/Login";
 import Invoices from "./Pages/Invoices";
-import TimeTracking from "./Pages/TimeTracking";
+import TimeTracker from "./Pages/TimeTracker";
 import MobileNavBar from "./Components/MobileNavBar";
 import SideBar from "./Components/SideBar";
 import ProtectedRoute from "./Components/ProtectedRoute";
@@ -93,8 +93,8 @@ function App() {
 
       <ProtectedRoute
         exact
-        path="/time-tracking"
-        component={TimeTracking}
+        path="/time-tracker"
+        component={TimeTracker}
         isAuthenticated={isAuthenticated}
         isVerifying={isVerifying}
       />

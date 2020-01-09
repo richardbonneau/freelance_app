@@ -17,6 +17,8 @@ const CalendarContainer = styled.div`
 `;
 const WeekdaysContainer = styled.div`
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `;
 const Weekday = styled.div`
   padding: 4px 6px;
@@ -38,7 +40,7 @@ const Weekday = styled.div`
 `;
 const TasksContainer = styled.div``;
 
-function TimeTracking() {
+function TimeTracker() {
   const [selectedWeek, setSelectedWeek] = useState(new Date());
   let momentSelectedWeek = moment(selectedWeek).startOf("week");
   const [selectedDay, setSelectedDay] = useState(moment(momentSelectedWeek).format("MMDDYY"));
@@ -83,11 +85,10 @@ function TimeTracking() {
   }
   return (
     <Container>
-      <h2>Time Tracking</h2>
+      <h2>Time Tracker</h2>
       <CalendarContainer>
         <Header>
           <h4>Week of {momentSelectedWeek.startOf("week").format("MMM Do YYYY")}</h4>
-
           <DatePicker
             selected={selectedWeek}
             onChange={date => setSelectedWeek(date)}
@@ -166,4 +167,4 @@ function TimeTracking() {
   );
 }
 
-export default TimeTracking;
+export default TimeTracker;
