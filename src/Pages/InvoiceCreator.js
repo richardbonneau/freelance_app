@@ -9,8 +9,17 @@ import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import { Container, PageButton, Anchor } from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
-import { TitleContainer, InvoiceContainer, NotesInput, DatePickContainer, SenderRecipientContainer, SenderContainer, RecipientContainer, ItemsListContainer, TotalContainer } from "../utils/invoiceStyling";
-
+import {
+  TitleContainer,
+  InvoiceContainer,
+  NotesInput,
+  DatePickContainer,
+  SenderRecipientContainer,
+  SenderContainer,
+  RecipientContainer,
+  ItemsListContainer,
+  TotalContainer
+} from "../utils/invoiceStyling";
 
 function InvoiceCreator() {
   const dispatch = useDispatch();
@@ -19,9 +28,7 @@ function InvoiceCreator() {
   const clients = useSelector(state => state.clients.clientsList);
   const itemsList = useSelector(state => state.invoices.currentItemsList);
   const userInfo = useSelector(state => state.user.userInfo);
-  const [selectedClientId, setSelectedClientId] = useState(
-    Number(clients[0].id)
-  );
+  const [selectedClientId, setSelectedClientId] = useState(Number(clients[0].id));
   const [titleInput, setTitleInput] = useState("");
   const [invoiceNumberInput, setInvoiceNumberInput] = useState("");
   const [invoiceDate, setInvoiceDate] = useState(new Date());
@@ -43,7 +50,7 @@ function InvoiceCreator() {
   const newInvoiceSubmit = e => {
     e.preventDefault();
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
-    console.log("userinfo", userInfo)
+    console.log("userinfo", userInfo);
     dispatch(
       addInvoiceToFirestore(
         {
@@ -68,7 +75,7 @@ function InvoiceCreator() {
     <Container>
       <h2>Invoice Creator</h2>
       <InvoiceContainer>
-        <h1 style={{ marginBottom: '35px' }}>INVOICE</h1>
+        <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
         <TitleContainer>
           <input
             type="text"
@@ -180,12 +187,12 @@ function InvoiceCreator() {
           <div>
             {" "}
             <h5>Subtotal</h5>
-            <div className="total">{"$" + itemsSubtotal}</div>
+            <div className="total">{"$" + itemsSubtotal.toFixed(2)}</div>
           </div>
 
           <div>
             <h4>Total</h4>
-            <div className="total">{"$" + itemsTotal}</div>
+            <div className="total">{"$" + itemsTotal.toFixed(2)}</div>
           </div>
         </TotalContainer>
 

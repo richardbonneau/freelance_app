@@ -126,7 +126,7 @@ function InvoiceDetails(props) {
             </div>
           </div>
           {details.items.map((item, i) => (
-            <ItemContainer>
+            <ItemContainer key={i}>
               <input
                 type="text"
                 className="title-description"

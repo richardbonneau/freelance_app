@@ -25,8 +25,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   color: white;
   left: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "0px" : "-220px")};
-  background: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? props => props.theme.primary : "white"};
+  background: ${props => props.theme.primary};
   z-index: 100;
   transition: all 300ms ease-out 10ms;
   min-width: 220px;
