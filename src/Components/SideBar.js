@@ -265,7 +265,10 @@ function SideBar() {
         </UserAvatarContainer>
       </NavContainer>
 
-      <Mask hamburgerMenuOpened={hamburgerMenuOpened} />
+      <Mask
+        onClick={() => dispatch(toggleHamburgerMenu())}
+        hamburgerMenuOpened={hamburgerMenuOpened}
+      />
     </>
   );
 }

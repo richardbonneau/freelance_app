@@ -112,7 +112,7 @@ function AddTaskPopup(props) {
 
   return (
     <>
-      <MaskOverlay isModalOpened={props.isModalOpened} />
+      <MaskOverlay onClick={() => props.toggleModal(false)} isModalOpened={props.isModalOpened} />
       <ModalContainer
         isModalOpened={props.isModalOpened}
         style={{ height: "260px", marginTop: "-130px" }}

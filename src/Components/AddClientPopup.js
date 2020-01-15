@@ -109,9 +109,7 @@ function AddClientPopup(props) {
           <div className="modal-buttons">
             {" "}
             <PageButton onClick={newClientSubmit}>Create Client</PageButton>
-            <PageButton onClick={() => props.toggleModal(false)}>
-              Cancel
-            </PageButton>
+            <PageButton onClick={() => props.toggleModal(false)}>Cancel</PageButton>
           </div>
         </form>
       </ModalContents>
@@ -120,7 +118,7 @@ function AddClientPopup(props) {
 
   return (
     <>
-      <MaskOverlay isModalOpened={props.isModalOpened} />
+      <MaskOverlay onClick={() => props.toggleModal(false)} isModalOpened={props.isModalOpened} />
       <ModalContainer isModalOpened={props.isModalOpened}>
         {addClientModalContents()}
       </ModalContainer>

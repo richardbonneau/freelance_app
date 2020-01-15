@@ -4,23 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddProjectPopup from "../Components/AddProjectPopup";
 import {} from "../utils/globalStyledComponents";
 import moment from "moment";
-import {
-  Container,
-  Table,
-  Th,
-  THead,
-  PageButton,
-  MaskOverlay,
-  ModalContainer,
-  ModalContents,
-  ModalTitle,
-  ModalHr,
-  FormInputContainer,
-  Anchor,
-  Tr,
-  Td,
-  ExpandableInvisibleButton
-} from "../utils/globalStyledComponents";
+import { Container, Table, Th, THead, PageButton, Tr, Td } from "../utils/globalStyledComponents";
 
 function Projects() {
   const listOfProjects = useSelector(state => state.projects.projectsList);
@@ -50,12 +34,8 @@ function Projects() {
           </td>
           <Td label="Project Name">{project.name}</Td>
           <Td label="Client">{client.name}</Td>
-          <Td label="Debut Date">
-            {moment(projectDebutDate).format("MMM Do YYYY")}
-          </Td>
-          <Td label="End Date">
-            {moment(projectEndDate).format("MMM Do YYYY")}
-          </Td>
+          <Td label="Debut Date">{moment(projectDebutDate).format("MMM Do YYYY")}</Td>
+          <Td label="End Date">{moment(projectEndDate).format("MMM Do YYYY")}</Td>
         </Tr>
       );
     });
@@ -105,10 +85,7 @@ function Projects() {
       </PageButton>
 
       {projectsList()}
-      <AddProjectPopup
-        isModalOpened={isModalOpened}
-        toggleModal={toggleModal}
-      />
+      <AddProjectPopup isModalOpened={isModalOpened} toggleModal={toggleModal} />
     </Container>
   );
 }

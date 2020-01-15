@@ -5,29 +5,14 @@ import Client from "../Components/Client";
 import { addClientToFirestore } from "../_actions";
 import AddClientPopup from "../Components/AddClientPopup";
 import { FiX } from "react-icons/fi";
-import {
-  Container,
-  Table,
-  Th,
-  THead,
-  PageButton,
-  MaskOverlay,
-  ModalContainer,
-  ModalContents,
-  ModalTitle,
-  ModalHr,
-  FormInputContainer,
-  Anchor
-} from "../utils/globalStyledComponents";
-
-
+import { Container, Table, Th, THead, PageButton } from "../utils/globalStyledComponents";
 
 function Clients() {
   const listOfClients = useSelector(state => state.clients.clientsList);
   const [isModalOpened, toggleModal] = useState(false);
   const [isClientCardOpened, toggleClientCard] = useState(false);
   const [selectedClient, setSelectedClient] = useState(listOfClients[0]);
-console.log("listOfClients",listOfClients)
+  console.log("listOfClients", listOfClients);
   const clientSelected = client => {
     toggleClientCard(true);
     setSelectedClient(client);
@@ -53,7 +38,6 @@ console.log("listOfClients",listOfClients)
     );
   };
 
-
   // const clientCardModalContents = () => {
   //   return (
   //     <ModalContents active={isClientCardOpened}>
@@ -75,11 +59,15 @@ console.log("listOfClients",listOfClients)
   return (
     <Container>
       <h2>Clients</h2>
-      <PageButton style={{width:"125px", float: 'right', marginBottom: '10px'}} onClick={() => toggleModal(true)}>Add New Client</PageButton>
+      <PageButton
+        style={{ width: "125px", float: "right", marginBottom: "10px" }}
+        onClick={() => toggleModal(true)}
+      >
+        Add New Client
+      </PageButton>
 
       {clientsList()}
-      <AddClientPopup isModalOpened={isModalOpened} toggleModal={toggleModal}  />
-
+      <AddClientPopup isModalOpened={isModalOpened} toggleModal={toggleModal} />
     </Container>
   );
 }

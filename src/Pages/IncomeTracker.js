@@ -4,6 +4,9 @@ import styled from "styled-components";
 import { Container } from "../utils/globalStyledComponents";
 
 const GeneralStatsContainer = styled.div``;
+const SubHeader = styled.h4`
+  margin: 15px 0 5px 0;
+`;
 const TimeFrameContainer = styled.div`
   display: flex;
 `;
@@ -90,7 +93,7 @@ function Dashboard() {
       <h2>Income Tracker</h2>
       Tables and graphs that shows you how much money you've made and with whom. What has been the
       most profitable?
-      <h4>General Stats</h4>
+      <SubHeader>General Stats</SubHeader>
       <GeneralStatsContainer>
         <TimeFrameContainer>
           <TimeFrame
