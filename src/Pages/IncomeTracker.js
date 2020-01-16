@@ -32,7 +32,7 @@ const TimeFrame = styled.div`
   font-size: 17px;
   &&:hover {
     background: ${({ timeFrame }) =>
-      timeFrame ? props => props.theme.blue : props => props.theme.accent};
+    timeFrame ? props => props.theme.blue : props => props.theme.accent};
     color: white;
     border-color: ${({ timeFrame }) => (timeFrame ? "#ddd" : props => props.theme.accent)};
   }
@@ -41,39 +41,65 @@ const TR = styled.tr`
   border-radius: 3px;
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
 `;
+const CheckboxContainer = styled.div`
+  display:flex;
+  align-items:center;
+  label{
+    margin-right:5px;
+  }
+`
 
 function Dashboard() {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("beginning-year");
   const listOfTasks = useSelector(state => state.tasks.tasksList);
   const listOfInvoices = useSelector(state => state.invoices.invoicesList);
 
+  const [tasksTotalHours, setTasksTotalHours] = useState(0);
   const [invoicesTotalHours, setInvoicesTotalHours] = useState(0);
   const [invoicesTotalIncome, setInvoicesTotalIncome] = useState(0);
   const [calculatedHourlyIncome, setCalculatedHourlyIncome] = useState(0);
+  const [useInvoicesData, setUseInvoicesData] = useState(false);
 
   function hoursIncomeCalculator(debutDate) {
+    let tasksHours = 0;
     let invoiceHours = 0;
     let invoiceIncome = 0;
     listOfInvoices.forEach(invoice => {
+      console.log('invoice', invoice)
       invoice.items.forEach(item => {
         invoiceHours += Number(item.hours);
         invoiceIncome += Number(item.rate);
+        console.log('invoiceHours', invoiceHours, 'invoiceIncome', invoiceIncome)
       });
     });
+    listOfTasks.forEach(task => {
+      console.log("task", task)
+      tasksHours += Number(task.timeWorked.hours);
+      if (task.timeWorked.minutes === '15') tasksHours += 0.25;
+      else if (task.timeWorked.minutes === '30') tasksHours += 0.5;
+      else if (task.timeWorked.minutes === '45') tasksHours += 0.75;
+    });
+    setTasksTotalHours(tasksHours);
     setInvoicesTotalHours(invoiceHours);
     setInvoicesTotalIncome(invoiceIncome);
-    setCalculatedHourlyIncome(invoiceHours / invoiceIncome);
+
   }
   useEffect(() => {
+
     hoursIncomeCalculator();
   }, [selectedTimeFrame]);
 
   function tableContents() {
-    if (selectedTimeFrame === "all-time") allTimeTableContents();
+    if (selectedTimeFrame === "all-time") return allTimeTableContents();
     else return <div>error</div>;
   }
 
   function allTimeTableContents() {
+    // setCalculatedHourlyIncome(invoiceHours / invoiceIncome);
+
+    let hoursToDisplay = invoicesTotalHours.toFixed(2);
+    if (!useInvoicesData) hoursToDisplay = tasksTotalHours.toFixed(2);
+    let hourlyIncome = hoursToDisplay / invoicesTotalIncome;
     return (
       <TR>
         {/* <td width="1%"> */}
@@ -81,9 +107,9 @@ function Dashboard() {
             onClick={() => props.clientSelected(props.client)}
           ></ExpandableInvisibleButton> */}
         {/* </td> */}
-        <TD label="Total Time Worked">{invoicesTotalHours.toFixed(2)}h</TD>
+        <TD label="Total Time Worked">{hoursToDisplay}h</TD>
         <TD label="Total Income">${invoicesTotalIncome.toFixed(2)}</TD>
-        <TD label="Total Income / hour">${calculatedHourlyIncome.toFixed(2)}</TD>
+        <TD label="Total Income / hour">${hourlyIncome.toFixed(2)}</TD>
       </TR>
     );
   }
@@ -94,6 +120,7 @@ function Dashboard() {
       Tables and graphs that shows you how much money you've made and with whom. What has been the
       most profitable?
       <SubHeader>General Stats</SubHeader>
+      <CheckboxContainer><label>Use only Invoices Data</label><input type="checkbox" checked={useInvoicesData} onClick={() => setUseInvoicesData(!useInvoicesData)} /></CheckboxContainer>
       <GeneralStatsContainer>
         <TimeFrameContainer>
           <TimeFrame
@@ -122,6 +149,8 @@ function Dashboard() {
           </TimeFrame>
         </TimeFrameContainer>
         <table>
+
+
           <tbody>{tableContents()}</tbody>
         </table>
       </GeneralStatsContainer>
