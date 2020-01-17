@@ -29,11 +29,9 @@ function InvoiceDetails(props) {
     state.clients.clientsList.find(client => client.id === details.clientId)
   );
 
-  console.log("details", details);
   const invoiceDate = new Date(details.invoiceDate.seconds * 1000);
   const dueDate = new Date(details.dueDate.seconds * 1000);
 
-  console.log("details", details);
   return (
     <Container>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>

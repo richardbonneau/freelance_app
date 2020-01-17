@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 import styled from "styled-components";
 import { Container } from "../utils/globalStyledComponents";
 
@@ -32,7 +33,7 @@ const TimeFrame = styled.div`
   font-size: 17px;
   &&:hover {
     background: ${({ timeFrame }) =>
-    timeFrame ? props => props.theme.blue : props => props.theme.accent};
+      timeFrame ? props => props.theme.blue : props => props.theme.accent};
     color: white;
     border-color: ${({ timeFrame }) => (timeFrame ? "#ddd" : props => props.theme.accent)};
   }
@@ -42,12 +43,12 @@ const TR = styled.tr`
   box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
 `;
 const CheckboxContainer = styled.div`
-  display:flex;
-  align-items:center;
-  label{
-    margin-right:5px;
+  display: flex;
+  align-items: center;
+  label {
+    margin-right: 5px;
   }
-`
+`;
 
 function Dashboard() {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("beginning-year");
@@ -65,41 +66,63 @@ function Dashboard() {
     let invoiceHours = 0;
     let invoiceIncome = 0;
     listOfInvoices.forEach(invoice => {
-      console.log('invoice', invoice)
-      invoice.items.forEach(item => {
-        invoiceHours += Number(item.hours);
-        invoiceIncome += Number(item.rate);
-        console.log('invoiceHours', invoiceHours, 'invoiceIncome', invoiceIncome)
-      });
+      let invoiceDate = moment(new Date(invoice.dueDate.seconds * 1000)).valueOf();
+      if (invoiceDate >= debutDate)
+        invoice.items.forEach(item => {
+          invoiceHours += Number(item.hours);
+          invoiceIncome += Number(item.rate);
+          console.log("invoiceHours", invoiceHours, "invoiceIncome", invoiceIncome);
+        });
     });
+
     listOfTasks.forEach(task => {
-      console.log("task", task)
+      console.log("task", task);
       tasksHours += Number(task.timeWorked.hours);
-      if (task.timeWorked.minutes === '15') tasksHours += 0.25;
-      else if (task.timeWorked.minutes === '30') tasksHours += 0.5;
-      else if (task.timeWorked.minutes === '45') tasksHours += 0.75;
+      if (task.timeWorked.minutes === "15") tasksHours += 0.25;
+      else if (task.timeWorked.minutes === "30") tasksHours += 0.5;
+      else if (task.timeWorked.minutes === "45") tasksHours += 0.75;
     });
     setTasksTotalHours(tasksHours);
     setInvoicesTotalHours(invoiceHours);
     setInvoicesTotalIncome(invoiceIncome);
-
   }
   useEffect(() => {
-
-    hoursIncomeCalculator();
+    console.log(
+      `moment()
+    .subtract(1, "months")`,
+      moment()
+        .subtract(1, "months")
+        .format("MMDDYY")
+    );
+    let debutDate = 0;
+    if (selectedTimeFrame === "beginning-year")
+      debutDate = moment()
+        .startOf("year")
+        .valueOf();
+    else if (selectedTimeFrame === "last-7-days")
+      debutDate = moment()
+        .subtract(7, "days")
+        .valueOf();
+    else if (selectedTimeFrame === "last-30-days")
+      debutDate = moment()
+        .subtract(1, "months")
+        .valueOf();
+    hoursIncomeCalculator(debutDate);
   }, [selectedTimeFrame]);
 
   function tableContents() {
+    return allTimeTableContents();
     if (selectedTimeFrame === "all-time") return allTimeTableContents();
     else return <div>error</div>;
   }
 
   function allTimeTableContents() {
     // setCalculatedHourlyIncome(invoiceHours / invoiceIncome);
-
     let hoursToDisplay = invoicesTotalHours.toFixed(2);
     if (!useInvoicesData) hoursToDisplay = tasksTotalHours.toFixed(2);
     let hourlyIncome = hoursToDisplay / invoicesTotalIncome;
+    console.log(`typeof hourlyIncome !== "number"`, hourlyIncome);
+    if (hourlyIncome === Infinity || isNaN(hourlyIncome)) hourlyIncome = 0;
     return (
       <TR>
         {/* <td width="1%"> */}
@@ -120,7 +143,14 @@ function Dashboard() {
       Tables and graphs that shows you how much money you've made and with whom. What has been the
       most profitable?
       <SubHeader>General Stats</SubHeader>
-      <CheckboxContainer><label>Use only Invoices Data</label><input type="checkbox" checked={useInvoicesData} onClick={() => setUseInvoicesData(!useInvoicesData)} /></CheckboxContainer>
+      <CheckboxContainer>
+        <label>Use only Invoices Data</label>
+        <input
+          type="checkbox"
+          checked={useInvoicesData}
+          onClick={() => setUseInvoicesData(!useInvoicesData)}
+        />
+      </CheckboxContainer>
       <GeneralStatsContainer>
         <TimeFrameContainer>
           <TimeFrame
@@ -149,8 +179,6 @@ function Dashboard() {
           </TimeFrame>
         </TimeFrameContainer>
         <table>
-
-
           <tbody>{tableContents()}</tbody>
         </table>
       </GeneralStatsContainer>

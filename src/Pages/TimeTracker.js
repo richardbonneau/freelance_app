@@ -43,12 +43,12 @@ const TasksContainer = styled.div``;
 function TimeTracker() {
   const [selectedWeek, setSelectedWeek] = useState(new Date());
   let momentSelectedWeek = moment(selectedWeek).startOf("week");
-  const [selectedDay, setSelectedDay] = useState(moment(momentSelectedWeek).format("MMDDYY"));
+  const [selectedDay, setSelectedDay] = useState(moment(momentSelectedWeek));
   const [isModalOpened, toggleModal] = useState(false);
   const listOfTasks = useSelector(state =>
     state.tasks.tasksList.filter(task => {
-      console.log("task.date === selectedDay", task.date, selectedDay);
-      return task.date === selectedDay;
+      let taskDateParsed = new Date(task.date.seconds * 1000);
+      return moment(taskDateParsed).format("MMDDYY") === moment(selectedDay).format("MMDDYY");
     })
   );
   const week = {
@@ -62,7 +62,7 @@ function TimeTracker() {
   };
 
   useEffect(() => {
-    setSelectedDay(moment(momentSelectedWeek).format("MMDDYY"));
+    setSelectedDay(moment(momentSelectedWeek));
   }, [selectedWeek]);
 
   // console.log("selectedDay", selectedDay);
@@ -70,8 +70,15 @@ function TimeTracker() {
   console.log("momentSelectedWeek", selectedDay);
 
   function tasksList() {
-    console.log("listOfTasks", listOfTasks);
-    // return listOfTasks.map((task, i) => <div key={i}>{task.workType}</div>);
+    if (listOfTasks.length === 0)
+      return (
+        <Tr>
+          <td width="1%">
+            {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
+          </td>
+          <Td>Nothing to show here</Td>
+        </Tr>
+      );
     return listOfTasks.map((task, i) => (
       <Tr key={i}>
         <td width="1%">
@@ -83,6 +90,7 @@ function TimeTracker() {
       </Tr>
     ));
   }
+
   return (
     <Container>
       <h2>Time Tracker</h2>
@@ -98,48 +106,15 @@ function TimeTracker() {
           />
         </Header>
         <WeekdaysContainer>
-          <Weekday
-            currentDay={week.sunday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.sunday.format("MMDDYY"))}
-          >
-            {week.sunday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.monday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.monday.format("MMDDYY"))}
-          >
-            {week.monday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.tuesday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.tuesday.format("MMDDYY"))}
-          >
-            {week.tuesday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.wednesday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.wednesday.format("MMDDYY"))}
-          >
-            {week.wednesday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.thursday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.thursday.format("MMDDYY"))}
-          >
-            {week.thursday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.friday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.friday.format("MMDDYY"))}
-          >
-            {week.friday.format("ddd D")}
-          </Weekday>
-          <Weekday
-            currentDay={week.saturday.format("MMDDYY") === selectedDay}
-            onClick={() => setSelectedDay(week.saturday.format("MMDDYY"))}
-          >
-            {week.saturday.format("ddd D")}
-          </Weekday>
+          {Object.keys(week).map((day, i) => (
+            <Weekday
+              key={i}
+              currentDay={week[day].format("MMDDYY") === selectedDay.format("MMDDYY")}
+              onClick={() => setSelectedDay(week[day])}
+            >
+              {week[day].format("ddd D")}
+            </Weekday>
+          ))}
         </WeekdaysContainer>
         <TasksContainer>
           <Table>
@@ -159,7 +134,7 @@ function TimeTracker() {
         </TasksContainer>
       </CalendarContainer>
       <AddTaskPopup
-        selectedDay={selectedDay}
+        selectedDay={moment(selectedDay).toDate()}
         isModalOpened={isModalOpened}
         toggleModal={toggleModal}
       />

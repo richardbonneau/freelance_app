@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
+import firebase from "firebase/app";
 import { addTaskToFirestore } from "../_actions";
 import {
   PageButton,
@@ -32,14 +33,13 @@ function AddTaskPopup(props) {
   const [selectedMinutes, setSelectedMinutes] = useState(minutes[0]);
 
   const addTaskModalContents = () => {
-    console.log("props.selectedDay", props.selectedDay);
     const newTaskSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
 
       dispatch(
         addTaskToFirestore({
-          date: props.selectedDay,
+          date: firebase.firestore.Timestamp.fromDate(props.selectedDay),
           projectId: selectedProjectId,
           workType,
           timeWorked: { hours: selectedHours, minutes: selectedMinutes }
