@@ -125,11 +125,11 @@ const LinkContainer = styled.div`
   }
   a {
     color: ${({ isCurrentPage }) =>
-    isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
+      isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
   }
   svg {
     color: ${({ isCurrentPage }) =>
-    isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
+      isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
   }
   div {
     display: inline-block;
@@ -146,6 +146,15 @@ const LinkContainer = styled.div`
   }
 `;
 
+const pages = [
+  { name: "DashBoard", link: "/dashboard", icon: FaIndent },
+  { name: "Income Tracker", link: "/income-tracker", icon: GoGraph },
+  { name: "Time Tracker", link: "/time-tracker", icon: IoIosTime },
+  { name: "Expenses", link: "/expenses", icon: FaMoneyBillAlt },
+  { name: "Clients", link: "/clients", icon: FaUserAlt },
+  { name: "Projects", link: "/projects", icon: FaPencilRuler },
+  { name: "Invoices", link: "/invoices", icon: FaFileInvoiceDollar }
+];
 function SideBar() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -160,7 +169,8 @@ function SideBar() {
     e.preventDefault();
     history.push(`/editInfo`);
   };
-  const closeHamburgerMenu = () => {
+  const closeHamburgerMenu = page => {
+    history.push(page);
     dispatch(toggleHamburgerMenu());
   };
 
@@ -179,7 +189,19 @@ function SideBar() {
           </SidebarHeader>
 
           <div style={{ marginTop: "20px" }} />
-          <LinkContainer
+          {pages.map(page => {
+            let Icon = page.icon;
+            return (
+              <LinkContainer
+                changeBackgroundColor={currentPage === page.link && hamburgerMenuOpened}
+                onClick={() => closeHamburgerMenu(page.link)}
+              >
+                <Icon />
+                <div>{page.name}</div>
+              </LinkContainer>
+            );
+          })}
+          {/* <LinkContainer
             changeBackgroundColor={currentPage === "/dashboard" && hamburgerMenuOpened}
             onClick={closeHamburgerMenu}
           >
@@ -245,9 +267,7 @@ function SideBar() {
               <FaFileInvoiceDollar />
               <div>Invoices</div>
             </Link>
-          </LinkContainer>
-
-
+          </LinkContainer> */}
 
           {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
         </div>

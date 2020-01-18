@@ -105,7 +105,7 @@ function Dashboard() {
         .valueOf();
     else if (selectedTimeFrame === "last-30-days")
       debutDate = moment()
-        .subtract(1, "months")
+        .subtract(30, "days")
         .valueOf();
     hoursIncomeCalculator(debutDate);
   }, [selectedTimeFrame]);
