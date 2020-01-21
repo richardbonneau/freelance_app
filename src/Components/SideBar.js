@@ -173,6 +173,7 @@ function SideBar() {
     history.push(page);
     dispatch(toggleHamburgerMenu());
   };
+  const username = useSelector(state => state.auth.user.email);
 
   return (
     <>
@@ -211,7 +212,7 @@ function SideBar() {
           <div className="avatar-and-username">
             {" "}
             <div className="avatar" />
-            <div className="username">USERNAME</div>
+            <div className="username">{username}</div>
           </div>
           <div className="popup">
             <div onClick={editInfo}>Edit Info</div>
