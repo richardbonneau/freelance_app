@@ -1,10 +1,11 @@
-*{
-  padding:0;
-  margin:0;
-  user-select:none;
-  font-family: 'Titillium Web', sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  font-family: "Titillium Web", sans-serif;
+  /* font-family: 'Titillium Web', sans-serif; */
 }
-html{
+html {
   overflow-x: hidden;
   /* font-family: 'Titillium Web', sans-serif; */
 }
@@ -27,6 +28,6 @@ html{
   color: #09d3ac;
 }
 
-.react-datepicker__input-container > input{
-  cursor:pointer
+.react-datepicker__input-container > input {
+  cursor: pointer;
 }

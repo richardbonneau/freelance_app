@@ -51,10 +51,10 @@ export const Tr = styled.tr`
   height: 50px;
   background: white;
   border-radius: 3px;
-  box-shadow: 0px 0.6px 1px 1px rgb(221, 221, 221);
+  box-shadow: 0px 0.6px 0px 1px rgb(221, 221, 221);
   transition: box-shadow 150ms;
   &:hover {
-    box-shadow: 0px 0.6px 1px 2px rgb(221, 221, 221);
+    box-shadow: 0px 0.6px 0px 2px rgb(221, 221, 221);
   }
 `;
 export const THead = styled.thead`
