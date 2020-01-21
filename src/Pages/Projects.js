@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import AddProjectPopup from "../Components/AddProjectPopup";
-import {} from "../utils/globalStyledComponents";
 import moment from "moment";
 import { Container, Table, Th, THead, PageButton, Tr, Td } from "../utils/globalStyledComponents";
 
@@ -36,6 +35,7 @@ function Projects() {
           <Td label="Client">{client.name}</Td>
           <Td label="Debut Date">{moment(projectDebutDate).format("MMM Do YYYY")}</Td>
           <Td label="End Date">{moment(projectEndDate).format("MMM Do YYYY")}</Td>
+          <td width="1%" />
         </Tr>
       );
     });
@@ -77,6 +77,7 @@ function Projects() {
   return (
     <Container>
       <h2>Projects</h2>
+      <div>Keep track of your ongoing Projects</div>
       <PageButton
         style={{ width: "125px", float: "right", marginBottom: "10px" }}
         onClick={() => toggleModal(true)}

@@ -140,8 +140,10 @@ function Dashboard() {
   return (
     <Container>
       <h2>Income Tracker</h2>
-      Tables and graphs that shows you how much money you've made and with whom. What has been the
-      most profitable?
+      <div>
+        Tables and graphs that shows you how much money you've made and with whom. What has been the
+        most profitable?
+      </div>
       <SubHeader>General Stats</SubHeader>
       <CheckboxContainer>
         <label>Use only Invoices Data</label>

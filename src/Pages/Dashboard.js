@@ -7,10 +7,6 @@ function Dashboard() {
     <Container>
       <h2>Dashboard</h2>
       Buttons that redirects you to different parts of the site
-      {/* <PageButton>New Invoice</PageButton>
-            <PageButton>New Client</PageButton>
-            <PageButton>New Project</PageButton>
-            <PageButton>Start Time Track</PageButton> */}
     </Container>
   );
 }

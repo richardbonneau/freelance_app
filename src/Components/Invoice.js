@@ -20,6 +20,7 @@ function Invoice(props) {
       <Td label="Project">projects[invoice.projectId]</Td>
       <Td label="Client">{client.name}</Td>
       <Td label="Due Date">{moment(invoiceDueDate).format("MMM Do YYYY")}</Td>
+      <td width="1%"></td>
     </Tr>
   );
 }

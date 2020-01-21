@@ -7,7 +7,7 @@ import {
   FaPencilRuler,
   FaFileInvoiceDollar
 } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
+
 import { IoIosTime } from "react-icons/io";
 import { GoGraph } from "react-icons/go";
 import styled from "styled-components";
@@ -196,80 +196,13 @@ function SideBar() {
                 changeBackgroundColor={currentPage === page.link && hamburgerMenuOpened}
                 onClick={() => closeHamburgerMenu(page.link)}
               >
-                <Icon />
-                <div>{page.name}</div>
+                <a href="#">
+                  <Icon />
+                  <div>{page.name}</div>
+                </a>
               </LinkContainer>
             );
           })}
-          {/* <LinkContainer
-            changeBackgroundColor={currentPage === "/dashboard" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/dashboard">
-              <FaIndent />
-              <div>DashBoard</div>
-            </Link>
-          </LinkContainer>
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/income-tracker" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/income-tracker">
-              <GoGraph />
-              <div>Income Tracker</div>
-            </Link>
-          </LinkContainer>
-
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/time-tracker" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/time-tracker">
-              <IoIosTime />
-              <div>Time Spent</div>
-            </Link>
-          </LinkContainer>
-
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/expenses" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/expenses">
-              <FaMoneyBillAlt />
-              <div>Expenses</div>
-            </Link>
-          </LinkContainer>
-
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/clients" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/clients">
-              <FaUserAlt />
-              <div>Clients</div>
-            </Link>
-          </LinkContainer>
-
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/projects" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/projects">
-              <FaPencilRuler />
-              <div>Projects</div>
-            </Link>
-          </LinkContainer>
-          <LinkContainer
-            changeBackgroundColor={currentPage === "/invoices" && hamburgerMenuOpened}
-            onClick={closeHamburgerMenu}
-          >
-            <Link to="/invoices">
-              <FaFileInvoiceDollar />
-              <div>Invoices</div>
-            </Link>
-          </LinkContainer> */}
-
-          {/* <LinkContainer><Link to="/">Contracts</Link></LinkContainer> */}
         </div>
         <UserAvatarContainer
           avatarPopupToggle={avatarPopupToggle}

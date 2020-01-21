@@ -94,6 +94,7 @@ function TimeTracker() {
   return (
     <Container>
       <h2>Time Tracker</h2>
+      <div>Keep track of how much time you spent on specific tasks.</div>
       <CalendarContainer>
         <Header>
           <h4>Week of {momentSelectedWeek.startOf("week").format("MMM Do YYYY")}</h4>

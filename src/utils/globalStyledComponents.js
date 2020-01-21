@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 800px;
   min-height: 100vh;
-  background: white;
+  background: #f6f7f9;
   * {
     color: ${props => props.theme.black};
   }
@@ -48,11 +48,13 @@ export const Table = styled.table`
   }
 `;
 export const Tr = styled.tr`
+  height: 50px;
+  background: white;
   border-radius: 3px;
-  box-shadow: 0px 0px 0px 1px rgb(221, 221, 221);
+  box-shadow: 0px 0.6px 1px 1px rgb(221, 221, 221);
   transition: box-shadow 150ms;
   &:hover {
-    box-shadow: 0 0 5px 2px rgb(221, 221, 221);
+    box-shadow: 0px 0.6px 1px 2px rgb(221, 221, 221);
   }
 `;
 export const THead = styled.thead`
@@ -65,6 +67,7 @@ export const Th = styled.th`
 `;
 export const Td = styled.td`
   padding: 0.625em;
+  color: black;
   text-align: center;
 
   @media (max-width: 768px) {

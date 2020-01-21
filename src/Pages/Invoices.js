@@ -4,14 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { openNewInvoicePage } from "../_actions";
 import Invoice from "../Components/Invoice";
 import Loading from "../Components/Loading";
-import {
-  Container,
-  Table,
-  Th,
-  THead,
-  PageButton
-} from "../utils/globalStyledComponents";
-
+import { Container, Table, Th, THead, PageButton } from "../utils/globalStyledComponents";
 
 function Invoices(props) {
   const dispatch = useDispatch();
@@ -20,7 +13,7 @@ function Invoices(props) {
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
 
   function createNewInvoice() {
-    console.log("here")
+    console.log("here");
     dispatch(openNewInvoicePage());
     props.history.push("/invoiceCreator");
   }
@@ -51,11 +44,17 @@ function Invoices(props) {
     );
   };
 
-  if (isSendingReq) return <Loading />
+  if (isSendingReq) return <Loading />;
   return (
     <Container>
       <h2>Invoices</h2>
-      <PageButton onClick={createNewInvoice} style={{ width: "160px", float: 'right', marginBottom: '10px' }} >Create New Invoice</PageButton>
+      <div>List of all of your invoices</div>
+      <PageButton
+        onClick={createNewInvoice}
+        style={{ width: "160px", float: "right", marginBottom: "10px" }}
+      >
+        Create New Invoice
+      </PageButton>
       {listOfInvoices()}
     </Container>
   );
