@@ -1,39 +1,37 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
-import AddProjectPopup from "../Components/AddProjectPopup";
+import AddExpensePopup from "../Components/AddExpensePopup";
 import { Container, Table, Th, THead, PageButton, Tr, Td } from "../utils/globalStyledComponents";
 
 function Expenses() {
-  const listOfProjects = useSelector(state => state.projects.projectsList);
+  const listOfExpenses = useSelector(state => state.expenses.expensesList);
   const listOfClients = useSelector(state => state.clients.clientsList);
   const [isModalOpened, toggleModal] = useState(false);
   const [isClientCardOpened, toggleClientCard] = useState(false);
 
-  //TODO:Open a card showing the project when a project is clicked
-  // const [selectedProject, setSelectedClient] = useState(listOfProjects[0]);
-  // console.log("listOfProjects", listOfProjects);
+  //TODO:Open a card showing the expense when a expense is clicked
+  // const [selectedExpense, setSelectedClient] = useState(listOfExpenses[0]);
+  // console.log("listOfExpenses", listOfExpenses);
 
   // const clientSelected = client => {
   //   toggleClientCard(true);
   //   setSelectedClient(client);
   // };
 
-  const projectsList = () => {
-    let tableContents = listOfProjects.map((project, i) => {
-      let projectDebutDate = new Date(project.projectDebutDate.seconds * 1000);
-      let projectEndDate = new Date(project.projectEndDate.seconds * 1000);
-      let client = listOfClients.find(client => client.id === project.clientId);
-      // return <Client key={i} client={client} clientSelected={clientSelected} />;
+  const expensesList = () => {
+    let tableContents = listOfExpenses.map((expense, i) => {
+      let date = new Date(expense.date.seconds * 1000);
+
       return (
         <Tr key={i}>
           <td width="1%">
-            {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
+            {/* <ExpandableInvisibleButton onClick={() => expense.expenseSelected(expense.client)}></ExpandableInvisibleButton> */}
           </td>
-          <Td label="Project Name">{project.name}</Td>
-          <Td label="Client">{client.name}</Td>
-          <Td label="Debut Date">{moment(projectDebutDate).format("MMM Do YYYY")}</Td>
-          <Td label="End Date">{moment(projectEndDate).format("MMM Do YYYY")}</Td>
+          <Td label="Name">{expense.name}</Td>
+          <Td label="Date">{moment(date).format("MMM Do YYYY")}</Td>
+          <Td label="Amount">${expense.amount}</Td>
+
           <td width="1%" />
         </Tr>
       );
@@ -43,10 +41,10 @@ function Expenses() {
         <THead>
           <tr>
             <Th width="1%" scope="col"></Th>
-            <Th scope="col">Project Name</Th>
-            <Th scope="col">Client</Th>
-            <Th scope="col">Debut Date</Th>
-            <Th scope="col">End Date</Th>
+            <Th scope="col">Name</Th>
+            <Th scope="col">Date</Th>
+            <Th scope="col">Amount</Th>
+
             <Th width="1%" scope="col"></Th>
           </tr>
         </THead>
@@ -80,11 +78,11 @@ function Expenses() {
         style={{ width: "125px", float: "right", marginBottom: "10px" }}
         onClick={() => toggleModal(true)}
       >
-        Add New Project
+        Add New Expense
       </PageButton>
 
-      {projectsList()}
-      <AddProjectPopup isModalOpened={isModalOpened} toggleModal={toggleModal} />
+      {expensesList()}
+      <AddExpensePopup isModalOpened={isModalOpened} toggleModal={toggleModal} />
     </Container>
   );
 }

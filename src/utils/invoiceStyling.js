@@ -24,7 +24,8 @@ export const TitleContainer = styled.div`
   }
 `;
 export const InvoiceContainer = styled.form`
-   box-shadow: none;
+  background: white;
+  box-shadow: none;
   border: none;
   padding: 20px;
   margin-top: 20px;

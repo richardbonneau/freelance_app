@@ -54,6 +54,13 @@ export const initialUserDocument = {
     }
   ],
   tasks: [],
+  expenses: [
+    {
+      name: "Computer Monitor",
+      date: firebase.firestore.Timestamp.fromDate(new Date()),
+      amount: 400.0
+    }
+  ],
   userInfo: {
     name: "",
     addressOne: "",

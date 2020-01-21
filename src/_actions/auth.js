@@ -5,6 +5,7 @@ import {
   requestInitialInvoicesList,
   requestInitialProjectsList,
   requestInitialTasksList,
+  requestInitialExpensesList,
   requestInitialUserInfo,
   firestoreSuccess
 } from "./index";
@@ -143,6 +144,7 @@ const getUserDataAndLogin = user => dispatch => {
         dispatch(requestInitialUserInfo(doc.data().userInfo));
         dispatch(requestInitialProjectsList(doc.data().projects));
         dispatch(requestInitialTasksList(doc.data().tasks));
+        dispatch(requestInitialExpensesList(doc.data().expenses));
 
         dispatch(receiveLogin(user));
         dispatch(firestoreSuccess());
