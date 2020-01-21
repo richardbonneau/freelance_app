@@ -148,12 +148,12 @@ const LinkContainer = styled.div`
 
 const pages = [
   { name: "DashBoard", link: "/dashboard", icon: FaIndent },
-  { name: "Income Tracker", link: "/income-tracker", icon: GoGraph },
-  { name: "Time Tracker", link: "/time-tracker", icon: IoIosTime },
-  { name: "Expenses", link: "/expenses", icon: FaMoneyBillAlt },
-  { name: "Clients", link: "/clients", icon: FaUserAlt },
+  { name: "Invoices", link: "/invoices", icon: FaFileInvoiceDollar },
   { name: "Projects", link: "/projects", icon: FaPencilRuler },
-  { name: "Invoices", link: "/invoices", icon: FaFileInvoiceDollar }
+  { name: "Clients", link: "/clients", icon: FaUserAlt },
+  { name: "Expenses", link: "/expenses", icon: FaMoneyBillAlt },
+  { name: "Income Tracker", link: "/income-tracker", icon: GoGraph },
+  { name: "Time Tracker", link: "/time-tracker", icon: IoIosTime }
 ];
 function SideBar() {
   const dispatch = useDispatch();

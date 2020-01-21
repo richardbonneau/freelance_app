@@ -73,7 +73,7 @@ function Expenses() {
   return (
     <Container>
       <h2>Expenses</h2>
-      <div>Upload any expenses that you need to declare when declaring your taxes.</div>
+      <div>Upload any expenses that you need to declare when doing your taxes.</div>
       <PageButton
         style={{ width: "125px", float: "right", marginBottom: "10px" }}
         onClick={() => toggleModal(true)}
