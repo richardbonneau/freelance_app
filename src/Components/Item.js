@@ -7,11 +7,13 @@ import { useDispatch } from "react-redux";
 import { deleteItemFromStore, modifyItemFromStore } from "../_actions";
 import { ItemContainer } from "../utils/invoiceStyling";
 
-
 function Item(props) {
   const dispatch = useDispatch();
   const [itemInputs, setItemInputs] = useState(props.item);
-  const handleItemChange = e => e.target.value.length < 6 ? setItemInputs({ ...itemInputs, [e.target.name]: e.target.value }) : false
+  const handleItemChange = e =>
+    e.target.value.length < 6 || e.target.name === "name"
+      ? setItemInputs({ ...itemInputs, [e.target.name]: e.target.value })
+      : false;
 
   let itemAmount = itemInputs.hours * itemInputs.rate;
 
@@ -60,10 +62,8 @@ function Item(props) {
           <div className="amount">{"$" + itemAmount.toFixed(2)}</div>
         </div>
       </div>
-      <div
-        onClick={e => dispatch(deleteItemFromStore(props.i))}
-        className="delete-btn"
-      ><FaTrashAlt className="trashcan" />
+      <div onClick={e => dispatch(deleteItemFromStore(props.i))} className="delete-btn">
+        <FaTrashAlt className="trashcan" />
       </div>
     </ItemContainer>
   );
