@@ -18,6 +18,7 @@ export default (
     isLoggingIn: false,
     isLoggingOut: false,
     loginError: false,
+    errorObj: { code: "", message: "" },
     logoutError: false,
     isVerifying: false,
     verifyingError: false,
@@ -33,7 +34,8 @@ export default (
       return {
         ...state,
         isLoggingIn: true,
-        loginError: false
+        loginError: false,
+        errorObj: { code: "", message: "" }
       };
     case LOGIN_SUCCESS:
       return {
@@ -47,7 +49,8 @@ export default (
         ...state,
         isLoggingIn: false,
         isAuthenticated: false,
-        loginError: true
+        loginError: true,
+        errorObj: action.error
       };
     case LOGOUT_REQUEST:
       return {

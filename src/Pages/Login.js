@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { firebaseLogin, firebaseSignup } from "../_actions";
 import styled from "styled-components";
-import { MdEmail, MdVpnKey } from "react-icons/md";
+import { MdEmail, MdLock } from "react-icons/md";
 import Loading from "../Components/Loading";
 import { Anchor } from "../utils/globalStyledComponents";
-
+import Alert from 'react-s-alert';
+import 'react-s-alert/dist/s-alert-default.css';
 const Container = styled.div`
   display:flex;
   height:100vh;
@@ -61,14 +62,6 @@ const Form = styled.form`
     width: 25px;
     color: #828282;
   }
-  .input-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-  }
-
   .form-btn {
     display: block;
     padding: 10px;
@@ -85,11 +78,33 @@ const Form = styled.form`
   .login-switch-btn {
     margin-left: 5px;
   }
+  .error-icon{
+
+    visibility:none;
+  }
+  .error-icon-show{
+    padding: 0 10px;
+    visibility:none;
+  }
 `;
+const InputContainer = styled.div`
+  
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  border-width: 1px;
+  border-style: solid;
+
+  border-color: ${({ error }) => (error ? "#bc393c" : "#ddd")};
+  transition: all 3000ms ease-out 10ms;
+  svg{
+    color:${({ error }) => (error ? "#bc393c" : "#ddd")};
+  }
+`
 
 function Login() {
   const dispatch = useDispatch();
-
   const [signupEmailInput, setSignupEmailInput] = useState("");
   const [signupPasswordInput, setSignupPasswordInput] = useState("");
   const [loginEmailInput, setLoginEmailInput] = useState("");
@@ -98,9 +113,10 @@ function Login() {
 
   const isLoggingIn = useSelector(state => state.auth.isLoggingIn);
   const loginError = useSelector(state => state.auth.loginError);
+  const errorType = useSelector(state => state.auth.errorObj);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const isVerifying = useSelector(state => state.auth.isVerifying);
-
+  console.log("loginError", loginError, errorType)
   const signupUser = e => {
     e.preventDefault();
     dispatch(firebaseSignup(signupEmailInput, signupPasswordInput));
@@ -111,6 +127,13 @@ function Login() {
     dispatch(firebaseLogin(loginEmailInput, loginPasswordInput));
   };
 
+  useEffect(() => {
+    Alert.error(errorType.message, {
+      position: 'top',
+      effect: 'scale',
+    })
+  }, [loginError]);
+
   if (isAuthenticated) return <Redirect to="/dashboard" />;
   else if (isVerifying || isLoggingIn) return <Loading />;
   else
@@ -120,9 +143,6 @@ function Login() {
 
         </SplashContainer>
         <LoginContainer>
-
-
-
           <Form>
             <h1>
               Welcome to <span>Freelancify</span>
@@ -136,7 +156,7 @@ function Login() {
               }
             </div>
 
-            <div className="input-container">
+            <InputContainer error={loginError && errorType.code !== "auth/weak-password"}>
               <MdEmail />
               <input
                 type="email"
@@ -147,9 +167,10 @@ function Login() {
                     : setLoginEmailInput(e.target.value)
                 }
               />
-            </div>
-            <div className="input-container">
-              <MdVpnKey />
+
+            </InputContainer>
+            <InputContainer error={loginError && errorType.code === "auth/weak-password"} >
+              <MdLock />
               <input
                 type="password"
                 placeholder="Password"
@@ -159,7 +180,8 @@ function Login() {
                     : setLoginPasswordInput(e.target.value)
                 }
               />
-            </div>
+
+            </InputContainer>
 
 
 
@@ -170,8 +192,9 @@ function Login() {
             }
             <Anchor href="#">Forgot password?</Anchor>
           </Form>
-
+          <Alert stack={{ limit: 1 }} />
         </LoginContainer>
+
       </Container>
 
     );

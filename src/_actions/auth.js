@@ -38,9 +38,10 @@ const receiveLogin = user => {
   };
 };
 
-const loginError = () => {
+const loginError = (error) => {
   return {
-    type: LOGIN_FAILURE
+    type: LOGIN_FAILURE,
+    error
   };
 };
 
@@ -99,7 +100,7 @@ export const firebaseSignup = (email, password) => dispatch => {
     })
     .catch(error => {
       console.log("login error", error);
-      dispatch(loginError());
+      dispatch(loginError(error));
     });
 };
 const addNewUserToDatabase = (user, dispatch) => {
@@ -108,11 +109,11 @@ const addNewUserToDatabase = (user, dispatch) => {
   db.collection("users")
     .doc(user.user.uid)
     .set(initialUserDocument)
-    .then(function() {
+    .then(function () {
       dispatch(receiveLogin(user.user));
       console.log("Document successfully written!");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       dispatch(databaseError());
       console.error("Error writing document: ", error);
     });
@@ -128,7 +129,7 @@ export const firebaseLogin = (email, password) => dispatch => {
     })
     .catch(error => {
       console.log("login error", error);
-      dispatch(loginError());
+      dispatch(loginError(error));
     });
 };
 
@@ -136,7 +137,7 @@ const getUserDataAndLogin = user => dispatch => {
   db.collection("users")
     .doc(user.uid)
     .get()
-    .then(function(doc) {
+    .then(function (doc) {
       if (doc.exists) {
         console.log("doc.data()", doc.data());
         dispatch(requestInitialClientsList(doc.data().clients));
@@ -156,7 +157,7 @@ const getUserDataAndLogin = user => dispatch => {
         dispatch(verifyFail());
       }
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("Error getting document:", error);
     });
 };
