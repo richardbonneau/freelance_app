@@ -33,9 +33,9 @@ function InvoiceDetails(props) {
   const dueDate = new Date(details.dueDate.seconds * 1000);
 
   return (
-    <Container>
+    <Container style={{ overflowX: "scroll" }}>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
-      <InvoiceContainer>
+      <InvoiceContainer style={{ minWidth: "800px" }}>
         <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
         <TitleContainer>
           <input
@@ -64,8 +64,8 @@ function InvoiceDetails(props) {
             />
           </div>
         </TitleContainer>
-        <div className="first-row">
-          <SenderRecipientContainer>
+        <div className="first-row" style={{ flexDirection: "row" }}>
+          <SenderRecipientContainer style={{ flexDirection: "row" }}>
             <SenderContainer>
               <h4>From</h4>
               <div>{details.userInfo.name}</div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "firebase/app";
 import { useHistory, Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import AddClientPopup from "../Components/AddClientPopup";
@@ -179,6 +180,7 @@ function InvoiceCreator() {
             type="button"
             onClick={() => dispatch(addItemToStore())}
           >
+            <FaPlus />
             Add New Item
           </PageButton>
         </ItemsListContainer>
