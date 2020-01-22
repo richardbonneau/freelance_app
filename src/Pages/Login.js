@@ -78,17 +78,12 @@ const Form = styled.form`
   .login-switch-btn {
     margin-left: 5px;
   }
-  .error-icon{
-
-    visibility:none;
-  }
-  .error-icon-show{
-    padding: 0 10px;
-    visibility:none;
+  .footer{
+    display:flex;
+    justify-content:space-around;
   }
 `;
 const InputContainer = styled.div`
-  
   width: 100%;
   display: flex;
   align-items: center;
@@ -96,10 +91,10 @@ const InputContainer = styled.div`
   border-width: 1px;
   border-style: solid;
 
-  border-color: ${({ error }) => (error ? "#bc393c" : "#ddd")};
-  transition: all 3000ms ease-out 10ms;
+  border-color: ${({ error }) => (error ? "#940300" : "#c4c4c4")};
+  transition: all 300ms ease-out 10ms;
   svg{
-    color:${({ error }) => (error ? "#bc393c" : "#ddd")};
+    color:${({ error }) => (error ? "#940300" : "#c4c4c4")};
   }
 `
 
@@ -107,9 +102,12 @@ function Login() {
   const dispatch = useDispatch();
   const [signupEmailInput, setSignupEmailInput] = useState("");
   const [signupPasswordInput, setSignupPasswordInput] = useState("");
+  const [signupRepeatPasswordInput, setSignupRepeatPasswordInput] = useState("");
   const [loginEmailInput, setLoginEmailInput] = useState("");
   const [loginPasswordInput, setLoginPasswordInput] = useState("");
-  const [showSignup, toggleLoginOrSignup] = useState(true);
+  const [showSignup, toggleLoginOrSignup] = useState(false);
+
+
 
   const isLoggingIn = useSelector(state => state.auth.isLoggingIn);
   const loginError = useSelector(state => state.auth.loginError);
@@ -119,7 +117,12 @@ function Login() {
   console.log("loginError", loginError, errorType)
   const signupUser = e => {
     e.preventDefault();
-    dispatch(firebaseSignup(signupEmailInput, signupPasswordInput));
+    if (signupPasswordInput === signupRepeatPasswordInput)
+      dispatch(firebaseSignup(signupEmailInput, signupPasswordInput));
+    else Alert.error("Passwords don't match", {
+      position: 'top',
+      effect: 'scale',
+    })
   };
 
   const loginUser = e => {
@@ -144,53 +147,80 @@ function Login() {
         </SplashContainer>
         <LoginContainer>
           <Form>
-            <h1>
-              Welcome to <span>Freelancify</span>
-            </h1>
-            <div className="header-text-container">
-              <div>Log in to your Freelancify account to get started.</div>
-              {
-                showSignup
-                  ? <div>If you already have an account, <Anchor onClick={() => toggleLoginOrSignup(false)}>Log In </Anchor></div>
-                  : <div>If you are a new user, <Anchor onClick={() => toggleLoginOrSignup(true)}>Sign Up </Anchor></div>
-              }
-            </div>
+            {showSignup ?
 
-            <InputContainer error={loginError && errorType.code !== "auth/weak-password"}>
-              <MdEmail />
-              <input
-                type="email"
-                placeholder="E-Mail"
-                onChange={e =>
-                  showSignup
-                    ? setSignupEmailInput(e.target.value)
-                    : setLoginEmailInput(e.target.value)
-                }
-              />
+              // SIGNUP
 
-            </InputContainer>
-            <InputContainer error={loginError && errorType.code === "auth/weak-password"} >
-              <MdLock />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={e =>
-                  showSignup
-                    ? setSignupPasswordInput(e.target.value)
-                    : setLoginPasswordInput(e.target.value)
-                }
-              />
+              <>
+                <h1>Sign Up</h1>
+                <div>Let's create your Freelancify account to get you started.</div>
 
-            </InputContainer>
+                <InputContainer error={loginError && errorType.code !== "auth/weak-password"}>
+                  <MdEmail />
+                  <input
+                    type="email"
+                    placeholder="E-Mail"
+                    value={signupEmailInput}
+                    onChange={e => setSignupEmailInput(e.target.value)}
+                  />
+
+                </InputContainer>
+                <InputContainer error={loginError && errorType.code === "auth/weak-password"} >
+                  <MdLock />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={signupPasswordInput}
+                    onChange={e => setSignupPasswordInput(e.target.value)}
+                  />
+                </InputContainer>
+                <InputContainer error={loginError && errorType.code === "auth/weak-password"} >
+                  <MdLock />
+                  <input
+                    type="password"
+                    placeholder="Repeat Password"
+                    value={signupRepeatPasswordInput}
+                    onChange={e => setSignupRepeatPasswordInput(e.target.value)}
+                  />
+                </InputContainer>    <a className="form-btn" onClick={signupUser}>Sign up</a>
+                <div className="footer"><Anchor onClick={() => toggleLoginOrSignup(false)}>Log In </Anchor></div>
+              </>
 
 
 
-            {showSignup ? (
+              // LOGIN
+              : (<><h1>
+                Welcome to <span>Freelancify</span>
+              </h1>
+                <div className="header-text-container">
+                  <div>Log in to your Freelancify account to get started.</div>
 
-              <a className="form-btn" onClick={signupUser}>Sign up</a>)
-              : (<a className="form-btn" onClick={loginUser}>Login</a>)
+                </div>
+                <InputContainer error={loginError && errorType.code !== "auth/weak-password"}>
+                  <MdEmail />
+                  <input
+                    type="email"
+                    placeholder="E-Mail"
+                    value={loginEmailInput}
+                    onChange={e => setLoginEmailInput(e.target.value)}
+                  />
+
+                </InputContainer>
+                <InputContainer error={loginError && errorType.code === "auth/weak-password"} >
+                  <MdLock />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    value={loginPasswordInput}
+                    onChange={e => setLoginPasswordInput(e.target.value)}
+                  />
+                </InputContainer>
+
+
+                <a className="form-btn" onClick={loginUser}>Login</a>
+                <div className="footer"><Anchor href="#">Forgot password?</Anchor><Anchor onClick={() => toggleLoginOrSignup(true)}>Sign Up </Anchor></div> </>)
             }
-            <Anchor href="#">Forgot password?</Anchor>
+
           </Form>
           <Alert stack={{ limit: 1 }} />
         </LoginContainer>
