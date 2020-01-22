@@ -195,6 +195,7 @@ export const ItemContainer = styled.div`
   }
   .title-description {
     width: 100%;
+    margin-right:20px !important;
   }
   .number-inputs-container {
     display: flex;
@@ -207,6 +208,10 @@ export const ItemContainer = styled.div`
   }
   .number-input {
     width: 50px;
+    border: none;
+    border-bottom: 1px solid #8c8c8c;
+    margin: 8px 0;
+}
   }
   .amount {
     text-align: right;
