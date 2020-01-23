@@ -158,7 +158,8 @@ export const TotalContainer = styled.div`
     margin: 8px 0;
   }
   .total {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 

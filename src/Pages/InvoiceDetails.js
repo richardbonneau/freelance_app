@@ -32,6 +32,13 @@ function InvoiceDetails(props) {
   const invoiceDate = new Date(details.invoiceDate.seconds * 1000);
   const dueDate = new Date(details.dueDate.seconds * 1000);
 
+  console.log("details", details);
+
+  let itemsSubtotal = 0;
+  let itemsTotal = 0;
+  details.items.forEach(item => (itemsSubtotal = itemsSubtotal + item.hours * item.rate));
+  itemsTotal = itemsSubtotal;
+
   return (
     <Container style={{ overflowX: "scroll" }}>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
@@ -171,24 +178,28 @@ function InvoiceDetails(props) {
         </ItemsListContainer>
 
         <TotalContainer>
-          <div>
+          <div className="total">
             {" "}
             <h5>Subtotal</h5>
-            {/* <div className="total">{"$" + itemsSubtotal}</div> */}
+            <div className="total">{"$" + itemsSubtotal}</div>
           </div>
 
-          <div>
+          <div className="total">
             <h4>Total</h4>
-            {/* <div className="total">{"$" + itemsTotal}</div> */}
+            <div>{"$" + itemsTotal}</div>
           </div>
         </TotalContainer>
 
-        <NotesInput
-          value={details.notes}
-          placeholder="Notes"
-          readOnly
-          // onChange={e => setNotesInput(e.target.value)}
-        ></NotesInput>
+        {details.notes !== "" ? (
+          <NotesInput
+            value={details.notes}
+            placeholder="Notes"
+            readOnly
+            // onChange={e => setNotesInput(e.target.value)}
+          ></NotesInput>
+        ) : (
+          <></>
+        )}
       </InvoiceContainer>
     </Container>
   );

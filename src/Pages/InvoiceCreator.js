@@ -186,15 +186,15 @@ function InvoiceCreator() {
         </ItemsListContainer>
 
         <TotalContainer>
-          <div>
+          <div className="total">
             {" "}
             <h5>Subtotal</h5>
-            <div className="total">{"$" + itemsSubtotal.toFixed(2)}</div>
+            <div>{"$" + itemsSubtotal.toFixed(2)}</div>
           </div>
 
-          <div>
+          <div className="total">
             <h4>Total</h4>
-            <div className="total">{"$" + itemsTotal.toFixed(2)}</div>
+            <div>{"$" + itemsTotal.toFixed(2)}</div>
           </div>
         </TotalContainer>
 
