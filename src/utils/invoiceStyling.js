@@ -213,7 +213,7 @@ export const ItemContainer = styled.div`
     border-bottom: 1px solid #8c8c8c;
     margin: 8px 0;
 }
-  }
+  
   .amount {
     text-align: right;
     word-break: break-all;

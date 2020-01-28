@@ -79,7 +79,7 @@ function Projects() {
       <h2>Projects</h2>
       <div>Keep track of your ongoing Projects</div>
       <PageButton
-        style={{ width: "125px", float: "right", marginBottom: "10px" }}
+        style={{ width: "125px", float: "right", margin: "10px 0" }}
         onClick={() => toggleModal(true)}
       >
         Add New Project

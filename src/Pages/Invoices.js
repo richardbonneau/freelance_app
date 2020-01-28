@@ -51,7 +51,7 @@ function Invoices(props) {
       <div>List of all of your invoices</div>
       <PageButton
         onClick={createNewInvoice}
-        style={{ width: "160px", float: "right", marginBottom: "10px" }}
+        style={{ width: "160px", float: "right", margin: "10px 0" }}
       >
         Create New Invoice
       </PageButton>

@@ -14,7 +14,7 @@ const Container = styled.div`
   position: fixed;
   width: 100%;
   transform: ${({ hamburgerMenuOpened }) =>
-    hamburgerMenuOpened ? "translate(220px, 0);" : "translate(0, 0)"};
+    hamburgerMenuOpened ? "translate(240px, 0);" : "translate(0, 0)"};
   background: ${({ hamburgerMenuOpened }) =>
     hamburgerMenuOpened ? props => props.theme.blue : props => props.theme.primary};
   color: white;

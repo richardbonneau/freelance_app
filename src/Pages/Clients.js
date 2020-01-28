@@ -61,7 +61,7 @@ function Clients() {
       <h2>Clients</h2>
       <div>Keep a list of your clients that you can then select when creating an invoice.</div>
       <PageButton
-        style={{ width: "125px", float: "right", marginBottom: "10px" }}
+        style={{ width: "125px", float: "right", margin: "10px 0" }}
         onClick={() => toggleModal(true)}
       >
         Add New Client

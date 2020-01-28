@@ -75,7 +75,7 @@ function Expenses() {
       <h2>Expenses</h2>
       <div>Upload any expenses that you need to declare when doing your taxes.</div>
       <PageButton
-        style={{ width: "125px", float: "right", marginBottom: "10px" }}
+        style={{ width: "125px", float: "right", margin: "10px 0" }}
         onClick={() => toggleModal(true)}
       >
         Add New Expense

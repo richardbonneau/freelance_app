@@ -24,7 +24,7 @@ const NavContainer = styled.nav`
   flex-direction: column;
   justify-content: space-between;
   color: white;
-  left: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "0px" : "-220px")};
+  left: ${({ hamburgerMenuOpened }) => (hamburgerMenuOpened ? "0px" : "-250px")};
   background: ${props => props.theme.primary};
   z-index: 100;
   transition: all 300ms ease-out 10ms;
@@ -125,11 +125,11 @@ const LinkContainer = styled.div`
   }
   a {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
+    isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
   }
   svg {
     color: ${({ isCurrentPage }) =>
-      isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
+    isCurrentPage ? props => props.theme.accent : props => props.theme.notWhite};
   }
   div {
     display: inline-block;

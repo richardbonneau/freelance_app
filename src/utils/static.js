@@ -41,7 +41,7 @@ export const initialUserDocument = {
       fromCountry: "Canada",
       invoiceDate: firebase.firestore.Timestamp.fromDate(new Date()),
       dueDate: firebase.firestore.Timestamp.fromDate(new Date()),
-      items: [{ name: "Front-End Development", hours: 5, rate: 40, id: "1" }],
+      items: [{ name: "Front-End Development", hours: '5', rate: '40', id: "1" }],
       userInfo: {
         name: "You",
         addressOne: "1234 Freelance Street",
