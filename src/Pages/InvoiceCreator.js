@@ -7,7 +7,14 @@ import DatePicker from "react-datepicker";
 import AddClientPopup from "../Components/AddClientPopup";
 import "react-datepicker/dist/react-datepicker.css";
 import { addInvoiceToFirestore, addItemToStore } from "../_actions";
-import { Container, PageButton, Anchor } from "../utils/globalStyledComponents";
+import {
+  Container,
+  PageButton,
+  Anchor,
+  MaskOverlay,
+  ModalContainer,
+  ModalContents
+} from "../utils/globalStyledComponents";
 import Item from "../Components/Item";
 import Loading from "../Components/Loading";
 import {
@@ -39,6 +46,8 @@ function InvoiceCreator() {
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
   const [isModalOpened, setModal] = useState(false);
+  const [errorModalOpened, toggleErrorModal] = useState(false);
+  const [errorModalContents, setErrorModalContents] = useState("");
 
   useEffect(() => {
     //Display new total sum everytime the list of item updates
@@ -49,7 +58,20 @@ function InvoiceCreator() {
   }, [itemsList]);
 
   const newInvoiceSubmit = e => {
+    console.log(
+      "itemsList.length <= 0",
+      itemsList.find(item => item.name === "")
+    );
     e.preventDefault();
+    if (titleInput === "" || invoiceNumberInput === "" || itemsSubtotal <= 0) {
+      setErrorModalContents("Some fields are missing");
+      toggleErrorModal(true);
+      return;
+    } else if (itemsList.find(item => item.name === "")) {
+      setErrorModalContents("Empty Item Name");
+      toggleErrorModal(true);
+      return;
+    }
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
     console.log("userinfo", userInfo);
     dispatch(
@@ -209,6 +231,23 @@ function InvoiceCreator() {
         </PageButton>
       </InvoiceContainer>
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
+
+      <MaskOverlay onClick={() => toggleErrorModal(false)} isModalOpened={errorModalOpened} />
+      <ModalContainer
+        style={{
+          height: "150px",
+          marginTop: "-75px",
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "20px",
+          alignItems: "center",
+          flexDirection: "column"
+        }}
+        isModalOpened={errorModalOpened}
+      >
+        <ModalContents>{errorModalContents}</ModalContents>
+        <PageButton onClick={() => toggleErrorModal(false)}>Ok</PageButton>
+      </ModalContainer>
     </Container>
   );
 }

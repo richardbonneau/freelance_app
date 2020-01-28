@@ -170,6 +170,9 @@ export const PageButton = styled.a`
   svg {
     margin-right: 5px;
   }
+  path {
+    color: white;
+  }
   &&:hover {
     background: ${props => props.theme.blueHover};
   }
