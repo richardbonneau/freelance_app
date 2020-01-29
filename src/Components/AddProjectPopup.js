@@ -17,7 +17,7 @@ function AddProjectPopup(props) {
   const dispatch = useDispatch();
   const listOfClients = useSelector(state => state.clients.clientsList);
   const [nameInput, setNameInput] = useState("");
-  const [selectedClientId, setSelectedClientId] = useState(Number(listOfClients[0].id));
+  const [selectedClientId, setSelectedClientId] = useState(0);
   const [projectStartDate, setProjectStartDate] = useState(new Date());
   const [projectEndDate, setProjectEndDate] = useState(new Date());
 
@@ -25,6 +25,9 @@ function AddProjectPopup(props) {
     const newProjectSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
+      if (nameInput === "") {
+        return
+      }
       let newProjectId = Date.now() * 10000 + Math.round(Math.random() * 9999);
       dispatch(
         addProjectToFirestore({
@@ -55,6 +58,7 @@ function AddProjectPopup(props) {
             value={selectedClientId}
             onChange={e => setSelectedClientId(Number(e.target.value))}
           >
+            <option value={0}>None</option>
             {listOfClients.map((client, i) => (
               <option key={i} value={client.id}>
                 {client.name}

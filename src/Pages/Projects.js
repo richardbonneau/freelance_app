@@ -32,7 +32,7 @@ function Projects() {
             {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
           </td>
           <Td label="Project Name">{project.name}</Td>
-          <Td label="Client">{client.name}</Td>
+          <Td label="Client">{client === undefined ? "-" : client.name}</Td>
           <Td label="Debut Date">{moment(projectDebutDate).format("MMM Do YYYY")}</Td>
           <Td label="End Date">{moment(projectEndDate).format("MMM Do YYYY")}</Td>
           <td width="1%" />
