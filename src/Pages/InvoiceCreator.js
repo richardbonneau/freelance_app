@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import AddClientPopup from "../Components/AddClientPopup";
+import ErrorPopup from "../Components/ErrorPopup";
 import "react-datepicker/dist/react-datepicker.css";
 import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import {
@@ -231,23 +232,8 @@ function InvoiceCreator() {
         </PageButton>
       </InvoiceContainer>
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
+      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
 
-      <MaskOverlay onClick={() => toggleErrorModal(false)} isModalOpened={errorModalOpened} />
-      <ModalContainer
-        style={{
-          height: "150px",
-          marginTop: "-75px",
-          display: "flex",
-          justifyContent: "center",
-          fontSize: "20px",
-          alignItems: "center",
-          flexDirection: "column"
-        }}
-        isModalOpened={errorModalOpened}
-      >
-        <ModalContents>{errorModalContents}</ModalContents>
-        <PageButton onClick={() => toggleErrorModal(false)}>Ok</PageButton>
-      </ModalContainer>
     </Container>
   );
 }
