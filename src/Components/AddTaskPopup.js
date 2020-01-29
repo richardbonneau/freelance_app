@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
+import ErrorPopup from "./ErrorPopup";
 import { addTaskToFirestore } from "../_actions";
 import {
   PageButton,
@@ -32,11 +33,18 @@ function AddTaskPopup(props) {
   const [selectedHours, setSelectedHours] = useState(hours[0]);
   const [selectedMinutes, setSelectedMinutes] = useState(minutes[0]);
 
+  const [errorModalOpened, toggleErrorModal] = useState(false);
+  const [errorModalContents, setErrorModalContents] = useState("");
+
   const addTaskModalContents = () => {
     const newTaskSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
-
+      if (workType === "") {
+        setErrorModalContents("Some fields are missing");
+        toggleErrorModal(true);
+        return
+      }
       dispatch(
         addTaskToFirestore({
           date: firebase.firestore.Timestamp.fromDate(props.selectedDay),
@@ -119,6 +127,7 @@ function AddTaskPopup(props) {
       >
         {addTaskModalContents()}
       </ModalContainer>
+      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
     </>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addClientToFirestore } from "../_actions";
+import ErrorPopup from "./ErrorPopup";
 import {
   PageButton,
   MaskOverlay,
@@ -22,10 +23,18 @@ function AddClientPopup(props) {
   const [provinceInput, setProvinceInput] = useState("");
   const [zipInput, setZipInput] = useState("");
 
+  const [errorModalOpened, toggleErrorModal] = useState(false);
+  const [errorModalContents, setErrorModalContents] = useState("");
+
   const addClientModalContents = () => {
     const newClientSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
+      if (nameInput === "" || emailInput === "" || companyInput === "" || addressOneInput === "" || addressTwoInput === "" || cityInput === "" || provinceInput === "" || zipInput === "") {
+        setErrorModalContents("Some fields are missing");
+        toggleErrorModal(true);
+        return;
+      }
       let newClientId = Date.now() * 10000 + Math.round(Math.random() * 9999);
       dispatch(
         addClientToFirestore({
@@ -122,6 +131,7 @@ function AddClientPopup(props) {
       <ModalContainer isModalOpened={props.isModalOpened}>
         {addClientModalContents()}
       </ModalContainer>
+      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
     </>
   );
 }

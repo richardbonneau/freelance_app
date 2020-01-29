@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
+import ErrorPopup from "./ErrorPopup";
 import { addExpenseToFirestore } from "../_actions";
 import {
   PageButton,
@@ -19,10 +20,18 @@ function AddExpensePopup(props) {
   const [expenseDate, setExpenseDate] = useState(new Date());
   const [amountInput, setAmountInput] = useState("");
 
+  const [errorModalOpened, toggleErrorModal] = useState(false);
+  const [errorModalContents, setErrorModalContents] = useState("");
+
   const addExpenseModalContents = () => {
     const newExpenseSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
+      if (nameInput === "") {
+        setErrorModalContents("Some fields are missing");
+        toggleErrorModal(true);
+        return;
+      }
       let newExpenseId = Date.now() * 10000 + Math.round(Math.random() * 9999);
       dispatch(
         addExpenseToFirestore({
@@ -82,6 +91,7 @@ function AddExpensePopup(props) {
       >
         {addExpenseModalContents()}
       </ModalContainer>
+      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
     </>
   );
 }
