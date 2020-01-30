@@ -31,13 +31,8 @@ function App() {
   const [isModalOpened, toggleModal] = useState(false);
 
   useEffect(() => {
-    console.log('userInfo.addressOne === ""', userInfo.addressOne === "", userInfo.addressOne);
-    if (userInfo.addressOne === "") {
-      console.log("its happeneing");
-      toggleModal(true);
-    }
+    if (userInfo.addressOne === "") toggleModal(true);
   }, [userInfo]);
-  console.log("userInfo.addressOnaaaaaaaaaaaaae", userInfo.addressOne);
 
   const renderNav = () => {
     return isVerifying ? null : (
