@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
+import { firebaseStorage } from "../utils/fire.js";
 import ErrorPopup from "./ErrorPopup";
 import { addExpenseToFirestore } from "../_actions";
 import {
@@ -19,9 +20,13 @@ function AddExpensePopup(props) {
   const [nameInput, setNameInput] = useState("");
   const [expenseDate, setExpenseDate] = useState(new Date());
   const [amountInput, setAmountInput] = useState("");
+  const [imageAsFile, setImageAsFile] = useState("");
+  const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
 
   const [errorModalOpened, toggleErrorModal] = useState(false);
   const [errorModalContents, setErrorModalContents] = useState("");
+
+  console.log("imageAsFile", imageAsFile, "imageAsUrl", imageAsUrl);
 
   const addExpenseModalContents = () => {
     const newExpenseSubmit = e => {
@@ -31,6 +36,27 @@ function AddExpensePopup(props) {
         setErrorModalContents("Some fields are missing");
         toggleErrorModal(true);
         return;
+      }
+      if (imageAsFile !== "") {
+        const uploadTask = firebaseStorage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+        uploadTask.on(
+          "state_changed",
+          snapShot => {
+            console.log(snapShot);
+          },
+          err => {
+            console.log(err);
+          },
+          () => {
+            firebaseStorage
+              .ref("images")
+              .child(imageAsFile.name)
+              .getDownloadURL()
+              .then(firebaseUrl => {
+                setImageAsUrl(prevObject => ({ ...prevObject, imgUrl: firebaseUrl }));
+              });
+          }
+        );
       }
       let newExpenseId = Date.now() * 10000 + Math.round(Math.random() * 9999);
       dispatch(
@@ -70,6 +96,8 @@ function AddExpensePopup(props) {
           />
           <div />
 
+          <input type="file" onChange={e => setImageAsFile(e.target.files[0])} />
+
           <div className="modal-buttons">
             {" "}
             <PageButton style={{ width: "110px" }} onClick={newExpenseSubmit}>
@@ -91,7 +119,11 @@ function AddExpensePopup(props) {
       >
         {addExpenseModalContents()}
       </ModalContainer>
-      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
+      <ErrorPopup
+        errorModalOpened={errorModalOpened}
+        toggleErrorModal={toggleErrorModal}
+        errorModalContents={errorModalContents}
+      />
     </>
   );
 }

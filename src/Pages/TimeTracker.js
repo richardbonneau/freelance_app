@@ -74,7 +74,8 @@ function TimeTracker() {
       return (
         <tr>
           <td></td>
-          <td>Nothing to show here</td>
+          <td></td>
+          <td style={{ textAlign: "center" }}> Nothing to show here</td>
         </tr>
       );
     return listOfTasks.map((task, i) => (
