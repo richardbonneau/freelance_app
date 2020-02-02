@@ -40,7 +40,7 @@ function InvoiceDetails(props) {
   itemsTotal = itemsSubtotal;
 
   return (
-    <Container style={{ overflowX: "scroll" }}>
+    <Container>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
       <InvoiceContainer style={{ minWidth: "800px" }}>
         <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>

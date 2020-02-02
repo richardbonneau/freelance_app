@@ -72,12 +72,10 @@ function TimeTracker() {
   function tasksList() {
     if (listOfTasks.length === 0)
       return (
-        <Tr>
-          <td width="1%">
-            {/* <ExpandableInvisibleButton onClick={() => project.projectSelected(project.client)}></ExpandableInvisibleButton> */}
-          </td>
-          <Td>Nothing to show here</Td>
-        </Tr>
+        <tr>
+          <td></td>
+          <td>Nothing to show here</td>
+        </tr>
       );
     return listOfTasks.map((task, i) => (
       <Tr key={i}>
