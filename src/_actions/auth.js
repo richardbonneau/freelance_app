@@ -38,7 +38,7 @@ const receiveLogin = user => {
   };
 };
 
-const loginError = (error) => {
+const loginError = error => {
   return {
     type: LOGIN_FAILURE,
     error
@@ -109,11 +109,23 @@ const addNewUserToDatabase = (user, dispatch) => {
   db.collection("users")
     .doc(user.user.uid)
     .set(initialUserDocument)
-    .then(function () {
+    .then(function() {
       dispatch(receiveLogin(user.user));
-      console.log("Document successfully written!");
+      console.log("User Document successfully written!");
+      dispatch(accessingDatabase());
+      db.collection("public-invoices")
+        .doc(user.user.uid)
+        .set({ invoices: [] })
+        .then(function() {
+          dispatch(receiveLogin(user.user));
+          console.log("Public Invoices Document successfully written!");
+        })
+        .catch(function(error) {
+          dispatch(databaseError());
+          console.error("Error writing document: ", error);
+        });
     })
-    .catch(function (error) {
+    .catch(function(error) {
       dispatch(databaseError());
       console.error("Error writing document: ", error);
     });
@@ -137,7 +149,7 @@ const getUserDataAndLogin = user => dispatch => {
   db.collection("users")
     .doc(user.uid)
     .get()
-    .then(function (doc) {
+    .then(function(doc) {
       if (doc.exists) {
         console.log("doc.data()", doc.data());
         dispatch(requestInitialClientsList(doc.data().clients));
@@ -157,7 +169,7 @@ const getUserDataAndLogin = user => dispatch => {
         dispatch(verifyFail());
       }
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.log("Error getting document:", error);
     });
 };

@@ -91,6 +91,7 @@ function InvoiceCreator() {
         history
       )
     );
+
     setInvoiceNumberInput("");
     setTitleInput("");
   };
@@ -232,8 +233,11 @@ function InvoiceCreator() {
         </PageButton>
       </InvoiceContainer>
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
-      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
-
+      <ErrorPopup
+        errorModalOpened={errorModalOpened}
+        toggleErrorModal={toggleErrorModal}
+        errorModalContents={errorModalContents}
+      />
     </Container>
   );
 }

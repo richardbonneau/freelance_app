@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
-import { useSelector } from "react-redux";
-import Item from "../Components/Item";
-import { Container, Anchor } from "../utils/globalStyledComponents";
+import { makeInvoicePublic } from "../_actions";
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Anchor, PageButton } from "../utils/globalStyledComponents";
 import {
   TitleContainer,
   InvoiceContainer,
@@ -21,6 +20,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function InvoiceDetails(props) {
   const userInfo = useSelector(state => state.user.userInfo);
+  const dispatch = useDispatch();
   let { id } = useParams();
   const details = useSelector(state =>
     state.invoices.invoicesList.find(invoice => invoice.id === Number(id))
@@ -39,9 +39,13 @@ function InvoiceDetails(props) {
   details.items.forEach(item => (itemsSubtotal = itemsSubtotal + item.hours * item.rate));
   itemsTotal = itemsSubtotal;
 
+  const makePublic = () => {
+    dispatch(makeInvoicePublic(details));
+  };
   return (
     <Container>
       <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
+      <PageButton onClick={makePublic}>Make Public</PageButton>
       <InvoiceContainer style={{ minWidth: "800px" }}>
         <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
         <TitleContainer style={{ display: "flex" }}>

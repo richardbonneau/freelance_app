@@ -129,6 +129,17 @@ function App() {
         isVerifying={isVerifying}
       />
 
+      {/* <Route
+        
+        render={props => {
+          store.dispatch(pickCurrentPage(props.location.pathname));
+          return 
+              <Component {...props} />
+            
+           
+        }}
+      /> */}
+
       <MaskOverlay onClick={() => toggleModal(false)} isModalOpened={isModalOpened} />
       <ModalContainer
         isModalOpened={isModalOpened}
