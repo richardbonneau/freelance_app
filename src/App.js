@@ -35,7 +35,7 @@ function App() {
   }, [userInfo]);
 
   const renderNav = () => {
-    return isVerifying ? null : (
+    return isVerifying || !isAuthenticated ? null : (
       <>
         <MobileNavBar />
         <SideBar />
@@ -129,16 +129,12 @@ function App() {
         isVerifying={isVerifying}
       />
 
-      {/* <Route
-        
+      <Route
+        path="/public-invoice/:id"
         render={props => {
-          store.dispatch(pickCurrentPage(props.location.pathname));
-          return 
-              <Component {...props} />
-            
-           
+          return <InvoiceDetails {...props} />;
         }}
-      /> */}
+      />
 
       <MaskOverlay onClick={() => toggleModal(false)} isModalOpened={isModalOpened} />
       <ModalContainer

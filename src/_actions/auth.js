@@ -113,17 +113,6 @@ const addNewUserToDatabase = (user, dispatch) => {
       dispatch(receiveLogin(user.user));
       console.log("User Document successfully written!");
       dispatch(accessingDatabase());
-      db.collection("public-invoices")
-        .doc(user.user.uid)
-        .set({ invoices: [] })
-        .then(function() {
-          dispatch(receiveLogin(user.user));
-          console.log("Public Invoices Document successfully written!");
-        })
-        .catch(function(error) {
-          dispatch(databaseError());
-          console.error("Error writing document: ", error);
-        });
     })
     .catch(function(error) {
       dispatch(databaseError());

@@ -107,18 +107,36 @@ export const makeInvoicePublic = invoice => dispatch => {
   if (!store.getState().invoices.isSendingReq) {
     dispatch(attemptPushNewInvoice());
     let uid = store.getState().auth.user.uid;
+    let clientInfo = store
+      .getState()
+      .clients.clientsList.find(client => client.id === invoice.clientId);
+
+    invoice = { ...invoice, clientInfo };
+    console.log("clientInfo", clientInfo);
     db.collection("public-invoices")
-      .doc(uid)
-      .update({
-        invoices: firestore.FieldValue.arrayUnion(invoice)
-      })
-      .then(function(doc) {
-        dispatch(firestoreSuccess());
-        console.log("Public Invoice pushed.");
+      .doc(invoice.id.toString())
+      .set(invoice)
+      .then(function() {
+        dispatch(reqSuccess());
+        console.log("Public Invoices Document successfully written!");
       })
       .catch(function(error) {
-        console.log("Error getting document:", error);
+        dispatch(requestError());
+        console.error("Error writing document: ", error);
       });
+
+    // db.collection("public-invoices")
+    //   .doc(uid)
+    //   .update({
+    //     invoices: firestore.FieldValue.arrayUnion(invoice)
+    //   })
+    //   .then(function(doc) {
+    //     dispatch(firestoreSuccess());
+    //     console.log("Public Invoice pushed.");
+    //   })
+    //   .catch(function(error) {
+    //     console.log("Error getting document:", error);
+    //   });
   }
 };
 export const firestoreSuccess = () => dispatch => {
