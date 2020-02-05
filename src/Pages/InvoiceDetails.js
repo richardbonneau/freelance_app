@@ -18,6 +18,7 @@ import {
 } from "../utils/invoiceStyling";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Loading from "../Components/Loading";
 
 function InvoiceDetails(props) {
   const userInfo = useSelector(state => state.user.userInfo);
@@ -75,7 +76,7 @@ function InvoiceDetails(props) {
       <Container>
         <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
         <PageButton onClick={makePublic}>Make Public</PageButton>
-        <InvoiceContainer style={{ minWidth: "800px" }}>
+        <InvoiceContainer style={{ width: "800px" }}>
           <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
           <TitleContainer style={{ display: "flex" }}>
             <input
@@ -236,7 +237,7 @@ function InvoiceDetails(props) {
         </InvoiceContainer>
       </Container>
     );
-  } else return <div>No such document</div>;
+  } else return <Loading />;
 }
 
 export default InvoiceDetails;

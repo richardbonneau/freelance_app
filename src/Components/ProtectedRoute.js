@@ -4,21 +4,14 @@ import styled from "styled-components";
 import Loading from "./Loading";
 import { pickCurrentPage } from "../_actions";
 import store from "../store";
+import { ComponentContainer } from "../utils/globalStyledComponents";
 
 const PageStructure = styled.div`
   @media (min-width: 1024px) {
     display: flex;
   }
 `;
-const ComponentContainer = styled.div`
-  flex-grow: 100;
-  background: #f6f7f9;
-  display: flex;
-  justify-content: center;
-  @media (min-width: 1024px) {
-    margin-left: 220px;
-  }
-`;
+
 export default function ProtectedRoute({
   component: Component,
   isAuthenticated,

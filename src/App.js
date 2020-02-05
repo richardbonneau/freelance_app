@@ -20,7 +20,8 @@ import {
   PageButton,
   MaskOverlay,
   ModalContainer,
-  ModalContents
+  ModalContents,
+  ComponentContainer
 } from "./utils/globalStyledComponents";
 
 function App() {
@@ -132,7 +133,11 @@ function App() {
       <Route
         path="/public-invoice/:id"
         render={props => {
-          return <InvoiceDetails {...props} />;
+          return (
+            <ComponentContainer style={{ marginLeft: "0" }}>
+              <InvoiceDetails {...props} />
+            </ComponentContainer>
+          );
         }}
       />
 

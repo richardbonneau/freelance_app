@@ -158,6 +158,7 @@ export const FormInputContainer = styled.div`
   margin-bottom: 15px;
 `;
 export const PageButton = styled.a`
+  border-radius: 5px;
   color: white;
   background: ${props => props.theme.blue};
   padding: 4px 10px;
@@ -175,5 +176,14 @@ export const PageButton = styled.a`
   }
   &&:hover {
     background: ${props => props.theme.blueHover};
+  }
+`;
+export const ComponentContainer = styled.div`
+  flex-grow: 100;
+  background: #f6f7f9;
+  display: flex;
+  justify-content: center;
+  @media (min-width: 1024px) {
+    margin-left: 220px;
   }
 `;
