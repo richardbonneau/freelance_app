@@ -119,6 +119,23 @@ export const makeInvoicePublic = invoice => dispatch => {
       .then(function() {
         dispatch(reqSuccess());
         console.log("Public Invoices Document successfully written!");
+        // TODO: How do we update the invoice object to turn the isPublic to true
+        // db.collection("users")
+        //   .doc(uid)
+        //   .update({
+        //     invoices: firestore.FieldValue.arrayUnion(newInvoice)
+        //   })
+        //   .then(function(doc) {
+        //     console.log("New client pushed. Now pushing to redux store.");
+        //     dispatch(pushNewInvoice(newInvoice));
+        //   })
+        //   .then(() => {
+        //     history.push(`/invoice/${newInvoice.id}`);
+        //     dispatch(firestoreSuccess());
+        //   })
+        //   .catch(function(error) {
+        //     console.log("Error getting document:", error);
+        //   });
       })
       .catch(function(error) {
         dispatch(requestError());

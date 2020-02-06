@@ -88,7 +88,8 @@ function InvoiceCreator() {
           clientId: selectedClientId,
           userInfo,
           items: itemsList,
-          notes: notesInput
+          notes: notesInput,
+          isPublic: false
         },
         history
       )
