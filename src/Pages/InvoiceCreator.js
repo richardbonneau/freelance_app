@@ -33,6 +33,7 @@ import {
 function InvoiceCreator() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const issuer = useSelector(state => state.auth.user.uid);
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const clients = useSelector(state => state.clients.clientsList);
   const itemsList = useSelector(state => state.invoices.currentItemsList);
@@ -78,6 +79,7 @@ function InvoiceCreator() {
     dispatch(
       addInvoiceToFirestore(
         {
+          invoiceIssuer: issuer,
           id: newInvoiceId,
           title: titleInput,
           invoiceNumber: invoiceNumberInput,

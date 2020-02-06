@@ -22,6 +22,7 @@ import Loading from "../Components/Loading";
 
 function InvoiceDetails(props) {
   const userInfo = useSelector(state => state.user.userInfo);
+  const currentUser = useSelector(state => state.auth.user.uid);
   const dispatch = useDispatch();
   let { id } = useParams();
 
@@ -58,7 +59,7 @@ function InvoiceDetails(props) {
         console.log("Error getting document:", error);
       });
   }
-  console.log("details", details);
+  console.log("props", props);
   if (details !== undefined && client !== undefined) {
     const invoiceDate = new Date(details.invoiceDate.seconds * 1000);
     const dueDate = new Date(details.dueDate.seconds * 1000);
@@ -71,11 +72,20 @@ function InvoiceDetails(props) {
     const makePublic = () => {
       dispatch(makeInvoicePublic(details));
     };
-
+    const privateView = () => {
+      return (
+        <>
+          {" "}
+          <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
+          <PageButton onClick={makePublic}>Make Public</PageButton>
+        </>
+      );
+    };
+    const publicView = () => {};
+    console.log("props.isAuthenticated", props);
     return (
       <Container>
-        <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
-        <PageButton onClick={makePublic}>Make Public</PageButton>
+        {invoiceDetails.invoiceIssuer === currentUser ? privateView() : publicView()}
         <InvoiceContainer style={{ width: "800px" }}>
           <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
           <TitleContainer style={{ display: "flex" }}>

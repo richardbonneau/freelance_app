@@ -43,6 +43,7 @@ function App() {
       </>
     );
   };
+  console.log("isAuthenticated", isAuthenticated);
   return (
     <>
       <Switch>
@@ -133,6 +134,7 @@ function App() {
       <Route
         path="/public-invoice/:id"
         render={props => {
+          console.log("props", props);
           return (
             <ComponentContainer style={{ marginLeft: "0" }}>
               <InvoiceDetails {...props} />
