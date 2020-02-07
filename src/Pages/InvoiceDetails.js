@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../utils/fire.js";
-import { makeInvoicePublic } from "../_actions";
+import { changeInvoicePrivacy } from "../_actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Anchor, PageButton } from "../utils/globalStyledComponents";
 import {
@@ -21,7 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Loading from "../Components/Loading";
 
 function InvoiceDetails(props) {
-  const userInfo = useSelector(state => state.user.userInfo);
+  const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const currentUser = useSelector(state => state.auth.user.uid);
   const dispatch = useDispatch();
   let { id } = useParams();
@@ -36,6 +36,7 @@ function InvoiceDetails(props) {
 
   const [client, setClient] = useState(invoiceClient);
 
+  useEffect(() => { setDetails(invoiceDetails) }, [invoiceDetails])
   console.log("props", props.match.params.id);
   if (details === undefined) {
     db.collection("public-invoices")
@@ -77,9 +78,12 @@ function InvoiceDetails(props) {
           {" "}
           <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
 
-          {details.isPublic
-            ? <PageButton onClick={() => { }} >Make Private</PageButton>
-            : <PageButton onClick={() => dispatch(makeInvoicePublic(details))}>Make Public</PageButton>
+
+          {isSendingReq
+            ? <PageButton style={{ height: '24px' }} ><Loading /></PageButton>
+            : details.isPublic
+              ? <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, false))} >Make Private</PageButton>
+              : <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, true))}>Make Public</PageButton>
 
           }
         </>

@@ -110,7 +110,8 @@ export const deleteItemFromStore = index => dispatch => {
 export const modifyItemFromStore = (index, contents) => dispatch => {
   dispatch(modifyItem(index, contents));
 };
-export const makeInvoicePublic = invoice => dispatch => {
+export const changeInvoicePrivacy = (invoice, makePublic) => dispatch => {
+  //TODO: this could probably be less lines of code
   console.log("store", store.getState().invoices.isSendingReq);
   if (!store.getState().invoices.isSendingReq) {
     dispatch(firebaseRequest());
@@ -125,11 +126,11 @@ export const makeInvoicePublic = invoice => dispatch => {
       .doc(invoice.id.toString())
       .set(invoice)
       .then(function () {
-        dispatch(reqSuccess());
+
         console.log("Public Invoices Document successfully written!");
         let modifiedInvoicesList = store.getState().invoices.invoicesList.map((inv) => {
           if (inv.id === invoice.id) {
-            return { ...inv, isPublic: true }
+            return { ...inv, isPublic: makePublic }
           }
           else return inv
         });
@@ -154,20 +155,10 @@ export const makeInvoicePublic = invoice => dispatch => {
         console.error("Error writing document: ", error);
       });
 
-    // db.collection("public-invoices")
-    //   .doc(uid)
-    //   .update({
-    //     invoices: firestore.FieldValue.arrayUnion(invoice)
-    //   })
-    //   .then(function(doc) {
-    //     dispatch(firestoreSuccess());
-    //     console.log("Public Invoice pushed.");
-    //   })
-    //   .catch(function(error) {
-    //     console.log("Error getting document:", error);
-    //   });
   }
 };
+
+
 export const firestoreSuccess = () => dispatch => {
   dispatch(reqSuccess());
 };
