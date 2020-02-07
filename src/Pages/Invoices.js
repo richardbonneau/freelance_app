@@ -27,7 +27,7 @@ function Invoices(props) {
         <THead>
           <tr>
             <Th width="1%" scope="col"></Th>
-            <Th scope="col">Title</Th>
+            <Th scope="col">Subject</Th>
             <Th width="5%" scope="col">
               #
             </Th>

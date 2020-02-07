@@ -15,7 +15,7 @@ function Invoice(props) {
           onClick={() => history.push(`/invoice/${props.invoice.id}`)}
         ></ExpandableInvisibleButton>
       </td>
-      <Td label="Title">{props.invoice.title}</Td>
+      <Td label="Subject">{props.invoice.title}</Td>
       <Td label="#">{props.invoice.invoiceNumber}</Td>
       <Td label="Project">projects[invoice.projectId]</Td>
       <Td label="Client">{client.name}</Td>

@@ -76,6 +76,7 @@ export const Td = styled.td`
     &::before {
       content: attr(label);
       float: left;
+      font-weight: 600;
     }
   }
 `;
