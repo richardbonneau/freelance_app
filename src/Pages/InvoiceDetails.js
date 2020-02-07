@@ -30,8 +30,8 @@ function InvoiceDetails(props) {
     state.invoices.invoicesList.find(invoice => invoice.id === Number(id))
   );
   const [details, setDetails] = useState(invoiceDetails);
-  const invoiceClient = useSelector(state =>
-    state.clients.clientsList.find(client => client.id === details.clientId)
+  const invoiceClient = useSelector(state => state.clients.clientsList.find(client => client.id === details.clientId)
+
   );
 
   const [client, setClient] = useState(invoiceClient);
@@ -41,7 +41,7 @@ function InvoiceDetails(props) {
     db.collection("public-invoices")
       .doc(props.match.params.id)
       .get()
-      .then(function(doc) {
+      .then(function (doc) {
         let index;
 
         if (doc.exists) {
@@ -55,7 +55,7 @@ function InvoiceDetails(props) {
           console.log("No such document!");
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting document:", error);
       });
   }
@@ -69,19 +69,23 @@ function InvoiceDetails(props) {
     details.items.forEach(item => (itemsSubtotal = itemsSubtotal + item.hours * item.rate));
     itemsTotal = itemsSubtotal;
 
-    const makePublic = () => {
-      dispatch(makeInvoicePublic(details));
-    };
+
     const privateView = () => {
+
       return (
         <>
           {" "}
           <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
-          <PageButton onClick={makePublic}>Make Public</PageButton>
+
+          {details.isPublic
+            ? <PageButton onClick={() => { }} >Make Private</PageButton>
+            : <PageButton onClick={() => dispatch(makeInvoicePublic(details))}>Make Public</PageButton>
+
+          }
         </>
       );
     };
-    const publicView = () => {};
+    const publicView = () => { };
     console.log("props.isAuthenticated", props);
     return (
       <Container>
@@ -95,7 +99,7 @@ function InvoiceDetails(props) {
               placeholder="Invoice Title"
               value={details.title}
               readOnly
-              // onChange={e => setTitleInput(e.target.value)}
+            // onChange={e => setTitleInput(e.target.value)}
             />
             <div className="subcontainer ">
               {" "}
@@ -107,11 +111,11 @@ function InvoiceDetails(props) {
                 value={details.invoiceNumber}
                 maxLength={7}
                 readOnly
-                // onChange={e =>
-                //   e.target.value.startsWith("#")
-                //     ? setInvoiceNumberInput(e.target.value)
-                //     : setInvoiceNumberInput("#" + e.target.value)
-                // }
+              // onChange={e =>
+              //   e.target.value.startsWith("#")
+              //     ? setInvoiceNumberInput(e.target.value)
+              //     : setInvoiceNumberInput("#" + e.target.value)
+              // }
               />
             </div>
           </TitleContainer>
@@ -239,11 +243,11 @@ function InvoiceDetails(props) {
               value={details.notes}
               placeholder="Notes"
               readOnly
-              // onChange={e => setNotesInput(e.target.value)}
+            // onChange={e => setNotesInput(e.target.value)}
             ></NotesInput>
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </InvoiceContainer>
       </Container>
     );

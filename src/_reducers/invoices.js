@@ -7,10 +7,11 @@ import {
   FIREBASE_SUCCESS,
   FIREBASE_FAILURE,
   OPEN_NEW_INVOICE_PAGE,
-  ATTEMPT_PUSHING_NEW_INVOICE,
+  FIREBASE_REQUEST,
   PUSH_NEW_ITEM,
   DELETE_ITEM,
-  MODIFY_ITEM
+  MODIFY_ITEM,
+  MODIFY_INVOICE
 } from "../_actions";
 
 let defaultItemsList = [{ ...newEntry, id: uniqid() }];
@@ -36,16 +37,15 @@ export default (
         ...state,
         currentItemsList: defaultItemsList
       }
-    case ATTEMPT_PUSHING_NEW_INVOICE:
-      return {
-        ...state,
-        isSendingReq: true,
-        reqError: false,
-      }
     case PUSH_NEW_INVOICE:
       return {
         ...state,
         invoicesList: [...state.invoicesList, action.newInvoice],
+      }
+    case MODIFY_INVOICE:
+      return {
+        ...state,
+        invoicesList: action.invoiceList,
       }
     case PUSH_NEW_ITEM:
       return {
@@ -65,7 +65,12 @@ export default (
           return action.contents;
         })
       }
-
+    case FIREBASE_REQUEST:
+      return {
+        ...state,
+        isSendingReq: true,
+        reqError: false,
+      }
     case FIREBASE_SUCCESS:
       return {
         ...state,
