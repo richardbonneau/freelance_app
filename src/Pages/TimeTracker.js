@@ -9,6 +9,10 @@ import { Container, PageButton, Tr, Td, Th, Table, THead } from "../utils/global
 
 const Header = styled.div`
   display: flex;
+  align-items: center;
+  h4 {
+    margin-right: 25px;
+  }
 `;
 const CalendarContainer = styled.div`
   display: flex;
@@ -39,6 +43,27 @@ const Weekday = styled.div`
   }
 `;
 const TasksContainer = styled.div``;
+const WeekSelector = styled.div`
+  position: relative;
+  width: 200px;
+  height: 25px;
+  margin: 10px 0;
+  a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    /* z-index: 1000; */
+  }
+
+  input {
+    height: 100%;
+    margin: 0 !important;
+    border-bottom: none !important;
+    color: #ffffff00;
+    background: #ffffff00;
+  }
+`;
 
 function TimeTracker() {
   const [selectedWeek, setSelectedWeek] = useState(new Date());
@@ -97,13 +122,16 @@ function TimeTracker() {
       <CalendarContainer>
         <Header>
           <h4>Week of {momentSelectedWeek.startOf("week").format("MMM Do YYYY")}</h4>
-          <DatePicker
-            selected={selectedWeek}
-            onChange={date => setSelectedWeek(date)}
-            disabledKeyboardNavigation
-            withPortal
-            highlightDates={[new Date()]}
-          />
+          <WeekSelector>
+            <PageButton>Click here to select a week</PageButton>
+            <DatePicker
+              selected={selectedWeek}
+              onChange={date => setSelectedWeek(date)}
+              disabledKeyboardNavigation
+              withPortal
+              highlightDates={[new Date()]}
+            />
+          </WeekSelector>
         </Header>
         <WeekdaysContainer>
           {Object.keys(week).map((day, i) => (
