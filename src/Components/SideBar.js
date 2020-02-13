@@ -152,8 +152,8 @@ const pages = [
   { name: "Projects", link: "/projects", icon: FaPencilRuler },
   { name: "Clients", link: "/clients", icon: FaUserAlt },
   { name: "Expenses", link: "/expenses", icon: FaMoneyBillAlt },
-  { name: "Income Tracker", link: "/income-tracker", icon: GoGraph },
-  { name: "Time Tracker", link: "/time-tracker", icon: IoIosTime }
+  { name: "Task Tracker", link: "/task-tracker", icon: IoIosTime },
+  { name: "Income Tracker", link: "/income-tracker", icon: GoGraph }
 ];
 function SideBar() {
   const dispatch = useDispatch();

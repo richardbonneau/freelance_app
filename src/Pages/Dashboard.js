@@ -40,7 +40,11 @@ function Dashboard() {
       <AddClientPopup isModalOpened={clientPopupOpened} toggleModal={setClientPopupOpened} />
       <AddExpensePopup isModalOpened={expensePopupOpened} toggleModal={setExpensePopupOpened} />
       <AddProjectPopup isModalOpened={projectPopupOpened} toggleModal={setProjectPopupOpened} />
-      <AddTaskPopup isModalOpened={taskPopupOpened} toggleModal={setTaskPopupOpened} />
+      <AddTaskPopup
+        isModalOpened={taskPopupOpened}
+        toggleModal={setTaskPopupOpened}
+        toggleProjectPopup={setProjectPopupOpened}
+      />
     </Container>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
 import ErrorPopup from "./ErrorPopup";
@@ -18,17 +19,22 @@ const minutes = ["00", "15", "30", "45"];
 
 const LabelInputContainer = styled.div`
   display: flex;
+  align-items: center;
   label {
     min-width: 98px;
     padding: 8px;
     text-align: center;
   }
+  select {
+    height: 30px;
+  }
 `;
 
 function AddTaskPopup(props) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const listOfProjects = useSelector(state => state.projects.projectsList);
-  const [selectedProjectId, setSelectedProjectId] = useState(Number(listOfProjects[0].id));
+  const [selectedProjectId, setSelectedProjectId] = useState(0);
   const [workType, setWorkType] = useState("");
   const [selectedHours, setSelectedHours] = useState(hours[0]);
   const [selectedMinutes, setSelectedMinutes] = useState(minutes[0]);
@@ -43,7 +49,7 @@ function AddTaskPopup(props) {
       if (workType === "") {
         setErrorModalContents("Some fields are missing");
         toggleErrorModal(true);
-        return
+        return;
       }
       dispatch(
         addTaskToFirestore({
@@ -62,17 +68,29 @@ function AddTaskPopup(props) {
         <ModalHr />
         <form>
           <LabelInputContainer>
-            <label>Task: </label>
+            <label>Project: </label>
             <select
               value={selectedProjectId}
               onChange={e => setSelectedProjectId(Number(e.target.value))}
             >
+              <option value={0}>None</option>
               {listOfProjects.map((client, i) => (
                 <option key={i} value={client.id}>
                   {client.name}
                 </option>
               ))}
             </select>
+            <a
+              href="#"
+              onClick={() => {
+                props.toggleModal(false);
+                if (props.toggleProjectPopup) setTimeout(() => props.toggleProjectPopup(true), 250);
+                else history.push("/projects");
+              }}
+              style={{ marginLeft: "14px" }}
+            >
+              Add
+            </a>
           </LabelInputContainer>
 
           <div />
@@ -127,7 +145,11 @@ function AddTaskPopup(props) {
       >
         {addTaskModalContents()}
       </ModalContainer>
-      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
+      <ErrorPopup
+        errorModalOpened={errorModalOpened}
+        toggleErrorModal={toggleErrorModal}
+        errorModalContents={errorModalContents}
+      />
     </>
   );
 }

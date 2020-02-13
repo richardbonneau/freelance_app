@@ -65,7 +65,7 @@ const WeekSelector = styled.div`
   }
 `;
 
-function TimeTracker() {
+function TaskTracker() {
   const [selectedWeek, setSelectedWeek] = useState(new Date());
   let momentSelectedWeek = moment(selectedWeek).startOf("week");
   const [selectedDay, setSelectedDay] = useState(moment(momentSelectedWeek));
@@ -117,8 +117,8 @@ function TimeTracker() {
 
   return (
     <Container>
-      <h2>Time Tracker</h2>
-      <div>Keep track of how much time you spent on specific tasks.</div>
+      <h2>Task Tracker</h2>
+      <div>Keep track of how much time you spend on specific tasks.</div>
       <CalendarContainer>
         <Header>
           <h4>Week of {momentSelectedWeek.startOf("week").format("MMM Do YYYY")}</h4>
@@ -157,8 +157,11 @@ function TimeTracker() {
             </THead>
             <tbody>{tasksList()}</tbody>
           </Table>
-
-          <PageButton onClick={() => toggleModal(true)}>Add New Task</PageButton>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <PageButton style={{ height: "30px", width: "65%" }} onClick={() => toggleModal(true)}>
+              Add New Task
+            </PageButton>
+          </div>
         </TasksContainer>
       </CalendarContainer>
       <AddTaskPopup
@@ -170,4 +173,4 @@ function TimeTracker() {
   );
 }
 
-export default TimeTracker;
+export default TaskTracker;
