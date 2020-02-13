@@ -148,6 +148,7 @@ export const ModalContents = styled.div`
   padding: 20px;
 `;
 export const ModalTitle = styled.h3`
+  margin-bottom: 15px;
   text-align: center;
 `;
 export const ModalHr = styled.hr`

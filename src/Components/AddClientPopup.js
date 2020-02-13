@@ -30,7 +30,16 @@ function AddClientPopup(props) {
     const newClientSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
-      if (nameInput === "" || emailInput === "" || companyInput === "" || addressOneInput === "" || addressTwoInput === "" || cityInput === "" || provinceInput === "" || zipInput === "") {
+      if (
+        nameInput === "" ||
+        emailInput === "" ||
+        companyInput === "" ||
+        addressOneInput === "" ||
+        addressTwoInput === "" ||
+        cityInput === "" ||
+        provinceInput === "" ||
+        zipInput === ""
+      ) {
         setErrorModalContents("Some fields are missing");
         toggleErrorModal(true);
         return;
@@ -63,7 +72,7 @@ function AddClientPopup(props) {
     return (
       <ModalContents active={props.isModalOpened}>
         <ModalTitle>New Client</ModalTitle>
-        <ModalHr />
+
         <form>
           <h4>Identification</h4>
           <input
@@ -131,7 +140,11 @@ function AddClientPopup(props) {
       <ModalContainer isModalOpened={props.isModalOpened}>
         {addClientModalContents()}
       </ModalContainer>
-      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
+      <ErrorPopup
+        errorModalOpened={errorModalOpened}
+        toggleErrorModal={toggleErrorModal}
+        errorModalContents={errorModalContents}
+      />
     </>
   );
 }

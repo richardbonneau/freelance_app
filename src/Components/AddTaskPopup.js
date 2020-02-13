@@ -65,7 +65,7 @@ function AddTaskPopup(props) {
     return (
       <ModalContents active={props.isModalOpened}>
         <ModalTitle>New Task</ModalTitle>
-        <ModalHr />
+
         <form>
           <LabelInputContainer>
             <label>Project: </label>

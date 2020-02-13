@@ -54,7 +54,7 @@ function AddExpensePopup(props) {
     return (
       <ModalContents active={props.isModalOpened}>
         <ModalTitle>New Expense</ModalTitle>
-        <ModalHr />
+
         <form>
           <input
             type="text"

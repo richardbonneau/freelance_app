@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
+import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
 import ErrorPopup from "./ErrorPopup";
@@ -13,7 +14,10 @@ import {
   ModalTitle,
   ModalHr
 } from "../utils/globalStyledComponents";
-
+const ProjectForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
 function AddProjectPopup(props) {
   const dispatch = useDispatch();
   const listOfClients = useSelector(state => state.clients.clientsList);
@@ -33,7 +37,7 @@ function AddProjectPopup(props) {
         setErrorModalContents("Some fields are missing");
         toggleErrorModal(true);
 
-        return
+        return;
       }
       let newProjectId = Date.now() * 10000 + Math.round(Math.random() * 9999);
       dispatch(
@@ -52,15 +56,15 @@ function AddProjectPopup(props) {
     return (
       <ModalContents active={props.isModalOpened}>
         <ModalTitle>New Project</ModalTitle>
-        <ModalHr />
-        <form>
+
+        <ProjectForm>
           <input
             type="text"
             placeholder="Name"
             value={nameInput}
             onChange={e => setNameInput(e.target.value)}
           />
-          <label>Client: </label>
+          <label>Client </label>
           <select
             value={selectedClientId}
             onChange={e => setSelectedClientId(Number(e.target.value))}
@@ -73,12 +77,14 @@ function AddProjectPopup(props) {
             ))}
           </select>
           <div />
+          <label style={{ marginTop: "5px" }}>Start Date </label>
           <DatePicker
             selected={projectStartDate}
             onChange={date => setProjectStartDate(date)}
             disabledKeyboardNavigation
           />
           <div />
+          <label>End Date </label>
           <DatePicker
             selected={projectEndDate}
             onChange={date => setProjectEndDate(date)}
@@ -89,7 +95,7 @@ function AddProjectPopup(props) {
             <PageButton onClick={newProjectSubmit}>Create Project</PageButton>
             <PageButton onClick={() => props.toggleModal(false)}>Cancel</PageButton>
           </div>
-        </form>
+        </ProjectForm>
       </ModalContents>
     );
   };
@@ -103,7 +109,11 @@ function AddProjectPopup(props) {
       >
         {addProjectModalContents()}
       </ModalContainer>
-      <ErrorPopup errorModalOpened={errorModalOpened} toggleErrorModal={toggleErrorModal} errorModalContents={errorModalContents} />
+      <ErrorPopup
+        errorModalOpened={errorModalOpened}
+        toggleErrorModal={toggleErrorModal}
+        errorModalContents={errorModalContents}
+      />
     </>
   );
 }
