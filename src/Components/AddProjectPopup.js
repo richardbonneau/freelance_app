@@ -105,7 +105,7 @@ function AddProjectPopup(props) {
       <MaskOverlay onClick={() => props.toggleModal(false)} isModalOpened={props.isModalOpened} />
       <ModalContainer
         isModalOpened={props.isModalOpened}
-        style={{ height: "330px", marginTop: "-150px" }}
+        style={{ height: "340px", marginTop: "-150px" }}
       >
         {addProjectModalContents()}
       </ModalContainer>

@@ -34,7 +34,7 @@ function Dashboard() {
         <PageButton onClick={() => setClientPopupOpened(true)}>New Client</PageButton>
         <PageButton onClick={() => setExpensePopupOpened(true)}>New Expense</PageButton>
         <PageButton onClick={() => setProjectPopupOpened(true)}>New Project</PageButton>
-        <PageButton onClick={() => setTaskPopupOpened(true)}>New Task</PageButton>
+        <PageButton onClick={() => setTaskPopupOpened(true)}>New Task (for Today)</PageButton>
       </ButtonContainer>
 
       <AddClientPopup isModalOpened={clientPopupOpened} toggleModal={setClientPopupOpened} />

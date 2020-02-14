@@ -93,7 +93,7 @@ function AddClientPopup(props) {
             value={companyInput}
             onChange={e => setCompanyInput(e.target.value)}
           />
-          <h4>Residency (required for Invoicing)</h4>{" "}
+          <h4 style={{ marginTop: "20px" }}>Residency (required for Invoicing)</h4>{" "}
           <input
             type="text"
             placeholder="Address Line 1"

@@ -15,7 +15,8 @@ export const Container = styled.div`
     -webkit-appearance: none;
     margin: 0;
   }
-  input[type="text"] {
+  input[type="text"],
+  input[type="number"] {
     border: none;
     border-bottom: 1px solid #8c8c8c;
     margin: 8px 0;
