@@ -60,6 +60,14 @@ function InvoiceCreator() {
   }, [itemsList]);
 
   const newInvoiceSubmit = e => {
+    //     name(pin):""
+    // email(pin):""
+    // companyName(pin):""
+    // addressOne(pin):""
+    // addressTwo(pin):"-"
+    // city(pin):""
+    // province(pin):""
+    // zip(pin):""
     console.log(
       "itemsList.length <= 0",
       itemsList.find(item => item.name === "")
@@ -71,6 +79,17 @@ function InvoiceCreator() {
       return;
     } else if (itemsList.find(item => item.name === "")) {
       setErrorModalContents("Empty Item Name");
+      toggleErrorModal(true);
+      return;
+    } else if (
+      userInfo.name === "" ||
+      userInfo.email === "" ||
+      userInfo.addressOne === "" ||
+      userInfo.city === "" ||
+      userInfo.province === "" ||
+      userInfo.zip === ""
+    ) {
+      setErrorModalContents("Enter your contact details before submitting an Invoice");
       toggleErrorModal(true);
       return;
     }

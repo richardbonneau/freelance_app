@@ -30,19 +30,21 @@ function InvoiceDetails(props) {
     state.invoices.invoicesList.find(invoice => invoice.id === Number(id))
   );
   const [details, setDetails] = useState(invoiceDetails);
-  const invoiceClient = useSelector(state => state.clients.clientsList.find(client => client.id === details.clientId)
-
+  const invoiceClient = useSelector(state =>
+    state.clients.clientsList.find(client => client.id === details.clientId)
   );
 
   const [client, setClient] = useState(invoiceClient);
 
-  useEffect(() => { setDetails(invoiceDetails) }, [invoiceDetails])
+  useEffect(() => {
+    setDetails(invoiceDetails);
+  }, [invoiceDetails]);
   console.log("props", props.match.params.id);
   if (details === undefined) {
     db.collection("public-invoices")
       .doc(props.match.params.id)
       .get()
-      .then(function (doc) {
+      .then(function(doc) {
         let index;
 
         if (doc.exists) {
@@ -56,7 +58,7 @@ function InvoiceDetails(props) {
           console.log("No such document!");
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("Error getting document:", error);
       });
   }
@@ -70,26 +72,28 @@ function InvoiceDetails(props) {
     details.items.forEach(item => (itemsSubtotal = itemsSubtotal + item.hours * item.rate));
     itemsTotal = itemsSubtotal;
 
-
     const privateView = () => {
-
       return (
         <>
           {" "}
           <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
-
-
-          {isSendingReq
-            ? <PageButton style={{ height: '24px' }} ><Loading /></PageButton>
-            : details.isPublic
-              ? <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, false))} >Make Private</PageButton>
-              : <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, true))}>Make Public</PageButton>
-
-          }
+          {isSendingReq ? (
+            <PageButton style={{ height: "24px" }}>
+              <Loading />
+            </PageButton>
+          ) : details.isPublic ? (
+            <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, false))}>
+              Make Private
+            </PageButton>
+          ) : (
+            <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, true))}>
+              Make Public
+            </PageButton>
+          )}
         </>
       );
     };
-    const publicView = () => { };
+    const publicView = () => {};
     console.log("props.isAuthenticated", props);
     return (
       <Container>
@@ -103,7 +107,7 @@ function InvoiceDetails(props) {
               placeholder="Invoice Title"
               value={details.title}
               readOnly
-            // onChange={e => setTitleInput(e.target.value)}
+              // onChange={e => setTitleInput(e.target.value)}
             />
             <div className="subcontainer ">
               {" "}
@@ -115,17 +119,17 @@ function InvoiceDetails(props) {
                 value={details.invoiceNumber}
                 maxLength={7}
                 readOnly
-              // onChange={e =>
-              //   e.target.value.startsWith("#")
-              //     ? setInvoiceNumberInput(e.target.value)
-              //     : setInvoiceNumberInput("#" + e.target.value)
-              // }
+                // onChange={e =>
+                //   e.target.value.startsWith("#")
+                //     ? setInvoiceNumberInput(e.target.value)
+                //     : setInvoiceNumberInput("#" + e.target.value)
+                // }
               />
             </div>
           </TitleContainer>
           <div className="first-row" style={{ flexDirection: "row" }}>
             <SenderRecipientContainer style={{ flexDirection: "row" }}>
-              <SenderContainer>
+              <SenderContainer style={{ marginRight: "40px" }}>
                 <h4>From</h4>
                 <div>{details.userInfo.name}</div>
                 <div>{details.userInfo.addressOne}</div>
@@ -247,11 +251,11 @@ function InvoiceDetails(props) {
               value={details.notes}
               placeholder="Notes"
               readOnly
-            // onChange={e => setNotesInput(e.target.value)}
+              // onChange={e => setNotesInput(e.target.value)}
             ></NotesInput>
           ) : (
-              <></>
-            )}
+            <></>
+          )}
         </InvoiceContainer>
       </Container>
     );
