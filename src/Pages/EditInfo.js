@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import { editUserInfoInFirestore } from "../_actions";
+import SuccessPopup from "../Components/SuccessPopup";
 
 function EditInfo(props) {
   const dispatch = useDispatch();
@@ -15,10 +16,25 @@ function EditInfo(props) {
   const [provinceInput, setProvinceInput] = useState("");
   const [zipInput, setZipInput] = useState("");
 
+  const [successModalOpened, toggleSuccessModal] = useState("");
+  const [successModalContents, setSuccessModalContents] = useState("");
 
   const sendNewUserInfoToFirestore = e => {
     // the "frontend" must build the Object that is sent to redux/firebase
     e.preventDefault();
+
+    if (
+      nameInput === "" ||
+      emailInput === "" ||
+      addressOneInput === "" ||
+      cityInput === "" ||
+      provinceInput === "" ||
+      zipInput === ""
+    ) {
+      setSuccessModalContents("Some fields are missing");
+      toggleSuccessModal(true);
+      return;
+    }
     dispatch(
       editUserInfoInFirestore({
         name: nameInput,
@@ -39,6 +55,8 @@ function EditInfo(props) {
     setCityInput("");
     setProvinceInput("");
     setZipInput("");
+    setSuccessModalContents("Credentials saved");
+    toggleSuccessModal(true);
   };
   return (
     <Container>
@@ -99,6 +117,11 @@ function EditInfo(props) {
           <PageButton onClick={sendNewUserInfoToFirestore}>Save</PageButton>
         </div>
       </form>
+      <SuccessPopup
+        toggleSuccessModal={toggleSuccessModal}
+        successModalOpened={successModalOpened}
+        successModalContents={successModalContents}
+      />
     </Container>
   );
 }
