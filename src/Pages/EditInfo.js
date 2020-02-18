@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import { editUserInfoInFirestore } from "../_actions";
@@ -7,14 +7,15 @@ import SuccessPopup from "../Components/SuccessPopup";
 
 function EditInfo(props) {
   const dispatch = useDispatch();
-  const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
-  const [companyInput, setCompanyInput] = useState("");
-  const [addressOneInput, setAddressOneInput] = useState("");
-  const [addressTwoInput, setAddressTwoInput] = useState("");
-  const [cityInput, setCityInput] = useState("");
-  const [provinceInput, setProvinceInput] = useState("");
-  const [zipInput, setZipInput] = useState("");
+  const userInfo = useSelector(state => state.user.userInfo);
+  const [nameInput, setNameInput] = useState(userInfo.name);
+  const [emailInput, setEmailInput] = useState(userInfo.email);
+  const [companyInput, setCompanyInput] = useState(userInfo.companyName);
+  const [addressOneInput, setAddressOneInput] = useState(userInfo.addressOne);
+  const [addressTwoInput, setAddressTwoInput] = useState(userInfo.addressTwo);
+  const [cityInput, setCityInput] = useState(userInfo.city);
+  const [provinceInput, setProvinceInput] = useState(userInfo.province);
+  const [zipInput, setZipInput] = useState(userInfo.zip);
 
   const [successModalOpened, toggleSuccessModal] = useState("");
   const [successModalContents, setSuccessModalContents] = useState("");
@@ -22,7 +23,20 @@ function EditInfo(props) {
   const sendNewUserInfoToFirestore = e => {
     // the "frontend" must build the Object that is sent to redux/firebase
     e.preventDefault();
-
+    if (
+      nameInput === userInfo.name &&
+      emailInput === userInfo.email &&
+      companyInput === userInfo.companyName &&
+      addressOneInput === userInfo.addressOne &&
+      addressTwoInput === userInfo.addressTwo &&
+      cityInput === userInfo.city &&
+      provinceInput === userInfo.province &&
+      zipInput === userInfo.zip
+    ) {
+      setSuccessModalContents("No changes were made");
+      toggleSuccessModal(true);
+      return;
+    }
     if (
       nameInput === "" ||
       emailInput === "" ||
@@ -47,17 +61,11 @@ function EditInfo(props) {
         zip: zipInput
       })
     );
-    setNameInput("");
-    setEmailInput("");
-    setCompanyInput("");
-    setAddressOneInput("");
-    setAddressTwoInput("");
-    setCityInput("");
-    setProvinceInput("");
-    setZipInput("");
+
     setSuccessModalContents("Credentials saved");
     toggleSuccessModal(true);
   };
+
   return (
     <Container>
       <h2>Edit Info</h2>
