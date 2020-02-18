@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addClientToFirestore } from "../_actions";
-import ErrorPopup from "./ErrorPopup";
+import InformationPopup from "./InformationPopup";
 import {
   PageButton,
   MaskOverlay,
@@ -23,8 +23,8 @@ function AddClientPopup(props) {
   const [provinceInput, setProvinceInput] = useState("");
   const [zipInput, setZipInput] = useState("");
 
-  const [errorModalOpened, toggleErrorModal] = useState(false);
-  const [errorModalContents, setErrorModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   const addClientModalContents = () => {
     const newClientSubmit = e => {
@@ -40,8 +40,8 @@ function AddClientPopup(props) {
         provinceInput === "" ||
         zipInput === ""
       ) {
-        setErrorModalContents("Some fields are missing");
-        toggleErrorModal(true);
+        setInformationModalContents("Some fields are missing");
+        toggleInformationModal(true);
         return;
       }
       let newClientId = Date.now() * 10000 + Math.round(Math.random() * 9999);
@@ -140,10 +140,10 @@ function AddClientPopup(props) {
       <ModalContainer isModalOpened={props.isModalOpened}>
         {addClientModalContents()}
       </ModalContainer>
-      <ErrorPopup
-        errorModalOpened={errorModalOpened}
-        toggleErrorModal={toggleErrorModal}
-        errorModalContents={errorModalContents}
+      <InformationPopup
+        informationModalOpened={informationModalOpened}
+        toggleInformationModal={toggleInformationModal}
+        informationModalContents={informationModalContents}
       />
     </>
   );

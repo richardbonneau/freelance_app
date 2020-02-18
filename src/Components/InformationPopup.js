@@ -9,12 +9,12 @@ import {
   ModalHr
 } from "../utils/globalStyledComponents";
 
-function SuccessPopup(props) {
+function InformationPopup(props) {
   return (
     <>
       <MaskOverlay
-        onClick={() => props.toggleSuccessModal(false)}
-        isModalOpened={props.successModalOpened}
+        onClick={() => props.toggleInformationModal(false)}
+        isModalOpened={props.informationModalOpened}
       />
       <ModalContainer
         style={{
@@ -26,13 +26,13 @@ function SuccessPopup(props) {
           alignItems: "center",
           flexDirection: "column"
         }}
-        isModalOpened={props.successModalOpened}
+        isModalOpened={props.informationModalOpened}
       >
-        <ModalContents>{props.successModalContents}</ModalContents>
-        <PageButton onClick={() => props.toggleSuccessModal(false)}>Ok</PageButton>
+        <ModalContents>{props.informationModalContents}</ModalContents>
+        <PageButton onClick={() => props.toggleInformationModal(false)}>Ok</PageButton>
       </ModalContainer>
     </>
   );
 }
 
-export default SuccessPopup;
+export default InformationPopup;

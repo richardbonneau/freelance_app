@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
-import ErrorPopup from "./ErrorPopup";
+import InformationPopup from "./InformationPopup";
 import { addTaskToFirestore } from "../_actions";
 import {
   PageButton,
@@ -39,16 +39,16 @@ function AddTaskPopup(props) {
   const [selectedHours, setSelectedHours] = useState(hours[0]);
   const [selectedMinutes, setSelectedMinutes] = useState(minutes[0]);
 
-  const [errorModalOpened, toggleErrorModal] = useState(false);
-  const [errorModalContents, setErrorModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   const addTaskModalContents = () => {
     const newTaskSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
       if (workType === "") {
-        setErrorModalContents("Some fields are missing");
-        toggleErrorModal(true);
+        setInformationModalContents("Some fields are missing");
+        toggleInformationModal(true);
         return;
       }
       dispatch(
@@ -145,10 +145,10 @@ function AddTaskPopup(props) {
       >
         {addTaskModalContents()}
       </ModalContainer>
-      <ErrorPopup
-        errorModalOpened={errorModalOpened}
-        toggleErrorModal={toggleErrorModal}
-        errorModalContents={errorModalContents}
+      <InformationPopup
+        informationModalOpened={informationModalOpened}
+        toggleInformationModal={toggleInformationModal}
+        informationModalContents={informationModalContents}
       />
     </>
   );

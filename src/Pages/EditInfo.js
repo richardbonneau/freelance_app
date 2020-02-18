@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Container, PageButton } from "../utils/globalStyledComponents";
 import { editUserInfoInFirestore } from "../_actions";
-import SuccessPopup from "../Components/SuccessPopup";
+import InformationPopup from "../Components/InformationPopup";
 
 function EditInfo(props) {
   const dispatch = useDispatch();
@@ -17,8 +17,8 @@ function EditInfo(props) {
   const [provinceInput, setProvinceInput] = useState(userInfo.province);
   const [zipInput, setZipInput] = useState(userInfo.zip);
 
-  const [successModalOpened, toggleSuccessModal] = useState("");
-  const [successModalContents, setSuccessModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState("");
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   const sendNewUserInfoToFirestore = e => {
     // the "frontend" must build the Object that is sent to redux/firebase
@@ -33,8 +33,8 @@ function EditInfo(props) {
       provinceInput === userInfo.province &&
       zipInput === userInfo.zip
     ) {
-      setSuccessModalContents("No changes were made");
-      toggleSuccessModal(true);
+      setInformationModalContents("No changes were made");
+      toggleInformationModal(true);
       return;
     }
     if (
@@ -45,8 +45,8 @@ function EditInfo(props) {
       provinceInput === "" ||
       zipInput === ""
     ) {
-      setSuccessModalContents("Some fields are missing");
-      toggleSuccessModal(true);
+      setInformationModalContents("Some fields are missing");
+      toggleInformationModal(true);
       return;
     }
     dispatch(
@@ -62,8 +62,8 @@ function EditInfo(props) {
       })
     );
 
-    setSuccessModalContents("Credentials saved");
-    toggleSuccessModal(true);
+    setInformationModalContents("Credentials saved");
+    toggleInformationModal(true);
   };
 
   return (
@@ -125,10 +125,10 @@ function EditInfo(props) {
           <PageButton onClick={sendNewUserInfoToFirestore}>Save</PageButton>
         </div>
       </form>
-      <SuccessPopup
-        toggleSuccessModal={toggleSuccessModal}
-        successModalOpened={successModalOpened}
-        successModalContents={successModalContents}
+      <InformationPopup
+        toggleInformationModal={toggleInformationModal}
+        informationModalOpened={informationModalOpened}
+        informationModalContents={informationModalContents}
       />
     </Container>
   );

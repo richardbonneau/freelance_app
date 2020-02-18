@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
-import ErrorPopup from "./ErrorPopup";
+import InformationPopup from "./InformationPopup";
 import { addProjectToFirestore } from "../_actions";
 import {
   PageButton,
@@ -26,16 +26,16 @@ function AddProjectPopup(props) {
   const [projectStartDate, setProjectStartDate] = useState(new Date());
   const [projectEndDate, setProjectEndDate] = useState(new Date());
 
-  const [errorModalOpened, toggleErrorModal] = useState(false);
-  const [errorModalContents, setErrorModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   const addProjectModalContents = () => {
     const newProjectSubmit = e => {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
       if (nameInput === "") {
-        setErrorModalContents("Some fields are missing");
-        toggleErrorModal(true);
+        setInformationModalContents("Some fields are missing");
+        toggleInformationModal(true);
 
         return;
       }
@@ -109,10 +109,10 @@ function AddProjectPopup(props) {
       >
         {addProjectModalContents()}
       </ModalContainer>
-      <ErrorPopup
-        errorModalOpened={errorModalOpened}
-        toggleErrorModal={toggleErrorModal}
-        errorModalContents={errorModalContents}
+      <InformationPopup
+        informationModalOpened={informationModalOpened}
+        toggleInformationModal={toggleInformationModal}
+        informationModalContents={informationModalContents}
       />
     </>
   );

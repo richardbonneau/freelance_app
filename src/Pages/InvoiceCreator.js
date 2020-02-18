@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import AddClientPopup from "../Components/AddClientPopup";
-import ErrorPopup from "../Components/ErrorPopup";
+import InformationPopup from "../Components/InformationPopup";
 import "react-datepicker/dist/react-datepicker.css";
 import { addInvoiceToFirestore, addItemToStore } from "../_actions";
 import {
@@ -48,8 +48,8 @@ function InvoiceCreator() {
   const [itemsSubtotal, setItemsSubtotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
   const [isModalOpened, setModal] = useState(false);
-  const [errorModalOpened, toggleErrorModal] = useState(false);
-  const [errorModalContents, setErrorModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   useEffect(() => {
     //Display new total sum everytime the list of item updates
@@ -74,12 +74,14 @@ function InvoiceCreator() {
     );
     e.preventDefault();
     if (titleInput === "" || invoiceNumberInput === "" || itemsSubtotal <= 0) {
-      setErrorModalContents("Some fields are missing");
-      toggleErrorModal(true);
+      console.log("trigger1");
+      setInformationModalContents("Some fields are missing");
+      toggleInformationModal(true);
       return;
     } else if (itemsList.find(item => item.name === "")) {
-      setErrorModalContents("Empty Item Name");
-      toggleErrorModal(true);
+      console.log("trigger2");
+      setInformationModalContents("Empty Item Name");
+      toggleInformationModal(true);
       return;
     } else if (
       userInfo.name === "" ||
@@ -89,12 +91,14 @@ function InvoiceCreator() {
       userInfo.province === "" ||
       userInfo.zip === ""
     ) {
-      setErrorModalContents("Enter your contact details before submitting an Invoice");
-      toggleErrorModal(true);
+      console.log("trigger3");
+      setInformationModalContents("Enter your contact details before submitting an Invoice");
+      toggleInformationModal(true);
       return;
     }
     let newInvoiceId = Date.now() * 10000 + Math.round(Math.random() * 99999);
     console.log("userinfo", userInfo);
+
     dispatch(
       addInvoiceToFirestore(
         {
@@ -255,10 +259,10 @@ function InvoiceCreator() {
         </PageButton>
       </InvoiceContainer>
       <AddClientPopup isModalOpened={isModalOpened} toggleModal={setModal} />
-      <ErrorPopup
-        errorModalOpened={errorModalOpened}
-        toggleErrorModal={toggleErrorModal}
-        errorModalContents={errorModalContents}
+      <InformationPopup
+        informationModalOpened={informationModalOpened}
+        toggleInformationModal={toggleInformationModal}
+        informationModalContents={informationModalContents}
       />
     </Container>
   );

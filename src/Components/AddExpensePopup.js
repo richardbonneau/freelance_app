@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from "firebase/app";
-import ErrorPopup from "./ErrorPopup";
+import InformationPopup from "./InformationPopup";
 import { addExpenseToFirestore } from "../_actions";
 import {
   PageButton,
@@ -22,8 +22,8 @@ function AddExpensePopup(props) {
   const [imageAsFile, setImageAsFile] = useState("");
   const [imageAsUrl, setImageAsUrl] = useState({ imgUrl: "" });
 
-  const [errorModalOpened, toggleErrorModal] = useState(false);
-  const [errorModalContents, setErrorModalContents] = useState("");
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
 
   console.log("imageAsFile", imageAsFile, "imageAsUrl", imageAsUrl);
 
@@ -32,8 +32,8 @@ function AddExpensePopup(props) {
       // the "frontend" must build the Object that is sent to redux/firebase
       e.preventDefault();
       if (nameInput === "") {
-        setErrorModalContents("Some fields are missing");
-        toggleErrorModal(true);
+        setInformationModalContents("Some fields are missing");
+        toggleInformationModal(true);
         return;
       }
 
@@ -99,10 +99,10 @@ function AddExpensePopup(props) {
       >
         {addExpenseModalContents()}
       </ModalContainer>
-      <ErrorPopup
-        errorModalOpened={errorModalOpened}
-        toggleErrorModal={toggleErrorModal}
-        errorModalContents={errorModalContents}
+      <InformationPopup
+        informationModalOpened={informationModalOpened}
+        toggleInformationModal={toggleInformationModal}
+        informationModalContents={informationModalContents}
       />
     </>
   );
