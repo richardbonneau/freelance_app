@@ -4,6 +4,7 @@ import { db } from "../utils/fire.js";
 import { changeInvoicePrivacy } from "../_actions";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Anchor, PageButton } from "../utils/globalStyledComponents";
+import InformationPopup from "../Components/InformationPopup";
 import {
   TitleContainer,
   InvoiceContainer,
@@ -35,10 +36,16 @@ function InvoiceDetails(props) {
   );
 
   const [client, setClient] = useState(invoiceClient);
+  const [informationModalOpened, toggleInformationModal] = useState(false);
+  const [informationModalContents, setInformationModalContents] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setDetails(invoiceDetails);
   }, [invoiceDetails]);
+  useEffect(() => {
+    setIsLoading(isSendingReq);
+  }, [isSendingReq]);
   console.log("props", props.match.params.id);
   if (details === undefined) {
     db.collection("public-invoices")
@@ -77,16 +84,25 @@ function InvoiceDetails(props) {
         <>
           {" "}
           <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
-          {isSendingReq ? (
-            <PageButton style={{ height: "24px" }}>
-              <Loading />
-            </PageButton>
-          ) : details.isPublic ? (
-            <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, false))}>
+          {details.isPublic ? (
+            <PageButton
+              onClick={() => {
+                setInformationModalContents("Changing Invoice status to Private");
+                setIsLoading(true);
+                toggleInformationModal(true);
+                dispatch(changeInvoicePrivacy(details, false));
+              }}
+            >
               Make Private
             </PageButton>
           ) : (
-            <PageButton onClick={() => dispatch(changeInvoicePrivacy(details, true))}>
+            <PageButton
+              onClick={() => {
+                setInformationModalContents("Changing Invoice status to Public");
+                toggleInformationModal(true);
+                dispatch(changeInvoicePrivacy(details, true));
+              }}
+            >
               Make Public
             </PageButton>
           )}
@@ -257,6 +273,12 @@ function InvoiceDetails(props) {
             <></>
           )}
         </InvoiceContainer>
+        <InformationPopup
+          informationModalOpened={informationModalOpened}
+          toggleInformationModal={toggleInformationModal}
+          informationModalContents={informationModalContents}
+          isLoading={isLoading}
+        />
       </Container>
     );
   } else return <Loading />;

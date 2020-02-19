@@ -8,18 +8,19 @@ import {
   ModalTitle,
   ModalHr
 } from "../utils/globalStyledComponents";
+import Loading from "../Components/Loading";
 
 function InformationPopup(props) {
   return (
     <>
       <MaskOverlay
-        onClick={() => props.toggleInformationModal(false)}
+        onClick={() => (props.isLoading ? null : props.toggleInformationModal(false))}
         isModalOpened={props.informationModalOpened}
       />
       <ModalContainer
         style={{
-          height: "150px",
-          marginTop: "-75px",
+          height: "180px",
+          marginTop: "-90px",
           display: "flex",
           justifyContent: "center",
           fontSize: "20px",
@@ -29,7 +30,11 @@ function InformationPopup(props) {
         isModalOpened={props.informationModalOpened}
       >
         <ModalContents>{props.informationModalContents}</ModalContents>
-        <PageButton onClick={() => props.toggleInformationModal(false)}>Ok</PageButton>
+        {props.isLoading ? (
+          <Loading />
+        ) : (
+          <PageButton onClick={() => props.toggleInformationModal(false)}>Ok</PageButton>
+        )}
       </ModalContainer>
     </>
   );
