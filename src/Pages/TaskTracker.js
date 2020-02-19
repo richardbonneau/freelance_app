@@ -6,6 +6,7 @@ import AddTaskPopup from "../Components/AddTaskPopup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Container, PageButton, Tr, Td, Th, Table, THead } from "../utils/globalStyledComponents";
+import { FaCalendarAlt } from "react-icons/fa";
 
 const Header = styled.div`
   display: flex;
@@ -45,8 +46,8 @@ const Weekday = styled.div`
 const TasksContainer = styled.div``;
 const WeekSelector = styled.div`
   position: relative;
-  width: 200px;
-  height: 25px;
+  width: 220px;
+  height: 35px;
   margin: 10px 0;
   a {
     position: absolute;
@@ -123,8 +124,12 @@ function TaskTracker() {
         <Header>
           <h4>Week of {momentSelectedWeek.startOf("week").format("MMM Do YYYY")}</h4>
           <WeekSelector>
-            <PageButton>Click here to select a week</PageButton>
+            <PageButton>
+              <FaCalendarAlt />
+              Click here to select a week
+            </PageButton>
             <DatePicker
+              className="tasktracker-datepicker"
               selected={selectedWeek}
               onChange={date => setSelectedWeek(date)}
               disabledKeyboardNavigation
