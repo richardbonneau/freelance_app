@@ -36,7 +36,9 @@ function App() {
   }, [userInfo]);
 
   const renderNav = () => {
-    return isVerifying || !isAuthenticated ? null : (
+    return isVerifying ||
+      !isAuthenticated ||
+      history.location.pathname.includes("public-invoice") ? null : (
       <>
         <MobileNavBar />
         <SideBar />

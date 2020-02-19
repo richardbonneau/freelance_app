@@ -19,7 +19,7 @@ function InformationPopup(props) {
       />
       <ModalContainer
         style={{
-          height: "180px",
+          height: "195px",
           marginTop: "-90px",
           display: "flex",
           justifyContent: "center",
@@ -29,7 +29,9 @@ function InformationPopup(props) {
         }}
         isModalOpened={props.informationModalOpened}
       >
-        <ModalContents>{props.informationModalContents}</ModalContents>
+        <ModalContents style={{ textAlign: "center" }}>
+          {props.informationModalContents}
+        </ModalContents>
         {props.isLoading ? (
           <Loading />
         ) : (

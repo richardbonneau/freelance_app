@@ -23,7 +23,7 @@ import Loading from "../Components/Loading";
 
 function InvoiceDetails(props) {
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
-  const currentUser = useSelector(state => state.auth.user.uid);
+  const currentUserUid = useSelector(state => state.auth.user.uid);
   const dispatch = useDispatch();
   let { id } = useParams();
 
@@ -41,12 +41,27 @@ function InvoiceDetails(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    console.log("invoiceDetails", invoiceDetails);
     setDetails(invoiceDetails);
   }, [invoiceDetails]);
   useEffect(() => {
     setIsLoading(isSendingReq);
+    if (!isSendingReq && details) {
+      console.log("detail");
+      let contents = (
+        <div>
+          <div>You can now share your Invoice using this URL</div>
+          <input
+            type="text"
+            onClick={e => e.target.select()}
+            value={`https://freelancify.io/public-invoice/${details.id}`}
+          />
+        </div>
+      );
+      if (details.isPublic) setInformationModalContents(contents);
+    }
   }, [isSendingReq]);
-  console.log("props", props.match.params.id);
+
   if (details === undefined) {
     db.collection("public-invoices")
       .doc(props.match.params.id)
@@ -113,7 +128,7 @@ function InvoiceDetails(props) {
     console.log("props.isAuthenticated", props);
     return (
       <Container>
-        {invoiceDetails.invoiceIssuer === currentUser ? privateView() : publicView()}
+        {props.history.location.pathname.includes("public-invoice") ? publicView() : privateView()}
         <InvoiceContainer style={{ width: "800px" }}>
           <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
           <TitleContainer style={{ display: "flex" }}>
