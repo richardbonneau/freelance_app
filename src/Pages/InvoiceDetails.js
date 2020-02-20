@@ -42,18 +42,23 @@ function InvoiceDetails(props) {
   const [isLoading, setIsLoading] = useState(false);
 
   let shareUrl = () => {
-    let contents = (
-      <div>
-        <div>You can share your Invoice using this URL</div>
-        <input
-          type="text"
-          onClick={e => e.target.select()}
-          value={`https://freelancify.io/public-invoice/${details.id}`}
-        />
-      </div>
-    );
-    if (!informationModalOpened) toggleInformationModal(true);
-    setInformationModalContents(contents);
+    if (details.isPublic) {
+      let contents = (
+        <div>
+          <div>You can share your Invoice using this URL</div>
+          <input
+            type="text"
+            onClick={e => e.target.select()}
+            value={`https://freelancify.io/public-invoice/${details.id}`}
+          />
+        </div>
+      );
+      if (!informationModalOpened) toggleInformationModal(true);
+      setInformationModalContents(contents);
+    } else {
+      if (!informationModalOpened) toggleInformationModal(true);
+      setInformationModalContents(`You need to change this invoice status to Public first`);
+    }
   };
   useEffect(() => setDidMount(true), []);
   useEffect(() => {
@@ -65,7 +70,7 @@ function InvoiceDetails(props) {
     console.log("is sending req");
     setIsLoading(isSendingReq);
     if (didMount && !isSendingReq && details) {
-      if (details.isPublic) shareUrl();
+      shareUrl();
     }
   }, [isSendingReq]);
 
