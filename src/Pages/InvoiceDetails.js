@@ -22,6 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Loading from "../Components/Loading";
 
 function InvoiceDetails(props) {
+  const [didMount, setDidMount] = useState(false);
   const isSendingReq = useSelector(state => state.invoices.isSendingReq);
   const currentUserUid = useSelector(state => state.auth.user.uid);
   const dispatch = useDispatch();
@@ -40,25 +41,31 @@ function InvoiceDetails(props) {
   const [informationModalContents, setInformationModalContents] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  let shareUrl = () => {
+    let contents = (
+      <div>
+        <div>You can share your Invoice using this URL</div>
+        <input
+          type="text"
+          onClick={e => e.target.select()}
+          value={`https://freelancify.io/public-invoice/${details.id}`}
+        />
+      </div>
+    );
+    if (!informationModalOpened) toggleInformationModal(true);
+    setInformationModalContents(contents);
+  };
+  useEffect(() => setDidMount(true), []);
   useEffect(() => {
     console.log("invoiceDetails", invoiceDetails);
     setDetails(invoiceDetails);
   }, [invoiceDetails]);
+
   useEffect(() => {
+    console.log("is sending req");
     setIsLoading(isSendingReq);
-    if (!isSendingReq && details) {
-      console.log("detail");
-      let contents = (
-        <div>
-          <div>You can now share your Invoice using this URL</div>
-          <input
-            type="text"
-            onClick={e => e.target.select()}
-            value={`https://freelancify.io/public-invoice/${details.id}`}
-          />
-        </div>
-      );
-      if (details.isPublic) setInformationModalContents(contents);
+    if (didMount && !isSendingReq && details) {
+      if (details.isPublic) shareUrl();
     }
   }, [isSendingReq]);
 
@@ -96,11 +103,17 @@ function InvoiceDetails(props) {
 
     const privateView = () => {
       return (
-        <>
+        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
           {" "}
-          <Anchor onClick={() => props.history.push("/invoices")}>Back</Anchor>
+          <PageButton style={{ height: "20px" }} onClick={() => props.history.push("/invoices")}>
+            Back
+          </PageButton>
+          <PageButton style={{ height: "20px", width: "190px" }} onClick={shareUrl}>
+            Get Shareable URL
+          </PageButton>
           {details.isPublic ? (
             <PageButton
+              style={{ height: "20px" }}
               onClick={() => {
                 setInformationModalContents("Changing Invoice status to Private");
                 setIsLoading(true);
@@ -121,7 +134,7 @@ function InvoiceDetails(props) {
               Make Public
             </PageButton>
           )}
-        </>
+        </div>
       );
     };
     const publicView = () => {};
@@ -129,7 +142,7 @@ function InvoiceDetails(props) {
     return (
       <Container>
         {props.history.location.pathname.includes("public-invoice") ? publicView() : privateView()}
-        <InvoiceContainer style={{ width: "800px" }}>
+        <InvoiceContainer style={{ width: "759px" }}>
           <h1 style={{ marginBottom: "35px" }}>INVOICE</h1>
           <TitleContainer style={{ display: "flex" }}>
             <input
