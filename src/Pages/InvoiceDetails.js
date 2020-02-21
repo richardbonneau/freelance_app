@@ -227,7 +227,7 @@ function InvoiceDetails(props) {
           </div>
 
           <ItemsListContainer>
-            <div className="items-header">
+            <div className="items-header" style={{display:'block'}}>
               <h4>Items</h4>
               <div className="header-hours-rate-amount" style={{ width: "240px" }}>
                 <h4>Hours</h4>
@@ -236,7 +236,7 @@ function InvoiceDetails(props) {
               </div>
             </div>
             {details.items.map((item, i) => (
-              <ItemContainer key={i}>
+              <ItemContainer key={i} style={{display:'flex'}}>
                 <input
                   type="text"
                   className="title-description"

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import AddExpensePopup from "../Components/AddExpensePopup";
-import { Container, Table, Th, THead, PageButton, Tr, Td } from "../utils/globalStyledComponents";
+import { Container, Table, Th, THead, PageButton, Tr, Td,ExpandableInvisibleButton } from "../utils/globalStyledComponents";
 
 function Expenses() {
   const listOfExpenses = useSelector(state => state.expenses.expensesList);
@@ -21,12 +21,13 @@ function Expenses() {
 
   const expensesList = () => {
     let tableContents = listOfExpenses.map((expense, i) => {
+      console.log("expense",expense)
       let date = new Date(expense.date.seconds * 1000);
 
       return (
         <Tr key={i}>
           <td width="1%">
-            {/* <ExpandableInvisibleButton onClick={() => expense.expenseSelected(expense.client)}></ExpandableInvisibleButton> */}
+            <ExpandableInvisibleButton onClick={() => expense.expenseSelected(expense.client)}></ExpandableInvisibleButton>
           </td>
           <Td label="Name">{expense.name}</Td>
           <Td label="Date">{moment(date).format("MMM Do YYYY")}</Td>
