@@ -156,8 +156,8 @@ function InvoiceCreator() {
               <div>{userInfo.addressOne}</div>
               <div>{userInfo.addressTwo}</div>
               <div>{userInfo.country}</div>
-              <div>{userInfo.province}</div>
-              <div>{userInfo.city}</div>
+              <div>{userInfo.city}, {userInfo.province}</div>
+              <div></div>
               <div>{userInfo.zip}</div>
 
               <Link className="edit-info" to="/editInfo">
@@ -177,11 +177,11 @@ function InvoiceCreator() {
                   </option>
                 ))}
               </select>
+              <div>{selectedClient.companyName}</div>
               <div>{selectedClient.addressOne}</div>
               <div>{selectedClient.addressTwo}</div>
               <div>{selectedClient.country}</div>
-              <div>{selectedClient.city}</div>
-              <div> {selectedClient.province}</div>
+              <div>{selectedClient.city}, {selectedClient.province}</div>
               <div>{selectedClient.zip}</div>
 
               <Anchor href="#" onClick={() => setModal(true)}>

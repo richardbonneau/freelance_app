@@ -108,7 +108,7 @@ function InvoiceDetails(props) {
 
     const privateView = () => {
       return (
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <div style={{ display: "flex", justifyContent: "space-evenly",marginTop:"25px" }}>
           {" "}
           <PageButton style={{ height: "20px" }} onClick={() => props.history.push("/invoices")}>
             Back
@@ -181,22 +181,23 @@ function InvoiceDetails(props) {
               <SenderContainer style={{ marginRight: "40px" }}>
                 <h4>From</h4>
                 <div>{details.userInfo.name}</div>
+                <div>{details.userInfo.companyName}</div>
                 <div>{details.userInfo.addressOne}</div>
                 <div>{details.userInfo.addressTwo}</div>
                 <div>{details.userInfo.country}</div>
-                <div>{details.userInfo.province}</div>
-                <div>{details.userInfo.city}</div>
+                <div>{details.userInfo.city}, {details.userInfo.province}</div>
                 <div>{details.userInfo.zip}</div>
               </SenderContainer>
 
               <RecipientContainer>
                 <h4>To</h4>
                 <div>{client.name}</div>
+                <div>{client.companyName}</div>
                 <div>{client.addressOne}</div>
                 <div>{client.addressTwo}</div>
                 <div>{client.country}</div>
-                <div>{client.city}</div>
-                <div> {client.province}</div>
+                <div>{client.city}, {client.province}</div>
+                
                 <div>{client.zip}</div>
               </RecipientContainer>
             </SenderRecipientContainer>
@@ -227,14 +228,22 @@ function InvoiceDetails(props) {
           </div>
 
           <ItemsListContainer>
-            <div className="items-header" style={{display:'block'}}>
+          <div className="items-header">
+            <h4>Items</h4>
+            <div className="header-hours-rate-amount">
+              <h4>Hours</h4>
+              <h4>Rate</h4>
+              <h4>Amount</h4>
+            </div>
+          </div>
+            {/* <div className="items-header" style={{display:'block'}}>
               <h4>Items</h4>
-              <div className="header-hours-rate-amount" style={{ width: "240px" }}>
+              <div className="header-hours-rate-amount" style={{ width: "240px", display:"block" }}>
                 <h4>Hours</h4>
                 <h4>Rate</h4>
                 <h4>Amount</h4>
               </div>
-            </div>
+            </div> */}
             {details.items.map((item, i) => (
               <ItemContainer key={i} style={{display:'flex'}}>
                 <input
@@ -250,7 +259,6 @@ function InvoiceDetails(props) {
                 <div className="number-inputs-container">
                   <div className="hours-rate-container">
                     <div className="number-inputs-container-first-child">
-                      <h4>Hours</h4>
                       <input
                         type="number"
                         className="number-input"
@@ -262,7 +270,7 @@ function InvoiceDetails(props) {
                       />
                     </div>
                     <div>
-                      <h4>Rate</h4>
+
                       <input
                         type="number"
                         className="number-input"

@@ -11,7 +11,7 @@ function Item(props) {
   const dispatch = useDispatch();
   const [itemInputs, setItemInputs] = useState(props.item);
   const handleItemChange = e =>
-    e.target.value.length < 6 || e.target.name === "name"
+    e.target.value.length < 10 || e.target.name === "name"
       ? setItemInputs({ ...itemInputs, [e.target.name]: e.target.value })
       : false;
 
@@ -27,7 +27,7 @@ function Item(props) {
         type="text"
         className="title-description"
         name="name"
-        maxLength={38}
+        maxLength={60}
         placeholder="Title and description"
         onChange={handleItemChange}
         value={itemInputs.name}
